@@ -169,6 +169,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Ng5\.gitignore" />
     <Content Include="Ng5\karma.conf.js" />
     <Content Include="Ng5\protractor.conf.js" />
     <Content Include="Ng5\src\app\about\about.component.html" />
@@ -191,9 +192,10 @@
     <Content Include="Ng5\tsconfig.json" />
     <Content Include="Ng5\package.json" />
     <Content Include="Ng5\package-lock.json" />
-    <Content Include="Ng5\e2e\tsconfig.e2e.json" />
     <Content Include="Ng5\src\app\about\about.component.scss" />
     <Content Include="Ng5\src\app\home\home.component.scss" />
+    <Content Include="Ng5\.editorconfig" />
+    <Content Include="Ng5\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -238,8 +240,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Ng5\e2e\app.e2e-spec.ts" />
-    <TypeScriptCompile Include="Ng5\e2e\app.po.ts" />
     <TypeScriptCompile Include="Ng5\src\app\about\about.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\about\about.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app-routing.module.ts" />
