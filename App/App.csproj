@@ -174,6 +174,7 @@
     <Content Include="Ng5\protractor.conf.js" />
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
+    <Content Include="Ng5\src\app\autocomplete\autocomplete.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
@@ -196,6 +197,7 @@
     <Content Include="Ng5\src\app\home\home.component.scss" />
     <Content Include="Ng5\.editorconfig" />
     <Content Include="Ng5\README.md" />
+    <Content Include="Ng5\src\app\autocomplete\autocomplete.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -246,6 +248,9 @@
     <TypeScriptCompile Include="Ng5\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\autocomplete\autocomplete.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\autocomplete\autocomplete.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\autocomplete\SearchResults.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
