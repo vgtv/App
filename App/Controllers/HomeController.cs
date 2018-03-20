@@ -10,7 +10,6 @@ namespace App.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly DataRepository dataAccess = new DataRepository();
 
         public ActionResult Index()
