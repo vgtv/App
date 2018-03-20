@@ -303,6 +303,7 @@
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
+    <Content Include="Ng5\src\app\search\search.component.html" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -331,6 +332,7 @@
     <Content Include="Models\dataModel.edmx.diagram">
       <DependentUpon>dataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Ng5\src\app\search\search.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -380,6 +382,8 @@
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.ts" />
     <TypeScriptCompile Include="Ng5\src\main.ts" />

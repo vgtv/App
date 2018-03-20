@@ -25,7 +25,7 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 return db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
-                    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
+                    .Select(x => new User { cristinID = x.cristinID, firstname = x.firstname, lastname = x.lastname }).ToList();
 
                 //return db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
                 //    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
@@ -38,10 +38,9 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.person.Select(x => new User { firstname = x.firstname, lastname = x.lastname }).Take(10).ToList();
+                return db.person.Select(x => new User { cristinID = x.cristinID, firstname = x.firstname, lastname = x.lastname }).Take(10).ToList();
             }
         }
-
 
         /*
          * ----------------------------------------------------------------------
@@ -151,7 +150,6 @@ namespace App.Models
                         matchedUsers.Add(new UserMatch { cristinID = user.Key, percentage = percentage });
                     }
                 }
-
                 return matchedUsers;
             }
         }
