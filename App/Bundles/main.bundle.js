@@ -246,7 +246,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n  <a class=\"navbar-brand\" href=\"#\">Akademikus</a>\r\n  \r\n  <form class=\"form-inline\">\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n    <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\r\n  </form>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">\r\n          <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
 
 /***/ }),
 
