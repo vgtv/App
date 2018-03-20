@@ -248,6 +248,7 @@
     <TypeScriptCompile Include="Ng5\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\autocomplete\app.service.ts" />
     <TypeScriptCompile Include="Ng5\src\app\autocomplete\autocomplete.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\autocomplete\autocomplete.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\autocomplete\SearchResults.ts" />

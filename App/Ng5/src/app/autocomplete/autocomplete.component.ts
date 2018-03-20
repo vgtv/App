@@ -2,45 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { SearchResults } from './SearchResults';
+import { FormControl } from '@angular/forms';
+import { AppService } from './app.service';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent {
+  searchTerm: FormControl = new FormControl();
 
-  constructor() { }
+  searchResult = [];
 
-  ngOnInit() {
-  }
-
-}
-
-  @Injectable()
-  export class AutoComplete {
-    
-  }
-
-  getSearchResults(){
-    this._http.get("api/UsersApi/")
-      .map(resultat => {
-        let JsonData = resultat.json();
-        return JsonData;
+  constructor(private service: AppService) {
+    this.searchTerm.valueChanges
+      .debounceTime(400)
+      .subscribe(data => {
+        this.service.search_word(data).subscribe(response => {
+          this.searchResult = response
+        })
       })
-      .subscribe(
-      JsonData => {
-        this.alleSporsmaal = [];
-        this.laster = false;
-
-        if (JsonData) {
-          for (let kategori of JsonData) {
-            this.alleSporsmaal.push(new Kategori(kategori.kid, kategori.kategorinavn, kategori.faqListe));
-          };
-        };
-      },
-      error => alert(error + "1"),
-      () => console.log("ferdig get-api/alleSporsmaal")
-      );
+}
   }
 
