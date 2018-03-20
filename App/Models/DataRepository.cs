@@ -151,7 +151,6 @@ namespace App.Models
                         matchedUsers.Add(new UserMatch { cristinID = user.Key, percentage = percentage });
                     }
                 }
-
                 return matchedUsers;
             }
         }
