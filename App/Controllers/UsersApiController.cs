@@ -6,26 +6,20 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using App.Models;
 
 namespace App.Controllers
 {
     public class UsersApiController : ApiController
     {
+        private readonly DataRepository dataAccess = new DataRepository();
 
-        public HttpResponseMessage Get(string searchQuery)
+        // Kan prøve denne ngInit for autocomplete
+        public HttpResponseMessage Get()
         {
-
-            // { firstname : "", lastname : "", "role", "instituion"}
-
-            List<Personsearch> persons = new List<Personsearch>
-            {
-                new Personsearch { firstname = "Poo", lastname = "Doe", role = "Professor", institution = "UiO" },
-                new Personsearch { firstname = "Foo", lastname = "Roe", role = "Firstemanuesi", institution = "NTNU" },
-                new Personsearch { firstname = "Loo", lastname = "Soe", role = "Professor", institution = "OsloMet" }
-            };
-
+            var searchResults = dataAccess.GetAllUsers();
             var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(persons);
+            string JsonString = Json.Serialize(searchResults);
 
             return new HttpResponseMessage()
             {
@@ -33,11 +27,18 @@ namespace App.Controllers
                 StatusCode = HttpStatusCode.OK
             };
         }
+
+        public HttpResponseMessage Get(string searchQuery)
+        {
+            var searchResults = dataAccess.GetUsers(searchQuery);
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(searchResults);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+        }        
     }   
-    public class Personsearch{
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string role { get; set; }
-        public string institution { get; set; }
-    }
 }
