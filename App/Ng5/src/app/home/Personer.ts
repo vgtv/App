@@ -1,4 +1,4 @@
-export class SearchResults {
+export class Personer {
   firstname: string;
   lastname: string;
   role: string;
