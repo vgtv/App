@@ -32,10 +32,11 @@ module.exports = ""
 /***/ }),
 
 /***/ "./src/app/about/about.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,15 +46,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
     }
     AboutComponent.prototype.ngOnInit = function () {
     };
     AboutComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-about',
             template: __webpack_require__("./src/app/about/about.component.html"),
             styles: [__webpack_require__("./src/app/about/about.component.scss")]
@@ -62,46 +62,48 @@ var AboutComponent = /** @class */ (function () {
     ], AboutComponent);
     return AboutComponent;
 }());
-exports.AboutComponent = AboutComponent;
+
 
 
 /***/ }),
 
 /***/ "./src/app/app-routing.module.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return routingComponents; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__about_about_component__ = __webpack_require__("./src/app/about/about.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-var home_component_1 = __webpack_require__("./src/app/home/home.component.ts");
-var about_component_1 = __webpack_require__("./src/app/about/about.component.ts");
-var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
+
+
+
+
 var routes = [
-    { path: 'home', component: home_component_1.HomeComponent },
-    { path: 'about', component: about_component_1.AboutComponent },
-    { path: 'topnav', component: topnav_component_1.TopnavComponent }
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */] },
+    { path: 'about', component: __WEBPACK_IMPORTED_MODULE_3__about_about_component__["a" /* AboutComponent */] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [router_1.RouterModule.forRoot(routes)],
-            exports: [router_1.RouterModule]
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forRoot(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
 }());
-exports.AppRoutingModule = AppRoutingModule;
-exports.routingComponents = [home_component_1.HomeComponent, about_component_1.AboutComponent, topnav_component_1.TopnavComponent];
+
+var routingComponents = [__WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */], __WEBPACK_IMPORTED_MODULE_3__about_about_component__["a" /* AboutComponent */]];
 
 
 /***/ }),
@@ -109,7 +111,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n<div class=\"container-fluid\">\r\n  <h2>Running Angular: 5.2.9</h2>\r\n  <hr />\r\n  <ul>\r\n    <li>\r\n      Angular er oppdatert - se package.json\r\n    </li>\r\n    <li>\r\n      <a href=\"https://ng-bootstrap.github.io/#/home\">Installert ng-bootstrap</a>\r\n    </li>\r\n    <li>\r\n      Installert og satt opp routing:\r\n      <a routerLink=\"/home\">Home</a>,\r\n      <a routerLink=\"/about\">About</a>\r\n    </li>\r\n    <li><a href=\"https://www.youtube.com/watch?v=Nehk4tBxD4o\">Bra video om routing</a></li>\r\n    <li>\r\n      <a href=\"https://www.npmjs.com/\">Npm bibliotek</a>\r\n    </li>\r\n    <li>\r\n      npm kommandoer<br />\r\n      <ul>\r\n        <li>\r\n          <code>ng build</code>\r\n        </li>\r\n        <li>\r\n          <code>ng build --watch</code>\r\n        </li>\r\n        <li>\r\n          <code>ctrl + c (y)</code>\r\n        </li>\r\n        <li>\r\n          <code>ng g c komponent_navn</code>\r\n        </li>\r\n        <li>\r\n          <code>npm install/uninstall .. --save</code>\r\n        </li>\r\n        <li>\r\n          <code>ng -v</code>\r\n        </li>\r\n        <li>\r\n          <code>ng serve</code>\r\n        </li>\r\n      </ul>\r\n    </li>\r\n    <li><a href=\"https://codehandbook.org/how-to-implement-auto-complete-in-angular-4/\">Mulig autocomplete</a></li>\r\n    <li>\r\n      <a href=\"https://dotnetthoughts.net/how-to-use-angular4-wth-aspnet-mvc/\">Følgte denne guiden</a>\r\n      <ul>\r\n        <li>Dette ligner veldig på det vi gjorde i webapp</li>\r\n        <li>Bootstrap 4.0 fikk jeg ikke til, valgte bare å inkludere den som cdn for nå</li>\r\n      </ul>\r\n    </li>\r\n  </ul>\r\n  <router-outlet></router-outlet>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <h2>Running Angular: 5.2.9</h2>\r\n  <hr />\r\n  <ul>\r\n    <li>\r\n      Angular er oppdatert - se package.json\r\n    </li>\r\n    <li>\r\n      <a href=\"https://ng-bootstrap.github.io/#/home\">Installert ng-bootstrap</a>\r\n    </li>\r\n    <li>\r\n      Installert og satt opp routing:\r\n      <a routerLink=\"/home\">Home</a>,\r\n      <a routerLink=\"/about\">About</a>\r\n    </li>\r\n    <li><a href=\"https://www.youtube.com/watch?v=Nehk4tBxD4o\">Bra video om routing</a></li>\r\n    <li>\r\n      <a href=\"https://www.npmjs.com/\">Npm bibliotek</a>\r\n    </li>\r\n    <li>\r\n      npm kommandoer<br />\r\n      <ul>\r\n        <li>\r\n          <code>ng build</code>\r\n        </li>\r\n        <li>\r\n          <code>ng build --watch</code>\r\n        </li>\r\n        <li>\r\n          <code>ctrl + c (y)</code>\r\n        </li>\r\n        <li>\r\n          <code>ng g c komponent_navn</code>\r\n        </li>\r\n        <li>\r\n          <code>npm install/uninstall .. --save</code>\r\n        </li>\r\n        <li>\r\n          <code>ng -v</code>\r\n        </li>\r\n        <li>\r\n          <code>ng serve</code>\r\n        </li>\r\n      </ul>\r\n    </li>\r\n    <li><a href=\"https://codehandbook.org/how-to-implement-auto-complete-in-angular-4/\">Mulig autocomplete</a></li>\r\n    <li>\r\n      <a href=\"https://dotnetthoughts.net/how-to-use-angular4-wth-aspnet-mvc/\">Følgte denne guiden</a>\r\n      <ul>\r\n        <li>Dette ligner veldig på det vi gjorde i webapp</li>\r\n        <li>Bootstrap 4.0 fikk jeg ikke til, valgte bare å inkludere den som cdn for nå</li>\r\n      </ul>\r\n    </li>\r\n  </ul>\r\n</div>\r\n\r\n<app-search></app-search>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -121,24 +123,24 @@ module.exports = ""
 /***/ }),
 
 /***/ "./src/app/app.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'app';
     }
     AppComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.scss")]
@@ -146,49 +148,56 @@ var AppComponent = /** @class */ (function () {
     ], AppComponent);
     return AppComponent;
 }());
-exports.AppComponent = AppComponent;
+
 
 
 /***/ }),
 
 /***/ "./src/app/app.module.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_search_component__ = __webpack_require__("./src/app/search/search.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
-var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
-var app_component_1 = __webpack_require__("./src/app/app.component.ts");
+
+
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        core_1.NgModule({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
-                app_component_1.AppComponent,
-                app_routing_module_1.routingComponents
+                __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["b" /* routingComponents */],
+                __WEBPACK_IMPORTED_MODULE_5__search_search_component__["a" /* SearchComponent */]
             ],
             imports: [
-                ng_bootstrap_1.NgbModule.forRoot(),
-                platform_browser_1.BrowserModule,
-                app_routing_module_1.AppRoutingModule
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */]
             ],
             providers: [],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
 }());
-exports.AppModule = AppModule;
+
 
 
 /***/ }),
@@ -196,7 +205,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "/home\r\n"
+module.exports = "/home hewqoueoh\r\n<div *ngFor=\"let k of hentData\">\r\n  {{ k.firstname }}\r\n  {{ k.lastname }}\r\n  {{ k.role }}\r\n  {{ k.institution }}\r\n</div>\r\n"
 
 /***/ }),
 
@@ -208,10 +217,11 @@ module.exports = "p {\n  color: red; }\n"
 /***/ }),
 
 /***/ "./src/app/home/home.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -221,15 +231,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var HomeComponent = /** @class */ (function () {
     function HomeComponent() {
     }
     HomeComponent.prototype.ngOnInit = function () {
     };
     HomeComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-home',
             template: __webpack_require__("./src/app/home/home.component.html"),
             styles: [__webpack_require__("./src/app/home/home.component.scss")]
@@ -238,30 +247,32 @@ var HomeComponent = /** @class */ (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-exports.HomeComponent = HomeComponent;
+
 
 
 /***/ }),
 
-/***/ "./src/app/topnav/topnav.component.html":
+/***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">\r\n          <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
+module.exports = "<p>\n  search works!\n</p>\n"
 
 /***/ }),
 
-/***/ "./src/app/topnav/topnav.component.scss":
+/***/ "./src/app/search/search.component.scss":
 /***/ (function(module, exports) {
 
 module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/topnav/topnav.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/search/search.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -271,39 +282,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var TopnavComponent = /** @class */ (function () {
-    function TopnavComponent() {
+
+
+var SearchComponent = /** @class */ (function () {
+    function SearchComponent(http) {
+        this.http = http;
     }
-    TopnavComponent.prototype.ngOnInit = function () {
+    SearchComponent.prototype.ngOnInit = function () {
+        this.http.get('/api/UsersApi').subscribe(function (data) {
+            console.log(data);
+        });
     };
-    TopnavComponent = __decorate([
-        core_1.Component({
-            selector: 'app-topnav',
-            template: __webpack_require__("./src/app/topnav/topnav.component.html"),
-            styles: [__webpack_require__("./src/app/topnav/topnav.component.scss")]
+    SearchComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-search',
+            template: __webpack_require__("./src/app/search/search.component.html"),
+            styles: [__webpack_require__("./src/app/search/search.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
-    ], TopnavComponent);
-    return TopnavComponent;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], SearchComponent);
+    return SearchComponent;
 }());
-exports.TopnavComponent = TopnavComponent;
+
 
 
 /***/ }),
 
 /***/ "./src/environments/environment.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.environment = {
+var environment = {
     production: false
 };
 
@@ -311,19 +325,22 @@ exports.environment = {
 /***/ }),
 
 /***/ "./src/main.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("./src/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var platform_browser_dynamic_1 = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-var app_module_1 = __webpack_require__("./src/app/app.module.ts");
-var environment_1 = __webpack_require__("./src/environments/environment.ts");
-if (environment_1.environment.production) {
-    core_1.enableProdMode();
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* enableProdMode */])();
 }
-platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule)
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
 
