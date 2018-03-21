@@ -5,7 +5,6 @@ import { Headers } from "@angular/http";
 
 
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
