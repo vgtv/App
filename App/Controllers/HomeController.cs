@@ -10,9 +10,6 @@ namespace App.Controllers
 {
     public class HomeController : Controller
     {
-
-        private readonly DataRepository dataAccess = new DataRepository();
-
         public ActionResult Index()
         {
             /*
@@ -33,7 +30,10 @@ namespace App.Controllers
             List<cols> colobj = new List<cols> { colsObj1, colsObj2, colsObj3 };
 
             c cObj1 = new c { v = "123", f = "Førstegreie"};
-            c cObj2 = new c { v = "39", f = "Julian" };
+            c cObj2 = new c { v = "39", f = "Julian" }
+
+            // f = navn og så f = tittel
+
             c cObj3 = new c { v = "#80d6ff", f = null };
             List<c> cobjs1 = new List<c> { cObj1, cObj2, cObj3 };
 
@@ -50,17 +50,17 @@ namespace App.Controllers
             
             var Json3 = new JavaScriptSerializer();
             string JsonString3 = Json.Serialize(sp);
+                 */
 
-            var test = dataAccess.GetUserData("63753");
 
-            var Json4 = new JavaScriptSerializer();
+            var test = dataAccess.GetScatterData("63753");
+
+            var Json = new JavaScriptSerializer();
             string JsonString4 = Json.Serialize(test);
 
-
             ViewBag.Users = JsonString4;
-            ViewBag.WordCloud = JsonString2;
-            */
-
+  
+  
             return View();
         }
 

@@ -1,4 +1,5 @@
-﻿using NinjaNye.SearchExtensions;
+﻿using App.Models.DomainModels;
+using NinjaNye.SearchExtensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace App.Models
 {
-    public class DataRepository
+    public class ApiRepository : iApiRepository
     {
         /*
          * ----------------------------------------------------------------------
@@ -25,7 +26,7 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 return db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
-                    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
+                    .Select(x => new User { firstName = x.firstname, lastName = x.lastname }).ToList();
 
                 //return db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
                 //    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
@@ -38,7 +39,23 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.person.Select(x => new User { firstname = x.firstname, lastname = x.lastname }).Take(10).ToList();
+                return db.person.Select(u => new User { firstName = u.firstname, lastName = u.lastname }).Take(10).ToList();
+            }
+        }
+
+        public Researcher GetResearcherData(string cristinID)
+        {
+            using(var db = new dbEntities())
+            {
+                Researcher researcher = db.person.Where(p => p.cristinID == cristinID)
+                    .Select(r => new Researcher {
+                        firstName = r.firstname, lastName = r.lastname }).FirstOrDefault();
+
+                var assosciation = db.association.Where(a => a.cristinID == cristinID).FirstOrDefault();
+                researcher.institution = assosciation.institusjon;
+                researcher.institute = assosciation.institutt;
+                researcher.institute = assosciation.position;
+                return researcher;
             }
         }
 
@@ -56,7 +73,7 @@ namespace App.Models
          *       {"wordCount":6,"word":"tempor"},
          *       ];
          */
-
+            
         public List<Cloud> GetWordCloud(string cristinID)
         {
             using (var db = new dbEntities())
@@ -96,6 +113,10 @@ namespace App.Models
                 List<UserMatch> matchedUsers = new List<UserMatch>();
 
                 List<int> currentUser = db.wordcloud.Where(e => e.cristinID == cristinID).Select(e => e.key).ToList();
+                if(currentUser.Count() <= 0)
+                {
+                    return null; // inactive
+                }
 
                 var person = db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefault();
@@ -153,6 +174,100 @@ namespace App.Models
                 }
                 return matchedUsers;
             }
+        }
+
+        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID)
+        {
+            List<UserMatch> matchedData = this.GetUserData(cristinID);
+            if (matchedData == null) { return null; }
+
+            var researcherList = new List<ResearcherRelevance>();
+
+            using (var db = new dbEntities())
+            {
+                foreach(var user in matchedData)
+                {
+                    var researcher = GetResearcherData(user.cristinID);
+                    researcherList.Add(new ResearcherRelevance {
+                        firstName = researcher.firstName, lastName = researcher.lastName,
+                        institute = researcher.institute, institution = researcher.institution,
+                        position = researcher.position, relevance = user.percentage
+                    } );
+                }
+                return researcherList;
+            }
+        }
+
+        public ScatterPlot GetScatterData(string cristinID)
+        {
+            List<UserMatch> matchedData = this.GetUserData(cristinID);
+            if(matchedData == null) { return null;  }
+
+            ScatterPlot scatterPlotData = new ScatterPlot();
+            List<rows> rowList = new List<rows>();
+
+            Random random = new Random();
+            int randomNumber = random.Next(0, 100);
+
+            using (var db = new dbEntities())
+            {
+                string mainPosition = db.association.Where(t => t.cristinID == cristinID)
+                    .Select(t => t.position).FirstOrDefault();
+
+                if (mainPosition == null) return null;
+
+                string mainColor = "#fb8c00";
+
+                User mainUser = db.person.Where(p => p.cristinID == cristinID)
+                    .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
+                    .FirstOrDefault();
+
+                if (mainUser == null) { return null; }
+
+                rowList.Add(new rows
+                {
+                    c = new List<c>{
+                        new c { v = random.Next(30, 150) +"", f = mainUser.firstName + " " + mainUser.lastName },
+                        new c { v = random.Next(10, 100)+"", f = mainPosition },
+                        new c { v = mainColor, f = null }
+                        }
+                });
+
+                foreach (var match in matchedData)
+                {
+                    string position = db.association.
+                        Where(t => t.cristinID == match.cristinID).Select(t => t.position)
+                        .FirstOrDefault();
+
+                    if (position == null) { continue; }
+
+                    string color = position == "Professor" ? "#ffbd45" : "#80d6ff";
+
+                    User user = db.person.Where(p => p.cristinID == match.cristinID)
+                        .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
+                        .FirstOrDefault();
+
+                    if (user == null) { continue; }
+
+                    rowList.Add(new rows
+                    {
+                        c = new List<c>{
+                            new c { v = random.Next(30, 150)+"", f = user.firstName + " " + user.lastName },
+                            new c { v = random.Next(10, 100)+"", f = position },
+                            new c { v = color, f = null }
+                        }
+                    });
+                }
+
+                cols colums1 = new cols { id = "", label = "", pattern = "", type = "number" };
+                cols colums2 = new cols { id = "", label = "", pattern = "", type = "number" };
+                cols colums3 = new cols { id = "", role = "style", type = "string" };
+                List<cols> columList = new List<cols> { colums1, colums2, colums3 };
+
+                scatterPlotData.cols = columList;
+                scatterPlotData.rows = rowList;
+            }
+            return scatterPlotData;
         }
     }
 }

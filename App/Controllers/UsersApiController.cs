@@ -12,7 +12,17 @@ namespace App.Controllers
 {
     public class UsersApiController : ApiController
     {
-        private DataRepository dataAccess = new DataRepository();
+        private readonly iApiRepository dataAccess;
+
+        public UsersApiController()
+        {
+            this.dataAccess = new ApiRepository();
+        }
+
+        public UsersApiController(iApiRepository stub)
+        {
+            this.dataAccess = stub;
+        }
 
         // Kan prøve denne ngInit for autocomplete
         public HttpResponseMessage Get()
