@@ -232,6 +232,7 @@
     </Compile>
     <Compile Include="Models\ApiRepository.cs" />
     <Compile Include="Models\DomainModels\iUser.cs" />
+    <Compile Include="Models\DomainModels\IUser1.cs" />
     <Compile Include="Models\DomainModels\Researcher.cs" />
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\eierskap.cs">

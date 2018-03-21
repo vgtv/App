@@ -7,7 +7,7 @@ namespace App.Models.DomainModels
 {
     public class User : iUser
     {
-        public string firstName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string lastName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
     }
 }
