@@ -8,7 +8,7 @@ const routes: Routes =
   [
     { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'auto', component: AutocompleteComponent },
+    
   ];
 
 @NgModule({
@@ -17,5 +17,5 @@ const routes: Routes =
 })
 
 export class AppRoutingModule { }
-export const routingComponents = [HomeComponent, AboutComponent, AutocompleteComponent];
+export const routingComponents = [HomeComponent, AboutComponent];
 

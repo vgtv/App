@@ -254,6 +254,7 @@
     <TypeScriptCompile Include="Ng5\src\app\autocomplete\SearchResults.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\home\Personer.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.ts" />
     <TypeScriptCompile Include="Ng5\src\main.ts" />

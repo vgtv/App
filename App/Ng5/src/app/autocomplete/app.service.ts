@@ -7,7 +7,7 @@ export class AppService {
 
   url: string
   constructor(private http: Http) {
-    this.url = 'api/UsersApi'
+    this.url = 'api/usersapi/'
   }
 
   search_word(term) {
