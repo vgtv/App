@@ -26,7 +26,7 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 return db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
-                    .Select(x => new User { firstName = x.firstname, lastName = x.lastname }).ToList();
+                    .Select(x => new User { cristinID = x.cristinID, firstName = x.firstname, lastName = x.lastname }).ToList();
 
                 //return db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
                 //    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
@@ -39,7 +39,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.person.Select(u => new User { firstName = u.firstname, lastName = u.lastname }).Take(10).ToList();
+                return db.person.Select(u => new User { cristinID = u.cristinID, firstName = u.firstname, lastName = u.lastname }).Take(10).ToList();
             }
         }
 
