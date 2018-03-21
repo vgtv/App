@@ -8,6 +8,9 @@ import { SearchComponent } from './search/search.component';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { FormsModule } from '@angular/forms';
 
+import { Http, Response } from "@angular/http";
+import { Headers } from "@angular/http";
+
 @NgModule({
   declarations: [
     AppComponent,

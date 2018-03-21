@@ -2,4 +2,8 @@
   search works!
 </p>
 
-<div *ngFor="let persons of hentData">{{persons.firstname}}</div>
+
+<h1>Søk Forsker</h1>
+<ng2-completer [(ngModel)]="searchStr" [datasource]="this.Data.firstname" [minSearchLength]="0"></ng2-completer>
+
+
