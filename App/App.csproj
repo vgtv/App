@@ -281,6 +281,7 @@
     <Content Include="App_Data\db_log.ldf">
       <DependentUpon>db.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\resetwordsSQL.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -382,6 +383,7 @@
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\search\Persons.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
