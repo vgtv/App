@@ -38,7 +38,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.person.Select(x => new User { cristinID = x.cristinID, firstname = x.firstname, lastname = x.lastname }).Take(10).ToList();
+                return db.person.Select(x => new User { cristinID = x.cristinID, firstname = x.firstname, lastname = x.lastname }).Take(100).ToList();
             }
         }
 

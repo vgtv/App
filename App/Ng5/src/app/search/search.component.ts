@@ -16,9 +16,13 @@ export class SearchComponent implements OnInit {
   public Data: Array<Persons>;
   public DataDone = false;
   protected searchStr: string;
+  protected dataService: CompleterData;
+  protected testData = [
+    { color: 'red', value: '#f00' }
+  ];
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private completerService: CompleterService) {
+    this.dataService = completerService.remote("api/UsersApi/", 'firstname, lastname', 'firstname');
   }
 
   ngOnInit() {
