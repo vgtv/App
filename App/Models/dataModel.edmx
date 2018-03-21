@@ -902,7 +902,7 @@
           <Property Name="cristinID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="institusjon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="institutt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="posisjon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="aktiv" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="titles">
@@ -1447,7 +1447,7 @@
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
                 <ScalarProperty Name="institusjon" ColumnName="institusjon" />
                 <ScalarProperty Name="institutt" ColumnName="institutt" />
-                <ScalarProperty Name="posisjon" ColumnName="posisjon" />
+                <ScalarProperty Name="position" ColumnName="posisjon" />
                 <ScalarProperty Name="aktiv" ColumnName="aktiv" />
               </MappingFragment>
             </EntityTypeMapping>

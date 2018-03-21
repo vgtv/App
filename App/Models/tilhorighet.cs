@@ -18,7 +18,7 @@ namespace App.Models
         public string cristinID { get; set; }
         public string institusjon { get; set; }
         public string institutt { get; set; }
-        public string posisjon { get; set; }
+        public string position { get; set; }
         public short aktiv { get; set; }
     }
 }

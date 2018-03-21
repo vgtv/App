@@ -211,9 +211,10 @@
     <Compile Include="Models\aarligranking2016.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\c.cs" />
-    <Compile Include="Models\Cloud.cs" />
-    <Compile Include="Models\cols.cs" />
+    <Compile Include="Models\ApiRepositoryStub.cs" />
+    <Compile Include="Models\DomainModels\c.cs" />
+    <Compile Include="Models\DomainModels\Cloud.cs" />
+    <Compile Include="Models\DomainModels\cols.cs" />
     <Compile Include="Models\dataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -229,7 +230,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataRepository.cs" />
+    <Compile Include="Models\ApiRepository.cs" />
+    <Compile Include="Models\DomainModels\iUser.cs" />
+    <Compile Include="Models\DomainModels\IUser1.cs" />
+    <Compile Include="Models\DomainModels\Researcher.cs" />
+    <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\eierskap.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +244,7 @@
     <Compile Include="Models\forskning.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iApiRepository.cs" />
     <Compile Include="Models\institutter.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -251,8 +257,8 @@
     <Compile Include="Models\rankinstitusjon.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\rows.cs" />
-    <Compile Include="Models\ScatterPlot.cs" />
+    <Compile Include="Models\DomainModels\rows.cs" />
+    <Compile Include="Models\DomainModels\ScatterPlot.cs" />
     <Compile Include="Models\stopwords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -265,9 +271,9 @@
     <Compile Include="Models\titles.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserMatch.cs" />
-    <Compile Include="Models\Word.cs" />
+    <Compile Include="Models\DomainModels\User.cs" />
+    <Compile Include="Models\DomainModels\UserMatch.cs" />
+    <Compile Include="Models\DomainModels\Word.cs" />
     <Compile Include="Models\wordcloud.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>

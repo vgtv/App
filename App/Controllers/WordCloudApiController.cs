@@ -12,7 +12,7 @@ namespace App.Controllers
 {
     public class WordCloudApiController : ApiController
     {
-        private readonly DataRepository dataAccess = new DataRepository();
+        private readonly ApiRepository dataAccess = new ApiRepository();
 
         public HttpResponseMessage Get(string cristinID)
         {
