@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Http, Response } from "@angular/http";
+import { Headers } from "@angular/http";
 import { CompleterService, CompleterData } from 'ng2-completer';
-
+import "rxjs/add/operator/map";
 import { Persons } from './Persons';
 
 @Component({
@@ -11,30 +13,27 @@ import { Persons } from './Persons';
 })
 export class SearchComponent implements OnInit {
 
-  public jsondata: Array<Persons>;
+  public Data: Array<Persons>;
+  public DataDone = false;
+  protected searchStr: string;
 
   constructor(private http: HttpClient) {
-    
+
   }
 
   ngOnInit() {
-    this.hentData(); 
+    this.getData();
   }
 
-  hentData() {
-    this.http.get("api/UsersApi/")
-      .map(resultat => {
-        let JsonData = resultat.json();
-        return JsonData;
-      })
+  getData() {
+    this.http.get<Persons[]>("api/UsersApi/")
       .subscribe(
       JsonData => {
         this.Data = [];
-
         if (JsonData) {
-          for (let personer of JsonData) {
-            this.Data.push(new Personer(personer.firstname, personer.lastname, personer.role, personer.institution));
-          };
+          this.Data = JsonData;
+          console.log(this.Data);
+          this.DataDone = true; 
         };
       },
       error => alert(error + "1"),
@@ -42,8 +41,4 @@ export class SearchComponent implements OnInit {
       );
 
   };
-  }
-
-this.http.get('/api/UsersApi').subscribe(data => {
-this.jsondata.push(new Persons(scientist.firstname, scientist.lastname, scientist.CristinID))
-console.log(scientist.firstname);
+}
