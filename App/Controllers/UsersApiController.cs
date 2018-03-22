@@ -6,26 +6,30 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using App.Models;
 
 namespace App.Controllers
 {
     public class UsersApiController : ApiController
     {
+        private readonly iApiRepository dataAccess;
 
-        public HttpResponseMessage Get(string searchQuery)
+        public UsersApiController()
         {
+            this.dataAccess = new ApiRepository();
+        }
 
-            // { firstname : "", lastname : "", "role", "instituion"}
+        public UsersApiController(iApiRepository stub)
+        {
+            this.dataAccess = stub;
+        }
 
-            List<Personsearch> persons = new List<Personsearch>
-            {
-                new Personsearch { firstname = "Poo", lastname = "Doe", role = "Professor", institution = "UiO" },
-                new Personsearch { firstname = "Foo", lastname = "Roe", role = "Firstemanuesi", institution = "NTNU" },
-                new Personsearch { firstname = "Loo", lastname = "Soe", role = "Professor", institution = "OsloMet" }
-            };
-
+        // Kan prøve denne ngInit for autocomplete
+        public HttpResponseMessage Get()
+        {
+            var searchResults = dataAccess.GetAllUsers();
             var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(persons);
+            string JsonString = Json.Serialize(searchResults);
 
             return new HttpResponseMessage()
             {
@@ -33,11 +37,18 @@ namespace App.Controllers
                 StatusCode = HttpStatusCode.OK
             };
         }
+
+        public HttpResponseMessage Get(string searchQuery)
+        {
+            var searchResults = dataAccess.GetUsers(searchQuery);
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(searchResults);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+        }        
     }   
-    public class Personsearch{
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string role { get; set; }
-        public string institution { get; set; }
-    }
 }
