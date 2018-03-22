@@ -31,7 +31,7 @@ namespace App.Models
                 int counter = 0;
                 int skip = 0;
 
-                if (searchResult.Count() < 10 )
+                if (searchResult.Count() < 10)
                 {
                     counter = searchResult.Count();
                     while (counter <= 10)
@@ -43,14 +43,15 @@ namespace App.Models
                         {
                             Debug.WriteLine("1");
                             return searchResult;
-                           
+
                         }
-                        if(searchResult.Any(x => x.cristinID == containResult.cristinID))
+                        if (searchResult.Any(x => x.cristinID == containResult.cristinID))
                         {
                             Debug.WriteLine("2");
                             ++counter;
                             ++skip;
-                            continue; }
+                            continue;
+                        }
 
                         searchResult.Add(containResult);
                         Debug.WriteLine("3");
@@ -112,19 +113,21 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                string[] color = new string[3] { "#42a5f5", "#80d6ff", "#0077c2" };
+                string[] colorArray = new string[3] { "#42a5f5", "#80d6ff", "#0077c2" };
 
                 Random rnd = new Random();
 
-                return db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
+                var cloud = db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
                 {
                     weight = (int)wc.count,
-                    word = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault(),
-                    color = color[rnd.Next(0, 3)]
+                    word = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
                 }).ToList();
+
+                cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 3)]);
+                return cloud;
             }
         }
-        
+
         /*
          * ----------------------------------------------------------------------
          * User Data
