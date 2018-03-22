@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Http, Response } from "@angular/http";
+
+
+
+
 @Component({
   selector: 'app-wordcloud',
   templateUrl: './wordcloud.component.html',
@@ -8,6 +14,11 @@ import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 
 export class WordcloudComponent implements OnInit {
+  data: Array<CloudData>;
+
+  constructor(private http: HttpClient) {
+  }
+
   options: CloudOptions = {
     // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value 
     width: 700,
@@ -15,50 +26,28 @@ export class WordcloudComponent implements OnInit {
     overflow: false,
   }
 
-  data: CloudData[] = [
-    { text: 'Weight-8-color', weight: 17, color: '#ffaaee' },
-    { text: 'Weight-10-link', weight: 1 },
-    { text: 'Weight-10-link', weight: 10 },
-    { text: 'Weight-10-link', weight: 7 },
-    { text: 'Weight-10-link', weight: 5 },
-    { text: 'Weight-10-link', weight: 3 },
-    { text: 'Weight-10-link', weight: 9 },
-    { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-    { text: 'Weight-10-link', weight: 1 },
-    { text: 'Weight-10-link', weight: 10 },
-    { text: 'Weight-10-link', weight: 7 },
-    { text: 'Weight-10-link', weight: 5 },
-    { text: 'Weight-10-link', weight: 3 },
-    { text: 'Weight-10-link', weight: 9 },
-    { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-    { text: 'Weight-10-link', weight: 1 },
-    { text: 'Weight-10-link', weight: 10 },
-    { text: 'Weight-10-link', weight: 7 },
-    { text: 'Weight-10-link', weight: 5 },
-    { text: 'Weight-10-link', weight: 3 },
-    { text: 'Weight-10-link', weight: 9 },
-    { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-    { text: 'Weight-10-link', weight: 1 },
-    { text: 'Weight-10-link', weight: 10 },
-    { text: 'Weight-10-link', weight: 7 },
-    { text: 'Weight-10-link', weight: 5 },
-    { text: 'Weight-10-link', weight: 3 },
-    { text: 'Weight-10-link', weight: 9 },
-    { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-    { text: 'Weight-10-link', weight: 1 },
-    { text: 'Weight-10-link', weight: 10 },
-    { text: 'Weight-10-link', weight: 7 },
-    { text: 'Weight-10-link', weight: 5 },
-    { text: 'Weight-10-link', weight: 3 },
-    { text: 'Weight-10-link', weight: 9 },
-    // ...
-  ]
+  getData(cID) {
+    this.http.get<any[]>("api/ApiWordCloud/?cristinID="+cID).subscribe(
+      JsonData => {
+        if (JsonData) {
+          this.data = JsonData;
+          console.log(this.data);
+
+        };
+      },
+      error => alert(error + "1"),
+      () => console.log("ferdig get-api/alleSporsmaal")
+    );
+  };
 
 
 
-  constructor() { }
+  
+
+
+  
   ngOnInit() {
-
+    this.getData(63753);
   }
 
 

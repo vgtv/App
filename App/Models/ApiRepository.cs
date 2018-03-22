@@ -120,10 +120,10 @@ namespace App.Models
                 var cloud = db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
                 {
                     weight = (int)wc.count,
-                    word = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
+                    text = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
                 }).ToList();
 
-                cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 3)]);
+                cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 2)]);
                 return cloud;
             }
         }

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+
+
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +27,11 @@ import { SearchComponent } from './search/search.component';
     NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    TagCloudModule
+    TagCloudModule,
+
+    HttpClientModule
+   
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -164,12 +164,13 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__topnav_topnav_component__ = __webpack_require__("./src/app/topnav/topnav.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__wordcloud_wordcloud_component__ = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular_tag_cloud_module__ = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_search_component__ = __webpack_require__("./src/app/search/search.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__topnav_topnav_component__ = __webpack_require__("./src/app/topnav/topnav.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__wordcloud_wordcloud_component__ = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular_tag_cloud_module__ = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__search_search_component__ = __webpack_require__("./src/app/search/search.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -185,26 +186,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__app_routing_module__["b" /* routingComponents */],
-                __WEBPACK_IMPORTED_MODULE_5__topnav_topnav_component__["a" /* TopnavComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__search_search_component__["a" /* SearchComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__wordcloud_wordcloud_component__["a" /* WordcloudComponent */]
+                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["b" /* routingComponents */],
+                __WEBPACK_IMPORTED_MODULE_6__topnav_topnav_component__["a" /* TopnavComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__search_search_component__["a" /* SearchComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__wordcloud_wordcloud_component__["a" /* WordcloudComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_3__app_routing_module__["a" /* AppRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_7_angular_tag_cloud_module__["a" /* TagCloudModule */]
+                __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_8_angular_tag_cloud_module__["a" /* TagCloudModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */]
             ],
             providers: [],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -390,6 +393,7 @@ module.exports = ""
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordcloudComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -400,53 +404,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var WordcloudComponent = /** @class */ (function () {
-    function WordcloudComponent() {
+    function WordcloudComponent(http) {
+        this.http = http;
         this.options = {
             // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value 
             width: 700,
             height: 400,
             overflow: false,
         };
-        this.data = [
-            { text: 'Weight-8-color', weight: 17, color: '#ffaaee' },
-            { text: 'Weight-10-link', weight: 1 },
-            { text: 'Weight-10-link', weight: 10 },
-            { text: 'Weight-10-link', weight: 7 },
-            { text: 'Weight-10-link', weight: 5 },
-            { text: 'Weight-10-link', weight: 3 },
-            { text: 'Weight-10-link', weight: 9 },
-            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-            { text: 'Weight-10-link', weight: 1 },
-            { text: 'Weight-10-link', weight: 10 },
-            { text: 'Weight-10-link', weight: 7 },
-            { text: 'Weight-10-link', weight: 5 },
-            { text: 'Weight-10-link', weight: 3 },
-            { text: 'Weight-10-link', weight: 9 },
-            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-            { text: 'Weight-10-link', weight: 1 },
-            { text: 'Weight-10-link', weight: 10 },
-            { text: 'Weight-10-link', weight: 7 },
-            { text: 'Weight-10-link', weight: 5 },
-            { text: 'Weight-10-link', weight: 3 },
-            { text: 'Weight-10-link', weight: 9 },
-            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-            { text: 'Weight-10-link', weight: 1 },
-            { text: 'Weight-10-link', weight: 10 },
-            { text: 'Weight-10-link', weight: 7 },
-            { text: 'Weight-10-link', weight: 5 },
-            { text: 'Weight-10-link', weight: 3 },
-            { text: 'Weight-10-link', weight: 9 },
-            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
-            { text: 'Weight-10-link', weight: 1 },
-            { text: 'Weight-10-link', weight: 10 },
-            { text: 'Weight-10-link', weight: 7 },
-            { text: 'Weight-10-link', weight: 5 },
-            { text: 'Weight-10-link', weight: 3 },
-            { text: 'Weight-10-link', weight: 9 },
-        ];
     }
+    WordcloudComponent.prototype.getData = function (cID) {
+        var _this = this;
+        this.http.get("api/ApiWordCloud/?cristinID=" + cID).subscribe(function (JsonData) {
+            if (JsonData) {
+                _this.data = JsonData;
+                console.log(_this.data);
+            }
+            ;
+        }, function (error) { return alert(error + "1"); }, function () { return console.log("ferdig get-api/alleSporsmaal"); });
+    };
+    ;
     WordcloudComponent.prototype.ngOnInit = function () {
+        this.getData(63753);
     };
     WordcloudComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -454,7 +435,7 @@ var WordcloudComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/wordcloud/wordcloud.component.html"),
             styles: [__webpack_require__("./src/app/wordcloud/wordcloud.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], WordcloudComponent);
     return WordcloudComponent;
 }());

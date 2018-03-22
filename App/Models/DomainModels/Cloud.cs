@@ -8,7 +8,7 @@ namespace App.Models.DomainModels
     public class Cloud
     {
         public int weight { get; set; }
-        public string word { get; set; }
+        public string text { get; set; }
         public string color { get; set; }
     }
 }
