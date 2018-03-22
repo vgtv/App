@@ -16,8 +16,8 @@ namespace App.Models
          * ----------------------------------------------------------------------
          * Json
          * [
-         *      {"firstname":"Yvonne","lastname":"Andersson"},
-         *      {"firstname":"Bedada Mergo","lastname":"Egne"}
+         *      {"cristinID":"1","firstname":"Yvonne","lastname":"Andersson"},
+         *      {"cristinID":"10","firstname":"Bedada Mergo","lastname":"Egne"}
          * ];
          */
 
@@ -73,7 +73,6 @@ namespace App.Models
          *       {"wordCount":6,"word":"tempor"},
          *       ];
          */
-            
         public List<Cloud> GetWordCloud(string cristinID)
         {
             using (var db = new dbEntities())
