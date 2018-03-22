@@ -4,7 +4,7 @@
 
 <div *ngIf="this.DataDone">
 <h1>Søk Forsker</h1>
-<ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+<ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="2" [pause]="2000"></ng2-completer>
 </div>
 
 

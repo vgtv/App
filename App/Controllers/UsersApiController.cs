@@ -19,6 +19,7 @@ namespace App.Controllers
         {
             var searchResults = dataAccess.GetAllUsers();
             var Json = new JavaScriptSerializer();
+            Json.MaxJsonLength = int.MaxValue;
             string JsonString = Json.Serialize(searchResults);
 
             return new HttpResponseMessage()

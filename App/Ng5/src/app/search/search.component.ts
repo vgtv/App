@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   ];
 
   constructor(private http: HttpClient, private completerService: CompleterService) {
-    this.dataService = completerService.remote("api/UsersApi/", 'firstname, lastname', 'firstname');
+    this.dataService = completerService.remote("api/UsersApi/", 'firstname, lastname', 'firstname').descriptionField('lastname');
   }
 
   ngOnInit() {
