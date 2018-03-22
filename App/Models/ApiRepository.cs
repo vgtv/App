@@ -16,8 +16,8 @@ namespace App.Models
          * ----------------------------------------------------------------------
          * Json
          * [
-         *      {"firstname":"Yvonne","lastname":"Andersson"},
-         *      {"firstname":"Bedada Mergo","lastname":"Egne"}
+         *      {"cristinID":"1","firstname":"Yvonne","lastname":"Andersson"},
+         *      {"cristinID":"10","firstname":"Bedada Mergo","lastname":"Egne"}
          * ];
          */
 
@@ -25,9 +25,41 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
+                var searchResult = db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
                     .Select(x => new User { cristinID = x.cristinID, firstName = x.firstname, lastName = x.lastname }).ToList();
 
+                int counter = 0;
+                int skip = 0;
+
+                if (searchResult.Count() < 10 )
+                {
+                    counter = searchResult.Count();
+                    while (counter <= 10)
+                    {
+                        var containResult = db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
+                        .Select(x => new User { cristinID = x.cristinID, firstName = x.firstname, lastName = x.lastname }).FirstOrDefault();
+
+                        if (containResult == null)
+                        {
+                            Debug.WriteLine("1");
+                            return searchResult;
+                           
+                        }
+                        if(searchResult.Any(x => x.cristinID == containResult.cristinID))
+                        {
+                            Debug.WriteLine("2");
+                            ++counter;
+                            ++skip;
+                            continue; }
+
+                        searchResult.Add(containResult);
+                        Debug.WriteLine("3");
+                        ++counter;
+                        ++skip;
+                    }
+                    return searchResult;
+                }
+                return searchResult;
                 //return db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
                 //    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
 
@@ -45,11 +77,14 @@ namespace App.Models
 
         public Researcher GetResearcherData(string cristinID)
         {
-            using(var db = new dbEntities())
+            using (var db = new dbEntities())
             {
                 Researcher researcher = db.person.Where(p => p.cristinID == cristinID)
-                    .Select(r => new Researcher {
-                        firstName = r.firstname, lastName = r.lastname }).FirstOrDefault();
+                    .Select(r => new Researcher
+                    {
+                        firstName = r.firstname,
+                        lastName = r.lastname
+                    }).FirstOrDefault();
 
                 var assosciation = db.association.Where(a => a.cristinID == cristinID).FirstOrDefault();
                 researcher.institution = assosciation.institusjon;
@@ -73,20 +108,23 @@ namespace App.Models
          *       {"wordCount":6,"word":"tempor"},
          *       ];
          */
-            
         public List<Cloud> GetWordCloud(string cristinID)
         {
             using (var db = new dbEntities())
             {
+                string[] color = new string[3] { "#42a5f5", "#80d6ff", "#0077c2" };
+
+                Random rnd = new Random();
+
                 return db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
                 {
-                    wordCount = wc.count,
-                    word = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
+                    weight = (int)wc.count,
+                    word = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault(),
+                    color = color[rnd.Next(0, 3)]
                 }).ToList();
             }
         }
-
-
+        
         /*
          * ----------------------------------------------------------------------
          * User Data
@@ -113,7 +151,7 @@ namespace App.Models
                 List<UserMatch> matchedUsers = new List<UserMatch>();
 
                 List<int> currentUser = db.wordcloud.Where(e => e.cristinID == cristinID).Select(e => e.key).ToList();
-                if(currentUser.Count() <= 0)
+                if (currentUser.Count() <= 0)
                 {
                     return null; // inactive
                 }
@@ -185,14 +223,18 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                foreach(var user in matchedData)
+                foreach (var user in matchedData)
                 {
                     var researcher = GetResearcherData(user.cristinID);
-                    researcherList.Add(new ResearcherRelevance {
-                        firstName = researcher.firstName, lastName = researcher.lastName,
-                        institute = researcher.institute, institution = researcher.institution,
-                        position = researcher.position, relevance = user.percentage
-                    } );
+                    researcherList.Add(new ResearcherRelevance
+                    {
+                        firstName = researcher.firstName,
+                        lastName = researcher.lastName,
+                        institute = researcher.institute,
+                        institution = researcher.institution,
+                        position = researcher.position,
+                        relevance = user.percentage
+                    });
                 }
                 return researcherList;
             }
@@ -201,7 +243,7 @@ namespace App.Models
         public ScatterPlot GetScatterData(string cristinID)
         {
             List<UserMatch> matchedData = this.GetUserData(cristinID);
-            if(matchedData == null) { return null;  }
+            if (matchedData == null) { return null; }
 
             ScatterPlot scatterPlotData = new ScatterPlot();
             List<rows> rowList = new List<rows>();

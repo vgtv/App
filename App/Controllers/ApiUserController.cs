@@ -10,13 +10,18 @@ using System.Web.Script.Serialization;
 
 namespace App.Controllers
 {
-    public class WordCloudApiController : ApiController
+    public class ApiUserController : ApiController
     {
-        private readonly ApiRepository dataAccess = new ApiRepository();
+        private readonly iApiRepository dataAccess = new ApiRepository();
 
         public HttpResponseMessage Get(string cristinID)
         {
-            var searchResults = dataAccess.GetWordCloud(cristinID);
+            var searchResults = dataAccess.GetResearcherData(cristinID);
+            if (searchResults == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");
+            }
+
             var Json = new JavaScriptSerializer();
             string JsonString = Json.Serialize(searchResults);
 

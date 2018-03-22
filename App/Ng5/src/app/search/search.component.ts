@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchComponent implements OnInit {
 
+
+
   constructor(private http: HttpClient) {
     
   }

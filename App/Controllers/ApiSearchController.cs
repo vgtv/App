@@ -10,24 +10,15 @@ using App.Models;
 
 namespace App.Controllers
 {
-    public class UsersApiController : ApiController
+    public class ApiSearchController : ApiController
     {
-        private readonly iApiRepository dataAccess;
+        private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public UsersApiController()
-        {
-            this.dataAccess = new ApiRepository();
-        }
-
-        public UsersApiController(iApiRepository stub)
-        {
-            this.dataAccess = stub;
-        }
-
-        // Kan prøve denne ngInit for autocomplete
+        [Obsolete("Get is deprecated, please use Get(string searchQuery) instead.")]
         public HttpResponseMessage Get()
         {
             var searchResults = dataAccess.GetAllUsers();
+
             var Json = new JavaScriptSerializer();
             string JsonString = Json.Serialize(searchResults);
 
@@ -41,6 +32,11 @@ namespace App.Controllers
         public HttpResponseMessage Get(string searchQuery)
         {
             var searchResults = dataAccess.GetUsers(searchQuery);
+            if (searchResults == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "No user found"); // ""
+            }
+
             var Json = new JavaScriptSerializer();
             string JsonString = Json.Serialize(searchResults);
 
