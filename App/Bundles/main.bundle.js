@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n<div class=\"container-fluid\">\r\n  <h2>Running Angular: 5.2.9</h2>\r\n  <hr />\r\n  <ul>\r\n    <li>\r\n      Angular er oppdatert - se package.json\r\n    </li>\r\n    <li>\r\n      <a href=\"https://ng-bootstrap.github.io/#/home\">Installert ng-bootstrap</a>\r\n    </li>\r\n    <li>\r\n      Installert og satt opp routing:\r\n      <a routerLink=\"/home\">Home</a>,\r\n      <a routerLink=\"/about\">About</a>\r\n    </li>\r\n    <li><a href=\"https://www.youtube.com/watch?v=Nehk4tBxD4o\">Bra video om routing</a></li>\r\n    <li>\r\n      <a href=\"https://www.npmjs.com/\">Npm bibliotek</a>\r\n    </li>\r\n    <li>\r\n      npm kommandoer<br />\r\n      <ul>\r\n        <li>\r\n          <code>ng build</code>\r\n        </li>\r\n        <li>\r\n          <code>ng build --watch</code>\r\n        </li>\r\n        <li>\r\n          <code>ctrl + c (y)</code>\r\n        </li>\r\n        <li>\r\n          <code>ng g c komponent_navn</code>\r\n        </li>\r\n        <li>\r\n          <code>npm install/uninstall .. --save</code>\r\n        </li>\r\n        <li>\r\n          <code>ng -v</code>\r\n        </li>\r\n        <li>\r\n          <code>ng serve</code>\r\n        </li>\r\n      </ul>\r\n    </li>\r\n    <li><a href=\"https://codehandbook.org/how-to-implement-auto-complete-in-angular-4/\">Mulig autocomplete</a></li>\r\n    <li>\r\n      <a href=\"https://dotnetthoughts.net/how-to-use-angular4-wth-aspnet-mvc/\">Følgte denne guiden</a>\r\n      <ul>\r\n        <li>Dette ligner veldig på det vi gjorde i webapp</li>\r\n        <li>Bootstrap 4.0 fikk jeg ikke til, valgte bare å inkludere den som cdn for nå</li>\r\n      </ul>\r\n    </li>\r\n  </ul>\r\n  <router-outlet></router-outlet>\r\n</div>\r\n\r\n"
+module.exports = "<app-topnav></app-topnav>\r\n<div class=\"container-fluid\">\r\n  <h2>Running Angular: 5.2.9</h2>\r\n  <hr />\r\n  <ul>\r\n    <li>\r\n      Angular er oppdatert - se package.json\r\n    </li>\r\n    <li>\r\n      <a href=\"https://ng-bootstrap.github.io/#/home\">Installert ng-bootstrap</a>\r\n    </li>\r\n    <li>\r\n      Installert og satt opp routing:\r\n      <a routerLink=\"/home\">Home</a>,\r\n      <a routerLink=\"/about\">About</a>\r\n    </li>\r\n    <li><a href=\"https://www.youtube.com/watch?v=Nehk4tBxD4o\">Bra video om routing</a></li>\r\n    <li>\r\n      <a href=\"https://www.npmjs.com/\">Npm bibliotek</a>\r\n    </li>\r\n    <li>\r\n      npm kommandoer<br />\r\n      <ul>\r\n        <li>\r\n          <code>ng build</code>\r\n        </li>\r\n        <li>\r\n          <code>ng build --watch</code>\r\n        </li>\r\n        <li>\r\n          <code>ctrl + c (y)</code>\r\n        </li>\r\n        <li>\r\n          <code>ng g c komponent_navn</code>\r\n        </li>\r\n        <li>\r\n          <code>npm install/uninstall .. --save</code>\r\n        </li>\r\n        <li>\r\n          <code>ng -v</code>\r\n        </li>\r\n        <li>\r\n          <code>ng serve</code>\r\n        </li>\r\n      </ul>\r\n    </li>\r\n    <li><a href=\"https://codehandbook.org/how-to-implement-auto-complete-in-angular-4/\">Mulig autocomplete</a></li>\r\n    <li>\r\n      <a href=\"https://dotnetthoughts.net/how-to-use-angular4-wth-aspnet-mvc/\">Følgte denne guiden</a>\r\n      <ul>\r\n        <li>Dette ligner veldig på det vi gjorde i webapp</li>\r\n        <li>Bootstrap 4.0 fikk jeg ikke til, valgte bare å inkludere den som cdn for nå</li>\r\n      </ul>\r\n    </li>\r\n  </ul>\r\n  <router-outlet></router-outlet>\r\n</div>\r\n<app-wordcloud></app-wordcloud>\r\n\r\n"
 
 /***/ }),
 
@@ -168,6 +168,9 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
+var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
+var wordcloud_component_1 = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
+var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -175,12 +178,15 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
-                app_routing_module_1.routingComponents
+                app_routing_module_1.routingComponents,
+                topnav_component_1.TopnavComponent,
+                wordcloud_component_1.WordcloudComponent
             ],
             imports: [
                 ng_bootstrap_1.NgbModule.forRoot(),
                 platform_browser_1.BrowserModule,
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
+                angular_tag_cloud_module_1.TagCloudModule
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
@@ -289,6 +295,99 @@ var TopnavComponent = /** @class */ (function () {
     return TopnavComponent;
 }());
 exports.TopnavComponent = TopnavComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/wordcloud/wordcloud.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div>\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/wordcloud/wordcloud.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/wordcloud/wordcloud.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var WordcloudComponent = /** @class */ (function () {
+    function WordcloudComponent() {
+        this.options = {
+            // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value 
+            width: 700,
+            height: 400,
+            overflow: false,
+        };
+        this.data = [
+            { text: 'Weight-8-color', weight: 17, color: '#ffaaee' },
+            { text: 'Weight-10-link', weight: 1 },
+            { text: 'Weight-10-link', weight: 10 },
+            { text: 'Weight-10-link', weight: 7 },
+            { text: 'Weight-10-link', weight: 5 },
+            { text: 'Weight-10-link', weight: 3 },
+            { text: 'Weight-10-link', weight: 9 },
+            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
+            { text: 'Weight-10-link', weight: 1 },
+            { text: 'Weight-10-link', weight: 10 },
+            { text: 'Weight-10-link', weight: 7 },
+            { text: 'Weight-10-link', weight: 5 },
+            { text: 'Weight-10-link', weight: 3 },
+            { text: 'Weight-10-link', weight: 9 },
+            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
+            { text: 'Weight-10-link', weight: 1 },
+            { text: 'Weight-10-link', weight: 10 },
+            { text: 'Weight-10-link', weight: 7 },
+            { text: 'Weight-10-link', weight: 5 },
+            { text: 'Weight-10-link', weight: 3 },
+            { text: 'Weight-10-link', weight: 9 },
+            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
+            { text: 'Weight-10-link', weight: 1 },
+            { text: 'Weight-10-link', weight: 10 },
+            { text: 'Weight-10-link', weight: 7 },
+            { text: 'Weight-10-link', weight: 5 },
+            { text: 'Weight-10-link', weight: 3 },
+            { text: 'Weight-10-link', weight: 9 },
+            { text: 'Weight-8-color', weight: 8, color: '#ffaaee' },
+            { text: 'Weight-10-link', weight: 1 },
+            { text: 'Weight-10-link', weight: 10 },
+            { text: 'Weight-10-link', weight: 7 },
+            { text: 'Weight-10-link', weight: 5 },
+            { text: 'Weight-10-link', weight: 3 },
+            { text: 'Weight-10-link', weight: 9 },
+        ];
+    }
+    WordcloudComponent.prototype.ngOnInit = function () {
+    };
+    WordcloudComponent = __decorate([
+        core_1.Component({
+            selector: 'app-wordcloud',
+            template: __webpack_require__("./src/app/wordcloud/wordcloud.component.html"),
+            styles: [__webpack_require__("./src/app/wordcloud/wordcloud.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], WordcloudComponent);
+    return WordcloudComponent;
+}());
+exports.WordcloudComponent = WordcloudComponent;
 
 
 /***/ }),

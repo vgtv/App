@@ -5,16 +5,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopnavComponent } from './topnav/topnav.component';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
+import { TagCloudModule } from 'angular-tag-cloud-module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    TopnavComponent,
+    WordcloudComponent
+   
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TagCloudModule
   ],
   providers: [],
   bootstrap: [AppComponent]
