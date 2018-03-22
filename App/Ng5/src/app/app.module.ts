@@ -10,7 +10,7 @@ import { SearchComponent } from './search/search.component';
   declarations: [
     AppComponent,
     routingComponents,
-    SearchComponent 
+    SearchComponent
   ],
   imports: [
     BrowserModule,
