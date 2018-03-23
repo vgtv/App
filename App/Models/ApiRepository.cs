@@ -123,6 +123,29 @@ namespace App.Models
                     text = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
                 }).ToList();
 
+                int max = cloud.Max(c => c.weight);
+                int min = cloud.Min(c => c.weight);
+
+                Debug.WriteLine(max);
+                Debug.WriteLine(min);
+                Debug.WriteLine("___");
+
+                foreach(var obj in cloud)
+                {
+
+                    double forste = obj.weight - min;
+                    double andre = max - min;
+                    double resultat = (forste / andre * 9)+1;
+                    obj.weight = (int)resultat;
+
+                    Debug.WriteLine(obj.weight);
+                }
+
+                foreach(var obj in cloud)
+                {
+                    //Debug.WriteLine(obj.weight);
+                }
+
                 cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 2)]);
                 return cloud;
             }
