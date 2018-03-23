@@ -1,4 +1,5 @@
 ﻿using App.Models.DomainModels;
+using Microsoft.Ajax.Utilities;
 using NinjaNye.SearchExtensions;
 using System;
 using System.Collections.Generic;
@@ -25,46 +26,29 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                var searchResult = db.person.Search(x => x.firstname, x => x.lastname).StartsWith(searchQuery)
-                    .Select(x => new User { cristinID = x.cristinID, firstName = x.firstname, lastName = x.lastname }).ToList();
-
-                int counter = 0;
-                int skip = 0;
-
-                if (searchResult.Count() < 10)
+                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                || p.lastname.StartsWith(searchQuery)).Select(p => new User
                 {
-                    counter = searchResult.Count();
-                    while (counter <= 10)
+                    cristinID = p.cristinID,
+                    firstName = p.firstname,
+                    lastName = p.lastname
+                }).ToList();
+
+                if (results.Count() < 10)
+                {
+                    results.AddRange(db.person.Where(p =>
+                    (p.firstname + " " + p.lastname).Contains(searchQuery))
+                    .Select(p => new User
                     {
-                        var containResult = db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
-                        .Select(x => new User { cristinID = x.cristinID, firstName = x.firstname, lastName = x.lastname }).FirstOrDefault();
+                        cristinID = p.cristinID,
+                        firstName = p.firstname,
+                        lastName = p.lastname
+                    }).ToList());
+                    //return results.ToList();
 
-                        if (containResult == null)
-                        {
-                            Debug.WriteLine("1");
-                            return searchResult;
-
-                        }
-                        if (searchResult.Any(x => x.cristinID == containResult.cristinID))
-                        {
-                            Debug.WriteLine("2");
-                            ++counter;
-                            ++skip;
-                            continue;
-                        }
-
-                        searchResult.Add(containResult);
-                        Debug.WriteLine("3");
-                        ++counter;
-                        ++skip;
-                    }
-                    return searchResult;
+                    return results.DistinctBy(i => i.cristinID).ToList();
                 }
-                return searchResult;
-                //return db.person.Search(x => x.firstname, x => x.lastname).Containing(searchQuery)
-                //    .Select(x => new User { firstname = x.firstname, lastname = x.lastname }).ToList();
-
-                //return db.person.Select(p => new User { firstname = p.firstname, lastname = p.lastname}).ToList();
+                return results;
             }
         }
 
@@ -126,26 +110,13 @@ namespace App.Models
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
 
-                Debug.WriteLine(max);
-                Debug.WriteLine(min);
-                Debug.WriteLine("___");
-
-                foreach(var obj in cloud)
+                foreach (var obj in cloud)
                 {
-
                     double forste = obj.weight - min;
                     double andre = max - min;
-                    double resultat = (forste / andre * 9)+1;
+                    double resultat = (forste / andre * 9) + 1;
                     obj.weight = (int)resultat;
-
-                    Debug.WriteLine(obj.weight);
                 }
-
-                foreach(var obj in cloud)
-                {
-                    //Debug.WriteLine(obj.weight);
-                }
-
                 cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 2)]);
                 return cloud;
             }
@@ -174,7 +145,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                List<UserMatch> matchedUsers = new List<UserMatch>();
+                var matchedUsers = new List<UserMatch>();
 
                 List<int> currentUser = db.wordcloud.Where(e => e.cristinID == cristinID).Select(e => e.key).ToList();
                 if (currentUser.Count() <= 0)
@@ -188,14 +159,27 @@ namespace App.Models
                 var cloud = db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).ToList();
 
+
+                int counter = 0;
+                for(int i = 0; i < cloud.Count; ++i)
+                {
+                    counter = 0;
+                    for(int j = 0; j < cloud[i].Items.Count; ++j)
+                    {
+                        if (person.Items.Contains(cloud[i].Items[j]))
+                        {
+                            ++counter;
+                        }
+                    }
+                    if (counter > 10)
+                    {
+                        matchedUsers.Add(new UserMatch { cristinID = cloud[i].Key, percentage = 100 });
+                    }
+                }
+                return matchedUsers;
+
+                /*
                 double matchBonus = 0;
-
-                // Regler:
-                // Dersom en bruker har en ord match med gitt person, blir man tildelt minst 1 bonus
-                // Dersom ordet forekommer hyppig til den gitte brukeren kan man få ekstra bonuser
-                // ! Resultatet er at vi får matchet mer relevante folk innenfor fagfeltet
-                // Man er en match med gitt bruker dersom man får en 50% i bonus systemet
-
                 foreach (var user in cloud)
                 {
                     matchBonus = 0;
@@ -235,14 +219,13 @@ namespace App.Models
                     {
                         matchedUsers.Add(new UserMatch { cristinID = user.Key, percentage = percentage });
                     }
-                }
-                return matchedUsers;
+                    */
             }
         }
 
         public List<ResearcherRelevance> GetResearcherRelevance(string cristinID)
         {
-            List<UserMatch> matchedData = this.GetUserData(cristinID);
+            List<UserMatch> matchedData = GetUserData(cristinID);
             if (matchedData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
