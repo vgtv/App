@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="aarliginstitusjonsranking2007">
           <Key>
             <PropertyRef Name="cristinID" />
@@ -285,6 +285,14 @@
           <Property Name="niva2" Type="int" />
           <Property Name="rankniva2" Type="int" />
         </EntityType>
+        <EntityType Name="basewords">
+          <Key>
+            <PropertyRef Name="key" />
+            <PropertyRef Name="baseword" />
+          </Key>
+          <Property Name="key" Type="int" Nullable="false" />
+          <Property Name="baseword" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="eierskap">
           <Key>
             <PropertyRef Name="eierskapID" />
@@ -413,6 +421,18 @@
           <Property Name="word" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="count" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_base_word_key">
+          <End Role="words" Type="Self.words" Multiplicity="1" />
+          <End Role="basewords" Type="Self.basewords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="words">
+              <PropertyRef Name="key" />
+            </Principal>
+            <Dependent Role="basewords">
+              <PropertyRef Name="key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_cristinID">
           <End Role="person" Type="Self.person" Multiplicity="1" />
           <End Role="titles" Type="Self.titles" Multiplicity="0..1" />
@@ -482,6 +502,7 @@
           <EntitySet Name="aarligranking2014" EntityType="Self.aarligranking2014" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="aarligranking2015" EntityType="Self.aarligranking2015" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="aarligranking2016" EntityType="Self.aarligranking2016" Schema="forskningsresultater" store:Type="Tables" />
+          <EntitySet Name="basewords" EntityType="Self.basewords" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="eierskap" EntityType="Self.eierskap" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="forfattere" EntityType="Self.forfattere" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="forskning" EntityType="Self.forskning" Schema="forskningsresultater" store:Type="Tables" />
@@ -495,6 +516,10 @@
           <EntitySet Name="titles" EntityType="Self.titles" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="wordcloud" EntityType="Self.wordcloud" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="words" EntityType="Self.words" Schema="forskningsresultater" store:Type="Tables" />
+          <AssociationSet Name="FK_base_word_key" Association="Self.FK_base_word_key">
+            <End Role="words" EntitySet="words" />
+            <End Role="basewords" EntitySet="basewords" />
+          </AssociationSet>
           <AssociationSet Name="FK_cristinID" Association="Self.FK_cristinID">
             <End Role="person" EntitySet="person" />
             <End Role="titles" EntitySet="titles" />
@@ -512,8 +537,7 @@
             <End Role="rank" EntitySet="rank" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -932,6 +956,7 @@
           <Property Name="word" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="wordcloud" Relationship="Self.FK_words" FromRole="words" ToRole="wordcloud" />
+          <NavigationProperty Name="basewords" Relationship="dbModel.FK_base_word_key" FromRole="words" ToRole="basewords" />
         </EntityType>
         <Association Name="FK_cristinID">
           <End Role="person" Type="Self.person" Multiplicity="1" />
@@ -1031,7 +1056,33 @@
             <End Role="words" EntitySet="words" />
             <End Role="wordcloud" EntitySet="wordcloud" />
           </AssociationSet>
+          <EntitySet Name="basewords" EntityType="dbModel.basewords" />
+          <AssociationSet Name="FK_base_word_key" Association="dbModel.FK_base_word_key">
+            <End Role="words" EntitySet="words" />
+            <End Role="basewords" EntitySet="basewords" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="basewords">
+          <Key>
+            <PropertyRef Name="key" />
+            <PropertyRef Name="baseword" />
+          </Key>
+          <Property Name="key" Type="Int32" Nullable="false" />
+          <Property Name="baseword" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="words" Relationship="dbModel.FK_base_word_key" FromRole="basewords" ToRole="words" />
+        </EntityType>
+        <Association Name="FK_base_word_key">
+          <End Type="dbModel.words" Role="words" Multiplicity="1" />
+          <End Type="dbModel.basewords" Role="basewords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="words">
+              <PropertyRef Name="key" />
+            </Principal>
+            <Dependent Role="basewords">
+              <PropertyRef Name="key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1475,6 +1526,14 @@
                 <ScalarProperty Name="key" ColumnName="key" />
                 <ScalarProperty Name="word" ColumnName="word" />
                 <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="basewords">
+            <EntityTypeMapping TypeName="dbModel.basewords">
+              <MappingFragment StoreEntitySet="basewords">
+                <ScalarProperty Name="baseword" ColumnName="baseword" />
+                <ScalarProperty Name="key" ColumnName="key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

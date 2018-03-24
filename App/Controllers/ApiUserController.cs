@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -14,9 +15,9 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public HttpResponseMessage Get(string cristinID)
+        public async Task<HttpResponseMessage> Get(string cristinID)
         {
-            var searchResults = dataAccess.GetResearcherData(cristinID);
+            var searchResults = await dataAccess.GetResearcherDataAsync(cristinID);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");

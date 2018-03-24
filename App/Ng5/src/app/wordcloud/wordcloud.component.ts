@@ -14,20 +14,28 @@ import { Http, Response } from "@angular/http";
 
 
 export class WordcloudComponent implements OnInit {
-  data: Array<CloudData>;
+  data: Array<CloudData> = [];
 
   constructor(private http: HttpClient) {
   }
 
   options: CloudOptions = {
-    // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value 
+    // if width is between 0 and 1 it will
+    // be set to the size of the upper element multiplied by the value 
     width: 700,
     height: 400,
     overflow: false,
   }
 
+  async getWordCloud(cristinID: string): Promise<any> {
+    return await this.
+      http.get<any[]>("api/apiwordcloud?cristinID=" + cristinID).toPromise();
+
+  }
+
+
   getData(cID) {
-    this.http.get<any[]>("api/ApiWordCloud/?cristinID="+cID).subscribe(
+    this.http.get<any[]>("api/ApiWordCloud/?cristinID=" + cID).subscribe(
       JsonData => {
         if (JsonData) {
           this.data = JsonData;
@@ -40,17 +48,9 @@ export class WordcloudComponent implements OnInit {
     );
   };
 
-
-
-  
-
-
-  
-  ngOnInit() {
-    this.getData(63753);
+  async ngOnInit() {
+    this.data = await this.getWordCloud("63753");
   }
-
-
-  }
+}
 
 

@@ -9,11 +9,12 @@ namespace App.Models
 {
     public interface iApiRepository
     {
-        List<User> GetUsers(string searchQuery);
-        List<User> GetAllUsers();
-        Researcher GetResearcherData(string cristinID);
-        List<Cloud> GetWordCloud(string cristinID);
-        List<UserMatch> GetUserData(string cristinID);
-        ScatterPlot GetScatterData(string cristinID);
+       Task<List<User>> GetUsersAsync(string searchQuery);
+
+        Task<List<User>> GetAllUsersAsync();
+        Task<Researcher> GetResearcherDataAsync(string cristinID);
+        Task <List<Cloud>> GetWordCloudAsync(string cristinID);
+        Task<List<UserMatch>> GetUserData(string cristinID);
+        Task<ScatterPlot> GetScatterData(string cristinID);
     }
 }

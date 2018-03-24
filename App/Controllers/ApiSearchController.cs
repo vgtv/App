@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using App.Models;
@@ -15,9 +16,9 @@ namespace App.Controllers
         private readonly iApiRepository dataAccess = new ApiRepository();
 
         [Obsolete("Get is deprecated, please use Get(string searchQuery) instead.")]
-        public HttpResponseMessage Get()
+        public async Task<HttpResponseMessage> Get()
         {
-            var searchResults = dataAccess.GetAllUsers();
+            var searchResults = await dataAccess.GetAllUsersAsync();
 
             var Json = new JavaScriptSerializer();
             string JsonString = Json.Serialize(searchResults);
@@ -29,9 +30,9 @@ namespace App.Controllers
             };
         }
 
-        public HttpResponseMessage Get(string searchQuery)
+        public async Task<HttpResponseMessage> Get(string searchQuery)
         {
-            var searchResults = dataAccess.GetUsers(searchQuery);
+            var searchResults = await dataAccess.GetUsersAsync(searchQuery);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No user found"); // ""

@@ -18,6 +18,7 @@ namespace App.Models
         public words()
         {
             this.wordcloud = new HashSet<wordcloud>();
+            this.basewords = new HashSet<basewords>();
         }
     
         public int key { get; set; }
@@ -26,5 +27,7 @@ namespace App.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<wordcloud> wordcloud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<basewords> basewords { get; set; }
     }
 }

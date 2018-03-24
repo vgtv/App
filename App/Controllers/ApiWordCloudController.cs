@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -12,11 +13,12 @@ namespace App.Controllers
 {
     public class ApiWordCloudController : ApiController
     {
+
         private readonly ApiRepository dataAccess = new ApiRepository();
 
-        public HttpResponseMessage Get(string cristinID)
+        public async Task<HttpResponseMessage> Get(string cristinID)
         {
-            var searchResults = dataAccess.GetWordCloud(cristinID);
+            var searchResults = await dataAccess.GetWordCloudAsync(cristinID);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");

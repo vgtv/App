@@ -215,6 +215,9 @@
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiRepositoryStub.cs" />
+    <Compile Include="Models\basewords.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DomainModels\c.cs" />
     <Compile Include="Models\DomainModels\Cloud.cs" />
     <Compile Include="Models\DomainModels\cols.cs" />
@@ -264,6 +267,7 @@
     <Compile Include="Models\stopwords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaskExtension.cs" />
     <Compile Include="Models\tidsskrift.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>

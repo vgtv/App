@@ -5,8 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using System.Data.Entity;
 
 namespace App.Controllers
 {
@@ -17,6 +19,7 @@ namespace App.Controllers
         public HttpResponseMessage Get(string cristinID)
         {
             var searchResults = dataAccess.GetResearcherRelevance(cristinID);
+
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");

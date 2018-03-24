@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace App.Models
 {
@@ -22,28 +24,28 @@ namespace App.Models
          * ];
          */
 
-        public List<User> GetUsers(string searchQuery)
+        public async Task<List<User>> GetUsersAsync(string searchQuery)
         {
             using (var db = new dbEntities())
             {
-                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                var results = await db.person.Where(p => p.firstname.StartsWith(searchQuery)
                 || p.lastname.StartsWith(searchQuery)).Select(p => new User
                 {
                     cristinID = p.cristinID,
                     firstName = p.firstname,
                     lastName = p.lastname
-                }).ToList();
+                }).ToListAsync();
 
                 if (results.Count() < 10)
                 {
-                    results.AddRange(db.person.Where(p =>
+                    results.AddRange(await db.person.Where(p =>
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
                     .Select(p => new User
                     {
                         cristinID = p.cristinID,
                         firstName = p.firstname,
                         lastName = p.lastname
-                    }).ToList());
+                    }).ToListAsync());
                     //return results.ToList();
 
                     return results.DistinctBy(i => i.cristinID).ToList();
@@ -52,26 +54,27 @@ namespace App.Models
             }
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsersAsync()
         {
             using (var db = new dbEntities())
             {
-                return db.person.Select(u => new User { cristinID = u.cristinID, firstName = u.firstname, lastName = u.lastname }).Take(10).ToList();
+                return await db.person.Select(u => new User
+                { cristinID = u.cristinID, firstName = u.firstname, lastName = u.lastname }).ToListAsync();
             }
         }
 
-        public Researcher GetResearcherData(string cristinID)
+        public async Task<Researcher> GetResearcherDataAsync(string cristinID)
         {
             using (var db = new dbEntities())
             {
-                Researcher researcher = db.person.Where(p => p.cristinID == cristinID)
+                Researcher researcher = await db.person.Where(p => p.cristinID == cristinID)
                     .Select(r => new Researcher
                     {
                         firstName = r.firstname,
                         lastName = r.lastname
-                    }).FirstOrDefault();
+                    }).FirstOrDefaultAsync();
 
-                var assosciation = db.association.Where(a => a.cristinID == cristinID).FirstOrDefault();
+                var assosciation = await db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefaultAsync();
                 researcher.institution = assosciation.institusjon;
                 researcher.institute = assosciation.institutt;
                 researcher.institute = assosciation.position;
@@ -93,7 +96,7 @@ namespace App.Models
          *       {"wordCount":6,"word":"tempor"},
          *       ];
          */
-        public List<Cloud> GetWordCloud(string cristinID)
+        public async Task<List<Cloud>> GetWordCloudAsync(string cristinID)
         {
             using (var db = new dbEntities())
             {
@@ -101,11 +104,20 @@ namespace App.Models
 
                 Random rnd = new Random();
 
-                var cloud = db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
+                var cloud = await db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
                 {
                     weight = (int)wc.count,
-                    text = db.words.Where(w => w.key == wc.key).Select(w => w.word).FirstOrDefault()
-                }).ToList();
+                    text = db.basewords.Where(bw => bw.key == wc.key)
+                    .Select(bw => bw.baseword).FirstOrDefault() != null ?
+                   db.basewords.Where(bw => bw.key == wc.key)
+                    .Select(bw => bw.baseword).FirstOrDefault() :
+                    db.words.Where(bw => bw.key == wc.key)
+                    .Select(bw => bw.word).FirstOrDefault()
+
+                    //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
+                }).ToListAsync();
+
+
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
@@ -141,30 +153,31 @@ namespace App.Models
          *       {"cristinID":"645051","percentage":70}
          *       ]
          */
-        public List<UserMatch> GetUserData(string cristinID)
+        public async Task<List<UserMatch>> GetUserData(string cristinID)
         {
             using (var db = new dbEntities())
             {
                 var matchedUsers = new List<UserMatch>();
 
-                List<int> currentUser = db.wordcloud.Where(e => e.cristinID == cristinID).Select(e => e.key).ToList();
+                List<int> currentUser = await db.wordcloud.Where(e => e.cristinID == cristinID)
+                    .Select(e => e.key).ToListAsync();
                 if (currentUser.Count() <= 0)
                 {
                     return null; // inactive
                 }
 
-                var person = db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
-                      .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefault();
+                var person = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
+                      .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefaultAsync();
 
-                var cloud = db.wordcloud.GroupBy(item => item.cristinID)
-                      .Select(group => new { group.Key, Items = group.ToList() }).ToList();
+                var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
+                      .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
 
 
                 int counter = 0;
-                for(int i = 0; i < cloud.Count; ++i)
+                for (int i = 0; i < cloud.Count; ++i)
                 {
                     counter = 0;
-                    for(int j = 0; j < cloud[i].Items.Count; ++j)
+                    for (int j = 0; j < cloud[i].Items.Count; ++j)
                     {
                         if (person.Items.Contains(cloud[i].Items[j]))
                         {
@@ -223,9 +236,9 @@ namespace App.Models
             }
         }
 
-        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID)
+        public async Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
         {
-            List<UserMatch> matchedData = GetUserData(cristinID);
+            List<UserMatch> matchedData = await GetUserData(cristinID);
             if (matchedData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
@@ -234,7 +247,7 @@ namespace App.Models
             {
                 foreach (var user in matchedData)
                 {
-                    var researcher = GetResearcherData(user.cristinID);
+                    var researcher = await GetResearcherDataAsync(user.cristinID);
                     researcherList.Add(new ResearcherRelevance
                     {
                         firstName = researcher.firstName,
@@ -249,9 +262,9 @@ namespace App.Models
             }
         }
 
-        public ScatterPlot GetScatterData(string cristinID)
+        public async Task<ScatterPlot> GetScatterData(string cristinID)
         {
-            List<UserMatch> matchedData = this.GetUserData(cristinID);
+            List<UserMatch> matchedData = await GetUserData(cristinID);
             if (matchedData == null) { return null; }
 
             ScatterPlot scatterPlotData = new ScatterPlot();
@@ -262,16 +275,16 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                string mainPosition = db.association.Where(t => t.cristinID == cristinID)
-                    .Select(t => t.position).FirstOrDefault();
+                string mainPosition = await db.tilhorighet.Where(t => t.cristinID == cristinID)
+                    .Select(t => t.position).FirstOrDefaultAsync();
 
                 if (mainPosition == null) return null;
 
                 string mainColor = "#fb8c00";
 
-                User mainUser = db.person.Where(p => p.cristinID == cristinID)
+                User mainUser = await db.person.Where(p => p.cristinID == cristinID)
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
                 if (mainUser == null) { return null; }
 
@@ -286,17 +299,17 @@ namespace App.Models
 
                 foreach (var match in matchedData)
                 {
-                    string position = db.association.
+                    string position = await db.tilhorighet.
                         Where(t => t.cristinID == match.cristinID).Select(t => t.position)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (position == null) { continue; }
 
                     string color = position == "Professor" ? "#ffbd45" : "#80d6ff";
 
-                    User user = db.person.Where(p => p.cristinID == match.cristinID)
+                    User user = await db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (user == null) { continue; }
 
