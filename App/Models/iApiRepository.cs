@@ -10,7 +10,6 @@ namespace App.Models
     public interface iApiRepository
     {
        Task<List<User>> GetUsersAsync(string searchQuery);
-
         Task<List<User>> GetAllUsersAsync();
         Task<Researcher> GetResearcherDataAsync(string cristinID);
         Task <List<Cloud>> GetWordCloudAsync(string cristinID);

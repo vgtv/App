@@ -28,7 +28,7 @@ namespace App.Controllers
                 Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
                 StatusCode = HttpStatusCode.OK
             };
-        }
+        }   
 
         public async Task<HttpResponseMessage> Get(string searchQuery)
         {

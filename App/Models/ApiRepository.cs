@@ -159,13 +159,6 @@ namespace App.Models
             {
                 var matchedUsers = new List<UserMatch>();
 
-                List<int> currentUser = await db.wordcloud.Where(e => e.cristinID == cristinID)
-                    .Select(e => e.key).ToListAsync();
-                if (currentUser.Count() <= 0)
-                {
-                    return null; // inactive
-                }
-
                 var person = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefaultAsync();
 
@@ -173,25 +166,24 @@ namespace App.Models
                       .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
 
 
-                int counter = 0;
-                for (int i = 0; i < cloud.Count; ++i)
-                {
-                    counter = 0;
-                    for (int j = 0; j < cloud[i].Items.Count; ++j)
-                    {
-                        if (person.Items.Contains(cloud[i].Items[j]))
-                        {
-                            ++counter;
-                        }
-                    }
-                    if (counter > 10)
-                    {
-                        matchedUsers.Add(new UserMatch { cristinID = cloud[i].Key, percentage = 100 });
-                    }
-                }
-                return matchedUsers;
+                /* int counter = 0;
+                 for (int i = 0; i < cloud.Count; ++i)
+                 {
+                     counter = 0;
+                     for (int j = 0; j < cloud[i].Items.Count; ++j)
+                     {
+                         if (person.Items.Contains(cloud[i].Items[j]))
+                         {
+                             ++counter;
+                         }
+                     }
+                     if (counter > 2)
+                     {
+                         matchedUsers.Add(new UserMatch { cristinID = cloud[i].Key, similarities = counter });
+                     }
+                 }
+                 return matchedUsers;*/
 
-                /*
                 double matchBonus = 0;
                 foreach (var user in cloud)
                 {
@@ -230,9 +222,10 @@ namespace App.Models
                     var percentage = ((int)(0.5f + ((100f * matchBonus) / user.Items.Count())));
                     if (percentage > 50)
                     {
-                        matchedUsers.Add(new UserMatch { cristinID = user.Key, percentage = percentage });
+                        matchedUsers.Add(new UserMatch { cristinID = user.Key, similarities = percentage });
                     }
-                    */
+                }
+                return matchedUsers;
             }
         }
 
@@ -242,6 +235,8 @@ namespace App.Models
             if (matchedData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
+
+            //posisjon kan være flere
 
             using (var db = new dbEntities())
             {
@@ -255,7 +250,7 @@ namespace App.Models
                         institute = researcher.institute,
                         institution = researcher.institution,
                         position = researcher.position,
-                        relevance = user.percentage
+                        relevance = user.similarities
                     });
                 }
                 return researcherList;
@@ -264,14 +259,13 @@ namespace App.Models
 
         public async Task<ScatterPlot> GetScatterData(string cristinID)
         {
-            List<UserMatch> matchedData = await GetUserData(cristinID);
-            if (matchedData == null) { return null; }
+            List<UserMatch> userData = await GetUserData(cristinID);
+            if (userData == null) { return null; }
 
             ScatterPlot scatterPlotData = new ScatterPlot();
             List<rows> rowList = new List<rows>();
 
             Random random = new Random();
-            int randomNumber = random.Next(0, 100);
 
             using (var db = new dbEntities())
             {
@@ -291,13 +285,13 @@ namespace App.Models
                 rowList.Add(new rows
                 {
                     c = new List<c>{
-                        new c { v = random.Next(30, 150) +"", f = mainUser.firstName + " " + mainUser.lastName },
-                        new c { v = random.Next(10, 100)+"", f = mainPosition },
+                        new c { v = random.Next(1, 8) +"", f = mainUser.firstName + " " + mainUser.lastName },
+                        new c { v = random.Next(100, 300) +"", f = mainPosition },
                         new c { v = mainColor, f = null }
                         }
                 });
 
-                foreach (var match in matchedData)
+                foreach (var match in userData)
                 {
                     string position = await db.tilhorighet.
                         Where(t => t.cristinID == match.cristinID).Select(t => t.position)
@@ -316,8 +310,8 @@ namespace App.Models
                     rowList.Add(new rows
                     {
                         c = new List<c>{
-                            new c { v = random.Next(30, 150)+"", f = user.firstName + " " + user.lastName },
-                            new c { v = random.Next(10, 100)+"", f = position },
+                            new c { v = random.Next(1,8)+"", f = user.firstName + " " + user.lastName },
+                            new c { v = random.Next(3, 300)+"", f = position },
                             new c { v = color, f = null }
                         }
                     });
