@@ -2,9 +2,29 @@
   search works!
 </p>
 
+
 <div *ngIf="this.DataDone">
-<h1>Søk Forsker</h1>
-<ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="2" [pause]="2000"></ng2-completer>
+  <h1>Søk Forsker</h1>
+  <ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="3" [pause]="5000"></ng2-completer>
 </div>
 
 
+<h3>Ng-Boostrap Search</h3>
+<ul>
+  <li>remote data retrieval</li>
+  <li><code>debounceTime</code> operator</li>
+  <li><code>do</code> operator</li>
+  <li><code>distinctUntilChanged</code> operator</li>
+  <li><code>switchMap</code> operator</li>
+  <li><code>catch</code> operator to display an error message in case of connectivity issue</li>
+</ul>
+
+<div class="form-group">
+  <label for="typeahead-http">Search for a wiki page:</label>
+  <input id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="Wikipedia search" />
+  <span *ngIf="searching">searching...</span>
+  <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+</div>
+
+<hr>
+<pre>Model: {{ model | json }}</pre>

@@ -6,10 +6,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { SearchComponent } from './search/search.component';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { Http, Response } from "@angular/http";
 import { Headers } from "@angular/http";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { Headers } from "@angular/http";
     HttpClientModule,
     AppRoutingModule,
     Ng2CompleterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

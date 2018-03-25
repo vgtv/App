@@ -95,7 +95,7 @@ var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forRoot(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
         })
@@ -166,6 +166,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_search_component__ = __webpack_require__("./src/app/search/search.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_completer__ = __webpack_require__("./node_modules/ng2-completer/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -180,11 +181,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["b" /* routingComponents */],
@@ -195,7 +197,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_6_ng2_completer__["b" /* Ng2CompleterModule */],
-                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["b" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["b" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_8__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */]
             ],
             providers: [],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
@@ -261,14 +265,14 @@ var HomeComponent = /** @class */ (function () {
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  search works!\r\n</p>\r\n\r\n<div *ngIf=\"this.DataDone\">\r\n<h1>Søk Forsker</h1>\r\n<ng2-completer [(ngModel)]=\"searchStr\" [datasource]=\"dataService\" [minSearchLength]=\"2\" [pause]=\"2000\"></ng2-completer>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<p>\r\n  search works!\r\n</p>\r\n\r\n\r\n<div *ngIf=\"this.DataDone\">\r\n  <h1>Søk Forsker</h1>\r\n  <ng2-completer [(ngModel)]=\"searchStr\" [datasource]=\"dataService\" [minSearchLength]=\"3\" [pause]=\"5000\"></ng2-completer>\r\n</div>\r\n\r\n\r\n<h3>Ng-Boostrap Search</h3>\r\n<ul>\r\n  <li>remote data retrieval</li>\r\n  <li><code>debounceTime</code> operator</li>\r\n  <li><code>do</code> operator</li>\r\n  <li><code>distinctUntilChanged</code> operator</li>\r\n  <li><code>switchMap</code> operator</li>\r\n  <li><code>catch</code> operator to display an error message in case of connectivity issue</li>\r\n</ul>\r\n\r\n<div class=\"form-group\">\r\n  <label for=\"typeahead-http\">Search for a wiki page:</label>\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control\" [class.is-invalid]=\"searchFailed\" [(ngModel)]=\"model\" [ngbTypeahead]=\"search\" placeholder=\"Wikipedia search\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n<pre>Model: {{ model | json }}</pre>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/search/search.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "/deep/ .completer-dropdown {\n  max-height: 50px;\n  overflow-y: auto; }\n"
 
 /***/ }),
 
@@ -276,11 +280,20 @@ module.exports = ""
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export PersonService */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_completer__ = __webpack_require__("./node_modules/ng2-completer/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_observable_of__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_catch__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_debounceTime__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/debounceTime.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/distinctUntilChanged.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_add_operator_do__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/do.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_switchMap__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/switchMap.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rxjs_add_operator_merge__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/merge.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -294,19 +307,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//--------- Ng-Boostrap-AC-----------//
+//imports
+
+
+
+
+
+
+
+
+
+var API_URL = 'api/UsersApi/';
+var PARAMS = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]({
+    fromObject: {
+        action: 'opensearch',
+        format: 'json',
+        origin: '*'
+    }
+});
+var PersonService = /** @class */ (function () {
+    function PersonService(http) {
+        this.http = http;
+    }
+    PersonService.prototype.search = function (term) {
+        if (term == '') {
+            return Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_observable_of__["a" /* of */])([]);
+        }
+        return this.http
+            .get(API_URL, { params: PARAMS.set('search', term) })
+            .map(function (response) { return response[1]; });
+    };
+    PersonService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], PersonService);
+    return PersonService;
+}());
+
 var SearchComponent = /** @class */ (function () {
-    function SearchComponent(http, completerService) {
+    function SearchComponent(_service, http, completerService) {
+        var _this = this;
+        this._service = _service;
         this.http = http;
         this.completerService = completerService;
+        this.searching = false;
+        this.searchFailed = false;
+        this.hideSearchingWhenUnsubsribed = new __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["a" /* Observable */](function () { return function () { return _this.searching = false; }; });
         this.DataDone = false;
         this.testData = [
             { color: 'red', value: '#f00' }
         ];
-        this.dataService = completerService.remote("api/UsersApi/", 'firstname, lastname', 'firstname').descriptionField('lastname');
+        this.search = function (text$) {
+            return text$
+                .debounceTime(300)
+                .distinctUntilChanged()
+                .do(function () { return _this.searching = true; })
+                .switchMap(function (term) {
+                return _this._service.search(term)
+                    .do(function () { return _this.searchFailed = false; })
+                    .catch(function () {
+                    _this.searchFailed = true;
+                    return Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_observable_of__["a" /* of */])([]);
+                });
+            })
+                .do(function () { return _this.searching = false; })
+                .merge(_this.hideSearchingWhenUnsubsribed);
+        };
+        this.dataService = completerService.remote("api/UsersApi/", 'firstname', 'firstname');
     }
     SearchComponent.prototype.ngOnInit = function () {
         this.getData();
     };
+    //Henter data fra API.
     SearchComponent.prototype.getData = function () {
         var _this = this;
         this.http.get("api/UsersApi/")
@@ -325,9 +398,10 @@ var SearchComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-search',
             template: __webpack_require__("./src/app/search/search.component.html"),
+            providers: [PersonService],
             styles: [__webpack_require__("./src/app/search/search.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ng2_completer__["a" /* CompleterService */]])
+        __metadata("design:paramtypes", [PersonService, __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ng2_completer__["a" /* CompleterService */]])
     ], SearchComponent);
     return SearchComponent;
 }());
@@ -366,7 +440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
