@@ -1,37 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
-import { SearchComponent } from './search/search.component';
-import { Ng2CompleterModule } from 'ng2-completer';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
-import { Http, Response } from "@angular/http";
-import { Headers } from "@angular/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PersonService } from './search/search.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbdTypeaheadHttp } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
+import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopnavComponent } from './topnav/topnav.component';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
+import { TagCloudModule } from 'angular-tag-cloud-module';
+
+import { ScatterComponent } from './scatter/scatter.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    SearchComponent,
+    TopnavComponent,
+    WordcloudComponent,
+    ScatterComponent,
+    NgbdTypeaheadHttp
+   
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    Ng2CompleterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    PersonService
+    TagCloudModule,
+    HttpClientModule,
+    Ng2GoogleChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

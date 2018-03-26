@@ -58,5 +58,6 @@ namespace App.Models
         public virtual DbSet<titles> titles { get; set; }
         public virtual DbSet<wordcloud> wordcloud { get; set; }
         public virtual DbSet<words> words { get; set; }
+        public virtual DbSet<basewords> basewords { get; set; }
     }
 }

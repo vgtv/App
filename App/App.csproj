@@ -145,9 +145,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServerRouteConstraint.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiRelevanceController.cs" />
+    <Compile Include="Controllers\ApiScatterPlotController.cs" />
+    <Compile Include="Controllers\ApiSearchController.cs" />
+    <Compile Include="Controllers\ApiUserController.cs" />
+    <Compile Include="Controllers\ApiWordCloudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsersApiController.cs" />
-    <Compile Include="Controllers\WordCloudApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,9 +214,13 @@
     <Compile Include="Models\aarligranking2016.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\c.cs" />
-    <Compile Include="Models\Cloud.cs" />
-    <Compile Include="Models\cols.cs" />
+    <Compile Include="Models\ApiRepositoryStub.cs" />
+    <Compile Include="Models\basewords.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\c.cs" />
+    <Compile Include="Models\DomainModels\Cloud.cs" />
+    <Compile Include="Models\DomainModels\cols.cs" />
     <Compile Include="Models\dataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -229,7 +236,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataRepository.cs" />
+    <Compile Include="Models\ApiRepository.cs" />
+    <Compile Include="Models\DomainModels\iUser.cs" />
+    <Compile Include="Models\DomainModels\Researcher.cs" />
+    <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\eierskap.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +249,7 @@
     <Compile Include="Models\forskning.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iApiRepository.cs" />
     <Compile Include="Models\institutter.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -251,8 +262,8 @@
     <Compile Include="Models\rankinstitusjon.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\rows.cs" />
-    <Compile Include="Models\ScatterPlot.cs" />
+    <Compile Include="Models\DomainModels\rows.cs" />
+    <Compile Include="Models\DomainModels\ScatterPlot.cs" />
     <Compile Include="Models\stopwords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -265,9 +276,9 @@
     <Compile Include="Models\titles.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserMatch.cs" />
-    <Compile Include="Models\Word.cs" />
+    <Compile Include="Models\DomainModels\User.cs" />
+    <Compile Include="Models\DomainModels\UserMatch.cs" />
+    <Compile Include="Models\DomainModels\Word.cs" />
     <Compile Include="Models\wordcloud.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -281,7 +292,6 @@
     <Content Include="App_Data\db_log.ldf">
       <DependentUpon>db.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\resetwordsSQL.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -304,7 +314,10 @@
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
+    <Content Include="Ng5\src\app\scatter\scatter.component.html" />
     <Content Include="Ng5\src\app\search\search.component.html" />
+    <Content Include="Ng5\src\app\topnav\topnav.component.html" />
+    <Content Include="Ng5\src\app\wordcloud\wordcloud.component.html" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -334,6 +347,9 @@
       <DependentUpon>dataModel.edmx</DependentUpon>
     </Content>
     <Content Include="Ng5\src\app\search\search.component.scss" />
+    <Content Include="Ng5\src\app\topnav\topnav.component.scss" />
+    <Content Include="Ng5\src\app\scatter\scatter.component.scss" />
+    <Content Include="Ng5\src\app\wordcloud\wordcloud.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -360,7 +376,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Ng5\node_modules\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
@@ -383,9 +401,14 @@
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
-    <TypeScriptCompile Include="Ng5\src\app\search\persons.model.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.ts" />
     <TypeScriptCompile Include="Ng5\src\main.ts" />

@@ -42,6 +42,8 @@
         <AssociationConnector Association="dbModel.FK_person" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.rank_FNcristinID" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.FK_words" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbModel.basewords" Width="1.5" PointX="6" PointY="21" />
+        <AssociationConnector Association="dbModel.FK_base_word_key" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
