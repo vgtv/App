@@ -11,14 +11,12 @@ import { HttpClient } from '@angular/common/http';
 
 export class WordcloudComponent implements OnInit {
   data: Array<CloudData> = [];
-  options: CloudOptions;
 
   constructor(private http: HttpClient) {
   }
 
   async ngOnInit() {
     this.data = await this.getWordCloud("63753");
-    this.setClodOptions();
   }
 
   async getWordCloud(cristinID: string): Promise<any> {
@@ -26,13 +24,13 @@ export class WordcloudComponent implements OnInit {
       http.get<any[]>("api/apiwordcloud?cristinID=" + cristinID).toPromise();
   }
 
-  public setClodOptions() {
-    this.options = {
+
+  options: CloudOptions = {
       width: 600,
       height: 400,
       overflow: false,
     }
   }
-}
+
 
 

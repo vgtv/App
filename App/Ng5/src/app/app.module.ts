@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbdTypeaheadHttp } from './search/search.component';
+import { FormsModule } from '@angular/forms';
+
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
@@ -11,17 +14,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopnavComponent } from './topnav/topnav.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
-import { SearchComponent } from './search/search.component';
+
 import { ScatterComponent } from './scatter/scatter.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     TopnavComponent,
-    SearchComponent,
     WordcloudComponent,
-    ScatterComponent
+    ScatterComponent,
+    NgbdTypeaheadHttp
    
   ],
   imports: [
@@ -30,7 +34,8 @@ import { ScatterComponent } from './scatter/scatter.component';
     AppRoutingModule,
     TagCloudModule,
     HttpClientModule,
-    Ng2GoogleChartsModule
+    Ng2GoogleChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

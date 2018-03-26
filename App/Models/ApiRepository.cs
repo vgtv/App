@@ -274,7 +274,7 @@ namespace App.Models
 
                 if (mainPosition == null) return null;
 
-                string mainColor = "#fb8c00";
+                string mainColor = "#ffbd45";
 
                 User mainUser = await db.person.Where(p => p.cristinID == cristinID)
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
@@ -299,7 +299,7 @@ namespace App.Models
 
                     if (position == null) { continue; }
 
-                    string color = position == "Professor" ? "#ffbd45" : "#80d6ff";
+                    string color = position == "Professor" ? "#0077c2" : "#80d6ff";
 
                     User user = await db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })

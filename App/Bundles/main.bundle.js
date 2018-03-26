@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n<app-wordcloud></app-wordcloud>\r\n<app-scatter></app-scatter>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "\r\n<app-topnav></app-topnav>\r\n\r\n<ngbd-typeahead-http></ngbd-typeahead-http>\r\n<app-wordcloud></app-wordcloud>\r\n<app-scatter></app-scatter>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -167,13 +167,14 @@ var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-b
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
+var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
 var wordcloud_component_1 = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
-var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var scatter_component_1 = __webpack_require__("./src/app/scatter/scatter.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -184,9 +185,9 @@ var AppModule = /** @class */ (function () {
                 app_component_1.AppComponent,
                 app_routing_module_1.routingComponents,
                 topnav_component_1.TopnavComponent,
-                search_component_1.SearchComponent,
                 wordcloud_component_1.WordcloudComponent,
-                scatter_component_1.ScatterComponent
+                scatter_component_1.ScatterComponent,
+                search_component_1.NgbdTypeaheadHttp
             ],
             imports: [
                 ng_bootstrap_1.NgbModule.forRoot(),
@@ -194,7 +195,8 @@ var AppModule = /** @class */ (function () {
                 app_routing_module_1.AppRoutingModule,
                 angular_tag_cloud_module_1.TagCloudModule,
                 http_1.HttpClientModule,
-                ng2_google_charts_1.Ng2GoogleChartsModule
+                ng2_google_charts_1.Ng2GoogleChartsModule,
+                forms_1.FormsModule
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
@@ -394,14 +396,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  search works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/search/search.component.scss":
-/***/ (function(module, exports) {
-
-module.exports = ""
+module.exports = "<div class=\"form-group\">\r\n  <label for=\"typeahead-http\">Search for a wiki page:</label>\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control\" [class.is-invalid]=\"searchFailed\" [(ngModel)]=\"model\" [ngbTypeahead]=\"search\" placeholder=\"Wikipedia search\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n<pre>Model: {{ model | json }}</pre>\r\n"
 
 /***/ }),
 
@@ -422,26 +417,78 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var Observable_1 = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+var of_1 = __webpack_require__("./node_modules/rxjs/_esm5/observable/of.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/catch.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/debounceTime.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/distinctUntilChanged.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/do.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/switchMap.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/merge.js");
+var WIKI_URL = 'https://en.wikipedia.org/w/api.php';
+var PARAMS = new http_1.HttpParams({
+    fromObject: {
+        action: 'opensearch',
+        format: 'json',
+        origin: '*'
+    }
+});
 var SearchComponent = /** @class */ (function () {
     function SearchComponent(http) {
         this.http = http;
     }
-    SearchComponent.prototype.ngOnInit = function () {
-        this.http.get('/api/UsersApi').subscribe(function (data) {
-            console.log(data);
-        });
+    SearchComponent.prototype.search = function (term) {
+        if (term === '') {
+            return of_1.of([]);
+        }
+        return this.http
+            .get(WIKI_URL, { params: PARAMS.set('search', term) })
+            .map(function (response) { return response[1]; });
     };
     SearchComponent = __decorate([
-        core_1.Component({
-            selector: 'app-search',
-            template: __webpack_require__("./src/app/search/search.component.html"),
-            styles: [__webpack_require__("./src/app/search/search.component.scss")]
-        }),
+        core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])
     ], SearchComponent);
     return SearchComponent;
 }());
 exports.SearchComponent = SearchComponent;
+var NgbdTypeaheadHttp = /** @class */ (function () {
+    function NgbdTypeaheadHttp(_service) {
+        var _this = this;
+        this._service = _service;
+        this.searching = false;
+        this.searchFailed = false;
+        this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
+        this.search = function (text$) {
+            return text$
+                .debounceTime(300)
+                .distinctUntilChanged()
+                .do(function () { return _this.searching = true; })
+                .switchMap(function (term) {
+                return _this._service.search(term)
+                    .do(function () { return _this.searchFailed = false; })
+                    .catch(function () {
+                    _this.searchFailed = true;
+                    return of_1.of([]);
+                });
+            })
+                .do(function () { return _this.searching = false; })
+                .merge(_this.hideSearchingWhenUnsubscribed);
+        };
+    }
+    NgbdTypeaheadHttp = __decorate([
+        core_1.Component({
+            selector: 'ngbd-typeahead-http',
+            template: __webpack_require__("./src/app/search/search.component.html"),
+            providers: [SearchComponent],
+            styles: [".form-control { width: 300px; display: inline; }"]
+        }),
+        __metadata("design:paramtypes", [SearchComponent])
+    ], NgbdTypeaheadHttp);
+    return NgbdTypeaheadHttp;
+}());
+exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 
 
 /***/ }),
@@ -566,6 +613,11 @@ var WordcloudComponent = /** @class */ (function () {
     function WordcloudComponent(http) {
         this.http = http;
         this.data = [];
+        this.options = {
+            width: 600,
+            height: 400,
+            overflow: false,
+        };
     }
     WordcloudComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -577,7 +629,6 @@ var WordcloudComponent = /** @class */ (function () {
                         return [4 /*yield*/, this.getWordCloud("63753")];
                     case 1:
                         _a.data = _b.sent();
-                        this.setClodOptions();
                         return [2 /*return*/];
                 }
             });
@@ -593,15 +644,6 @@ var WordcloudComponent = /** @class */ (function () {
                 }
             });
         });
-    };
-    WordcloudComponent.prototype.setClodOptions = function () {
-        this.options = {
-            // if width is between 0 and 1 it will
-            // be set to the size of the upper element multiplied by the value 
-            width: 600,
-            height: 400,
-            overflow: false,
-        };
     };
     WordcloudComponent = __decorate([
         core_1.Component({

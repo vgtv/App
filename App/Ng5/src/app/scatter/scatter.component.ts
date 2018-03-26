@@ -23,7 +23,7 @@ export class ScatterComponent implements OnInit {
   public async getScatterData(cristinID: string): Promise<any> {
     return await
       this.http.get<any[]>("api/apiscatterplot?cristinID=" + cristinID).toPromise();
-  }
+  } 
 
   public async loadScatterData(cristinID: string) {
     this.scatterChartData = {

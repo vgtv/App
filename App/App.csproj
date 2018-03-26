@@ -267,7 +267,6 @@
     <Compile Include="Models\stopwords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TaskExtension.cs" />
     <Compile Include="Models\tidsskrift.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
