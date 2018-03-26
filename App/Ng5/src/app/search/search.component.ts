@@ -2,6 +2,10 @@ import { Component, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
+import { Persons } from './user';
+import { Http, Response } from "@angular/http";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -12,12 +16,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
-const WIKI_URL = 'https://en.wikipedia.org/w/api.php';
+const WIKI_URL = 'api/ApiSearch';
 const PARAMS = new HttpParams({
   fromObject: {
-    action: 'opensearch',
-    format: 'json',
-    origin: '*'
+    action: 'query',
+    format: 'xml',
+    origin: 'firstname',
+    titles: 'firstname'
   }
 });
 
@@ -29,30 +34,32 @@ export class SearchComponent {
     if (term === '') {
       return of([]);
     }
-
+      
     return this.http
-      .get(WIKI_URL, { params: PARAMS.set('search', term) })
-      .map(response => response[1]);
+      .get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
+      .map(response => response[0]);
   }
 }
 
 @Component({
-  selector: 'ngbd-typeahead-http',
+  selector: 'app-search',
   templateUrl: './search.component.html',
   providers: [SearchComponent],
   styles: [`.form-control { width: 300px; display: inline; }`]
 })
 export class NgbdTypeaheadHttp {
+  public Data: Array<Persons>;
+  public DataDone = false;
   model: any;
   searching = false;
   searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor(private _service: SearchComponent) { }
+  constructor(private _service: SearchComponent, private http: HttpClient) { }
 
   search = (text$: Observable<string>) =>
     text$
-      .debounceTime(300)
+      .debounceTime(3000)
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>
@@ -64,4 +71,20 @@ export class NgbdTypeaheadHttp {
           }))
       .do(() => this.searching = false)
       .merge(this.hideSearchingWhenUnsubscribed);
+
+  getData() {
+    this.http.get<Persons[]>("api/ApiSearch/")
+      .subscribe(
+      JsonData => {
+        this.Data = [];
+        if (JsonData) {
+          this.Data = JsonData;
+          console.log(this.Data);
+          this.DataDone = true;
+        };
+      },
+      error => alert(error + "1"),
+      () => console.log("ferdig get-api/alleSporsmaal")
+      );
+  };
 }

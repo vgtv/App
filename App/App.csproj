@@ -405,6 +405,7 @@
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\search\user.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.spec.ts" />

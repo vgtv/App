@@ -34,7 +34,7 @@ namespace App.Models
                     cristinID = p.cristinID,
                     firstName = p.firstname,
                     lastName = p.lastname
-                }).ToListAsync();
+                }).Take(10).ToListAsync();
 
                 if (results.Count() < 10)
                 {

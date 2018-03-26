@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbdTypeaheadHttp } from './search/search.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Http, Response } from "@angular/http";
 
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
@@ -13,6 +14,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopnavComponent } from './topnav/topnav.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 
 import { ScatterComponent } from './scatter/scatter.component';
@@ -25,7 +29,8 @@ import { ScatterComponent } from './scatter/scatter.component';
     TopnavComponent,
     WordcloudComponent,
     ScatterComponent,
-    NgbdTypeaheadHttp
+    NgbdTypeaheadHttp,
+
    
   ],
   imports: [
@@ -35,9 +40,14 @@ import { ScatterComponent } from './scatter/scatter.component';
     TagCloudModule,
     HttpClientModule,
     Ng2GoogleChartsModule,
-    FormsModule
+    FormsModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [Http],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
