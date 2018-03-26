@@ -12,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, Response } from "@angular/http";
 import { Headers } from "@angular/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
+import { PersonService } from './search/search.component';
+
 
 
 
@@ -20,16 +21,17 @@ import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
   declarations: [
     AppComponent,
     routingComponents,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     Ng2CompleterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    PersonService
   ],
   providers: [],
   bootstrap: [AppComponent]
