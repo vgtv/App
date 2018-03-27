@@ -12,9 +12,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
-const WIKI_URL = 'api/apisearch?';
-const PARAMS = new HttpParams({
-});
+const URL = 'api/apisearch?';
+const PARAMS = new HttpParams();
 
 @Injectable()
 export class SearchComponent {
@@ -24,7 +23,7 @@ export class SearchComponent {
     if (term === '') {
       return of([]);
     }
-    return this.http.get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
+    return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
       .map(response => response);
     // response endret fra response[0] til repsonse. Wikipedia gir opprinnelig egentlig et array, men
     // vi får et array med objekter som repsons
