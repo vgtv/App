@@ -118,7 +118,7 @@ namespace App.Models
                     //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();
 
-                if(cloud.Count() <= 0) { return null;  }
+                if (cloud.Count() <= 0) { return null; }
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
@@ -166,25 +166,6 @@ namespace App.Models
                 var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
 
-
-                /* int counter = 0;
-                 for (int i = 0; i < cloud.Count; ++i)
-                 {
-                     counter = 0;
-                     for (int j = 0; j < cloud[i].Items.Count; ++j)
-                     {
-                         if (person.Items.Contains(cloud[i].Items[j]))
-                         {
-                             ++counter;
-                         }
-                     }
-                     if (counter > 2)
-                     {
-                         matchedUsers.Add(new UserMatch { cristinID = cloud[i].Key, similarities = counter });
-                     }
-                 }
-                 return matchedUsers;*/
-
                 double matchBonus = 0;
                 foreach (var user in cloud)
                 {
@@ -221,7 +202,7 @@ namespace App.Models
                         }
                     }
                     var percentage = ((int)(0.5f + ((100f * matchBonus) / user.Items.Count())));
-                    if (percentage > 50)
+                    if (percentage > 25)
                     {
                         matchedUsers.Add(new UserMatch { cristinID = user.Key, similarities = percentage });
                     }
@@ -281,13 +262,18 @@ namespace App.Models
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
                     .FirstOrDefaultAsync();
 
+                var mainRank = await db.rank.Where(r => r.cristinID == cristinID)
+                    .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
+               // if (mainRank.publications == null || mainRank.quality ==null) { return null;  }
+
+
                 if (mainUser == null) { return null; }
 
                 rowList.Add(new rows
                 {
                     c = new List<c>{
-                        new c { v = random.Next(1, 8) +"", f = mainUser.firstName + " " + mainUser.lastName },
-                        new c { v = random.Next(100, 300) +"", f = mainPosition },
+                        new c { v = mainRank.quality , f = mainUser.firstName + " " + mainUser.lastName },
+                        new c { v = mainRank.publications+"", f = mainPosition },
                         new c { v = mainColor, f = null }
                         }
                 });
@@ -297,6 +283,11 @@ namespace App.Models
                     string position = await db.tilhorighet.
                         Where(t => t.cristinID == match.cristinID).Select(t => t.position)
                         .FirstOrDefaultAsync();
+
+                    var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
+                        .Select(r => new { publications=r.publikasjoner, quality=r.kvalitet }).FirstOrDefaultAsync();
+
+                    //if (mainRank.publications == null || mainRank.quality == null) { continue; }
 
                     if (position == null) { continue; }
 
@@ -311,8 +302,8 @@ namespace App.Models
                     rowList.Add(new rows
                     {
                         c = new List<c>{
-                            new c { v = random.Next(1,8)+"", f = user.firstName + " " + user.lastName },
-                            new c { v = random.Next(3, 300)+"", f = position },
+                            new c { v = rank.quality, f = user.firstName + " " + user.lastName },
+                            new c { v = rank.publications+"", f = position },
                             new c { v = color, f = null }
                         }
                     });

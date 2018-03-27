@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<app-topnav></app-topnav>\r\n\r\n<ngbd-typeahead-http></ngbd-typeahead-http>\r\n  \r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<app-topnav></app-topnav>\r\n\r\n<app-scatter></app-scatter>\r\n  \r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -364,12 +364,11 @@ var ScatterComponent = /** @class */ (function () {
                         _a.scatterChartData = (_b.dataTable = _c.sent(),
                             _b.chartType = 'ScatterChart',
                             _b.options = {
-                                width: 950, height: 550,
+                                width: 1050, height: 550,
                                 backgroundColor: 'transparent',
                                 title: 'Publikasjoner vs kvalitet',
                                 hAxis: { title: 'Kvalitet' },
-                                viewWindow: { min: 0, max: 8 },
-                                vAxis: { title: 'Publikasjoner', minValue: 0, maxValue: 300 },
+                                vAxis: { title: 'Publikasjoner' },
                                 legend: 'none'
                             },
                             _b);

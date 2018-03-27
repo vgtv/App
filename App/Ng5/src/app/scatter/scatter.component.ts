@@ -30,12 +30,11 @@ export class ScatterComponent implements OnInit {
       dataTable: await this.getScatterData(cristinID),
       chartType: 'ScatterChart',
       options: {
-        width: 950, height: 550,
+        width: 1050, height: 550,
         backgroundColor: 'transparent',
         title: 'Publikasjoner vs kvalitet',
         hAxis: { title: 'Kvalitet' },
-        viewWindow: { min: 0, max: 8 },
-        vAxis: { title: 'Publikasjoner', minValue: 0, maxValue: 300 },
+        vAxis: { title: 'Publikasjoner' },
         legend: 'none'
       }
     };

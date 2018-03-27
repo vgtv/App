@@ -154,66 +154,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2007.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2008.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2009.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2010.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2011.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2012.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2013.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2014.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2015.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2016.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2007.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2008.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2009.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2010.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2011.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2012.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2013.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2014.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2015.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2016.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ApiRepositoryStub.cs" />
     <Compile Include="Models\basewords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
