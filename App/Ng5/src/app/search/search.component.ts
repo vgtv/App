@@ -59,5 +59,5 @@ export class NgbdTypeaheadHttp {
             return of([]);
           }))
       .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed);
+      .merge(this.hideSearchingWhenUnsubscribed)
 }

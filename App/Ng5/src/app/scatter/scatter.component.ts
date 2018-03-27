@@ -17,13 +17,13 @@ export class ScatterComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   public async ngOnInit() {
-    await this.loadScatterData("63753");
+    await this.loadScatterData('63753');
   }
 
   public async getScatterData(cristinID: string): Promise<any> {
     return await
-      this.http.get<any[]>("api/apiscatterplot?cristinID=" + cristinID).toPromise();
-  } 
+      this.http.get<any[]>('api/apiscatterplot?cristinID=' + cristinID).toPromise();
+  }
 
   public async loadScatterData(cristinID: string) {
     this.scatterChartData = {

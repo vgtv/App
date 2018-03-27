@@ -55,6 +55,7 @@ namespace App.Models
             }
         }
 
+
         public async Task<List<User>> GetAllUsersAsync()
         {
             using (var db = new dbEntities())
@@ -165,8 +166,11 @@ namespace App.Models
 
                 var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
-
                 double matchBonus = 0;
+
+                //Debug.WriteLine(cloud.Count());
+                //Debug.WriteLine(m.Count());
+
                 foreach (var user in cloud)
                 {
                     matchBonus = 0;
