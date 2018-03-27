@@ -16,6 +16,7 @@ import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 
 import { ScatterComponent } from './scatter/scatter.component';
+import { UserinfoComponent } from './userinfo/userinfo.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ScatterComponent } from './scatter/scatter.component';
     TopnavComponent,
     WordcloudComponent,
     ScatterComponent,
-    NgbdTypeaheadHttp
+    NgbdTypeaheadHttp,
+    UserinfoComponent
    
   ],
   imports: [

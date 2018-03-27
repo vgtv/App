@@ -234,6 +234,7 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -257,6 +258,7 @@
     <Content Include="Ng5\src\app\scatter\scatter.component.html" />
     <Content Include="Ng5\src\app\search\search.component.html" />
     <Content Include="Ng5\src\app\topnav\topnav.component.html" />
+    <Content Include="Ng5\src\app\userinfo\userinfo.component.html" />
     <Content Include="Ng5\src\app\wordcloud\wordcloud.component.html" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
@@ -290,6 +292,7 @@
     <Content Include="Ng5\src\app\topnav\topnav.component.scss" />
     <Content Include="Ng5\src\app\scatter\scatter.component.scss" />
     <Content Include="Ng5\src\app\wordcloud\wordcloud.component.scss" />
+    <Content Include="Ng5\src\app\userinfo\userinfo.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -317,7 +320,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Ng5\node_modules\" />
+    <Folder Include="Ng5\node_modules\npm\html\static\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -347,6 +350,9 @@
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\Researcher.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\userinfo.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\userinfo.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />
