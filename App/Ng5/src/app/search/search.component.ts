@@ -12,27 +12,22 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
-const WIKI_URL = 'https://en.wikipedia.org/w/api.php';
+const WIKI_URL = 'api/apisearch?';
 const PARAMS = new HttpParams({
-  fromObject: {
-    action: 'opensearch',
-    format: 'json',
-    origin: '*'
-  }
 });
 
 @Injectable()
 export class SearchComponent {
   constructor(private http: HttpClient) { }
 
-  search(term: string) {
+  public search(term: string) {
     if (term === '') {
       return of([]);
     }
-
-    return this.http
-      .get(WIKI_URL, { params: PARAMS.set('search', term) })
-      .map(response => response[1]);
+    return this.http.get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
+      .map(response => response);
+    // response endret fra response[0] til repsonse. Wikipedia gir opprinnelig egentlig et array, men
+    // vi får et array med objekter som repsons
   }
 }
 
@@ -49,6 +44,8 @@ export class NgbdTypeaheadHttp {
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
   constructor(private _service: SearchComponent) { }
+  formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
+  // add formatches her
 
   search = (text$: Observable<string>) =>
     text$
