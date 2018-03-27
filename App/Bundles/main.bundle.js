@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<app-topnav></app-topnav>\r\n\r\n<ngbd-typeahead-http></ngbd-typeahead-http>\r\n<app-wordcloud></app-wordcloud>\r\n<app-scatter></app-scatter>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "\r\n<app-topnav></app-topnav>\r\n\r\n<ngbd-typeahead-http></ngbd-typeahead-http>\r\n  \r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -396,7 +396,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label for=\"typeahead-http\">Search for a wiki page:</label>\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control\" [class.is-invalid]=\"searchFailed\" [(ngModel)]=\"model\" [ngbTypeahead]=\"search\" placeholder=\"Wikipedia search\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n<pre>Model: {{ model | json }}</pre>\r\n"
+module.exports = "<div class=\"form-group\" [class.has-danger]=\"searchFailed\">\r\n  <input type=\"text\" class=\"form-control\"\r\n         [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"\r\n         placeholder=\"search\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"form-control-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<pre>Model: {{ model | json }}</pre>\r\n"
 
 /***/ }),
 
@@ -426,14 +426,8 @@ __webpack_require__("./node_modules/rxjs/_esm5/add/operator/do.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/switchMap.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/merge.js");
-var WIKI_URL = 'https://en.wikipedia.org/w/api.php';
-var PARAMS = new http_1.HttpParams({
-    fromObject: {
-        action: 'opensearch',
-        format: 'json',
-        origin: '*'
-    }
-});
+var WIKI_URL = 'api/apisearch?';
+var PARAMS = new http_1.HttpParams({});
 var SearchComponent = /** @class */ (function () {
     function SearchComponent(http) {
         this.http = http;
@@ -442,9 +436,10 @@ var SearchComponent = /** @class */ (function () {
         if (term === '') {
             return of_1.of([]);
         }
-        return this.http
-            .get(WIKI_URL, { params: PARAMS.set('search', term) })
-            .map(function (response) { return response[1]; });
+        return this.http.get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
+            .map(function (response) { return response; });
+        // response endret fra response[0] til repsonse. Wikipedia gir opprinnelig egentlig et array, men
+        // vi får et array med objekter som repsons
     };
     SearchComponent = __decorate([
         core_1.Injectable(),
@@ -460,6 +455,8 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
         this.searching = false;
         this.searchFailed = false;
         this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
+        this.formatMatches = function (value) { return value.firstName + ' ' + value.lastName; };
+        // add formatches her
         this.search = function (text$) {
             return text$
                 .debounceTime(300)

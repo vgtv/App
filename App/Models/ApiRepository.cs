@@ -34,10 +34,11 @@ namespace App.Models
                     cristinID = p.cristinID,
                     firstName = p.firstname,
                     lastName = p.lastname
-                }).ToListAsync();
+                }).Take(10).ToListAsync();
 
                 if (results.Count() < 10)
                 {
+                    int limit = 10 - results.Count();
                     results.AddRange(await db.person.Where(p =>
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
                     .Select(p => new User
@@ -45,7 +46,7 @@ namespace App.Models
                         cristinID = p.cristinID,
                         firstName = p.firstname,
                         lastName = p.lastname
-                    }).ToListAsync());
+                    }).Take(limit).ToListAsync());
                     //return results.ToList();
 
                     return results.DistinctBy(i => i.cristinID).ToList();
@@ -77,7 +78,7 @@ namespace App.Models
                 var assosciation = await db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefaultAsync();
                 researcher.institution = assosciation.institusjon;
                 researcher.institute = assosciation.institutt;
-                researcher.institute = assosciation.position;
+                researcher.position = assosciation.position;
                 return researcher;
             }
         }
@@ -117,7 +118,7 @@ namespace App.Models
                     //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();
 
-
+                if(cloud.Count() <= 0) { return null;  }
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
