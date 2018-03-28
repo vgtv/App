@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n\r\n<app-scatter></app-scatter>\r\n  \r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<app-topnav></app-topnav>\r\n\r\n<div class=\"wrapper\">\r\n\r\n  <div class=\"container\">\r\n    <div class=\"mx-auto\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n      <div class=\"col\">\r\n        <app-userinfo></app-userinfo>\r\n      </div>\r\n      <div class=\"col\">\r\n        <app-wordcloud></app-wordcloud>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -335,7 +335,7 @@ var ScatterComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadScatterData("63753")];
+                    case 0: return [4 /*yield*/, this.loadScatterData('63753')];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -347,7 +347,7 @@ var ScatterComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get("api/apiscatterplot?cristinID=" + cristinID).toPromise()];
+                    case 0: return [4 /*yield*/, this.http.get('api/apiscatterplot?cristinID=' + cristinID).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -397,7 +397,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\" [class.has-danger]=\"searchFailed\">\r\n  <input type=\"text\" class=\"form-control\"\r\n         [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"\r\n         placeholder=\"search\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"form-control-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<pre>Model: {{ model | json }}</pre>\r\n"
+module.exports = "<form class=\"form-inline\" [class.has-danger]=\"searchFailed\">\r\n  <input type=\"text\" class=\"form-control form-control-lg mr-sm-2 col-md\"\r\n         [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"\r\n         placeholder=\"search\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"form-control-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</form>\r\n\r\n<pre>{{ model | json }}</pre>\r\n"
 
 /***/ }),
 
@@ -494,7 +494,7 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <!----<input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">-->\r\n          <ngbd-typeahead-http></ngbd-typeahead-http>\r\n          <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <!----<input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">\r\n  <ngbd-typeahead-http></ngbd-typeahead-http>\r\n  <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>-->\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -636,7 +636,7 @@ var UserinfoComponent = /** @class */ (function () {
                     case 0:
                         this.model = new Researcher_1.Researcher();
                         _a = this;
-                        return [4 /*yield*/, this.getUserData("63753")];
+                        return [4 /*yield*/, this.getUserData('63753')];
                     case 1:
                         _a.model = _b.sent();
                         return [2 /*return*/];
@@ -648,7 +648,7 @@ var UserinfoComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get("api/apiuser?cristinID=" + cristinID).toPromise()];
+                    case 0: return [4 /*yield*/, this.http.get('api/apiuser?cristinID=' + cristinID).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -742,7 +742,7 @@ var WordcloudComponent = /** @class */ (function () {
         this.options = {
             width: 600,
             height: 400,
-            overflow: false,
+            overflow: false
         };
     }
     WordcloudComponent.prototype.ngOnInit = function () {
@@ -752,7 +752,7 @@ var WordcloudComponent = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = this;
-                        return [4 /*yield*/, this.getWordCloud("63753")];
+                        return [4 /*yield*/, this.getWordCloud('63753')];
                     case 1:
                         _a.data = _b.sent();
                         return [2 /*return*/];
@@ -765,7 +765,7 @@ var WordcloudComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.
-                            http.get("api/apiwordcloud?cristinID=" + cristinID).toPromise()];
+                            http.get('api/apiwordcloud?cristinID=' + cristinID).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
