@@ -1,13 +1,11 @@
-<div class="form-group" [class.has-danger]="searchFailed">
-  <input type="text" class="form-control"
+<form class="form-inline" [class.has-danger]="searchFailed">
+  <input type="text" class="form-control form-control-lg mr-sm-2 col-md"
          [(ngModel)]="model" [ngbTypeahead]="search"
          placeholder="search"
          [resultFormatter]="formatMatches"
          [inputFormatter]="formatMatches" />
   <span *ngIf="searching">searching...</span>
   <div class="form-control-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-</div>
+</form>
 
-<hr>
-
-<pre>Model: {{ model | json }}</pre>
+<pre>{{ model | json }}</pre>
