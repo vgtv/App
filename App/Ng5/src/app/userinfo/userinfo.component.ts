@@ -10,16 +10,14 @@ import { Researcher } from './Researcher';
 export class UserinfoComponent implements OnInit {
   public model: Researcher;
 
-  constructor(private http: HttpClient) {
-  
-  }
+  constructor(private http: HttpClient) {}
 
   async ngOnInit() {
     this.model = new Researcher();
-    this.model = await this.getUserData("63753");
+    this.model = await this.getUserData('63753');
   }
   public async getUserData(cristinID: string): Promise<any> {
     return await
-      this.http.get<any[]>("api/apiuser?cristinID=" + cristinID).toPromise();
-  } 
+      this.http.get<any[]>('api/apiuser?cristinID=' + cristinID).toPromise();
+  }
 }

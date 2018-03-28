@@ -17,25 +17,24 @@ export class ScatterComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   public async ngOnInit() {
-    await this.loadScatterData("63753");
+    await this.loadScatterData('63753');
   }
 
   public async getScatterData(cristinID: string): Promise<any> {
     return await
-      this.http.get<any[]>("api/apiscatterplot?cristinID=" + cristinID).toPromise();
-  } 
+      this.http.get<any[]>('api/apiscatterplot?cristinID=' + cristinID).toPromise();
+  }
 
   public async loadScatterData(cristinID: string) {
     this.scatterChartData = {
       dataTable: await this.getScatterData(cristinID),
       chartType: 'ScatterChart',
       options: {
-        width: 950, height: 550,
+        width: 1050, height: 550,
         backgroundColor: 'transparent',
         title: 'Publikasjoner vs kvalitet',
         hAxis: { title: 'Kvalitet' },
-        viewWindow: { min: 0, max: 8 },
-        vAxis: { title: 'Publikasjoner', minValue: 0, maxValue: 300 },
+        vAxis: { title: 'Publikasjoner' },
         legend: 'none'
       }
     };

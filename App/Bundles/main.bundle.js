@@ -109,7 +109,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <app-topnav></app-topnav>\r\n\r\n  <div class=\"wrapper\">\r\n\r\n    <div class=\"container\">\r\n      <div class=\"mx-auto\">\r\n        <ngbd-typeahead-http></ngbd-typeahead-http>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"container-fluid\">\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <app-userinfo></app-userinfo>\r\n        </div>\r\n        <div class=\"col\">\r\n          <app-wordcloud></app-wordcloud>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n\r\n    <router-outlet></router-outlet>\r\n"
+module.exports = "<app-topnav></app-topnav>\r\n\r\n<app-scatter></app-scatter>\r\n  \r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -366,12 +366,11 @@ var ScatterComponent = /** @class */ (function () {
                         _a.scatterChartData = (_b.dataTable = _c.sent(),
                             _b.chartType = 'ScatterChart',
                             _b.options = {
-                                width: 950, height: 550,
+                                width: 1050, height: 550,
                                 backgroundColor: 'transparent',
                                 title: 'Publikasjoner vs kvalitet',
                                 hAxis: { title: 'Kvalitet' },
-                                viewWindow: { min: 0, max: 8 },
-                                vAxis: { title: 'Publikasjoner', minValue: 0, maxValue: 300 },
+                                vAxis: { title: 'Publikasjoner' },
                                 legend: 'none'
                             },
                             _b);
@@ -398,7 +397,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <form class=\"form-inline\" [class.has-danger]=\"searchFailed\">\r\n    <input type=\"text\" class=\"form-control form-control-lg mr-sm-2 col-md\"\r\n    [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"\r\n    placeholder=\"search\"\r\n    [resultFormatter]=\"formatMatches\"\r\n    [inputFormatter]=\"formatMatches\" />\r\n    <span *ngIf=\"searching\">searching...</span>\r\n    <div class=\"form-control-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  </form>\r\n"
+module.exports = "<div class=\"form-group\" [class.has-danger]=\"searchFailed\">\r\n  <input type=\"text\" class=\"form-control\"\r\n         [(ngModel)]=\"model\" [ngbTypeahead]=\"search\"\r\n         placeholder=\"search\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">searching...</span>\r\n  <div class=\"form-control-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<pre>Model: {{ model | json }}</pre>\r\n"
 
 /***/ }),
 
@@ -428,8 +427,8 @@ __webpack_require__("./node_modules/rxjs/_esm5/add/operator/do.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/switchMap.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/merge.js");
-var WIKI_URL = 'api/apisearch?';
-var PARAMS = new http_1.HttpParams({});
+var URL = 'api/apisearch?';
+var PARAMS = new http_1.HttpParams();
 var SearchComponent = /** @class */ (function () {
     function SearchComponent(http) {
         this.http = http;
@@ -438,7 +437,7 @@ var SearchComponent = /** @class */ (function () {
         if (term === '') {
             return of_1.of([]);
         }
-        return this.http.get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
+        return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
             .map(function (response) { return response; });
         // response endret fra response[0] til repsonse. Wikipedia gir opprinnelig egentlig et array, men
         // vi får et array med objekter som repsons
@@ -495,7 +494,7 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <!----<input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">\r\n          <ngbd-typeahead-http></ngbd-typeahead-http>\r\n          <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>-->\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\" href=\"#\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n      <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        <form class=\"form-inline\">\r\n          <!----<input class=\"form-control form-control-lg mr-sm-2\" type=\"search\" placeholder=\"Søk etter norsk forsker\" aria-label=\"Search\">-->\r\n          <ngbd-typeahead-http></ngbd-typeahead-http>\r\n          <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\">Søk</button>\r\n        </form>\r\n        </div>\r\n        <ul class=\"navbar-nav d-flex justify-content-end\">\r\n          <li class=\"nav-item\">\r\n            <a class=\"nav-link\" href=\"#\">Om Tjenesten</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -561,7 +560,7 @@ exports.Researcher = Researcher;
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <h1><strong>{{model.firstName}} {{model.lastName}}</strong></h1>\r\n  <h3><strong>{{model.position}}</strong></h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{model.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{model.institution}}</p>\r\n"
+module.exports = "<div class=\"container\">\r\n  <h1>{{model.firstName}} {{model.lastName}}</h1>\r\n  <h3>{{model.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{model.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{model.institution}}</p>\r\n</div>\r\n"
 
 /***/ }),
 

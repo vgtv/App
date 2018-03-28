@@ -25,26 +25,6 @@ namespace App.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<aarliginstitusjonsranking2007> aarliginstitusjonsranking2007 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2008> aarliginstitusjonsranking2008 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2009> aarliginstitusjonsranking2009 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2010> aarliginstitusjonsranking2010 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2011> aarliginstitusjonsranking2011 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2012> aarliginstitusjonsranking2012 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2013> aarliginstitusjonsranking2013 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2014> aarliginstitusjonsranking2014 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2015> aarliginstitusjonsranking2015 { get; set; }
-        public virtual DbSet<aarliginstitusjonsranking2016> aarliginstitusjonsranking2016 { get; set; }
-        public virtual DbSet<aarligranking2007> aarligranking2007 { get; set; }
-        public virtual DbSet<aarligranking2008> aarligranking2008 { get; set; }
-        public virtual DbSet<aarligranking2009> aarligranking2009 { get; set; }
-        public virtual DbSet<aarligranking2010> aarligranking2010 { get; set; }
-        public virtual DbSet<aarligranking2011> aarligranking2011 { get; set; }
-        public virtual DbSet<aarligranking2012> aarligranking2012 { get; set; }
-        public virtual DbSet<aarligranking2013> aarligranking2013 { get; set; }
-        public virtual DbSet<aarligranking2014> aarligranking2014 { get; set; }
-        public virtual DbSet<aarligranking2015> aarligranking2015 { get; set; }
-        public virtual DbSet<aarligranking2016> aarligranking2016 { get; set; }
         public virtual DbSet<eierskap> eierskap { get; set; }
         public virtual DbSet<forfattere> forfattere { get; set; }
         public virtual DbSet<forskning> forskning { get; set; }

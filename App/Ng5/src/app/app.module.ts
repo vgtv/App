@@ -28,7 +28,6 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     ScatterComponent,
     NgbdTypeaheadHttp,
     UserinfoComponent
-   
   ],
   imports: [
     NgbModule.forRoot(),
