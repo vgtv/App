@@ -17,6 +17,8 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
 
 import { ScatterComponent } from './scatter/scatter.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
+import { SearchresultsComponent } from './searchresults/searchresults.component';
+import { RelevanceComponent } from './relevance/relevance.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     WordcloudComponent,
     ScatterComponent,
     NgbdTypeaheadHttp,
-    UserinfoComponent
+    UserinfoComponent,
+    SearchresultsComponent,
+    RelevanceComponent
   ],
   imports: [
     NgbModule.forRoot(),
