@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,9 +8,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./wordcloud.component.scss']
 })
 
-
-export class WordcloudComponent implements OnInit {
+export class WordcloudComponent{
+  @Input() input: string;
   data: Array<CloudData> = [];
+
   options: CloudOptions = {
     width: 600,
     height: 400,
@@ -20,13 +21,12 @@ export class WordcloudComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  async ngOnInit() {
-    this.data = await this.getWordCloud('63753');
+  async ngOnChanges() {
+    this.data = await this.getWordCloud(this.input);
   }
 
   async getWordCloud(cristinID: string): Promise<any> {
-    return await this.
-      http.get<any[]>('api/apiwordcloud?cristinID=' + cristinID).toPromise();
+    return await this.http.get<any[]>('api/apiwordcloud?cristinID=' + cristinID).toPromise();
   }
 }
 

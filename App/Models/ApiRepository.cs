@@ -76,10 +76,11 @@ namespace App.Models
                         lastName = r.lastname
                     }).FirstOrDefaultAsync();
 
-                var assosciation = await db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefaultAsync();
-                researcher.institution = assosciation.institusjon;
-                researcher.institute = assosciation.institutt;
-                researcher.position = assosciation.position;
+                var assosciations = await db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefaultAsync();
+                researcher.institution = assosciations.institusjon;
+                researcher.institute = assosciations.institutt;
+                researcher.position = assosciations.position;
+
                 return researcher;
             }
         }
@@ -206,7 +207,7 @@ namespace App.Models
                         }
                     }
                     var percentage = ((int)(0.5f + ((100f * matchBonus) / user.Items.Count())));
-                    if (percentage > 25)
+                    if (percentage > 50)
                     {
                         matchedUsers.Add(new UserMatch { cristinID = user.Key, similarities = percentage });
                     }
@@ -268,7 +269,7 @@ namespace App.Models
 
                 var mainRank = await db.rank.Where(r => r.cristinID == cristinID)
                     .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
-               // if (mainRank.publications == null || mainRank.quality ==null) { return null;  }
+                // if (mainRank.publications == null || mainRank.quality ==null) { return null;  }
 
 
                 if (mainUser == null) { return null; }
@@ -289,7 +290,7 @@ namespace App.Models
                         .FirstOrDefaultAsync();
 
                     var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
-                        .Select(r => new { publications=r.publikasjoner, quality=r.kvalitet }).FirstOrDefaultAsync();
+                        .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
 
                     //if (mainRank.publications == null || mainRank.quality == null) { continue; }
 

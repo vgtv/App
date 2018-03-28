@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { ChartReadyEvent } from 'ng2-google-charts';
 import { ChartErrorEvent } from 'ng2-google-charts';
 import { ChartSelectEvent } from 'ng2-google-charts';
@@ -11,13 +10,14 @@ import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
   templateUrl: './scatter.component.html',
   styleUrls: ['./scatter.component.scss']
 })
-export class ScatterComponent implements OnInit {
+export class ScatterComponent {
+  @Input() input: string;
   public scatterChartData: any;
 
   constructor(private http: HttpClient) { }
 
-  public async ngOnInit() {
-    await this.loadScatterData('63753');
+  async ngOnChanges() {
+    await this.loadScatterData(this.input);
   }
 
   public async getScatterData(cristinID: string): Promise<any> {
@@ -30,7 +30,7 @@ export class ScatterComponent implements OnInit {
       dataTable: await this.getScatterData(cristinID),
       chartType: 'ScatterChart',
       options: {
-        width: 1050, height: 550,
+        width: 1250, height: 850,
         backgroundColor: 'transparent',
         title: 'Publikasjoner vs kvalitet',
         hAxis: { title: 'Kvalitet' },

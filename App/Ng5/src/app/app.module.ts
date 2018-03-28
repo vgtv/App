@@ -11,7 +11,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TopnavComponent } from './topnav/topnav.component';
+
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 
@@ -19,6 +19,7 @@ import { ScatterComponent } from './scatter/scatter.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 import { SearchresultsComponent } from './searchresults/searchresults.component';
 import { RelevanceComponent } from './relevance/relevance.component';
+import { TopnavComponent } from './topnav/topnav.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { RelevanceComponent } from './relevance/relevance.component';
     NgbdTypeaheadHttp,
     UserinfoComponent,
     SearchresultsComponent,
-    RelevanceComponent
+    RelevanceComponent,
+    TopnavComponent
   ],
   imports: [
     NgbModule.forRoot(),
