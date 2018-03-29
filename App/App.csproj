@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServerRouteConstraint.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiSearchFullTextController.cs" />
     <Compile Include="Controllers\ApiRelevanceController.cs" />
     <Compile Include="Controllers\ApiScatterPlotController.cs" />
     <Compile Include="Controllers\ApiSearchController.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Models\basewords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\Affiliation.cs" />
     <Compile Include="Models\DomainModels\c.cs" />
     <Compile Include="Models\DomainModels\Cloud.cs" />
     <Compile Include="Models\DomainModels\cols.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Models\DomainModels\iUser.cs" />
     <Compile Include="Models\DomainModels\Researcher.cs" />
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
+    <Compile Include="Models\DomainModels\Results.cs" />
     <Compile Include="Models\eierskap.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -356,6 +359,8 @@
     <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\affiliation.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\results.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />

@@ -7,7 +7,7 @@ import { Researcher } from './Researcher';
   templateUrl: './userinfo.component.html',
   styleUrls: ['./userinfo.component.scss']
 })
-export class UserinfoComponent{
+export class UserinfoComponent {
   @Input() input: string;
   public user: Researcher;
 

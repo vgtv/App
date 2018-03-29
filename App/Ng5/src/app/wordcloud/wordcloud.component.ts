@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./wordcloud.component.scss']
 })
 
-export class WordcloudComponent{
+export class WordcloudComponent {
   @Input() input: string;
   data: Array<CloudData> = [];
 

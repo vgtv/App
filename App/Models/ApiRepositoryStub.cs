@@ -24,6 +24,11 @@ namespace App.Models
             throw new NotImplementedException();
         }
 
+        public Task<List<Results>> GetSearchResultsAsync(string searchQuery)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<UserMatch>> GetUserData(string cristinID)
         {
             throw new NotImplementedException();

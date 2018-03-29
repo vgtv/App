@@ -11,6 +11,8 @@ using System.Data.Entity;
 
 namespace App.Models
 {
+
+
     public class ApiRepository : iApiRepository
     {
         /*
@@ -47,14 +49,11 @@ namespace App.Models
                         firstName = p.firstname,
                         lastName = p.lastname
                     }).Take(limit).ToListAsync());
-                    //return results.ToList();
-
                     return results.DistinctBy(i => i.cristinID).ToList();
                 }
                 return results;
             }
         }
-
 
         public async Task<List<User>> GetAllUsersAsync()
         {
@@ -80,10 +79,55 @@ namespace App.Models
                 researcher.institution = assosciations.institusjon;
                 researcher.institute = assosciations.institutt;
                 researcher.position = assosciations.position;
-
                 return researcher;
             }
         }
+
+
+        public async Task<List<Results>> GetSearchResultsAsync(string searchQuery)
+        {
+            if(searchQuery == "") { return null; }
+
+            using (var db = new dbEntities())
+            {
+                var results = await db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                || p.lastname.StartsWith(searchQuery)).Select(p => new Results
+                {
+                    cristinID = p.cristinID,
+                    firstName = p.firstname,
+                    lastName = p.lastname,
+                    affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
+                    {
+                        institute = a.institutt,
+                        institution = a.institusjon,
+                        position = a.position
+                    }
+                    ).FirstOrDefault()
+                }).ToListAsync();
+
+                if (results.Count() < 10)
+                {
+                    int limit = 10 - results.Count();
+                    results.AddRange(await db.person.Where(p =>
+                    (p.firstname + " " + p.lastname).Contains(searchQuery))
+                    .Select(p => new Results
+                    {
+                        cristinID = p.cristinID,
+                        firstName = p.firstname,
+                        lastName = p.lastname,
+                        affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
+                        {
+                            institute = a.institutt,
+                            institution = a.institusjon,
+                            position = a.position
+                        }).FirstOrDefault()
+                    }).Take(limit).ToListAsync());
+                    return results.DistinctBy(i => i.cristinID).ToList();
+                }
+                return results;
+            }
+        }
+
 
 
         /*
@@ -111,11 +155,10 @@ namespace App.Models
                 {
                     weight = (int)wc.count,
                     text = db.basewords.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.baseword).FirstOrDefault() != null ?
-                   db.basewords.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.baseword).FirstOrDefault() :
-                    db.words.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.word).FirstOrDefault()
+                    .Select(bw => bw.baseword).FirstOrDefault() != null ? db.basewords.Where(bw => bw.key == wc.key)
+                                                                    .Select(bw => bw.baseword).FirstOrDefault() :
+                                                                    db.words.Where(bw => bw.key == wc.key)
+                                                                    .Select(bw => bw.word).FirstOrDefault()
 
                     //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();

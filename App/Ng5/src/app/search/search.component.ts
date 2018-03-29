@@ -24,6 +24,7 @@ export class SearchService {
     if (term === '') {
       return of([]);
     }
+    console.log('OK');
     return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
       .map(response => response);
   }
@@ -37,12 +38,11 @@ export class SearchService {
 
 export class NgbdTypeaheadHttp implements OnInit {
   model: any;
-  searching: boolean = false;
-  searchFailed: boolean = false;
-  showSearchBar: boolean = true;
+  searching = false;
+  searchFailed = false;
+  showSearchBar = true;
 
-  hideSearchingWhenUnsubscribed = new Observable(() =>
-    () => this.searching = false);
+  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
   constructor(private _service: SearchService, private router: Router) {
   }
@@ -51,17 +51,18 @@ export class NgbdTypeaheadHttp implements OnInit {
   }
 
   showSearchResults() {
-    if (typeof this.model !== "undefined") // ikke skrevet noe inn
-      if (typeof this.model.cristinID !== "undefined") { // trykket ikke på en person
+    if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
+      if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
         this.router.navigate(['/profile', this.model.cristinID]);
         this.showSearchBar = false;
+      } else {
+        this.router.navigate(['/search', this.model]);
       }
-      else {
-        this.router.navigate(['/search', this.model);
-      }
+    }
   }
 
   formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
+
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(300)
