@@ -111,7 +111,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n\r\n<div class=\"wrapper\">\r\n  <div class=\"container\">\r\n    <div class=\"mx-auto\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "\r\n\r\n<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"wrapper\">\r\n    <div class=\"container\">\r\n      <div class=\"mx-auto\">\r\n        <ngbd-typeahead-http></ngbd-typeahead-http>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -133,18 +133,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'app';
+    function AppComponent(router) {
+        this.router = router;
+        this.showSearchBar = true;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.router.events.subscribe(function (event) {
+            if (event instanceof router_1.NavigationStart) {
+                _this.showSearchBar = event.url === '/' ? true : false;
+            }
+        });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.scss")]
-        })
+        }),
+        __metadata("design:paramtypes", [router_1.Router])
     ], AppComponent);
     return AppComponent;
 }());
@@ -559,7 +573,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group form-inline\" *ngIf=\"showSearchBar\">\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-8\"\r\n         [class.is-invalid]=\"searchFailed\"\r\n         [(ngModel)]=\"model\"\r\n         [ngbTypeahead]=\"search\"\r\n         placeholder=\"Søk etter en norsk forsker\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">...</span>\r\n  <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\" (click)=\"showSearchResults()\" (keyup.enter)=\"showSearchResults()\">Søk</button>\r\n  <hr>\r\n</div>\r\n"
+module.exports = "<div class=\"form-group form-inline\">\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-8\"\r\n         [class.is-invalid]=\"searchFailed\"\r\n         [(ngModel)]=\"model\"\r\n         [ngbTypeahead]=\"search\"\r\n         placeholder=\"Søk etter en norsk forsker\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <span *ngIf=\"searching\">...</span>\r\n  <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  <button class=\"btn btn-lg btn-outline-warning my-2 my-sm-0\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  <hr>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -638,15 +652,15 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
                 .merge(_this.hideSearchingWhenUnsubscribed);
         };
     }
-    NgbdTypeaheadHttp.prototype.ngOnInit = function () {
-    };
-    NgbdTypeaheadHttp.prototype.showSearchResults = function () {
+    NgbdTypeaheadHttp.prototype.ngOnInit = function () { };
+    NgbdTypeaheadHttp.prototype.onSearch = function () {
         if (typeof this.model !== 'undefined') {
             if (typeof this.model.cristinID !== 'undefined') {
                 this.router.navigate(['/profile', this.model.cristinID]);
-                this.showSearchBar = false;
+                this.showSearchBar = !this.showSearchBar;
             }
             else {
+                this.showSearchBar = !this.showSearchBar;
                 this.router.navigate(['/search', this.model]);
             }
         }
@@ -793,7 +807,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\"  [routerLink]=\"['']\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\">\r\n        Her skal søke boks komme\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  [routerLink]=\"['/about']\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"navbar-brand\"   (click)=\"navigateHome()\">AKADEMIKUS</li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  (click)=\"navigateAbout()\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -820,18 +834,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var TopnavComponent = /** @class */ (function () {
-    function TopnavComponent() {
+    function TopnavComponent(router) {
+        this.router = router;
     }
-    TopnavComponent.prototype.ngOnInit = function () {
+    TopnavComponent.prototype.navigateHome = function () {
+        this.router.navigate(['']);
     };
+    TopnavComponent.prototype.navigateAbout = function () {
+        this.router.navigate(['about']);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TopnavComponent.prototype, "default", void 0);
     TopnavComponent = __decorate([
         core_1.Component({
             selector: 'app-topnav',
             template: __webpack_require__("./src/app/topnav/topnav.component.html"),
             styles: [__webpack_require__("./src/app/topnav/topnav.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [router_1.Router])
     ], TopnavComponent);
     return TopnavComponent;
 }());

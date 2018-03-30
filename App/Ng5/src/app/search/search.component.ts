@@ -44,18 +44,17 @@ export class NgbdTypeaheadHttp implements OnInit {
 
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor(private _service: SearchService, private router: Router) {
-  }
+  constructor(private _service: SearchService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  showSearchResults() {
+  onSearch() {
     if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
       if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
         this.router.navigate(['/profile', this.model.cristinID]);
-        this.showSearchBar = false;
+        this.showSearchBar = !this.showSearchBar;
       } else {
+        this.showSearchBar = !this.showSearchBar;
         this.router.navigate(['/search', this.model]);
       }
     }

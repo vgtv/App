@@ -1,11 +1,19 @@
-<app-topnav></app-topnav>
 
-<div class="wrapper">
-  <div class="container">
-    <div class="mx-auto">
-      <ngbd-typeahead-http></ngbd-typeahead-http>
+
+<div *ngIf="showSearchBar">
+  <app-topnav></app-topnav>
+  <div class="wrapper">
+    <div class="container">
+      <div class="mx-auto">
+        <ngbd-typeahead-http></ngbd-typeahead-http>
+      </div>
     </div>
   </div>
 </div>
+
+<div *ngIf="!showSearchBar">
+  <app-topnav [default]="!showSearchBar"></app-topnav>
+</div>
+
 
 <router-outlet></router-outlet>

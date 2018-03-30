@@ -18,8 +18,7 @@ export class WordcloudComponent {
     overflow: false
   };
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   async ngOnChanges() {
     this.data = await this.getWordCloud(this.input);

@@ -1,4 +1,4 @@
-<div class="form-group form-inline" *ngIf="showSearchBar">
+<div class="form-group form-inline">
   <input id="typeahead-http" type="text" class="form-control form-control-lg col-md-8"
          [class.is-invalid]="searchFailed"
          [(ngModel)]="model"
@@ -8,6 +8,6 @@
          [inputFormatter]="formatMatches" />
   <span *ngIf="searching">...</span>
   <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-  <button class="btn btn-lg btn-outline-warning my-2 my-sm-0" type="submit" (click)="showSearchResults()" (keyup.enter)="showSearchResults()">Søk</button>
+  <button class="btn btn-lg btn-outline-warning my-2 my-sm-0" type="submit" (click)="onSearch()" (keyup.enter)="onSearch()">Søk</button>
   <hr>
 </div>
