@@ -12,31 +12,44 @@ import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
 })
 export class ScatterComponent {
   @Input() input: string;
-  public scatterChartData: any;
+  scatterChartData: any;
+  apiURL = 'api/apiscatterplot?cristinID=';
+  showScatter: boolean;
 
   constructor(private http: HttpClient) { }
 
   async ngOnChanges() {
-    await this.loadScatterData(this.input);
+    await this.initializeScatter(this.input);
   }
 
-  public async getScatterData(cristinID: string): Promise<any> {
-    return await
-      this.http.get<any[]>('api/apiscatterplot?cristinID=' + cristinID).toPromise();
-  }
+  async initializeScatter(cristinID: string): Promise<any> {
+    return await new Promise((resolve, reject) => {
+      this.http.get<any[]>(this.apiURL + cristinID)
+        .toPromise()
+        .then(results => {
 
-  public async loadScatterData(cristinID: string) {
-    this.scatterChartData = {
-      dataTable: await this.getScatterData(cristinID),
-      chartType: 'ScatterChart',
-      options: {
-        width: 1250, height: 850,
-        backgroundColor: 'transparent',
-        title: 'Publikasjoner vs kvalitet',
-        hAxis: { title: 'Kvalitet' },
-        vAxis: { title: 'Publikasjoner' },
-        legend: 'none'
-      }
-    };
+          this.scatterChartData = {
+            dataTable: results,
+            chartType: 'ScatterChart',
+            options: {
+              width: 1250, height: 850,
+              backgroundColor: 'transparent',
+              title: 'Publikasjoner vs kvalitet',
+              hAxis: { title: 'Kvalitet' },
+              vAxis: { title: 'Publikasjoner' },
+              legend: 'none'
+            }
+          };
+          this.showScatter = true;
+          resolve();
+        },
+        response => {
+          if (response.error === 'No data found for user') {
+            this.showScatter = false;
+          } else {
+            reject();
+          }
+        });
+    });
   }
 }

@@ -2,14 +2,14 @@
 
 
 <div class="col-sm-10">
-    <ul *ngFor="let obj of results">
-      <li>
-        {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}}
-      </li>
-      <li>
-        {{obj.affiliation.position}} {{obj.affiliation.institution}} {{obj.affiliation.institute}}
-      </li>
-    </ul>
+  <ul *ngFor="let obj of results">
+    <li>
+      {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}}
+    </li>
+    <li>
+      {{obj.affiliation?.position}}
+      {{obj.affiliation?.institution}}
+      {{obj.affiliation?.institute}}
+    </li>
+  </ul>
 </div>
-
-<div *ngIf="searchResults">HALLO</div>

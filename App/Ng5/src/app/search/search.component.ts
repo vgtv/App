@@ -51,10 +51,10 @@ export class NgbdTypeaheadHttp implements OnInit {
   onSearch() {
     if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
       if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
+        this.showSearchBar = false;
         this.router.navigate(['/profile', this.model.cristinID]);
-        this.showSearchBar = !this.showSearchBar;
       } else {
-        this.showSearchBar = !this.showSearchBar;
+        this.showSearchBar = false;
         this.router.navigate(['/search', this.model]);
       }
     }

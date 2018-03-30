@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit{
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log("Ja");
     this.sub = this.router.params.subscribe(params => {
       this.cristinID = params['id'];
     });

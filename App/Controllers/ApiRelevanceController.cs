@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace App.Controllers
 {
-    public class ApiRelevanceController : ApiController
+    public class ApiRelevanceControtvller : ApiController
     {
         private readonly ApiRepository dataAccess = new ApiRepository();
 

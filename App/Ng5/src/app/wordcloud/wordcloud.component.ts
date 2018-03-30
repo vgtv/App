@@ -10,7 +10,9 @@ import { HttpClient } from '@angular/common/http';
 
 export class WordcloudComponent {
   @Input() input: string;
-  data: Array<CloudData> = [];
+  data: Array<CloudData>;
+  showCloud: boolean;
+  apiURL = 'api/apiwordcloud?cristinID=';
 
   options: CloudOptions = {
     width: 600,
@@ -21,11 +23,26 @@ export class WordcloudComponent {
   constructor(private http: HttpClient) { }
 
   async ngOnChanges() {
-    this.data = await this.getWordCloud(this.input);
+    await this.initializeCloud(this.input);
   }
 
-  async getWordCloud(cristinID: string): Promise<any> {
-    return await this.http.get<any[]>('api/apiwordcloud?cristinID=' + cristinID).toPromise();
+  async initializeCloud(cristinID: string): Promise<any> {
+    return await new Promise((resolve, reject) => {
+      this.http.get<any[]>(this.apiURL + cristinID)
+        .toPromise()
+        .then(results => {
+          this.data = results;
+          this.showCloud = true;
+          resolve();
+        },
+        response => {
+          if (response.error === 'No data found for user') {
+            this.showCloud = false;
+          } else {
+            reject();
+          }
+        });
+    });
   }
 }
 

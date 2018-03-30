@@ -317,6 +317,7 @@ var ProfileComponent = /** @class */ (function () {
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log("Ja");
         this.sub = this.router.params.subscribe(function (params) {
             _this.cristinID = params['id'];
         });
@@ -436,7 +437,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<google-chart [data]=\"scatterChartData\"></google-chart>\r\n"
+module.exports = "\r\n<div *ngIf=\"showScatter\">\r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -502,12 +503,13 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var ScatterComponent = /** @class */ (function () {
     function ScatterComponent(http) {
         this.http = http;
+        this.apiURL = 'api/apiscatterplot?cristinID=';
     }
     ScatterComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadScatterData(this.input)];
+                    case 0: return [4 /*yield*/, this.initializeScatter(this.input)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -515,38 +517,39 @@ var ScatterComponent = /** @class */ (function () {
             });
         });
     };
-    ScatterComponent.prototype.getScatterData = function (cristinID) {
+    ScatterComponent.prototype.initializeScatter = function (cristinID) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get('api/apiscatterplot?cristinID=' + cristinID).toPromise()];
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            _this.http.get(_this.apiURL + cristinID)
+                                .toPromise()
+                                .then(function (results) {
+                                _this.scatterChartData = {
+                                    dataTable: results,
+                                    chartType: 'ScatterChart',
+                                    options: {
+                                        width: 1250, height: 850,
+                                        backgroundColor: 'transparent',
+                                        title: 'Publikasjoner vs kvalitet',
+                                        hAxis: { title: 'Kvalitet' },
+                                        vAxis: { title: 'Publikasjoner' },
+                                        legend: 'none'
+                                    }
+                                };
+                                _this.showScatter = true;
+                                resolve();
+                            }, function (response) {
+                                if (response.error === 'No data found for user') {
+                                    _this.showScatter = false;
+                                }
+                                else {
+                                    reject();
+                                }
+                            });
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    ScatterComponent.prototype.loadScatterData = function (cristinID) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _a = this;
-                        _b = {};
-                        return [4 /*yield*/, this.getScatterData(cristinID)];
-                    case 1:
-                        _a.scatterChartData = (_b.dataTable = _c.sent(),
-                            _b.chartType = 'ScatterChart',
-                            _b.options = {
-                                width: 1250, height: 850,
-                                backgroundColor: 'transparent',
-                                title: 'Publikasjoner vs kvalitet',
-                                hAxis: { title: 'Kvalitet' },
-                                vAxis: { title: 'Publikasjoner' },
-                                legend: 'none'
-                            },
-                            _b);
-                        return [2 /*return*/];
                 }
             });
         });
@@ -656,11 +659,11 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
     NgbdTypeaheadHttp.prototype.onSearch = function () {
         if (typeof this.model !== 'undefined') {
             if (typeof this.model.cristinID !== 'undefined') {
+                this.showSearchBar = false;
                 this.router.navigate(['/profile', this.model.cristinID]);
-                this.showSearchBar = !this.showSearchBar;
             }
             else {
-                this.showSearchBar = !this.showSearchBar;
+                this.showSearchBar = false;
                 this.router.navigate(['/search', this.model]);
             }
         }
@@ -683,7 +686,7 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n    <ul *ngFor=\"let obj of results\">\r\n      <li>\r\n        {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}}\r\n      </li>\r\n      <li>\r\n        {{obj.affiliation.position}} {{obj.affiliation.institution}} {{obj.affiliation.institute}}\r\n      </li>\r\n    </ul>\r\n</div>\r\n\r\n<div *ngIf=\"searchResults\">HALLO</div>\r\n"
+module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results\">\r\n    <li>\r\n      {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}}\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -761,16 +764,16 @@ var SearchresultsComponent = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        this.sub = this.router.params.subscribe(function (params) {
-                            _this.query = params['query'];
-                            if (_this.query === '') {
-                                return;
-                            }
-                        });
                         _a = this;
-                        return [4 /*yield*/, this.getSearchResults(this.query)];
+                        return [4 /*yield*/, this.router.params.subscribe(function (params) {
+                                _this.query = params['query'];
+                                if (_this.query === '') {
+                                    return;
+                                }
+                                _this.getSearchResults(_this.query);
+                            })];
                     case 1:
-                        _a.results = _b.sent();
+                        _a.sub = _b.sent();
                         return [2 /*return*/];
                 }
             });
@@ -778,10 +781,26 @@ var SearchresultsComponent = /** @class */ (function () {
     };
     SearchresultsComponent.prototype.getSearchResults = function (query) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            _this.http.get(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()
+                                .then(function (results) {
+                                _this.results = results;
+                                resolve();
+                            }, function (response) {
+                                console.log(response);
+                                if (response.error === 'No data found for user') {
+                                }
+                                else {
+                                    reject();
+                                }
+                            });
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });
@@ -999,7 +1018,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1065,7 +1084,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var WordcloudComponent = /** @class */ (function () {
     function WordcloudComponent(http) {
         this.http = http;
-        this.data = [];
+        this.apiURL = 'api/apiwordcloud?cristinID=';
         this.options = {
             width: 600,
             height: 400,
@@ -1074,24 +1093,37 @@ var WordcloudComponent = /** @class */ (function () {
     }
     WordcloudComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this;
-                        return [4 /*yield*/, this.getWordCloud(this.input)];
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.initializeCloud(this.input)];
                     case 1:
-                        _a.data = _b.sent();
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    WordcloudComponent.prototype.getWordCloud = function (cristinID) {
+    WordcloudComponent.prototype.initializeCloud = function (cristinID) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get('api/apiwordcloud?cristinID=' + cristinID).toPromise()];
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            _this.http.get(_this.apiURL + cristinID)
+                                .toPromise()
+                                .then(function (results) {
+                                _this.data = results;
+                                _this.showCloud = true;
+                                resolve();
+                            }, function (response) {
+                                if (response.error === 'No data found for user') {
+                                    _this.showCloud = false;
+                                }
+                                else {
+                                    reject();
+                                }
+                            });
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

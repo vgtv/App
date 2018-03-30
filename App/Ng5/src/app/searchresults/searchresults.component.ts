@@ -20,17 +20,30 @@ export class SearchresultsComponent implements OnInit {
   constructor(private router: ActivatedRoute, private http: HttpClient) { }
 
   async ngOnInit() {
-    this.sub = this.router.params.subscribe(params => {
+    this.sub = await this.router.params.subscribe(params => {
       this.query = params['query'];
       if (this.query === '') {
         return;
       }
+      this.getSearchResults(this.query);
     });
-    this.results = await this.getSearchResults(this.query);
   }
 
-  async getSearchResults(query: string): Promise<any> {
-    return await this.http.get<Results[]>(URL, { params: PARAMS.set('searchQuery', query) }).toPromise();
+  async getSearchResults(query: string) {
+    await new Promise((resolve, reject) => {
+      this.http.get<Results[]>(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()
+        .then(results => {
+          this.results = results;
+          resolve();
+        },
+        response => {
+          console.log(response);
+          if (response.error === 'No data found for user') {
+          } else {
+            reject();
+          }
+        });
+    });
   }
 
   ngOnDestroy() {

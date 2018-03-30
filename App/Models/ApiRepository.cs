@@ -122,7 +122,12 @@ namespace App.Models
                             position = a.position
                         }).FirstOrDefault()
                     }).Take(limit).ToListAsync());
-                    return results.DistinctBy(i => i.cristinID).ToList();
+
+                    results.DistinctBy(i => i.cristinID).ToList();
+                    if (results.Count() <= 0) {
+                        return null;
+                    }
+                    return results;
                 }
                 return results;
             }
@@ -163,7 +168,9 @@ namespace App.Models
                     //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();
 
-                if (cloud.Count() <= 0) { return null; }
+                if (cloud.Count() <= 0) {
+                    return null;
+                }
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
@@ -207,6 +214,8 @@ namespace App.Models
 
                 var person = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefaultAsync();
+
+                if(person == null) { return null;  }
 
                 var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
