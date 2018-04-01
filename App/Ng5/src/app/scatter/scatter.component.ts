@@ -35,7 +35,7 @@ export class ScatterComponent implements OnInit {
         title: 'Publikasjoner vs kvalitet',
         hAxis: { title: 'Kvalitet' },
         vAxis: { title: 'Publikasjoner' },
-        legend: 'none'
+        legend: 'right'
       }
     };
   }

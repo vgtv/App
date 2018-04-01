@@ -1,14 +1,12 @@
 <app-topnav></app-topnav>
 
-<div class="wrapper">
-
-  <div class="container">
+  <!--<div class="container" id="bg">
     <div class="mx-auto">
       <ngbd-typeahead-http></ngbd-typeahead-http>
     </div>
-  </div>
+  </div>-->
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="userinfo">
     <div class="row">
       <div class="col">
         <app-userinfo></app-userinfo>
@@ -19,6 +17,14 @@
     </div>
   </div>
 
-</div>
+  <div class="container-fluid" id="scatter">
+
+    <app-scatter></app-scatter>
+  </div>
+
+
+  <div class="container-fluid" id="relevance">
+  </div>
+  <!--Relevante fagpersoner-->
 
 <router-outlet></router-outlet>
