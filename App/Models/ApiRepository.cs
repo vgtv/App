@@ -86,7 +86,7 @@ namespace App.Models
 
         public async Task<List<Results>> GetSearchResultsAsync(string searchQuery)
         {
-            if(searchQuery == "") { return null; }
+            if (searchQuery == "") { return null; }
 
             using (var db = new dbEntities())
             {
@@ -124,7 +124,8 @@ namespace App.Models
                     }).Take(limit).ToListAsync());
 
                     results.DistinctBy(i => i.cristinID).ToList();
-                    if (results.Count() <= 0) {
+                    if (results.Count() <= 0)
+                    {
                         return null;
                     }
                     return results;
@@ -168,19 +169,20 @@ namespace App.Models
                     //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();
 
-                if (cloud.Count() <= 0) {
+                if (cloud.Count() <= 0)
+                {
                     return null;
                 }
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
 
-                foreach (var obj in cloud)
+                foreach (var word in cloud)
                 {
-                    double forste = obj.weight - min;
+                    double forste = word.weight - min;
                     double andre = max - min;
                     double resultat = (forste / andre * 9) + 1;
-                    obj.weight = (int)resultat;
+                    word.weight = (int)resultat;
                 }
                 cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 2)]);
                 return cloud;
@@ -212,65 +214,58 @@ namespace App.Models
             {
                 var matchedUsers = new List<UserMatch>();
 
-                var person = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
+                var currentUser = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefaultAsync();
 
-                if(person == null) { return null;  }
-
-                var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
+                if (currentUser == null) { return null; }
+                var comparedUsers = await db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
-                double matchBonus = 0;
 
-                //Debug.WriteLine(cloud.Count());
-                //Debug.WriteLine(m.Count());
-
-                foreach (var user in cloud)
+                double fraction;
+                foreach (var comparedUser in comparedUsers)
                 {
-                    matchBonus = 0;
-                    foreach (var item in user.Items)
+                    fraction = 0;
+                    foreach (var compared in comparedUser.Items)
                     {
-                        foreach (var w in person.Items)
+                        foreach (var current in currentUser.Items)
                         {
-                            if (w.cristinID == item.cristinID) { continue; }
-
-                            if (w.key == item.key)
+                            if (current.cristinID == compared.cristinID) { continue; }
+                            if (current.key == compared.key)
                             {
-                                if (w.count > 1 && w.count <= 5)
+                                if (current.count > 1 && current.count <= 5)
                                 {
-                                    ++matchBonus;
+                                    ++fraction;
                                 }
-                                else if (w.count > 5 && w.count <= 10)
+                                else if (current.count > 5 && current.count <= 10)
                                 {
-                                    matchBonus += 2;
+                                    fraction += 2;
                                 }
-                                else if (w.count > 10 && w.count <= 15)
+                                else if (current.count > 10 && current.count <= 15)
                                 {
-                                    matchBonus += 3;
+                                    fraction += 3;
                                 }
-                                else if (w.count > 15 && w.count <= 20)
+                                else if (current.count > 15 && current.count <= 20)
                                 {
-                                    matchBonus += 4;
+                                    fraction += 4;
                                 }
-                                else if (w.count > 20)
+                                else if (current.count > 20)
                                 {
-                                    matchBonus += 6;
+                                    fraction += 6;
                                 }
                             }
                         }
                     }
-                    var percentage = ((int)(0.5f + ((100f * matchBonus) / user.Items.Count())));
-                    if (percentage > 50)
-                    {
-                        matchedUsers.Add(new UserMatch { cristinID = user.Key, similarities = percentage });
-                    }
+                    var similarities = ((int)(0.5f + ((100f * fraction) / comparedUser.Items.Count())));
+                    matchedUsers.Add(new UserMatch { cristinID = comparedUser.Key, similarities = similarities });
                 }
-                return matchedUsers;
+                return matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
             }
         }
 
         public async Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
         {
             List<UserMatch> matchedData = await GetUserData(cristinID);
+
             if (matchedData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
