@@ -357,8 +357,10 @@
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\scatter\ScatterPlot.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\affiliation.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\results.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.spec.ts" />

@@ -15,9 +15,9 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public async Task<HttpResponseMessage> Get(string cristinID)
+        public HttpResponseMessage Get(string cristinID)
         {
-            var searchResults = await dataAccess.GetResearcherDataAsync(cristinID);
+            var searchResults = dataAccess.GetResearcherInfo(cristinID);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");

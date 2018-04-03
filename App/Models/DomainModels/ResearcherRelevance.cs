@@ -7,7 +7,6 @@ namespace App.Models.DomainModels
 {
     public class ResearcherRelevance : Researcher
     {
-        public ResearcherRelevance(){}
-        public int relevance { get; set; }
+        public int similarities { get; set; }
     }
 }

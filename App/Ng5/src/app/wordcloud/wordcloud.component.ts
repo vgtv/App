@@ -23,6 +23,7 @@ export class WordcloudComponent {
   constructor(private http: HttpClient) { }
 
   async ngOnChanges() {
+    this.showCloud = false;
     await this.initializeCloud(this.input);
   }
 

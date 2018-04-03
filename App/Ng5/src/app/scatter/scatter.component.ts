@@ -4,7 +4,6 @@ import { ChartReadyEvent } from 'ng2-google-charts';
 import { ChartErrorEvent } from 'ng2-google-charts';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
-
 @Component({
   selector: 'app-scatter',
   templateUrl: './scatter.component.html',
@@ -19,6 +18,8 @@ export class ScatterComponent {
   constructor(private http: HttpClient) { }
 
   async ngOnChanges() {
+    console.log("Scatterplot changing");
+    this.showScatter = false;
     await this.initializeScatter(this.input);
   }
 
@@ -27,17 +28,24 @@ export class ScatterComponent {
       this.http.get<any[]>(this.apiURL + cristinID)
         .toPromise()
         .then(results => {
-
           this.scatterChartData = {
             dataTable: results,
             chartType: 'ScatterChart',
             options: {
               width: 1250, height: 850,
               backgroundColor: 'transparent',
-              title: 'Publikasjoner vs kvalitet',
-              hAxis: { title: 'Kvalitet' },
+              title: 'Publikasjoner vs. kvalitet',
+              hAxis: {
+                title: 'Kvalitet',
+                ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              },
               vAxis: { title: 'Publikasjoner' },
-              legend: 'none'
+              legend: 'none',
+              animation: {
+                startup: true,
+                duration: 5000,
+                easing: 'inAndOut'
+              }               
             }
           };
           this.showScatter = true;

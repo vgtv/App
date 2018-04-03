@@ -24,7 +24,6 @@ export class SearchService {
     if (term === '') {
       return of([]);
     }
-    console.log('OK');
     return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
       .map(response => response);
   }

@@ -317,7 +317,6 @@ var ProfileComponent = /** @class */ (function () {
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("Ja");
         this.sub = this.router.params.subscribe(function (params) {
             _this.cristinID = params['id'];
         });
@@ -343,14 +342,14 @@ exports.ProfileComponent = ProfileComponent;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <table class=\"table\">\r\n  <thead>\r\n    <tr>\r\n      <th scope=\"col\">#</th>\r\n      <th scope=\"col\">First</th>\r\n      <th scope=\"col\">Last</th>\r\n      <th scope=\"col\">Handle</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr>\r\n      <th scope=\"row\">1</th>\r\n      <td>Mark</td>\r\n      <td>Otto</td>\r\n      <td>@mdo</td>\r\n    </tr>\r\n    <tr>\r\n      <th scope=\"row\">2</th>\r\n      <td>Jacob</td>\r\n      <td>Thornton</td>\r\n      <td>@fat</td>\r\n    </tr>\r\n    <tr>\r\n      <th scope=\"row\">3</th>\r\n      <td>Larry</td>\r\n      <td>the Bird</td>\r\n      <td>@twitter</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n<p>\r\n  Her kommer det en liste med relevante forskere...\r\n</p>\r\n"
+module.exports = " <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [class.filled]=\"fill === 100\" [rate]=\"person.similarities\" class=\"star\" [readonly]=\"true\"></ngb-rating>\r\n\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/relevance/relevance.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".star {\n  font-size: 1.9rem;\n  color: darkorange; }\n\n.filled {\n  color: ghostwhite; }\n"
 
 /***/ }),
 
@@ -405,13 +404,53 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var RelevanceComponent = /** @class */ (function () {
-    function RelevanceComponent() {
+    function RelevanceComponent(http, config) {
+        this.http = http;
+        this.apiURL = 'api/apirelevance?cristinID=';
+        config.max = 5;
+        config.readonly = true;
     }
     RelevanceComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        console.log("Relevance changing");
+                        this.showTable = false;
+                        return [4 /*yield*/, this.initializeTable(this.input)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RelevanceComponent.prototype.initializeTable = function (cristinID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            _this.http.get(_this.apiURL + cristinID)
+                                .toPromise()
+                                .then(function (results) {
+                                _this.dataTable = results;
+                                _this.showTable = true;
+                                resolve();
+                            }, function (response) {
+                                if (response.error === 'No data found for user') {
+                                    _this.showTable = false;
+                                }
+                                else {
+                                    reject();
+                                }
+                            });
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };
@@ -423,9 +462,10 @@ var RelevanceComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-relevance',
             template: __webpack_require__("./src/app/relevance/relevance.component.html"),
-            styles: [__webpack_require__("./src/app/relevance/relevance.component.scss")]
+            styles: [__webpack_require__("./src/app/relevance/relevance.component.scss")],
+            providers: [ng_bootstrap_1.NgbRatingConfig]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [http_1.HttpClient, ng_bootstrap_1.NgbRatingConfig])
     ], RelevanceComponent);
     return RelevanceComponent;
 }());
@@ -509,7 +549,10 @@ var ScatterComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.initializeScatter(this.input)];
+                    case 0:
+                        console.log("Scatterplot changing");
+                        this.showScatter = false;
+                        return [4 /*yield*/, this.initializeScatter(this.input)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -532,10 +575,18 @@ var ScatterComponent = /** @class */ (function () {
                                     options: {
                                         width: 1250, height: 850,
                                         backgroundColor: 'transparent',
-                                        title: 'Publikasjoner vs kvalitet',
-                                        hAxis: { title: 'Kvalitet' },
+                                        title: 'Publikasjoner vs. kvalitet',
+                                        hAxis: {
+                                            title: 'Kvalitet',
+                                            ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                                        },
                                         vAxis: { title: 'Publikasjoner' },
-                                        legend: 'none'
+                                        legend: 'none',
+                                        animation: {
+                                            startup: true,
+                                            duration: 5000,
+                                            easing: 'inAndOut'
+                                        }
                                     }
                                 };
                                 _this.showScatter = true;
@@ -617,7 +668,6 @@ var SearchService = /** @class */ (function () {
         if (term === '') {
             return of_1.of([]);
         }
-        console.log('OK');
         return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
             .map(function (response) { return response; });
     };
@@ -902,7 +952,7 @@ exports.Researcher = Researcher;
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <h1>{{user.firstName}} {{user.lastName}}</h1>\r\n  <h3>{{user.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user.institution}}</p>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1>{{user.firstName}} {{user.lastName}}</h1>\r\n  <h3>{{user?.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -969,28 +1019,46 @@ var Researcher_1 = __webpack_require__("./src/app/userinfo/Researcher.ts");
 var UserinfoComponent = /** @class */ (function () {
     function UserinfoComponent(http) {
         this.http = http;
+        this.apiURL = 'api/apiuser?cristinID=';
     }
     UserinfoComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        this.user = new Researcher_1.Researcher();
-                        _a = this;
-                        return [4 /*yield*/, this.getUserData(this.input)];
+                        console.log("Info changing");
+                        this.showInfo = false;
+                        return [4 /*yield*/, this.initializeUserInfo(this.input)];
                     case 1:
-                        _a.user = _b.sent();
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    UserinfoComponent.prototype.getUserData = function (cristinID) {
+    UserinfoComponent.prototype.initializeUserInfo = function (cristinID) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get('api/apiuser?cristinID=' + cristinID).toPromise()];
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            _this.http.get(_this.apiURL + cristinID)
+                                .toPromise()
+                                .then(function (results) {
+                                _this.user = new Researcher_1.Researcher();
+                                _this.user = results;
+                                _this.showInfo = true;
+                                resolve();
+                            }, function (response) {
+                                if (response.error === 'No data found for user') {
+                                    _this.showInfo = false;
+                                }
+                                else {
+                                    _this.showInfo = false;
+                                    reject();
+                                }
+                            });
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -1095,7 +1163,9 @@ var WordcloudComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.initializeCloud(this.input)];
+                    case 0:
+                        this.showCloud = false;
+                        return [4 /*yield*/, this.initializeCloud(this.input)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];

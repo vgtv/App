@@ -1,33 +1,24 @@
-  <table class="table">
+ <table class="table table-hover" *ngIf="showTable">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th>Relevans</th>
+      <th>Forsker</th>
+      <th>Posisjon</th>
+      <th>Institusjon</th>
+      <th>Institutt</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let person of dataTable">
+      <td>
+        <ngb-rating [class.filled]="fill === 100" [rate]="person.similarities" class="star" [readonly]="true"></ngb-rating>
+
+      </td>
+      <td>{{person.firstName}} {{person.lastName}}</td>
+      <td>{{person?.position}}</td>
+      <td>{{person?.institution}}</td>
+      <td>{{person?.institute}}</td>
     </tr>
   </tbody>
 </table>
-<p>
-  Her kommer det en liste med relevante forskere...
-</p>
+
