@@ -15,21 +15,6 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        [Obsolete("Get is deprecated, please use Get(string searchQuery) instead.")]
-        public async Task<HttpResponseMessage> Get()
-        {
-            var searchResults = await dataAccess.GetAllUsersAsync();
-
-            var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(searchResults);
-
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
-                StatusCode = HttpStatusCode.OK
-            };
-        }   
-
         public async Task<HttpResponseMessage> Get(string searchQuery)
         {
             var searchResults = await dataAccess.GetUsersAsync(searchQuery);

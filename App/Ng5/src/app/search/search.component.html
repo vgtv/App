@@ -1,11 +1,13 @@
-<form class="form-inline" [class.has-danger]="searchFailed">
-  <input type="text" class="form-control form-control-lg mr-sm-2 col-md"
-         [(ngModel)]="model" [ngbTypeahead]="search"
-         placeholder="search"
+<div class="form-group form-inline">
+  <input id="typeahead-http" type="text" class="form-control form-control-lg col-md-8"
+         [class.is-invalid]="searchFailed"
+         [(ngModel)]="model"
+         [ngbTypeahead]="search"
+         placeholder="Søk etter en norsk forsker"
          [resultFormatter]="formatMatches"
          [inputFormatter]="formatMatches" />
-  <span *ngIf="searching">searching...</span>
-  <div class="form-control-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-</form>
-
-<pre>{{ model | json }}</pre>
+  <span *ngIf="searching">...</span>
+  <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+  <button class="btn btn-lg btn-outline-warning my-2 my-sm-0" type="submit" (click)="onSearch()" (keyup.enter)="onSearch()">Søk</button>
+  <hr>
+</div>

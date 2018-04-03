@@ -1,3 +1,31 @@
-<p>
-  relevance works!
-</p>
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+  </span>
+</ng-template>
+
+
+ <table class="table table-hover" *ngIf="showTable">
+  <thead>
+    <tr>
+      <th>Relevans</th>
+      <th>Forsker</th>
+      <th>Posisjon</th>
+      <th>Institusjon</th>
+      <th>Institutt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of dataTable">
+      <td>
+        <ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating>
+        {{person.similarities}}
+      </td>
+      <td>{{person.firstName}} {{person.lastName}}</td>
+      <td>{{person?.position}}</td>
+      <td>{{person?.institution}}</td>
+      <td>{{person?.institute}}</td>
+    </tr>
+  </tbody>
+</table>
+

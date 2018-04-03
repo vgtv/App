@@ -1,7 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -16,7 +17,7 @@ const URL = 'api/apisearch?';
 const PARAMS = new HttpParams();
 
 @Injectable()
-export class SearchComponent {
+export class SearchService {
   constructor(private http: HttpClient) { }
 
   public search(term: string) {
@@ -25,26 +26,40 @@ export class SearchComponent {
     }
     return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
       .map(response => response);
-    // response endret fra response[0] til repsonse. Wikipedia gir opprinnelig egentlig et array, men
-    // vi får et array med objekter som repsons
   }
 }
 
 @Component({
   selector: 'ngbd-typeahead-http',
   templateUrl: './search.component.html',
-  providers: [SearchComponent],
-  styles: [`.form-control { width: 300px; display: inline; }`]
+  providers: [SearchService]
 })
-export class NgbdTypeaheadHttp {
+
+export class NgbdTypeaheadHttp implements OnInit {
   model: any;
   searching = false;
   searchFailed = false;
+  showSearchBar = true;
+
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor(private _service: SearchComponent) { }
+  constructor(private _service: SearchService, private router: Router) {}
+
+  ngOnInit(): void {}
+
+  onSearch() {
+    if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
+      if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
+        this.showSearchBar = false;
+        this.router.navigate(['/profile', this.model.cristinID]);
+      } else {
+        this.showSearchBar = false;
+        this.router.navigate(['/search', this.model]);
+      }
+    }
+  }
+
   formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
-  // add formatches her
 
   search = (text$: Observable<string>) =>
     text$

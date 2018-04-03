@@ -1,20 +1,17 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3">
   <div class="container-fluid">
     <ul class="nav navbar-nav d-flex justify-content-start">
-      <li class="navbar-brand" href="#">AKADEMIKUS</li>
+      <li class="navbar-brand"   (click)="navigateHome()">AKADEMIKUS</li>
     </ul>
 
-      <div class="nav navbar-nav d-flex justify-content-center">
-        <form class="form-inline">
-          <!----<input class="form-control form-control-lg mr-sm-2" type="search" placeholder="Søk etter norsk forsker" aria-label="Search">
-  <ngbd-typeahead-http></ngbd-typeahead-http>
-  <button class="btn btn-lg btn-outline-warning my-2 my-sm-0" type="submit">Søk</button>-->
-        </form>
-        </div>
-        <ul class="navbar-nav d-flex justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Om Tjenesten</a>
-          </li>
-        </ul>
-      </div>
+    <div class="nav navbar-nav d-flex justify-content-center" *ngIf="default">
+      <ngbd-typeahead-http></ngbd-typeahead-http>
+    </div>
+
+    <ul class="navbar-nav d-flex justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link"  (click)="navigateAbout()">Om Tjenesten</a>
+      </li>
+    </ul>
+  </div>
 </nav>
