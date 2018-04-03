@@ -20,6 +20,8 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { SearchresultsComponent } from './searchresults/searchresults.component';
 import { RelevanceComponent } from './relevance/relevance.component';
 
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { RelevanceComponent } from './relevance/relevance.component';
     TagCloudModule,
     HttpClientModule,
     Ng2GoogleChartsModule,
-    FormsModule
+    FormsModule,
+    LoadingBarHttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

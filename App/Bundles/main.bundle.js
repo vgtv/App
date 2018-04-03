@@ -114,7 +114,7 @@ var routingComponents = [__WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-topnav></app-topnav>\r\n\r\n<div class=\"wrapper\">\r\n\r\n  <div class=\"container\">\r\n    <div class=\"mx-auto\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n      <div class=\"col\">\r\n        <app-userinfo></app-userinfo>\r\n      </div>\r\n      <div class=\"col\">\r\n        <app-wordcloud></app-wordcloud>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<app-topnav></app-topnav>\r\n\r\n<div class=\"wrapper\">\r\n\r\n  <div class=\"container\">\r\n    <div class=\"mx-auto\">\r\n     <ngbd-typeahead-http></ngbd-typeahead-http> \r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n      <div class=\"col\">\r\n        <app-userinfo></app-userinfo>\r\n      </div>\r\n      <div class=\"col\">\r\n        <app-wordcloud><ngx-loading-bar></ngx-loading-bar></app-wordcloud>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -177,12 +177,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userinfo_userinfo_component__ = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__searchresults_searchresults_component__ = __webpack_require__("./src/app/searchresults/searchresults.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__relevance_relevance_component__ = __webpack_require__("./src/app/relevance/relevance.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ngx_loading_bar_http_client__ = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -220,9 +222,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_7__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_11_angular_tag_cloud_module__["a" /* TagCloudModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_6_ng2_google_charts__["a" /* Ng2GoogleChartsModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_16__ngx_loading_bar_http_client__["a" /* LoadingBarHttpClientModule */]
             ],
             providers: [],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]]
@@ -288,7 +291,7 @@ var HomeComponent = /** @class */ (function () {
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  relevance works!\n</p>\n"
+module.exports = "<p>\r\n  relevance works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -460,7 +463,7 @@ var ScatterComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/scatter/scatter.component.html"),
             styles: [__webpack_require__("./src/app/scatter/scatter.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], ScatterComponent);
     return ScatterComponent;
 }());
@@ -514,7 +517,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var URL = 'api/apisearch?';
-var PARAMS = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]();
+var PARAMS = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpParams */]();
 var SearchComponent = /** @class */ (function () {
     function SearchComponent(http) {
         this.http = http;
@@ -530,7 +533,7 @@ var SearchComponent = /** @class */ (function () {
     };
     SearchComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], SearchComponent);
     return SearchComponent;
 }());
@@ -580,7 +583,7 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  searchresults works!\n</p>\n"
+module.exports = "<p>\r\n  searchresults works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -797,7 +800,7 @@ var UserinfoComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/userinfo/userinfo.component.html"),
             styles: [__webpack_require__("./src/app/userinfo/userinfo.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], UserinfoComponent);
     return UserinfoComponent;
 }());
@@ -915,7 +918,7 @@ var WordcloudComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/wordcloud/wordcloud.component.html"),
             styles: [__webpack_require__("./src/app/wordcloud/wordcloud.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], WordcloudComponent);
     return WordcloudComponent;
 }());
