@@ -342,14 +342,14 @@ exports.ProfileComponent = ProfileComponent;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = " <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [class.filled]=\"fill === 100\" [rate]=\"person.similarities\" class=\"star\" [readonly]=\"true\"></ngb-rating>\r\n\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
+module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/relevance/relevance.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".star {\n  font-size: 1.9rem;\n  color: darkorange; }\n\n.filled {\n  color: ghostwhite; }\n"
+module.exports = ".star {\n  position: relative;\n  display: inline-block;\n  font-size: 2rem;\n  color: #d3d3d3; }\n\n.full {\n  color: darkorange; }\n\n.half {\n  position: absolute;\n  display: inline-block;\n  overflow: hidden;\n  color: darkorange; }\n"
 
 /***/ }),
 
@@ -418,7 +418,7 @@ var RelevanceComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Relevance changing");
+                        console.log('Relevance changing..');
                         this.showTable = false;
                         return [4 /*yield*/, this.initializeTable(this.input)];
                     case 1:
@@ -1086,7 +1086,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-right\">Basert på <code>{{count}}</code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1153,6 +1153,7 @@ var WordcloudComponent = /** @class */ (function () {
     function WordcloudComponent(http) {
         this.http = http;
         this.apiURL = 'api/apiwordcloud?cristinID=';
+        this.apiURL2 = 'api/apilegend?cristinID=';
         this.options = {
             width: 600,
             height: 400,
@@ -1183,6 +1184,7 @@ var WordcloudComponent = /** @class */ (function () {
                                 .toPromise()
                                 .then(function (results) {
                                 _this.data = results;
+                                _this.getLegend(cristinID);
                                 _this.showCloud = true;
                                 resolve();
                             }, function (response) {
@@ -1197,6 +1199,12 @@ var WordcloudComponent = /** @class */ (function () {
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
+        });
+    };
+    WordcloudComponent.prototype.getLegend = function (cristinID) {
+        var _this = this;
+        this.http.get(this.apiURL2 + cristinID).subscribe(function (results) {
+            return _this.count = results;
         });
     };
     __decorate([

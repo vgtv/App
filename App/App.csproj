@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServerRouteConstraint.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiLegendController.cs" />
     <Compile Include="Controllers\ApiSearchFullTextController.cs" />
     <Compile Include="Controllers\ApiRelevanceController.cs" />
     <Compile Include="Controllers\ApiScatterPlotController.cs" />

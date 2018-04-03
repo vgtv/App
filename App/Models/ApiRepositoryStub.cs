@@ -9,6 +9,11 @@ namespace App.Models
 {
     public class ApiRepositoryStub : iApiRepository
     {
+        public short? GetLegend(string cristinID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Researcher GetResearcherInfo(string cristinID)
         {
             throw new NotImplementedException();

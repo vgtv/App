@@ -21,7 +21,7 @@ export class RelevanceComponent {
   }
 
   async ngOnChanges() {
-    console.log("Relevance changing");
+    console.log('Relevance changing..');
     this.showTable = false;
     await this.initializeTable(this.input);
   }

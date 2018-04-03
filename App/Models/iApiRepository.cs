@@ -9,6 +9,7 @@ namespace App.Models
 {
     public interface iApiRepository
     {
+        short? GetLegend(string cristinID);
         Task<List<Results>> GetSearchResultsAsync(string searchQuery);
         Task<List<User>> GetUsersAsync(string searchQuery);
         Researcher GetResearcherInfo(string cristinID);

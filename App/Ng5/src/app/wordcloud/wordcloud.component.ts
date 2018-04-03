@@ -12,7 +12,9 @@ export class WordcloudComponent {
   @Input() input: string;
   data: Array<CloudData>;
   showCloud: boolean;
+  count: string;
   apiURL = 'api/apiwordcloud?cristinID=';
+  apiURL2 = 'api/apilegend?cristinID=';
 
   options: CloudOptions = {
     width: 600,
@@ -33,6 +35,7 @@ export class WordcloudComponent {
         .toPromise()
         .then(results => {
           this.data = results;
+          this.getLegend(cristinID);
           this.showCloud = true;
           resolve();
         },
@@ -44,6 +47,12 @@ export class WordcloudComponent {
           }
         });
     });
+  }
+
+  getLegend(cristinID: string) {
+    this.http.get<string>(this.apiURL2 + cristinID).subscribe(results =>
+      this.count = results
+    );
   }
 }
 

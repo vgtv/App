@@ -393,7 +393,7 @@ namespace App.Models
                             default: ++x; break;
                         }
                     }
-                    matchedUsers.Add(new UserMatch { cristinID = compared.Key, similarities = (int)x });
+                    matchedUsers.Add(new UserMatch { cristinID = compared.Key, similarities = x });
                 }
                 return matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
             }
@@ -422,7 +422,19 @@ namespace App.Models
                 }
                 foreach (var user in userData)
                 {
-                    if (counter > 10) { return researcherList; }
+                    if (counter > 10) {
+
+                        double max1 = userData.Max(e => e.similarities);
+                        double min1 = userData.Min(e => e.similarities);
+
+                        foreach(var i in researcherList)
+                        {
+                            i.similarities = ((i.similarities - min1) / (max1 - min1) * 5) + 4;
+                        }
+                        return researcherList;
+
+
+                    }
                     if ((db.forfattere.Where(a => !currentAuthor.Contains(a)).FirstOrDefault()) != null)
                     {
                         var researcher = GetResearcherInfo(user.cristinID);
@@ -439,13 +451,28 @@ namespace App.Models
                                     institute = researcher.institute ?? "Ukjent",
                                     institution = researcher.institution ?? "Ukjent",
                                     position = researcher.position ?? "Ukjent",
+
                                     similarities = user.similarities
                                 });
                             }
                         }
                     }
                 }
+                double max = userData.Max(e => e.similarities);
+                double min = userData.Min(e => e.similarities);
+                foreach (var i in researcherList)
+                {
+                    i.similarities = ((i.similarities - min) / (max - min) * 5) + 4;
+                }
                 return researcherList;
+            }
+        }
+
+        public short? GetLegend(string cristinID)
+        {
+            using(var db = new dbEntities())
+            {
+                return db.titles.Where(e => e.cristinID == cristinID).Select(e=> e.titlesCount).FirstOrDefault();
             }
         }
 
