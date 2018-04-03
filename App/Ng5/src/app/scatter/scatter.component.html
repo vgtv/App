@@ -1,4 +1,10 @@
-
-<div *ngIf="showScatter">
-  <google-chart [data]="scatterChartData"></google-chart>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h1><strong>Forskningsmiljø</strong></h1>
+    </div>
+  </div>
 </div>
+  <div *ngIf="showScatter">
+    <google-chart [data]="scatterChartData"></google-chart>
+  </div>
