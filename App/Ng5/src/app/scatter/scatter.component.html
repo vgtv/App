@@ -1,11 +1,14 @@
+<div class="row">
+  <div class="col text-center">
+    <h1><strong>Forskningsmiljø</strong></h1>
+  </div>
+</div>
+
 <div *ngIf="showProgressBar">
   <mat-progress-bar mode="determinate" [value]="loader.progress$|async"></mat-progress-bar>
 </div>
+
 <div class="container" *ngIf="showScatter">
-  <div class="row">
-    <div class="col text-center">
-      <h1><strong>Forskningsmiljø</strong></h1>
-    </div>
-  </div>
+ 
   <google-chart [data]="scatterChartData"></google-chart>
 </div>
