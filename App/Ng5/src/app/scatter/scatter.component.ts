@@ -8,6 +8,7 @@ import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
+
 @Component({
   selector: 'app-scatter',
   templateUrl: './scatter.component.html',
