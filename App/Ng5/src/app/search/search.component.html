@@ -5,8 +5,10 @@
          [ngbTypeahead]="search"
          placeholder="Søk etter en norsk forsker"
          [resultFormatter]="formatMatches"
-         [inputFormatter]="formatMatches" />
-  <span *ngIf="searching">@Søkehjul@</span>
+         [inputFormatter]="formatMatches"
+         />
+  <span *ngIf="searching">Søker..
+  </span>
   <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded</div>
   <button class="btn btn-lg btn-outline-warning my-2 my-sm-0" type="submit"
           (click)="onSearch()"

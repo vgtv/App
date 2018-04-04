@@ -13,7 +13,7 @@ namespace App.Controllers
 {
     public class ApiScatterPlotController : ApiController
     {
-        private readonly ApiRepository dataAccess = new ApiRepository();
+        private readonly iApiRepository dataAccess = new ApiRepository();
 
         public async Task<HttpResponseMessage> Get(string cristinID)
         {
