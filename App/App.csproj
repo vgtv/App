@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServerRouteConstraint.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiLegendController.cs" />
     <Compile Include="Controllers\ApiSearchFullTextController.cs" />
     <Compile Include="Controllers\ApiRelevanceController.cs" />
     <Compile Include="Controllers\ApiScatterPlotController.cs" />
@@ -357,8 +358,10 @@
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\scatter\ScatterPlot.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\affiliation.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\results.ts" />
     <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.spec.ts" />

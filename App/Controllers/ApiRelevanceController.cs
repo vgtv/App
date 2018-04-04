@@ -12,13 +12,13 @@ using System.Data.Entity;
 
 namespace App.Controllers
 {
-    public class ApiRelevanceControtvller : ApiController
+    public class ApiRelevanceController : ApiController
     {
-        private readonly ApiRepository dataAccess = new ApiRepository();
+        private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public HttpResponseMessage Get(string cristinID)
+        public async Task<HttpResponseMessage> Get(string cristinID)
         {
-            var searchResults = dataAccess.GetResearcherRelevance(cristinID);
+            var searchResults = await dataAccess.GetResearcherRelevance(cristinID);
 
             if (searchResults == null)
             {

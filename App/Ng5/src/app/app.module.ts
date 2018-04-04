@@ -19,6 +19,8 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { RelevanceComponent } from './relevance/relevance.component';
 import { TopnavComponent } from './topnav/topnav.component';
 
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { TopnavComponent } from './topnav/topnav.component';
     TagCloudModule,
     HttpClientModule,
     Ng2GoogleChartsModule,
-    FormsModule
+    FormsModule,
+    LoadingBarHttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

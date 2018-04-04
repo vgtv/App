@@ -9,17 +9,36 @@ import { Researcher } from './Researcher';
 })
 export class UserinfoComponent {
   @Input() input: string;
-  public user: Researcher;
+  user: Researcher;
+  showInfo: boolean;
+  apiURL = 'api/apiuser?cristinID=';
 
   constructor(private http: HttpClient) {}
 
   async ngOnChanges() {
-    this.user = new Researcher();
-    this.user = await this.getUserData(this.input);
+    console.log("Info changing");
+    this.showInfo = false;
+    await this.initializeUserInfo(this.input);
   }
 
-  public async getUserData(cristinID: string): Promise<any> {
-    return await
-      this.http.get<any[]>('api/apiuser?cristinID=' + cristinID).toPromise();
+  async initializeUserInfo(cristinID: string): Promise<any> {
+    return await new Promise((resolve, reject) => {
+      this.http.get<Researcher>(this.apiURL + cristinID)
+        .toPromise()
+        .then(results => {
+          this.user = new Researcher();
+          this.user = results;
+          this.showInfo = true;
+          resolve();
+        },
+        response => {
+          if (response.error === 'No data found for user') {
+            this.showInfo = false;
+          } else {
+            this.showInfo = false;
+            reject();
+          }
+        });
+    });
   }
 }

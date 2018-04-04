@@ -14,18 +14,13 @@ namespace App.Models
     
     public partial class person
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public person()
-        {
-            this.wordcloud = new HashSet<wordcloud>();
-        }
-    
+   
         public string cristinID { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
     
         public virtual titles titles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+      
         public virtual ICollection<wordcloud> wordcloud { get; set; }
         public virtual rank rank { get; set; }
     }
