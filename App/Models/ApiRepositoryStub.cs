@@ -9,17 +9,27 @@ namespace App.Models
 {
     public class ApiRepositoryStub : iApiRepository
     {
-        public Task<List<User>> GetAllUsersAsync()
+        public short? GetLegend(string cristinID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Researcher> GetResearcherDataAsync(string cristinID)
+        public Researcher GetResearcherInfo(string cristinID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
         {
             throw new NotImplementedException();
         }
 
         public Task<ScatterPlot> GetScatterData(string cristinID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Results>> GetSearchResultsAsync(string searchQuery)
         {
             throw new NotImplementedException();
         }

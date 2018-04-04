@@ -145,6 +145,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServerRouteConstraint.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiLegendController.cs" />
+    <Compile Include="Controllers\ApiSearchFullTextController.cs" />
     <Compile Include="Controllers\ApiRelevanceController.cs" />
     <Compile Include="Controllers\ApiScatterPlotController.cs" />
     <Compile Include="Controllers\ApiSearchController.cs" />
@@ -154,70 +156,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2007.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2008.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2009.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2010.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2011.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2012.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2013.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2014.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2015.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarliginstitusjonsranking2016.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2007.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2008.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2009.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2010.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2011.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2012.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2013.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2014.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2015.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aarligranking2016.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ApiRepositoryStub.cs" />
     <Compile Include="Models\basewords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\Affiliation.cs" />
     <Compile Include="Models\DomainModels\c.cs" />
     <Compile Include="Models\DomainModels\Cloud.cs" />
     <Compile Include="Models\DomainModels\cols.cs" />
@@ -240,6 +183,7 @@
     <Compile Include="Models\DomainModels\iUser.cs" />
     <Compile Include="Models\DomainModels\Researcher.cs" />
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
+    <Compile Include="Models\DomainModels\Results.cs" />
     <Compile Include="Models\eierskap.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -294,6 +238,7 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,9 +259,13 @@
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
+    <Content Include="Ng5\src\app\profile\profile.component.html" />
+    <Content Include="Ng5\src\app\relevance\relevance.component.html" />
     <Content Include="Ng5\src\app\scatter\scatter.component.html" />
+    <Content Include="Ng5\src\app\searchresults\searchresults.component.html" />
     <Content Include="Ng5\src\app\search\search.component.html" />
     <Content Include="Ng5\src\app\topnav\topnav.component.html" />
+    <Content Include="Ng5\src\app\userinfo\userinfo.component.html" />
     <Content Include="Ng5\src\app\wordcloud\wordcloud.component.html" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
@@ -350,6 +299,10 @@
     <Content Include="Ng5\src\app\topnav\topnav.component.scss" />
     <Content Include="Ng5\src\app\scatter\scatter.component.scss" />
     <Content Include="Ng5\src\app\wordcloud\wordcloud.component.scss" />
+    <Content Include="Ng5\src\app\userinfo\userinfo.component.scss" />
+    <Content Include="Ng5\src\app\searchresults\searchresults.component.scss" />
+    <Content Include="Ng5\src\app\relevance\relevance.component.scss" />
+    <Content Include="Ng5\src\app\profile\profile.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -377,7 +330,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Ng5\node_modules\" />
+    <Folder Include="Ng5\node_modules\npm\html\static\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -401,13 +354,26 @@
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\relevance\relevance.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\scatter\scatter.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\scatter\ScatterPlot.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\affiliation.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\results.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\searchresults\searchresults.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\search.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\search\user.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\topnav\topnav.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\Researcher.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\userinfo.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\userinfo\userinfo.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\wordcloud\wordcloud.component.ts" />
     <TypeScriptCompile Include="Ng5\src\environments\environment.prod.ts" />

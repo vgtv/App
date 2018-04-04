@@ -1,0 +1,7 @@
+<div class="container" *ngIf="showInfo">
+  <h1>{{user.firstName}} {{user.lastName}}</h1>
+  <h3>{{user?.position}}</h3>
+  <hr>
+  <p><strong>Institutt:</strong> {{user?.institute}}</p>
+  <p><strong>Institusjon:</strong> {{user?.institution}}</p>
+</div>

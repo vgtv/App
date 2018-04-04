@@ -1,11 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
-import { Persons } from './user';
-import { Http, Response } from "@angular/http";
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { Router } from '@angular/router';
 
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -16,50 +13,57 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
-const WIKI_URL = 'api/ApiSearch';
-const PARAMS = new HttpParams({
-  fromObject: {
-    action: 'query',
-    format: 'xml',
-    origin: 'firstname',
-    titles: 'firstname'
-  }
-});
+const URL = 'api/apisearch?';
+const PARAMS = new HttpParams();
 
 @Injectable()
-export class SearchComponent {
+export class SearchService {
   constructor(private http: HttpClient) { }
 
-  search(term: string) {
+  public search(term: string) {
     if (term === '') {
       return of([]);
     }
-      
-    return this.http
-      .get(WIKI_URL, { params: PARAMS.set('searchQuery', term) })
-      .map(response => response[0]);
+    return this.http.get(URL, { params: PARAMS.set('searchQuery', term) })
+      .map(response => response);
   }
 }
 
 @Component({
-  selector: 'app-search',
+  selector: 'ngbd-typeahead-http',
   templateUrl: './search.component.html',
-  providers: [SearchComponent],
-  styles: [`.form-control { width: 300px; display: inline; }`]
+  providers: [SearchService]
 })
-export class NgbdTypeaheadHttp {
-  public Data: Array<Persons>;
-  public DataDone = false;
+
+export class NgbdTypeaheadHttp implements OnInit {
   model: any;
   searching = false;
   searchFailed = false;
+  showSearchBar = true;
+
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor(private _service: SearchComponent, private http: HttpClient) { }
+  constructor(private _service: SearchService, private router: Router) {}
+
+  ngOnInit(): void {}
+
+  onSearch() {
+    if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
+      if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
+        this.showSearchBar = false;
+        this.router.navigate(['/profile', this.model.cristinID]);
+      } else {
+        this.showSearchBar = false;
+        this.router.navigate(['/search', this.model]);
+      }
+    }
+  }
+
+  formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
 
   search = (text$: Observable<string>) =>
     text$
-      .debounceTime(3000)
+      .debounceTime(300)
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>
@@ -70,21 +74,5 @@ export class NgbdTypeaheadHttp {
             return of([]);
           }))
       .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed);
-
-  getData() {
-    this.http.get<Persons[]>("api/ApiSearch/")
-      .subscribe(
-      JsonData => {
-        this.Data = [];
-        if (JsonData) {
-          this.Data = JsonData;
-          console.log(this.Data);
-          this.DataDone = true;
-        };
-      },
-      error => alert(error + "1"),
-      () => console.log("ferdig get-api/alleSporsmaal")
-      );
-  };
+      .merge(this.hideSearchingWhenUnsubscribed)
 }

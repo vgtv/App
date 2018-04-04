@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
   styleUrls: ['./topnav.component.scss']
 })
-export class TopnavComponent implements OnInit {
+export class TopnavComponent {
+  @Input() default: boolean;
 
-  constructor() { }
+  constructor(private router: Router) {
 
-  ngOnInit() {
   }
 
+  navigateHome() {
+    this.router.navigate(['']);
+  }
+
+  navigateAbout() {
+    this.router.navigate(['about']);
+  }
 }

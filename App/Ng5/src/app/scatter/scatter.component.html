@@ -1,1 +1,4 @@
-<google-chart [data]="scatterChartData"></google-chart>
+
+<div *ngIf="showScatter">
+  <google-chart [data]="scatterChartData"></google-chart>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,29 +8,53 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./wordcloud.component.scss']
 })
 
-
-export class WordcloudComponent implements OnInit {
-  data: Array<CloudData> = [];
-
-  constructor(private http: HttpClient) {
-  }
-
-  async ngOnInit() {
-    this.data = await this.getWordCloud("63753");
-  }
-
-  async getWordCloud(cristinID: string): Promise<any> {
-    return await this.
-      http.get<any[]>("api/apiwordcloud?cristinID=" + cristinID).toPromise();
-  }
-
+export class WordcloudComponent {
+  @Input() input: string;
+  data: Array<CloudData>;
+  showCloud: boolean;
+  count: string;
+  apiURL = 'api/apiwordcloud?cristinID=';
+  apiURL2 = 'api/apilegend?cristinID=';
 
   options: CloudOptions = {
-      width: 600,
-      height: 400,
-      overflow: false,
-    }
+    width: 600,
+    height: 400,
+    overflow: false
+  };
+
+  constructor(private http: HttpClient) { }
+
+  async ngOnChanges() {
+    this.showCloud = false;
+    await this.initializeCloud(this.input);
   }
+
+  async initializeCloud(cristinID: string): Promise<any> {
+    return await new Promise((resolve, reject) => {
+      this.http.get<any[]>(this.apiURL + cristinID)
+        .toPromise()
+        .then(results => {
+          this.data = results;
+          this.getLegend(cristinID);
+          this.showCloud = true;
+          resolve();
+        },
+        response => {
+          if (response.error === 'No data found for user') {
+            this.showCloud = false;
+          } else {
+            reject();
+          }
+        });
+    });
+  }
+
+  getLegend(cristinID: string) {
+    this.http.get<string>(this.apiURL2 + cristinID).subscribe(results =>
+      this.count = results
+    );
+  }
+}
 
 
 

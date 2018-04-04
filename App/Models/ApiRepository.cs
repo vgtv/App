@@ -11,6 +11,8 @@ using System.Data.Entity;
 
 namespace App.Models
 {
+
+
     public class ApiRepository : iApiRepository
     {
         /*
@@ -38,6 +40,7 @@ namespace App.Models
 
                 if (results.Count() < 10)
                 {
+                    int limit = 10 - results.Count();
                     results.AddRange(await db.person.Where(p =>
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
                     .Select(p => new User
@@ -45,42 +48,86 @@ namespace App.Models
                         cristinID = p.cristinID,
                         firstName = p.firstname,
                         lastName = p.lastname
-                    }).ToListAsync());
-                    //return results.ToList();
-
+                    }).Take(limit).ToListAsync());
                     return results.DistinctBy(i => i.cristinID).ToList();
                 }
                 return results;
             }
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public Researcher GetResearcherInfo(string cristinID)
         {
             using (var db = new dbEntities())
             {
-                return await db.person.Select(u => new User
-                { cristinID = u.cristinID, firstName = u.firstname, lastName = u.lastname }).ToListAsync();
-            }
-        }
-
-        public async Task<Researcher> GetResearcherDataAsync(string cristinID)
-        {
-            using (var db = new dbEntities())
-            {
-                Researcher researcher = await db.person.Where(p => p.cristinID == cristinID)
+                Researcher researcher = db.person.Where(p => p.cristinID == cristinID)
                     .Select(r => new Researcher
                     {
                         firstName = r.firstname,
                         lastName = r.lastname
-                    }).FirstOrDefaultAsync();
+                    }).FirstOrDefault();
 
-                var assosciation = await db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefaultAsync();
-                researcher.institution = assosciation.institusjon;
-                researcher.institute = assosciation.institutt;
-                researcher.institute = assosciation.position;
+                if (researcher == null) { return null; }
+ 
+                var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
+                if (assosciations == null) { return null; }
+        
+                researcher.institution = assosciations.institusjon ?? "Ukjent";
+                researcher.institute = assosciations.institutt ?? "Ukjent";
+                researcher.position = assosciations.position ?? "Ukjent";
                 return researcher;
             }
         }
+
+        public async Task<List<Results>> GetSearchResultsAsync(string searchQuery)
+        {
+            if (searchQuery == "") { return null; }
+
+            using (var db = new dbEntities())
+            {
+                var results = await db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                || p.lastname.StartsWith(searchQuery)).Select(p => new Results
+                {
+                    cristinID = p.cristinID,
+                    firstName = p.firstname,
+                    lastName = p.lastname,
+                    affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
+                    {
+                        institute = a.institutt,
+                        institution = a.institusjon,
+                        position = a.position
+                    }
+                    ).FirstOrDefault()
+                }).ToListAsync();
+
+                if (results.Count() < 10)
+                {
+                    int limit = 10 - results.Count();
+                    results.AddRange(await db.person.Where(p =>
+                    (p.firstname + " " + p.lastname).Contains(searchQuery))
+                    .Select(p => new Results
+                    {
+                        cristinID = p.cristinID,
+                        firstName = p.firstname,
+                        lastName = p.lastname,
+                        affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
+                        {
+                            institute = a.institutt,
+                            institution = a.institusjon,
+                            position = a.position
+                        }).FirstOrDefault()
+                    }).Take(limit).ToListAsync());
+
+                    results.DistinctBy(i => i.cristinID).ToList();
+                    if (results.Count() <= 0)
+                    {
+                        return null;
+                    }
+                    return results;
+                }
+                return results;
+            }
+        }
+
 
 
         /*
@@ -108,26 +155,27 @@ namespace App.Models
                 {
                     weight = (int)wc.count,
                     text = db.basewords.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.baseword).FirstOrDefault() != null ?
-                   db.basewords.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.baseword).FirstOrDefault() :
-                    db.words.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.word).FirstOrDefault()
+                    .Select(bw => bw.baseword).FirstOrDefault() != null ? db.basewords.Where(bw => bw.key == wc.key)
+                                                                    .Select(bw => bw.baseword).FirstOrDefault() :
+                                                                    db.words.Where(bw => bw.key == wc.key)
+                                                                    .Select(bw => bw.word).FirstOrDefault()
 
-                    //text = db.words.Where(bw => bw.key == wc.key).Select(bw => bw.word).FirstOrDefault()
                 }).ToListAsync();
 
-
+                if (cloud.Count() <= 0)
+                {
+                    return null;
+                }
 
                 int max = cloud.Max(c => c.weight);
                 int min = cloud.Min(c => c.weight);
 
-                foreach (var obj in cloud)
+                foreach (var word in cloud)
                 {
-                    double forste = obj.weight - min;
-                    double andre = max - min;
-                    double resultat = (forste / andre * 9) + 1;
-                    obj.weight = (int)resultat;
+                    double numerator = word.weight - min;
+                    double denomiator = max - min;
+                    double fraction = (numerator / denomiator * 9) + 1;
+                    word.weight = (int)fraction;
                 }
                 cloud.ForEach(c => c.color = colorArray[rnd.Next(0, 2)]);
                 return cloud;
@@ -159,101 +207,272 @@ namespace App.Models
             {
                 var matchedUsers = new List<UserMatch>();
 
-                var person = await db.wordcloud.Where(e => e.cristinID == cristinID).GroupBy(item => item.cristinID)
-                      .Select(group => new { group.Key, Items = group.ToList() }).FirstOrDefaultAsync();
-
-                var cloud = await db.wordcloud.GroupBy(item => item.cristinID)
-                      .Select(group => new { group.Key, Items = group.ToList() }).ToListAsync();
-
-
-                /* int counter = 0;
-                 for (int i = 0; i < cloud.Count; ++i)
-                 {
-                     counter = 0;
-                     for (int j = 0; j < cloud[i].Items.Count; ++j)
-                     {
-                         if (person.Items.Contains(cloud[i].Items[j]))
-                         {
-                             ++counter;
-                         }
-                     }
-                     if (counter > 2)
-                     {
-                         matchedUsers.Add(new UserMatch { cristinID = cloud[i].Key, similarities = counter });
-                     }
-                 }
-                 return matchedUsers;*/
-
-                double matchBonus = 0;
-                foreach (var user in cloud)
-                {
-                    matchBonus = 0;
-                    foreach (var item in user.Items)
+                var currentUser = await db.wordcloud.Where(e => e.cristinID == cristinID)
+                    .GroupBy(item => item.cristinID)
+                    .Select(group => new
                     {
-                        foreach (var w in person.Items)
-                        {
-                            if (w.cristinID == item.cristinID) { continue; }
+                        group.Key,
+                        Items = group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
+                    }).FirstOrDefaultAsync();
 
-                            if (w.key == item.key)
-                            {
-                                if (w.count > 1 && w.count <= 5)
+                if (currentUser == null) { return null; }
+
+                var comparedUsers = await db.wordcloud.GroupBy(item => item.cristinID)
+                      .Select(group => new
+                      {
+                          group.Key,
+                          Items =
+                          group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
+                      }).ToListAsync();
+
+                double x, y;
+                foreach (var compared in comparedUsers)
+                {
+                    x = 0;
+                    y = 0;
+                    foreach (var i in compared.Items)
+                    {
+                        switch (currentUser.Items.FindIndex(e => e.key == i.key))
+                        {
+                            case -1:
+                                break;
+                            case 1:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
                                 {
-                                    ++matchBonus;
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
                                 }
-                                else if (w.count > 5 && w.count <= 10)
+                                x += 10 / y;
+                                break;
+                            case 2:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
                                 {
-                                    matchBonus += 2;
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
                                 }
-                                else if (w.count > 10 && w.count <= 15)
+                                x += 9 / y;
+                                break;
+                            case 3:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
                                 {
-                                    matchBonus += 3;
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
                                 }
-                                else if (w.count > 15 && w.count <= 20)
+                                x += 8 / y;
+                                break;
+                            case 4:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
                                 {
-                                    matchBonus += 4;
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
                                 }
-                                else if (w.count > 20)
+                                x += 7 / y;
+                                break;
+                            case 5:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
                                 {
-                                    matchBonus += 6;
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
                                 }
-                            }
+                                x += 6 / y;
+                                break;
+                            case 6:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                {
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
+                                }
+                                x += 5 / y;
+                                break;
+                            case 7:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                {
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
+                                }
+                                x += 4 / y;
+
+                                break;
+                            case 8:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                {
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
+                                }
+                                x += 3 / y;
+                                break;
+                            case 9:
+                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                {
+                                    case -1: x = 0; break;
+                                    case 1: y = 1.0; break;
+                                    case 2: y = 1.1; break;
+                                    case 3: y = 1.2; break;
+                                    case 4: y = 1.3; break;
+                                    case 5: y = 1.4; break;
+                                    case 6: y = 1.5; break;
+                                    case 7: y = 1.6; break;
+                                    case 8: y = 1.7; break;
+                                    case 9: y = 1.8; break;
+                                    default: y = 1.9; break;
+                                }
+                                x += 2 / y;
+                                break;
+                            default: ++x; break;
                         }
                     }
-                    var percentage = ((int)(0.5f + ((100f * matchBonus) / user.Items.Count())));
-                    if (percentage > 50)
-                    {
-                        matchedUsers.Add(new UserMatch { cristinID = user.Key, similarities = percentage });
-                    }
+                    matchedUsers.Add(new UserMatch { cristinID = compared.Key, similarities = x });
                 }
-                return matchedUsers;
+                return matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
             }
         }
 
         public async Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
         {
-            List<UserMatch> matchedData = await GetUserData(cristinID);
-            if (matchedData == null) { return null; }
+            List<UserMatch> userData = await GetUserData(cristinID);
+            if (userData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
 
-            //posisjon kan være flere
-
+            int counter = 0;
             using (var db = new dbEntities())
             {
-                foreach (var user in matchedData)
+                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID);
+                if (currentAuthor == null)
                 {
-                    var researcher = await GetResearcherDataAsync(user.cristinID);
-                    researcherList.Add(new ResearcherRelevance
+                    return null;
+                }
+                string currentInstitution = await db.tilhorighet.Where(t => t.cristinID == cristinID)
+                    .Select(t => t.institusjon).FirstOrDefaultAsync();
+                if (currentInstitution == null)
+                {
+                    currentInstitution = "";
+                }
+                foreach (var user in userData)
+                {
+                    if (counter > 10) {
+
+                        double max1 = userData.Max(e => e.similarities);
+                        double min1 = userData.Min(e => e.similarities);
+
+                        foreach(var i in researcherList)
+                        {
+                            i.similarities = ((i.similarities - min1) / (max1 - min1) * 5) + 4;
+                        }
+                        return researcherList;
+
+
+                    }
+                    if ((db.forfattere.Where(a => !currentAuthor.Contains(a)).FirstOrDefault()) != null)
                     {
-                        firstName = researcher.firstName,
-                        lastName = researcher.lastName,
-                        institute = researcher.institute,
-                        institution = researcher.institution,
-                        position = researcher.position,
-                        relevance = user.similarities
-                    });
+                        var researcher = GetResearcherInfo(user.cristinID);
+
+                        if (researcher != null)
+                        {
+                            if (currentInstitution != researcher.institution)
+                            {
+                                ++counter;
+                                researcherList.Add(new ResearcherRelevance
+                                {
+                                    firstName = researcher.firstName,
+                                    lastName = researcher.lastName,
+                                    institute = researcher.institute ?? "Ukjent",
+                                    institution = researcher.institution ?? "Ukjent",
+                                    position = researcher.position ?? "Ukjent",
+
+                                    similarities = user.similarities
+                                });
+                            }
+                        }
+                    }
+                }
+                double max = userData.Max(e => e.similarities);
+                double min = userData.Min(e => e.similarities);
+                foreach (var i in researcherList)
+                {
+                    i.similarities = ((i.similarities - min) / (max - min) * 5) + 4;
                 }
                 return researcherList;
+            }
+        }
+
+        public short? GetLegend(string cristinID)
+        {
+            using(var db = new dbEntities())
+            {
+                return db.titles.Where(e => e.cristinID == cristinID).Select(e=> e.titlesCount).FirstOrDefault();
             }
         }
 
@@ -280,16 +499,10 @@ namespace App.Models
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
                     .FirstOrDefaultAsync();
 
-                if (mainUser == null) { return null; }
+                var mainRank = await db.rank.Where(r => r.cristinID == cristinID)
+                    .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
 
-                rowList.Add(new rows
-                {
-                    c = new List<c>{
-                        new c { v = random.Next(1, 8) +"", f = mainUser.firstName + " " + mainUser.lastName },
-                        new c { v = random.Next(100, 300) +"", f = mainPosition },
-                        new c { v = mainColor, f = null }
-                        }
-                });
+                if (mainRank.publications == null || mainRank.quality == null || mainUser == null) { return null; }
 
                 foreach (var match in userData)
                 {
@@ -297,9 +510,12 @@ namespace App.Models
                         Where(t => t.cristinID == match.cristinID).Select(t => t.position)
                         .FirstOrDefaultAsync();
 
+                    var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
+                        .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
+
                     if (position == null) { continue; }
 
-                    string color = position == "Professor" ? "#0077c2" : "#80d6ff";
+                    string color = position == "Professor" || position == "Professor II" ? "#0077c2" : "#80d6ff";
 
                     User user = await db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
@@ -310,12 +526,22 @@ namespace App.Models
                     rowList.Add(new rows
                     {
                         c = new List<c>{
-                            new c { v = random.Next(1,8)+"", f = user.firstName + " " + user.lastName },
-                            new c { v = random.Next(3, 300)+"", f = position },
+                            new c { v = rank.quality, f = user.firstName + " " + user.lastName },
+                            new c { v = rank.publications+"", f = position },
                             new c { v = color, f = null }
                         }
                     });
                 }
+
+                //main
+                rowList.Add(new rows
+                {
+                    c = new List<c>{
+                        new c { v = mainRank.quality , f = mainUser.firstName + " " + mainUser.lastName },
+                        new c { v = mainRank.publications+"", f = mainPosition },
+                        new c { v = mainColor, f = null }
+                        }
+                });
 
                 cols colums1 = new cols { id = "", label = "", pattern = "", type = "number" };
                 cols colums2 = new cols { id = "", label = "", pattern = "", type = "number" };

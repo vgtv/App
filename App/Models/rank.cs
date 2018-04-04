@@ -22,6 +22,7 @@ namespace App.Models
         public Nullable<double> kroner { get; set; }
         public Nullable<int> publikasjoner { get; set; }
         public Nullable<int> niva2 { get; set; }
+        public Nullable<decimal> kvalitet { get; set; }
     
         public virtual person person { get; set; }
     }

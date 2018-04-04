@@ -15,8 +15,7 @@ namespace App.Models
     public partial class basewords
     {
         public int key { get; set; }
-        public string baseword { get; set; }
-    
+        public string baseword { get; set; }    
         public virtual words words { get; set; }
     }
 }

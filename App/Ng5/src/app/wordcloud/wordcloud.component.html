@@ -1,7 +1,9 @@
-<div>
+<div *ngIf="showCloud">
   <angular-tag-cloud [data]="data"
                      [width]="options.width"
                      [height]="options.height"
                      [overflow]="options.overflow">
   </angular-tag-cloud>
+
+  <p class="text-right">Basert på <code>{{count}}</code> engelske artikler</p>
 </div>

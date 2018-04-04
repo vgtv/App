@@ -3,23 +3,23 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbdTypeaheadHttp } from './search/search.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http, Response } from "@angular/http";
+import { FormsModule } from '@angular/forms';
 
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { TagCloudModule } from 'angular-tag-cloud-module';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TopnavComponent } from './topnav/topnav.component';
-import { WordcloudComponent } from './wordcloud/wordcloud.component';
-import { MatFormFieldModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { TagCloudModule } from 'angular-tag-cloud-module';
 
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { ScatterComponent } from './scatter/scatter.component';
+import { UserinfoComponent } from './userinfo/userinfo.component';
+import { RelevanceComponent } from './relevance/relevance.component';
+import { TopnavComponent } from './topnav/topnav.component';
+
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 
 @NgModule({
@@ -30,8 +30,9 @@ import { ScatterComponent } from './scatter/scatter.component';
     WordcloudComponent,
     ScatterComponent,
     NgbdTypeaheadHttp,
-
-   
+    UserinfoComponent,
+    RelevanceComponent,
+    TopnavComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -41,13 +42,9 @@ import { ScatterComponent } from './scatter/scatter.component';
     HttpClientModule,
     Ng2GoogleChartsModule,
     FormsModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    BrowserAnimationsModule
+    LoadingBarHttpClientModule
   ],
-  providers: [Http],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
