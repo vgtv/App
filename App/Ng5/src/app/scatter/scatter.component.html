@@ -1,5 +1,7 @@
-
-<div *ngIf="showScatter">
+<div *ngIf="showProgressBar">
   <mat-progress-bar mode="determinate" [value]="loader.progress$|async"></mat-progress-bar>
+</div>
+<div *ngIf="showScatter">
   <google-chart [data]="scatterChartData"></google-chart>
 </div>
+

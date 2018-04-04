@@ -21,7 +21,8 @@ import { TopnavComponent } from './topnav/topnav.component';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import {MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatProgressBarModule } from '@angular/material/progress-bar';
     Ng2GoogleChartsModule,
     FormsModule,
     LoadingBarHttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    BrowserAnimationsModule
   ],
   providers: [LoadingBarService],
   bootstrap: [AppComponent]
