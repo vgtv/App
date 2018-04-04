@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Relevance } from './relevance';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
 @Component({
   selector: 'app-relevance',
   templateUrl: './relevance.component.html',

@@ -189,18 +189,24 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular_tag_cloud_module__ = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__wordcloud_wordcloud_component__ = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__scatter_scatter_component__ = __webpack_require__("./src/app/scatter/scatter.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__userinfo_userinfo_component__ = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__relevance_relevance_component__ = __webpack_require__("./src/app/relevance/relevance.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__topnav_topnav_component__ = __webpack_require__("./src/app/topnav/topnav.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ngx_loading_bar_http_client__ = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser_animations__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__wordcloud_wordcloud_component__ = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__scatter_scatter_component__ = __webpack_require__("./src/app/scatter/scatter.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userinfo_userinfo_component__ = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__relevance_relevance_component__ = __webpack_require__("./src/app/relevance/relevance.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__topnav_topnav_component__ = __webpack_require__("./src/app/topnav/topnav.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ngx_loading_bar_http_client__ = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ngx_loading_bar_core__ = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_material_progress_bar__ = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -225,13 +231,13 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__app_routing_module__["b" /* routingComponents */],
-                __WEBPACK_IMPORTED_MODULE_14__topnav_topnav_component__["a" /* TopnavComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__wordcloud_wordcloud_component__["a" /* WordcloudComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__scatter_scatter_component__["a" /* ScatterComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__topnav_topnav_component__["a" /* TopnavComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__wordcloud_wordcloud_component__["a" /* WordcloudComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__scatter_scatter_component__["a" /* ScatterComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__search_search_component__["a" /* NgbdTypeaheadHttp */],
-                __WEBPACK_IMPORTED_MODULE_12__userinfo_userinfo_component__["a" /* UserinfoComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__relevance_relevance_component__["a" /* RelevanceComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__topnav_topnav_component__["a" /* TopnavComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__userinfo_userinfo_component__["a" /* UserinfoComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__relevance_relevance_component__["a" /* RelevanceComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__topnav_topnav_component__["a" /* TopnavComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
@@ -241,9 +247,11 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_6_ng2_google_charts__["a" /* Ng2GoogleChartsModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_15__ngx_loading_bar_http_client__["a" /* LoadingBarHttpClientModule */]
+                __WEBPACK_IMPORTED_MODULE_16__ngx_loading_bar_http_client__["a" /* LoadingBarHttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_18__angular_material_progress_bar__["a" /* MatProgressBarModule */],
+                __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */]
             ],
-            providers: [],
+            providers: [__WEBPACK_IMPORTED_MODULE_17__ngx_loading_bar_core__["b" /* LoadingBarService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -257,7 +265,7 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "/home hewqoueoh\r\n<div *ngFor=\"let k of hentData\">\r\n  {{ k.firstname }}\r\n  {{ k.lastname }}\r\n  {{ k.role }}\r\n  {{ k.institution }}\r\n</div>\r\n"
+module.exports = "/home\r\n"
 
 /***/ }),
 
@@ -307,7 +315,7 @@ var HomeComponent = /** @class */ (function () {
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\"></app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\"> </app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -367,7 +375,7 @@ var ProfileComponent = /** @class */ (function () {
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" style=\"padding-bottom:5em\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Relevante fagpersoner</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n <table class=\"table table-hover table-light\" *ngIf=\"showTable\">\r\n  <thead class=\"thead-light\">\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
+module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjsn</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -504,7 +512,7 @@ var RelevanceComponent = /** @class */ (function () {
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showProgressBar\">\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\"></mat-progress-bar>\r\n</div>\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n  </div>\r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -522,6 +530,7 @@ module.exports = ""
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScatterComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_loading_bar_core__ = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -568,9 +577,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 
 
+
 var ScatterComponent = /** @class */ (function () {
-    function ScatterComponent(http) {
+    function ScatterComponent(http, loader) {
         this.http = http;
+        this.loader = loader;
         this.apiURL = 'api/apiscatterplot?cristinID=';
     }
     ScatterComponent.prototype.ngOnChanges = function () {
@@ -580,6 +591,7 @@ var ScatterComponent = /** @class */ (function () {
                     case 0:
                         console.log("Scatterplot changing");
                         this.showScatter = false;
+                        this.showProgressBar = true;
                         return [4 /*yield*/, this.initializeScatter(this.input)];
                     case 1:
                         _a.sent();
@@ -617,6 +629,7 @@ var ScatterComponent = /** @class */ (function () {
                                     }
                                 };
                                 _this.showScatter = true;
+                                _this.showProgressBar = false;
                                 resolve();
                             }, function (response) {
                                 if (response.error === 'No data found for user') {
@@ -642,7 +655,7 @@ var ScatterComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/scatter/scatter.component.html"),
             styles: [__webpack_require__("./src/app/scatter/scatter.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__ngx_loading_bar_core__["b" /* LoadingBarService */]])
     ], ScatterComponent);
     return ScatterComponent;
 }());
@@ -926,7 +939,7 @@ var SearchresultsComponent = /** @class */ (function () {
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-4 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\"><strong>AKADEMIKUS</strong></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\"><strong>Om Tjenesten</strong></a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1002,7 +1015,7 @@ var Researcher = /** @class */ (function () {
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>\r\n  <h3><strong>{{user?.position}}</strong></h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1>{{user.firstName}} {{user.lastName}}</h1>\r\n  <h3>{{user?.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1138,7 +1151,7 @@ var UserinfoComponent = /** @class */ (function () {
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-right\">Basert på <code>{{count}}</code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
