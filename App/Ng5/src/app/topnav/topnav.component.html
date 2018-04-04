@@ -1,7 +1,9 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-3">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-4 nav-shadow">
   <div class="container-fluid">
     <ul class="nav navbar-nav d-flex justify-content-start">
-      <li class="navbar-brand"   (click)="navigateHome()">AKADEMIKUS</li>
+      <li class="nav-item">
+      <a class="nav-link" (click)="navigateHome()"><strong>AKADEMIKUS</strong></a>
+      </li>
     </ul>
 
     <div class="nav navbar-nav d-flex justify-content-center" *ngIf="default">
@@ -10,7 +12,7 @@
 
     <ul class="navbar-nav d-flex justify-content-end">
       <li class="nav-item">
-        <a class="nav-link"  (click)="navigateAbout()">Om Tjenesten</a>
+        <a class="nav-link" (click)="navigateAbout()"><strong>Om Tjenesten</strong></a>
       </li>
     </ul>
   </div>

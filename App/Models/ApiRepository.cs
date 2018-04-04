@@ -67,13 +67,14 @@ namespace App.Models
                     }).FirstOrDefault();
 
                 if (researcher == null) { return null; }
- 
+
                 var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
+
                 if (assosciations == null) { return null; }
         
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
-                researcher.position = assosciations.position ?? "Ukjent";
+                researcher.position = assosciations.position != "null" ? assosciations.position : "Ukjent";
                 return researcher;
             }
         }
@@ -427,9 +428,13 @@ namespace App.Models
                         double max1 = userData.Max(e => e.similarities);
                         double min1 = userData.Min(e => e.similarities);
 
+
+                        Debug.WriteLine(max1);
+                        Debug.WriteLine(min1);
                         foreach(var i in researcherList)
                         {
-                            i.similarities = ((i.similarities - min1) / (max1 - min1) * 5) + 4;
+               
+                            i.similarities = (5-1)*(i.similarities - min1) / (max1 - min1) + 1;
                         }
                         return researcherList;
 
@@ -515,7 +520,7 @@ namespace App.Models
 
                     if (position == null) { continue; }
 
-                    string color = position == "Professor" || position == "Professor II" ? "#0077c2" : "#80d6ff";
+                    string color = position == "Professor" || position == "Professor ii" ? "#0077c2" : "#80d6ff";
 
                     User user = await db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })

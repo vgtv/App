@@ -1,6 +1,9 @@
 ﻿* {
     font-family: 'Heebo', sans-serif !important;
 }
+body {
+    background-color: #f5f5f6 !important;
+}
 
 h1 {
     color: #0077c1 !important;

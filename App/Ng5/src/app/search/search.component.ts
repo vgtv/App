@@ -31,6 +31,7 @@ export class SearchService {
 
 @Component({
   selector: 'ngbd-typeahead-http',
+  styleUrls: ['./search.component.scss'],
   templateUrl: './search.component.html',
   providers: [SearchService]
 })
@@ -60,6 +61,7 @@ export class NgbdTypeaheadHttp implements OnInit {
   }
 
   formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
+  extra = (value: any) => "- Universitetet i Oslo";
 
   search = (text$: Observable<string>) =>
     text$

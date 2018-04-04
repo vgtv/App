@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid" id="userinfo">
   <div class="row">
     <div class="col-sm">
       <app-userinfo [input]="cristinID"></app-userinfo>
@@ -7,11 +7,17 @@
       <app-wordcloud [input]="cristinID"></app-wordcloud>
     </div>
   </div>
+</div>
+
+<div class="container-fluid" id="scatter">
   <div class="row">
     <div class="col-sm">
       <app-scatter [input]="cristinID"> </app-scatter>
     </div>
   </div>
+</div>
+
+<div class="container-fluid" id="relevance">
   <div class="row">
     <div class="col-sm">
       <app-relevance [input]="cristinID"></app-relevance>
