@@ -4,6 +4,10 @@ import { ChartReadyEvent } from 'ng2-google-charts';
 import { ChartErrorEvent } from 'ng2-google-charts';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
+
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
 @Component({
   selector: 'app-scatter',
   templateUrl: './scatter.component.html',
@@ -15,7 +19,7 @@ export class ScatterComponent {
   apiURL = 'api/apiscatterplot?cristinID=';
   showScatter: boolean;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public loader: LoadingBarService) { }
 
   async ngOnChanges() {
     console.log("Scatterplot changing");

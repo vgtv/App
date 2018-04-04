@@ -20,6 +20,8 @@ import { RelevanceComponent } from './relevance/relevance.component';
 import { TopnavComponent } from './topnav/topnav.component';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import {MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -42,9 +44,10 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     HttpClientModule,
     Ng2GoogleChartsModule,
     FormsModule,
-    LoadingBarHttpClientModule
+    LoadingBarHttpClientModule,
+    MatProgressBarModule
   ],
-  providers: [],
+  providers: [LoadingBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
