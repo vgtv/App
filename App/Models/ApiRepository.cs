@@ -67,13 +67,14 @@ namespace App.Models
                     }).FirstOrDefault();
 
                 if (researcher == null) { return null; }
- 
+
                 var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
+
                 if (assosciations == null) { return null; }
         
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
-                researcher.position = assosciations.position ?? "Ukjent";
+                researcher.position = assosciations.position != "null" ? assosciations.position : "Ukjent";
                 return researcher;
             }
         }
