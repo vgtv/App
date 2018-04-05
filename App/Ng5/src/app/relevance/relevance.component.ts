@@ -19,6 +19,7 @@ export class RelevanceComponent {
   showTable: boolean;
   neutrality: boolean = true;
   enviroment: boolean = true;
+  p: number = 1;
 
   constructor(private http: HttpClient, config: NgbRatingConfig) {
     config.max = 5;

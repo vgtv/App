@@ -5,7 +5,6 @@
 </ng-template>
 
 <div *ngIf="showTable">
-
   <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="neutrality">
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="true"> Habil
@@ -35,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let person of dataTable | callback: neutrality : enviroment">
+      <tr *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: p }">
         <td>
           <ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating>
         </td>
@@ -46,4 +45,6 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="p = $event"></pagination-controls>
 </div>
+

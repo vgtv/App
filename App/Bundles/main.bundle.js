@@ -186,6 +186,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
+var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
 var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
@@ -226,7 +227,8 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_client_1.LoadingBarHttpClientModule,
                 progress_bar_1.MatProgressBarModule,
-                animations_1.BrowserAnimationsModule
+                animations_1.BrowserAnimationsModule,
+                ngx_pagination_1.NgxPaginationModule
             ],
             providers: [core_2.LoadingBarService],
             bootstrap: [app_component_1.AppComponent]
@@ -383,7 +385,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n<div *ngIf=\"showTable\">\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment\">\r\n        <td>\r\n          <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        </td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</div>\r\n"
+module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n<div *ngIf=\"showTable\">\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: p }\">\r\n        <td>\r\n          <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        </td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -453,6 +455,7 @@ var RelevanceComponent = /** @class */ (function () {
         this.apiURL = 'api/apirelevance?cristinID=';
         this.neutrality = true;
         this.enviroment = true;
+        this.p = 1;
         config.max = 5;
         config.readonly = true;
     }
