@@ -49,7 +49,13 @@ namespace App.Models
                         firstName = p.firstname,
                         lastName = p.lastname
                     }).Take(limit).ToListAsync());
-                    return results.DistinctBy(i => i.cristinID).ToList();
+                    results = results.DistinctBy(i => i.cristinID).ToList();
+                }
+
+                foreach(var i in results)
+                {
+                    i.position = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e=>e.position).FirstOrDefault();
+                    i.institution = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e => e.institusjon).FirstOrDefault();
                 }
                 return results;
             }
@@ -428,7 +434,6 @@ namespace App.Models
                         var comp = db.forfattere.Where(a => a.cristinID == user.cristinID).Select(e=>e.forskningsID).ToList();
 
                         if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null) { 
-                            Debug.WriteLine("Fant en innhabil");
                             researcherList.Add(new ResearcherRelevance
                             {
                                 firstName = researcher.firstName,

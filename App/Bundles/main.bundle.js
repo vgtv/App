@@ -190,12 +190,15 @@ var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
+var animations_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
 var wordcloud_component_1 = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
 var scatter_component_1 = __webpack_require__("./src/app/scatter/scatter.component.ts");
 var userinfo_component_1 = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
 var relevance_component_1 = __webpack_require__("./src/app/relevance/relevance.component.ts");
 var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
+var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var progress_bar_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -221,9 +224,11 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 ng2_google_charts_1.Ng2GoogleChartsModule,
                 forms_1.FormsModule,
-                http_client_1.LoadingBarHttpClientModule
+                http_client_1.LoadingBarHttpClientModule,
+                progress_bar_1.MatProgressBarModule,
+                animations_1.BrowserAnimationsModule
             ],
-            providers: [],
+            providers: [core_2.LoadingBarService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -237,7 +242,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "/home hewqoueoh\r\n<div *ngFor=\"let k of hentData\">\r\n  {{ k.firstname }}\r\n  {{ k.lastname }}\r\n  {{ k.role }}\r\n  {{ k.institution }}\r\n</div>\r\n"
+module.exports = "/home\r\n"
 
 /***/ }),
 
@@ -287,7 +292,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\"></app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\"> </app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -520,7 +525,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"showScatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n  </div>\r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgressBar\">\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n \r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -583,9 +588,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var ScatterComponent = /** @class */ (function () {
-    function ScatterComponent(http) {
+    function ScatterComponent(http, loader) {
         this.http = http;
+        this.loader = loader;
         this.apiURL = 'api/apiscatterplot?cristinID=';
     }
     ScatterComponent.prototype.ngOnChanges = function () {
@@ -595,6 +602,7 @@ var ScatterComponent = /** @class */ (function () {
                     case 0:
                         console.log("Scatterplot changing");
                         this.showScatter = false;
+                        this.showProgressBar = true;
                         return [4 /*yield*/, this.initializeScatter(this.input)];
                     case 1:
                         _a.sent();
@@ -632,6 +640,7 @@ var ScatterComponent = /** @class */ (function () {
                                     }
                                 };
                                 _this.showScatter = true;
+                                _this.showProgressBar = false;
                                 resolve();
                             }, function (response) {
                                 if (response.error === 'No data found for user') {
@@ -657,7 +666,7 @@ var ScatterComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/scatter/scatter.component.html"),
             styles: [__webpack_require__("./src/app/scatter/scatter.component.scss")]
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, core_2.LoadingBarService])
     ], ScatterComponent);
     return ScatterComponent;
 }());
@@ -669,7 +678,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group d-flex justify-content-center\">\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n         [class.is-invalid]=\"searchFailed\"\r\n         [(ngModel)]=\"model\"\r\n         [ngbTypeahead]=\"search\"\r\n         placeholder=\"Søk etter norsk forsker\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <!--<span *ngIf=\"searching\">...</span>-->\r\n  <!--<div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n</div>\r\n\r\n<div class=\"d-flex justify-content-center\">\r\n  <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n</div>\r\n"
+module.exports = "<!--  Denne er for topnav -->\r\n\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <!--<span *ngIf=\"searching\">...</span>-->\r\n    <!--<div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!--  Denne er for forsiden  -->\r\n\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <span *ngIf=\"searching\">...</span>\r\n    <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -734,9 +743,11 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
         this.router = router;
         this.searching = false;
         this.searchFailed = false;
-        this.showSearchBar = true;
         this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
-        this.formatMatches = function (value) { return value.firstName + ' ' + value.lastName + "- Universitetet i Oslo - Forsker"; };
+        this.formatMatches = function (value) {
+            return value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution;
+        };
+        this.resultMatches = function (value) { return value.firstName + ' ' + value.lastName; };
         this.search = function (text$) {
             return text$
                 .debounceTime(300)
@@ -758,15 +769,17 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
     NgbdTypeaheadHttp.prototype.onSearch = function () {
         if (typeof this.model !== 'undefined') {
             if (typeof this.model.cristinID !== 'undefined') {
-                this.showSearchBar = false;
                 this.router.navigate(['/profile', this.model.cristinID]);
             }
             else {
-                this.showSearchBar = false;
                 this.router.navigate(['/search', this.model]);
             }
         }
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], NgbdTypeaheadHttp.prototype, "showTopNav", void 0);
     NgbdTypeaheadHttp = __decorate([
         core_1.Component({
             selector: 'ngbd-typeahead-http',
@@ -926,7 +939,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-4 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\"><strong>AKADEMIKUS</strong></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\"><strong>Om Tjenesten</strong></a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1002,7 +1015,7 @@ exports.Researcher = Researcher;
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1>{{user.firstName}} {{user.lastName}}</h1>\r\n  <h3>{{user?.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>\r\n  <h3><strong>{{user?.position}}</strong></h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1136,7 +1149,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-right\">Basert på <code>{{count}}</code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
