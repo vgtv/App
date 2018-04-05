@@ -60,8 +60,7 @@ export class NgbdTypeaheadHttp implements OnInit {
     }
   }
 
-  formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
-  extra = (value: any) => "- Universitetet i Oslo";
+  formatMatches = (value: any) => value.firstName + ' ' + value.lastName + "- Universitetet i Oslo - Forsker";
 
   search = (text$: Observable<string>) =>
     text$

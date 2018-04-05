@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbdTypeaheadHttp } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 
+import { CallbackPipe } from './relevance/callback.pipe';
+
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -32,7 +34,8 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     NgbdTypeaheadHttp,
     UserinfoComponent,
     RelevanceComponent,
-    TopnavComponent
+    TopnavComponent,
+    CallbackPipe
   ],
   imports: [
     NgbModule.forRoot(),

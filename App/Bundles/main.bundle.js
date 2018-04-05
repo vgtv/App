@@ -185,6 +185,7 @@ var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootst
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
 var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
@@ -209,7 +210,8 @@ var AppModule = /** @class */ (function () {
                 search_component_1.NgbdTypeaheadHttp,
                 userinfo_component_1.UserinfoComponent,
                 relevance_component_1.RelevanceComponent,
-                topnav_component_1.TopnavComponent
+                topnav_component_1.TopnavComponent,
+                callback_pipe_1.CallbackPipe
             ],
             imports: [
                 ng_bootstrap_1.NgbModule.forRoot(),
@@ -341,10 +343,42 @@ exports.ProfileComponent = ProfileComponent;
 
 /***/ }),
 
+/***/ "./src/app/relevance/callback.pipe.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var CallbackPipe = /** @class */ (function () {
+    function CallbackPipe() {
+    }
+    CallbackPipe.prototype.transform = function (items, toggle) {
+        return items.filter(function (item) { return item.neutral === toggle; });
+    };
+    CallbackPipe = __decorate([
+        core_1.Pipe({
+            name: 'callback',
+            pure: false
+        })
+    ], CallbackPipe);
+    return CallbackPipe;
+}());
+exports.CallbackPipe = CallbackPipe;
+
+
+/***/ }),
+
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
+module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n\r\n<div class=\"row\" *ngIf=\"showTable\">\r\n  <div class=\"col\">\r\n    <div ngbDropdown class=\"d-inline-block\">\r\n      <button class=\"btn btn-outline-primary\" id=\"dropdownBasic1\" ngbDropdownToggle>Velg relevans</button>\r\n      <div ngbDropdownMenu aria-labelledby=\"dropdownBasic1\">\r\n        <button class=\"dropdown-item\" (click)=\"toggleIntern()\">Test - Habil</button>\r\n        <button class=\"dropdown-item\" (click)=\"toggleExtern()\">Test - Innhabil</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans <span *ngIf=\"toggle\">(Habil)</span> <span *ngIf=\"!toggle\">(Innhabil)</span></th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of (dataTable | callback: toggle)\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -414,7 +448,14 @@ var RelevanceComponent = /** @class */ (function () {
         this.apiURL = 'api/apirelevance?cristinID=';
         config.max = 5;
         config.readonly = true;
+        this.toggle = true;
     }
+    RelevanceComponent.prototype.toggleIntern = function () {
+        this.toggle = true;
+    };
+    RelevanceComponent.prototype.toggleExtern = function () {
+        this.toggle = false;
+    };
     RelevanceComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -628,14 +669,14 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"formatMatches\" />\r\n    <!--><span *ngIf=\"searching\">...</span>-->\r\n    <!--><div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n  </div>\r\n\r\n<div class= \"d-flex justify-content-center\">\r\n  <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n</div>\r\n"
+module.exports = "<div class=\"form-group d-flex justify-content-center\">\r\n  <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n         [class.is-invalid]=\"searchFailed\"\r\n         [(ngModel)]=\"model\"\r\n         [ngbTypeahead]=\"search\"\r\n         placeholder=\"Søk etter norsk forsker\"\r\n         [resultFormatter]=\"formatMatches\"\r\n         [inputFormatter]=\"formatMatches\" />\r\n  <!--<span *ngIf=\"searching\">...</span>-->\r\n  <!--<div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n</div>\r\n\r\n<div class=\"d-flex justify-content-center\">\r\n  <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/search/search.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ":host /deep/ .dropdown-item {\n  color: blue;\n  display: block; }\n\n:host /deep/ .drop-down-menu {\n  top: auto;\n  left: auto;\n  background-color: aqua; }\n"
+module.exports = ":host /deep/ .drop-down-menu {\n  top: auto;\n  left: auto;\n  background-color: aqua; }\n"
 
 /***/ }),
 
@@ -695,8 +736,7 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
         this.searchFailed = false;
         this.showSearchBar = true;
         this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
-        this.formatMatches = function (value) { return value.firstName + ' ' + value.lastName; };
-        this.extra = function (value) { return "- Universitetet i Oslo"; };
+        this.formatMatches = function (value) { return value.firstName + ' ' + value.lastName + "- Universitetet i Oslo - Forsker"; };
         this.search = function (text$) {
             return text$
                 .debounceTime(300)

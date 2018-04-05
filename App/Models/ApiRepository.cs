@@ -71,7 +71,7 @@ namespace App.Models
                 var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
 
                 if (assosciations == null) { return null; }
-        
+
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
                 researcher.position = assosciations.position != "null" ? assosciations.position : "Ukjent";
@@ -233,6 +233,8 @@ namespace App.Models
                     y = 0;
                     foreach (var i in compared.Items)
                     {
+                        if (currentUser.Key == compared.Key) { continue; }
+
                         switch (currentUser.Items.FindIndex(e => e.key == i.key))
                         {
                             case -1:
@@ -407,67 +409,71 @@ namespace App.Models
 
             var researcherList = new List<ResearcherRelevance>();
 
-            int counter = 0;
             using (var db = new dbEntities())
             {
-                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID);
+                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID).ToList();
                 if (currentAuthor == null)
                 {
                     return null;
                 }
-                string currentInstitution = await db.tilhorighet.Where(t => t.cristinID == cristinID)
-                    .Select(t => t.institusjon).FirstOrDefaultAsync();
-                if (currentInstitution == null)
-                {
-                    currentInstitution = "";
-                }
+                var currentInstitution = db.tilhorighet.Where(t => t.cristinID == cristinID)
+                     .Select(t => t.institusjon).ToList();
+
                 foreach (var user in userData)
                 {
-                    if (counter > 10) {
+                    var researcher = GetResearcherInfo(user.cristinID);
 
-                        double max1 = userData.Max(e => e.similarities);
-                        double min1 = userData.Min(e => e.similarities);
-
-
-                        Debug.WriteLine(max1);
-                        Debug.WriteLine(min1);
-                        foreach(var i in researcherList)
-                        {
-               
-                            i.similarities = (5-1)*(i.similarities - min1) / (max1 - min1) + 1;
-                        }
-                        return researcherList;
-
-
-                    }
-                    if ((db.forfattere.Where(a => !currentAuthor.Contains(a)).FirstOrDefault()) != null)
+                    if (researcher != null)
                     {
-                        var researcher = GetResearcherInfo(user.cristinID);
+                        var comp = db.forfattere.Where(a => a.cristinID == user.cristinID).Select(e=>e.forskningsID).ToList();
 
-                        if (researcher != null)
-                        {
-                            if (currentInstitution != researcher.institution)
+                        if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null) { 
+                            Debug.WriteLine("Fant en innhabil");
+                            researcherList.Add(new ResearcherRelevance
                             {
-                                ++counter;
-                                researcherList.Add(new ResearcherRelevance
-                                {
-                                    firstName = researcher.firstName,
-                                    lastName = researcher.lastName,
-                                    institute = researcher.institute ?? "Ukjent",
-                                    institution = researcher.institution ?? "Ukjent",
-                                    position = researcher.position ?? "Ukjent",
+                                firstName = researcher.firstName,
+                                lastName = researcher.lastName,
+                                institute = researcher.institute ?? "Ukjent",
+                                institution = researcher.institution ?? "Ukjent",
+                                position = researcher.position ?? "Ukjent",
+                                similarities = user.similarities,
+                                neutral = false
+                            });
+                        }
 
-                                    similarities = user.similarities
-                                });
-                            }
+                        else if (currentInstitution.Contains(researcher.institution))
+                        {
+                            researcherList.Add(new ResearcherRelevance
+                            {
+                                firstName = researcher.firstName,
+                                lastName = researcher.lastName,
+                                institute = researcher.institute ?? "Ukjent",
+                                institution = researcher.institution ?? "Ukjent",
+                                position = researcher.position ?? "Ukjent",
+                                similarities = user.similarities,
+                                neutral = false
+                            });
+                        }
+                        else
+                        {
+                            researcherList.Add(new ResearcherRelevance
+                            {
+                                firstName = researcher.firstName,
+                                lastName = researcher.lastName,
+                                institute = researcher.institute ?? "Ukjent",
+                                institution = researcher.institution ?? "Ukjent",
+                                position = researcher.position ?? "Ukjent",
+                                similarities = user.similarities,
+                                neutral = true
+                            });
                         }
                     }
                 }
-                double max = userData.Max(e => e.similarities);
-                double min = userData.Min(e => e.similarities);
+
                 foreach (var i in researcherList)
                 {
-                    i.similarities = ((i.similarities - min) / (max - min) * 5) + 4;
+                    i.similarities = (5 - 1) * (i.similarities - userData.Min(e => e.similarities))
+                                     / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
                 }
                 return researcherList;
             }
@@ -475,9 +481,9 @@ namespace App.Models
 
         public short? GetLegend(string cristinID)
         {
-            using(var db = new dbEntities())
+            using (var db = new dbEntities())
             {
-                return db.titles.Where(e => e.cristinID == cristinID).Select(e=> e.titlesCount).FirstOrDefault();
+                return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
             }
         }
 

@@ -14,11 +14,21 @@ export class RelevanceComponent {
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
   showTable: boolean;
+  toggle: boolean;
 
   constructor(private http: HttpClient, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
+    this.toggle = true;
   }
+
+  toggleIntern() {
+    this.toggle = true;
+  }
+  toggleExtern() {
+    this.toggle = false;
+  }
+
 
   async ngOnChanges() {
     console.log('Relevance changing..');
