@@ -364,8 +364,8 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var CallbackPipe = /** @class */ (function () {
     function CallbackPipe() {
     }
-    CallbackPipe.prototype.transform = function (items, toggle) {
-        return items.filter(function (item) { return item.neutral === toggle; });
+    CallbackPipe.prototype.transform = function (items, toggle, toggle2) {
+        return items.filter(function (item) { return item.neutrality === toggle && item.enviroment == toggle2; });
     };
     CallbackPipe = __decorate([
         core_1.Pipe({
@@ -383,7 +383,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n\r\n<div class=\"row\" *ngIf=\"showTable\">\r\n  <div class=\"col\">\r\n    <div ngbDropdown class=\"d-inline-block\">\r\n      <button class=\"btn btn-outline-primary\" id=\"dropdownBasic1\" ngbDropdownToggle>Velg relevans</button>\r\n      <div ngbDropdownMenu aria-labelledby=\"dropdownBasic1\">\r\n        <button class=\"dropdown-item\" (click)=\"toggleIntern()\">Test - Habil</button>\r\n        <button class=\"dropdown-item\" (click)=\"toggleExtern()\">Test - Innhabil</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans <span *ngIf=\"toggle\">(Habil)</span> <span *ngIf=\"!toggle\">(Innhabil)</span></th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjon</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of (dataTable | callback: toggle)\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
+module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n<div *ngIf=\"showTable\">\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment\">\r\n        <td>\r\n          <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        </td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -451,22 +451,19 @@ var RelevanceComponent = /** @class */ (function () {
     function RelevanceComponent(http, config) {
         this.http = http;
         this.apiURL = 'api/apirelevance?cristinID=';
+        this.neutrality = true;
+        this.enviroment = true;
         config.max = 5;
         config.readonly = true;
-        this.toggle = true;
     }
-    RelevanceComponent.prototype.toggleIntern = function () {
-        this.toggle = true;
-    };
-    RelevanceComponent.prototype.toggleExtern = function () {
-        this.toggle = false;
-    };
     RelevanceComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log('Relevance changing..');
+                        this.neutrality = true;
+                        this.enviroment = true;
                         this.showTable = false;
                         return [4 /*yield*/, this.initializeTable(this.input)];
                     case 1:

@@ -52,9 +52,9 @@ namespace App.Models
                     results = results.DistinctBy(i => i.cristinID).ToList();
                 }
 
-                foreach(var i in results)
+                foreach (var i in results)
                 {
-                    i.position = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e=>e.position).FirstOrDefault();
+                    i.position = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e => e.position).FirstOrDefault();
                     i.institution = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e => e.institusjon).FirstOrDefault();
                 }
                 return results;
@@ -428,56 +428,42 @@ namespace App.Models
                 foreach (var user in userData)
                 {
                     var researcher = GetResearcherInfo(user.cristinID);
-
                     if (researcher != null)
                     {
-                        var comp = db.forfattere.Where(a => a.cristinID == user.cristinID).Select(e=>e.forskningsID).ToList();
+                        var comp = db.forfattere.Where(a => a.cristinID == user.cristinID)
+                            .Select(e => e.forskningsID).ToList();
 
-                        if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null) { 
-                            researcherList.Add(new ResearcherRelevance
-                            {
-                                firstName = researcher.firstName,
-                                lastName = researcher.lastName,
-                                institute = researcher.institute ?? "Ukjent",
-                                institution = researcher.institution ?? "Ukjent",
-                                position = researcher.position ?? "Ukjent",
-                                similarities = user.similarities,
-                                neutral = false
-                            });
-                        }
 
-                        else if (currentInstitution.Contains(researcher.institution))
+                        var newResearcher = new ResearcherRelevance();
+                        if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
                         {
-                            researcherList.Add(new ResearcherRelevance
-                            {
-                                firstName = researcher.firstName,
-                                lastName = researcher.lastName,
-                                institute = researcher.institute ?? "Ukjent",
-                                institution = researcher.institution ?? "Ukjent",
-                                position = researcher.position ?? "Ukjent",
-                                similarities = user.similarities,
-                                neutral = false
-                            });
+                            newResearcher.firstName = researcher.firstName;
+                            newResearcher.lastName = researcher.lastName;
+                            newResearcher.institute = researcher.institute ?? "Ukjent";
+                            newResearcher.institution = researcher.institution ?? "Ukjent";
+                            newResearcher.position = researcher.position ?? "Ukjent";
+                            newResearcher.similarities = user.similarities;
+                            newResearcher.neutrality = false;
                         }
                         else
                         {
-                            researcherList.Add(new ResearcherRelevance
-                            {
-                                firstName = researcher.firstName,
-                                lastName = researcher.lastName,
-                                institute = researcher.institute ?? "Ukjent",
-                                institution = researcher.institution ?? "Ukjent",
-                                position = researcher.position ?? "Ukjent",
-                                similarities = user.similarities,
-                                neutral = true
-                            });
+                            newResearcher.firstName = researcher.firstName;
+                            newResearcher.lastName = researcher.lastName;
+                            newResearcher.institute = researcher.institute ?? "Ukjent";
+                            newResearcher.institution = researcher.institution ?? "Ukjent";
+                            newResearcher.position = researcher.position ?? "Ukjent";
+                            newResearcher.similarities = user.similarities;
+                            newResearcher.neutrality = true;
+
                         }
+                        newResearcher.enviroment = currentInstitution.Contains(researcher.institution) ? true : false;
+                        researcherList.Add(newResearcher);
                     }
                 }
 
-                foreach (var i in researcherList)
+                foreach (var researcher in researcherList)
                 {
-                    i.similarities = (5 - 1) * (i.similarities - userData.Min(e => e.similarities))
+                    researcher.similarities = (5 - 1) * (researcher.similarities - userData.Min(e => e.similarities))
                                      / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
                 }
                 return researcherList;

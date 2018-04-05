@@ -1,6 +1,7 @@
 export interface Relevance {
   similarities: number;
-  neutral: boolean;
+  neutrality: boolean;
+  enviroment: boolean;
   firstName: string;
   lastName: string;
   institution: string;
