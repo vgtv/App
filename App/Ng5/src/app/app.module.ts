@@ -22,6 +22,7 @@ import { TopnavComponent } from './topnav/topnav.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 
@@ -35,7 +36,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     NgbdTypeaheadHttp,
     UserinfoComponent,
     RelevanceComponent,
-    TopnavComponent
+    TopnavComponent,
+    PaginationComponent
   ],
   imports: [
     NgbModule.forRoot(),

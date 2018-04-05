@@ -198,12 +198,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ngx_loading_bar_http_client__ = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ngx_loading_bar_core__ = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_material_progress_bar__ = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pagination_pagination_component__ = __webpack_require__("./src/app/pagination/pagination.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -237,7 +239,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__search_search_component__["a" /* NgbdTypeaheadHttp */],
                 __WEBPACK_IMPORTED_MODULE_13__userinfo_userinfo_component__["a" /* UserinfoComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__relevance_relevance_component__["a" /* RelevanceComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__topnav_topnav_component__["a" /* TopnavComponent */]
+                __WEBPACK_IMPORTED_MODULE_15__topnav_topnav_component__["a" /* TopnavComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__pagination_pagination_component__["a" /* PaginationComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
@@ -312,6 +315,56 @@ var HomeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/pagination/pagination.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  pagination works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/pagination/pagination.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/pagination/pagination.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaginationComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PaginationComponent = /** @class */ (function () {
+    function PaginationComponent() {
+    }
+    PaginationComponent.prototype.ngOnInit = function () {
+    };
+    PaginationComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-pagination',
+            template: __webpack_require__("./src/app/pagination/pagination.component.html"),
+            styles: [__webpack_require__("./src/app/pagination/pagination.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PaginationComponent);
+    return PaginationComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
@@ -375,7 +428,7 @@ var ProfileComponent = /** @class */ (function () {
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n\r\n <table class=\"table table-hover\" *ngIf=\"showTable\">\r\n  <thead>\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjsn</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
+module.exports = "<div class=\"row\" style=\"padding-bottom:5em\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Relevante fagpersoner</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n <table class=\"table table-hover table-light\" *ngIf=\"showTable\">\r\n  <thead class=\"thead-light\">\r\n    <tr>\r\n      <th>Relevans</th>\r\n      <th>Forsker</th>\r\n      <th>Posisjon</th>\r\n      <th>Institusjsn</th>\r\n      <th>Institutt</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let person of dataTable\">\r\n      <td>\r\n        <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        {{person.similarities}}\r\n      </td>\r\n      <td>{{person.firstName}} {{person.lastName}}</td>\r\n      <td>{{person?.position}}</td>\r\n      <td>{{person?.institution}}</td>\r\n      <td>{{person?.institute}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -512,7 +565,7 @@ var RelevanceComponent = /** @class */ (function () {
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showProgressBar\">\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\"></mat-progress-bar>\r\n</div>\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n  </div>\r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgressBar\">\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n \r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -939,7 +992,7 @@ var SearchresultsComponent = /** @class */ (function () {
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-4 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\"><strong>AKADEMIKUS</strong></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\"><strong>Om Tjenesten</strong></a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1015,7 +1068,7 @@ var Researcher = /** @class */ (function () {
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1>{{user.firstName}} {{user.lastName}}</h1>\r\n  <h3>{{user?.position}}</h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>\r\n  <h3><strong>{{user?.position}}</strong></h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1151,7 +1204,7 @@ var UserinfoComponent = /** @class */ (function () {
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-right\">Basert på <code>{{count}}</code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
