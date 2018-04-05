@@ -17,24 +17,18 @@ export class RelevanceComponent {
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
   showTable: boolean;
-  toggle: boolean;
+  neutrality: boolean = true;
+  enviroment: boolean = true;
 
   constructor(private http: HttpClient, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
-    this.toggle = true;
   }
-
-  toggleIntern() {
-    this.toggle = true;
-  }
-  toggleExtern() {
-    this.toggle = false;
-  }
-
 
   async ngOnChanges() {
     console.log('Relevance changing..');
+    this.neutrality = true;
+    this.enviroment = true;
     this.showTable = false;
     await this.initializeTable(this.input);
   }
