@@ -799,7 +799,7 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results\">\r\n    <li>\r\n     <a href=\"/profile/{{obj.cristinID}}\"> {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
+module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results\">\r\n    <li>\r\n     <a [routerLink]=\"['/profile', obj.cristinID]\"><span class=\"badge\">{{obj.cristinID}}</span> {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
 
 /***/ }),
 
