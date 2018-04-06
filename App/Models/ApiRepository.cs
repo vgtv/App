@@ -52,14 +52,34 @@ namespace App.Models
                     results = results.DistinctBy(i => i.cristinID).ToList();
                 }
 
-                foreach (var i in results)
+
+                var filter = GetFilter();
+                foreach (var assosciation in results)
                 {
-                    i.position = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e => e.position).FirstOrDefault();
-                    i.institution = db.tilhorighet.Where(e => e.cristinID == i.cristinID).Select(e => e.institusjon).FirstOrDefault();
+                    var temp = db.tilhorighet.Where(e => e.cristinID == assosciation.cristinID)
+                        .Select(e => new { pos = e.position, ins = e.institusjon })
+                        .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
+
+                    if (temp != null)
+                    {
+                        assosciation.position = temp.pos;
+                        assosciation.institution = temp.ins;
+                    }
+
                 }
                 return results;
             }
         }
+
+        public List<string> GetFilter()
+        {
+            return new List<string>{
+                     "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor","Universitetslektor","Instituttleder",
+                    "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
+                    "Dosent","Professor ii","Forsker i","Forskningsjef", "Professor", "Professor emeritus"
+                    };
+        }
+
 
         public Researcher GetResearcherInfo(string cristinID)
         {
@@ -74,7 +94,9 @@ namespace App.Models
 
                 if (researcher == null) { return null; }
 
-                var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
+                var filter = GetFilter();
+                var assosciations = db.tilhorighet.Where(e => e.cristinID == cristinID)
+                    .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                 if (assosciations == null) { return null; }
 
@@ -483,15 +505,15 @@ namespace App.Models
             List<UserMatch> userData = await GetUserData(cristinID);
             if (userData == null) { return null; }
 
-            ScatterPlot scatterPlotData = new ScatterPlot();
-            List<rows> rowList = new List<rows>();
-
-            Random random = new Random();
+            var scatterPlotData = new ScatterPlot();
+            var rowList = new List<rows>();
+            var random = new Random();
 
             using (var db = new dbEntities())
             {
-                string mainPosition = await db.tilhorighet.Where(t => t.cristinID == cristinID)
-                    .Select(t => t.position).FirstOrDefaultAsync();
+                var filter = GetFilter();
+                string mainPosition = db.tilhorighet.Where(e => e.cristinID == cristinID).Select(t => t.position)
+                    .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
 
                 if (mainPosition == null) return null;
 
@@ -508,10 +530,8 @@ namespace App.Models
 
                 foreach (var match in userData)
                 {
-                    string position = await db.tilhorighet.
-                        Where(t => t.cristinID == match.cristinID).Select(t => t.position)
-                        .FirstOrDefaultAsync();
-
+                    string position = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => t.position)
+                        .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
                     var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
                         .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
 
