@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbdTypeaheadHttp } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 
+import { CallbackPipe } from './relevance/callback.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -22,7 +24,6 @@ import { TopnavComponent } from './topnav/topnav.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { PaginationComponent } from './pagination/pagination.component';
 
 
 
@@ -37,7 +38,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     UserinfoComponent,
     RelevanceComponent,
     TopnavComponent,
-    PaginationComponent
+    CallbackPipe
   ],
   imports: [
     NgbModule.forRoot(),
@@ -49,7 +50,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     FormsModule,
     LoadingBarHttpClientModule,
     MatProgressBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [LoadingBarService],
   bootstrap: [AppComponent]

@@ -17,6 +17,9 @@ export class RelevanceComponent {
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
   showTable: boolean;
+  neutrality: boolean = true;
+  enviroment: boolean = true;
+  p: number = 1;
 
   constructor(private http: HttpClient, config: NgbRatingConfig) {
     config.max = 5;
@@ -25,6 +28,8 @@ export class RelevanceComponent {
 
   async ngOnChanges() {
     console.log('Relevance changing..');
+    this.neutrality = true;
+    this.enviroment = true;
     this.showTable = false;
     await this.initializeTable(this.input);
   }

@@ -10,5 +10,7 @@ namespace App.Models.DomainModels
         public string cristinID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string institution { get; set; }
+        public string position { get; set; }
     }
 }

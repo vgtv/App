@@ -8,5 +8,7 @@ namespace App.Models.DomainModels
     public class ResearcherRelevance : Researcher
     {
         public double similarities { get; set; }
+        public bool neutrality { get; set; }
+        public bool enviroment { get; set; }
     }
 }

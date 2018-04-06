@@ -49,11 +49,37 @@ namespace App.Models
                         firstName = p.firstname,
                         lastName = p.lastname
                     }).Take(limit).ToListAsync());
-                    return results.DistinctBy(i => i.cristinID).ToList();
+                    results = results.DistinctBy(i => i.cristinID).ToList();
+                }
+
+
+                var filter = GetFilter();
+                foreach (var assosciation in results)
+                {
+                    var temp = db.tilhorighet.Where(e => e.cristinID == assosciation.cristinID)
+                        .Select(e => new { pos = e.position, ins = e.institusjon })
+                        .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
+
+                    if (temp != null)
+                    {
+                        assosciation.position = temp.pos;
+                        assosciation.institution = temp.ins;
+                    }
+
                 }
                 return results;
             }
         }
+
+        public List<string> GetFilter()
+        {
+            return new List<string>{
+                     "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor","Universitetslektor","Instituttleder",
+                    "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
+                    "Dosent","Professor ii","Forsker i","Forskningsjef", "Professor", "Professor emeritus"
+                    };
+        }
+
 
         public Researcher GetResearcherInfo(string cristinID)
         {
@@ -68,10 +94,12 @@ namespace App.Models
 
                 if (researcher == null) { return null; }
 
-                var assosciations = db.tilhorighet.Where(a => a.cristinID == cristinID).FirstOrDefault();
+                var filter = GetFilter();
+                var assosciations = db.tilhorighet.Where(e => e.cristinID == cristinID)
+                    .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                 if (assosciations == null) { return null; }
-        
+
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
                 researcher.position = assosciations.position != "null" ? assosciations.position : "Ukjent";
@@ -233,6 +261,8 @@ namespace App.Models
                     y = 0;
                     foreach (var i in compared.Items)
                     {
+                        if (currentUser.Key == compared.Key) { continue; }
+
                         switch (currentUser.Items.FindIndex(e => e.key == i.key))
                         {
                             case -1:
@@ -407,67 +437,56 @@ namespace App.Models
 
             var researcherList = new List<ResearcherRelevance>();
 
-            int counter = 0;
             using (var db = new dbEntities())
             {
-                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID);
+                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID).ToList();
                 if (currentAuthor == null)
                 {
                     return null;
                 }
-                string currentInstitution = await db.tilhorighet.Where(t => t.cristinID == cristinID)
-                    .Select(t => t.institusjon).FirstOrDefaultAsync();
-                if (currentInstitution == null)
-                {
-                    currentInstitution = "";
-                }
+                var currentInstitution = db.tilhorighet.Where(t => t.cristinID == cristinID)
+                     .Select(t => t.institusjon).ToList();
+
                 foreach (var user in userData)
                 {
-                    if (counter > 10) {
-
-                        double max1 = userData.Max(e => e.similarities);
-                        double min1 = userData.Min(e => e.similarities);
-
-
-                        Debug.WriteLine(max1);
-                        Debug.WriteLine(min1);
-                        foreach(var i in researcherList)
-                        {
-               
-                            i.similarities = (5-1)*(i.similarities - min1) / (max1 - min1) + 1;
-                        }
-                        return researcherList;
-
-
-                    }
-                    if ((db.forfattere.Where(a => !currentAuthor.Contains(a)).FirstOrDefault()) != null)
+                    var researcher = GetResearcherInfo(user.cristinID);
+                    if (researcher != null)
                     {
-                        var researcher = GetResearcherInfo(user.cristinID);
+                        var comp = db.forfattere.Where(a => a.cristinID == user.cristinID)
+                            .Select(e => e.forskningsID).ToList();
 
-                        if (researcher != null)
+
+                        var newResearcher = new ResearcherRelevance();
+                        if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
                         {
-                            if (currentInstitution != researcher.institution)
-                            {
-                                ++counter;
-                                researcherList.Add(new ResearcherRelevance
-                                {
-                                    firstName = researcher.firstName,
-                                    lastName = researcher.lastName,
-                                    institute = researcher.institute ?? "Ukjent",
-                                    institution = researcher.institution ?? "Ukjent",
-                                    position = researcher.position ?? "Ukjent",
-
-                                    similarities = user.similarities
-                                });
-                            }
+                            newResearcher.firstName = researcher.firstName;
+                            newResearcher.lastName = researcher.lastName;
+                            newResearcher.institute = researcher.institute ?? "Ukjent";
+                            newResearcher.institution = researcher.institution ?? "Ukjent";
+                            newResearcher.position = researcher.position ?? "Ukjent";
+                            newResearcher.similarities = user.similarities;
+                            newResearcher.neutrality = false;
                         }
+                        else
+                        {
+                            newResearcher.firstName = researcher.firstName;
+                            newResearcher.lastName = researcher.lastName;
+                            newResearcher.institute = researcher.institute ?? "Ukjent";
+                            newResearcher.institution = researcher.institution ?? "Ukjent";
+                            newResearcher.position = researcher.position ?? "Ukjent";
+                            newResearcher.similarities = user.similarities;
+                            newResearcher.neutrality = true;
+
+                        }
+                        newResearcher.enviroment = currentInstitution.Contains(researcher.institution) ? true : false;
+                        researcherList.Add(newResearcher);
                     }
                 }
-                double max = userData.Max(e => e.similarities);
-                double min = userData.Min(e => e.similarities);
-                foreach (var i in researcherList)
+
+                foreach (var researcher in researcherList)
                 {
-                    i.similarities = ((i.similarities - min) / (max - min) * 5) + 4;
+                    researcher.similarities = (5 - 1) * (researcher.similarities - userData.Min(e => e.similarities))
+                                     / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
                 }
                 return researcherList;
             }
@@ -475,9 +494,9 @@ namespace App.Models
 
         public short? GetLegend(string cristinID)
         {
-            using(var db = new dbEntities())
+            using (var db = new dbEntities())
             {
-                return db.titles.Where(e => e.cristinID == cristinID).Select(e=> e.titlesCount).FirstOrDefault();
+                return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
             }
         }
 
@@ -486,15 +505,15 @@ namespace App.Models
             List<UserMatch> userData = await GetUserData(cristinID);
             if (userData == null) { return null; }
 
-            ScatterPlot scatterPlotData = new ScatterPlot();
-            List<rows> rowList = new List<rows>();
-
-            Random random = new Random();
+            var scatterPlotData = new ScatterPlot();
+            var rowList = new List<rows>();
+            var random = new Random();
 
             using (var db = new dbEntities())
             {
-                string mainPosition = await db.tilhorighet.Where(t => t.cristinID == cristinID)
-                    .Select(t => t.position).FirstOrDefaultAsync();
+                var filter = GetFilter();
+                string mainPosition = db.tilhorighet.Where(e => e.cristinID == cristinID).Select(t => t.position)
+                    .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
 
                 if (mainPosition == null) return null;
 
@@ -511,10 +530,8 @@ namespace App.Models
 
                 foreach (var match in userData)
                 {
-                    string position = await db.tilhorighet.
-                        Where(t => t.cristinID == match.cristinID).Select(t => t.position)
-                        .FirstOrDefaultAsync();
-
+                    string position = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => t.position)
+                        .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
                     var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
                         .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
 

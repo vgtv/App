@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
@@ -40,7 +40,7 @@ export class NgbdTypeaheadHttp implements OnInit {
   model: any;
   searching = false;
   searchFailed = false;
-  showSearchBar = true;
+  @Input() showTopNav: boolean;
 
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
@@ -51,17 +51,17 @@ export class NgbdTypeaheadHttp implements OnInit {
   onSearch() {
     if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
       if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
-        this.showSearchBar = false;
         this.router.navigate(['/profile', this.model.cristinID]);
       } else {
-        this.showSearchBar = false;
         this.router.navigate(['/search', this.model]);
       }
     }
   }
 
-  formatMatches = (value: any) => value.firstName + ' ' + value.lastName;
-  extra = (value: any) => "- Universitetet i Oslo";
+  formatMatches = (value: any) =>
+    value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution;
+
+  resultMatches = (value: any) => value.firstName + ' ' + value.lastName;
 
   search = (text$: Observable<string>) =>
     text$
