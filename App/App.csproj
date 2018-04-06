@@ -1747,7 +1747,6 @@
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
-    <Content Include="Ng5\src\app\pagination\pagination.component.html" />
     <Content Include="Ng5\src\app\profile\profile.component.html" />
     <Content Include="Ng5\src\app\relevance\relevance.component.html" />
     <Content Include="Ng5\src\app\scatter\scatter.component.html" />
@@ -3609,7 +3608,6 @@
     <Content Include="Ng5\node_modules\%40angular\router\upgrade.metadata.json" />
     <Content Include="Ng5\node_modules\%40angular\router\upgrade\package.json" />
     <Content Include="Ng5\node_modules\%40angular\router\upgrade\upgrade.metadata.json" />
-    <Content Include="Ng5\src\app\pagination\pagination.component.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -6465,8 +6463,6 @@
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
-    <TypeScriptCompile Include="Ng5\src\app\pagination\pagination.component.spec.ts" />
-    <TypeScriptCompile Include="Ng5\src\app\pagination\pagination.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\callback.pipe.ts" />

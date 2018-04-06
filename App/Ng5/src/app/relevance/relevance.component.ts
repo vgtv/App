@@ -5,6 +5,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relevance',
@@ -19,9 +20,9 @@ export class RelevanceComponent {
   showTable: boolean;
   neutrality: boolean = true;
   enviroment: boolean = true;
-  p: number = 1;
+  page: number = 1;
 
-  constructor(private http: HttpClient, config: NgbRatingConfig) {
+  constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
     config.max = 5;
     config.readonly = true;
   }
@@ -32,6 +33,10 @@ export class RelevanceComponent {
     this.enviroment = true;
     this.showTable = false;
     await this.initializeTable(this.input);
+  }
+
+  navigateToProfile(cristinID: string) {
+    this.router.navigate(['/profile', cristinID]);
   }
 
   async initializeTable(cristinID: string): Promise<any> {
