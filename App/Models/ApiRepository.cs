@@ -49,6 +49,7 @@ namespace App.Models
                         firstName = p.firstname,
                         lastName = p.lastname
                     }).Take(limit).ToListAsync());
+
                     results = results.DistinctBy(i => i.cristinID).ToList();
                 }
 
@@ -119,7 +120,8 @@ namespace App.Models
                     cristinID = p.cristinID,
                     firstName = p.firstname,
                     lastName = p.lastname,
-                    affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
+                    affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID)
+                    .Select(a => new Affiliation
                     {
                         institute = a.institutt,
                         institution = a.institusjon,
@@ -180,16 +182,15 @@ namespace App.Models
 
                 Random rnd = new Random();
 
-                var cloud = await db.wordcloud.Where(wc => wc.cristinID == cristinID).Select(wc => new Cloud
-                {
-                    weight = (int)wc.count,
-                    text = db.basewords.Where(bw => bw.key == wc.key)
-                    .Select(bw => bw.baseword).FirstOrDefault() != null ? db.basewords.Where(bw => bw.key == wc.key)
-                                                                    .Select(bw => bw.baseword).FirstOrDefault() :
-                                                                    db.words.Where(bw => bw.key == wc.key)
-                                                                    .Select(bw => bw.word).FirstOrDefault()
+                var cloud = await db.wordcloud.Where(wc => wc.cristinID == cristinID)
+                    .Select(wc => new Cloud
+                    {
+                        weight = (int)wc.count,
+                        text = db.basewords.Where(bw => bw.key == wc.key)
+                               .Select(bw => bw.baseword).FirstOrDefault() ?? db.words.Where(bw => bw.key == wc.key)
+                               .Select(bw => bw.word).FirstOrDefault()
 
-                }).ToListAsync();
+                    }).ToListAsync();
 
                 if (cloud.Count() <= 0)
                 {
@@ -459,6 +460,7 @@ namespace App.Models
                         var newResearcher = new ResearcherRelevance();
                         if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
                         {
+                            newResearcher.cristinID = user.cristinID;
                             newResearcher.firstName = researcher.firstName;
                             newResearcher.lastName = researcher.lastName;
                             newResearcher.institute = researcher.institute ?? "Ukjent";
@@ -469,6 +471,7 @@ namespace App.Models
                         }
                         else
                         {
+                            newResearcher.cristinID = user.cristinID;
                             newResearcher.firstName = researcher.firstName;
                             newResearcher.lastName = researcher.lastName;
                             newResearcher.institute = researcher.institute ?? "Ukjent";
