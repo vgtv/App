@@ -31,22 +31,20 @@
         <th>Posisjon</th>
         <th>Institusjon</th>
         <th>Institutt</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr style="cursor:pointer" (click)="navigateToProfile(person.cristinID)"
-          *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }"
-          title="Gå til {{person.firstName}} {{person.lastName}}">
-        <td>
-          <ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating>
-        </td>
+      <tr *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
+        <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
         <td>{{person.firstName}} {{person.lastName}}</td>
         <td>{{person?.position}}</td>
         <td>{{person?.institution}}</td>
         <td>{{person?.institute}}</td>
+        <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)"/></td>
       </tr>
     </tbody>
   </table>
-  <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
+<pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
 </div>
 

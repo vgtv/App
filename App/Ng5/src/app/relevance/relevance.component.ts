@@ -15,12 +15,14 @@ import { Router } from '@angular/router';
 })
 export class RelevanceComponent {
   @Input() input: string;
+
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
   showTable: boolean;
   neutrality: boolean = true;
   enviroment: boolean = true;
   page: number = 1;
+  sub: any;
 
   constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
     config.max = 5;
@@ -28,6 +30,10 @@ export class RelevanceComponent {
   }
 
   async ngOnChanges() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+
     console.log('Relevance changing..');
     this.neutrality = true;
     this.enviroment = true;
@@ -39,22 +45,25 @@ export class RelevanceComponent {
     this.router.navigate(['/profile', cristinID]);
   }
 
-  async initializeTable(cristinID: string): Promise<any> {
-    return await new Promise((resolve, reject) => {
-      this.http.get<Relevance[]>(this.apiURL + cristinID)
-        .toPromise()
-        .then(results => {
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  
+  async initializeTable(cristinID: string) {    
+      this.sub = this.http.get<Relevance[]>(this.apiURL + cristinID)
+        .subscribe(results => {
           this.dataTable = results;
           this.showTable = true;
-          resolve();
         },
-        response => {
-          if (response.error === 'No data found for user') {
+        msg => {
+          if (msg.error === 'No data found for user') {
             this.showTable = false;
+             // vis at det ikke finnes data for bruker
           } else {
-            reject();
+            this.showTable = false;
+            console.error(msg.status);           
           }
         });
-    });
-  }
+    }  
 }
