@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using App.Models.DomainModels;
 
 namespace App.Models
 {
+
     public class ApiRepositoryStub : iApiRepository
     {
         public short? GetLegend(string cristinID)
@@ -19,12 +21,12 @@ namespace App.Models
             throw new NotImplementedException();
         }
 
-        public Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
+        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ScatterPlot> GetScatterData(string cristinID)
+        public ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +36,7 @@ namespace App.Models
             throw new NotImplementedException();
         }
 
-        public Task<List<UserMatch>> GetUserData(string cristinID)
+        public List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

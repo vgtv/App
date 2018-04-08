@@ -1,25 +1,11 @@
-<div *ngIf="showProgress">
-
-    <h5>{{progressText}}</h5>
-
-  <mat-progress-bar mode="determinate"
-                    [value]="loader.progress$|async"
-                    aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
-</div>
-
-<div class="container-fluid" id="scatter" *ngIf="showPlot">
-  <div class="row">
-    <div class="col-sm">
-      <div class="row">
-        <div class="col text-center">
-          <h1><strong>Forskningsmiljø</strong></h1>
-        </div>
-        <div class="container">
-          <google-chart [data]="scatterChartData"></google-chart>
-        </div>
-      </div>
-    </div>
+<div class="row" *ngIf="ready">
+  <div class="col text-center">
+    <h1><strong>Forskningsmiljø</strong></h1>
+  </div>
+  <div class="container">
+    <google-chart [data]="scatterChartData"></google-chart>
   </div>
 </div>
+
 
 

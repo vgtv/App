@@ -1,10 +1,10 @@
-<ng-template #t let-fill="fill">
-  <span class="star" [class.full]="fill === 100">
-    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
-  </span>
-</ng-template>
+<div *ngIf="ready">
+  <ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+    </span>
+  </ng-template>
 
-<div *ngIf="showTable">
   <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="neutrality">
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="true"> Habil
@@ -41,10 +41,10 @@
         <td>{{person?.position}}</td>
         <td>{{person?.institution}}</td>
         <td>{{person?.institute}}</td>
-        <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)"/></td>
+        <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)" /></td>
       </tr>
     </tbody>
   </table>
-<pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
+  <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
 </div>
 

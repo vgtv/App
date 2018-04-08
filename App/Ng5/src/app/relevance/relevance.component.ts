@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Relevance } from './relevance';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -15,14 +15,15 @@ import { Router } from '@angular/router';
 })
 export class RelevanceComponent {
   @Input() input: string;
+  @Input() ready: boolean;
+  @Output() showTable = new EventEmitter<boolean>();
 
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
-  showTable: boolean;
   neutrality: boolean = true;
   enviroment: boolean = true;
   page: number = 1;
-  sub: any;
+  pendingHttp: any;
 
   constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
     config.max = 5;
@@ -30,15 +31,15 @@ export class RelevanceComponent {
   }
 
   async ngOnChanges() {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.pendingHttp) {
+      this.pendingHttp.unsubscribe();
     }
 
-    console.log('Relevance changing..');
-    this.neutrality = true;
-    this.enviroment = true;
-    this.showTable = false;
-    await this.initializeTable(this.input);
+    if (!this.ready) {
+      this.neutrality = true;
+      this.enviroment = true;
+      await this.initializeTable(this.input);
+    }
   }
 
   navigateToProfile(cristinID: string) {
@@ -46,22 +47,21 @@ export class RelevanceComponent {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.pendingHttp.unsubscribe();
   }
-
   
   async initializeTable(cristinID: string) {    
-      this.sub = this.http.get<Relevance[]>(this.apiURL + cristinID)
+      this.pendingHttp = this.http.get<Relevance[]>(this.apiURL + cristinID)
         .subscribe(results => {
           this.dataTable = results;
-          this.showTable = true;
+          this.showTable.emit(true);
         },
         msg => {
           if (msg.error === 'No data found for user') {
-            this.showTable = false;
+            this.showTable.emit(false);
              // vis at det ikke finnes data for bruker
           } else {
-            this.showTable = false;
+            this.showTable.emit(false);
             console.error(msg.status);           
           }
         });

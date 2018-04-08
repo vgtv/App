@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Threading;
 
 namespace App.Models
 {
@@ -231,33 +232,37 @@ namespace App.Models
          *       {"cristinID":"645051","percentage":70}
          *       ]
          */
-        public async Task<List<UserMatch>> GetUserData(string cristinID)
+        public List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken)
         {
+
+
             using (var db = new dbEntities())
             {
                 var matchedUsers = new List<UserMatch>();
 
-                var currentUser = await db.wordcloud.Where(e => e.cristinID == cristinID)
+                var currentUser = db.wordcloud.Where(e => e.cristinID == cristinID)
                     .GroupBy(item => item.cristinID)
                     .Select(group => new
                     {
                         group.Key,
                         Items = group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
-                    }).FirstOrDefaultAsync();
+                    }).FirstOrDefault();
 
                 if (currentUser == null) { return null; }
 
-                var comparedUsers = await db.wordcloud.GroupBy(item => item.cristinID)
+                var comparedUsers = db.wordcloud.GroupBy(item => item.cristinID)
                       .Select(group => new
                       {
                           group.Key,
                           Items =
                           group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
-                      }).ToListAsync();
+                      }).ToList();
 
                 double x, y;
                 foreach (var compared in comparedUsers)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
+
                     x = 0;
                     y = 0;
                     foreach (var i in compared.Items)
@@ -431,9 +436,16 @@ namespace App.Models
             }
         }
 
-        public async Task<List<ResearcherRelevance>> GetResearcherRelevance(string cristinID)
+        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
         {
-            List<UserMatch> userData = await GetUserData(cristinID);
+            List<UserMatch> userData = new List<UserMatch>();
+            try
+            {
+                userData = GetUserData(cristinID, cancellationToken);
+            }catch
+            {
+                throw;
+            }
             if (userData == null) { return null; }
 
             var researcherList = new List<ResearcherRelevance>();
@@ -450,6 +462,7 @@ namespace App.Models
 
                 foreach (var user in userData)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     var researcher = GetResearcherInfo(user.cristinID);
                     if (researcher != null)
                     {
@@ -495,17 +508,17 @@ namespace App.Models
             }
         }
 
-        public short? GetLegend(string cristinID)
+        public ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken)
         {
-            using (var db = new dbEntities())
+            List<UserMatch> userData = new List<UserMatch>();
+            try
             {
-                return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
+                userData = GetUserData(cristinID, cancellationToken);
             }
-        }
-
-        public async Task<ScatterPlot> GetScatterData(string cristinID)
-        {
-            List<UserMatch> userData = await GetUserData(cristinID);
+            catch
+            {
+                throw;
+            }
             if (userData == null) { return null; }
 
             var scatterPlotData = new ScatterPlot();
@@ -522,29 +535,30 @@ namespace App.Models
 
                 string mainColor = "#ffbd45";
 
-                User mainUser = await db.person.Where(p => p.cristinID == cristinID)
+                User mainUser = db.person.Where(p => p.cristinID == cristinID)
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefault();
 
-                var mainRank = await db.rank.Where(r => r.cristinID == cristinID)
-                    .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
+                var mainRank = db.rank.Where(r => r.cristinID == cristinID)
+                    .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
                 if (mainRank.publications == null || mainRank.quality == null || mainUser == null) { return null; }
 
                 foreach (var match in userData)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     string position = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => t.position)
                         .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
-                    var rank = await db.rank.Where(r => r.cristinID == match.cristinID)
-                        .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefaultAsync();
+                    var rank = db.rank.Where(r => r.cristinID == match.cristinID)
+                        .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
                     if (position == null) { continue; }
 
                     string color = position == "Professor" || position == "Professor ii" ? "#0077c2" : "#80d6ff";
 
-                    User user = await db.person.Where(p => p.cristinID == match.cristinID)
+                    User user = db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
-                        .FirstOrDefaultAsync();
+                        .FirstOrDefault();
 
                     if (user == null) { continue; }
 
@@ -577,6 +591,13 @@ namespace App.Models
                 scatterPlotData.rows = rowList;
             }
             return scatterPlotData;
+        }
+        public short? GetLegend(string cristinID)
+        {
+            using (var db = new dbEntities())
+            {
+                return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
+            }
         }
     }
 }
