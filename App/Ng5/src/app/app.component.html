@@ -1,8 +1,10 @@
 <div *ngIf="showSearchBar">
   <app-topnav></app-topnav>
-    <div class="container" id="userinfo">
-        <ngbd-typeahead-http></ngbd-typeahead-http>
+  <div class="container">
+    <div class="col-3" id="index-search">
+      <ngbd-typeahead-http></ngbd-typeahead-http>
     </div>
+  </div>
 </div>
 
 <div *ngIf="!showSearchBar">
