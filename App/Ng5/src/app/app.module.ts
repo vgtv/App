@@ -23,8 +23,10 @@ import { TopnavComponent } from './topnav/topnav.component';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     FormsModule,
     LoadingBarHttpClientModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgxPaginationModule
   ],

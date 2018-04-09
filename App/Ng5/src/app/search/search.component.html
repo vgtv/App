@@ -1,7 +1,6 @@
 <!--  Denne er for topnav -->
-
 <div *ngIf="showTopNav">
-    <form class="form-inline">
+    <div class="form-inline">
         <input id="typehead-http" type="text" class="form-control form-control-lg mr-sm-2"
                [class.is-invalid]="searchFailed"
                [(ngModel)]="model"
@@ -9,28 +8,30 @@
                placeholder="Søk etter norsk forsker"
                [resultFormatter]="formatMatches"
                [inputFormatter]="resultMatches">
-        <button class="btn btn-lg btn-warning" type="submit" (click)="onSearch()" (keyup.enter)="onSearch()">Søk</button>
-    </form>
+        <button class="btn btn-lg btn-warning" type="submit" (click)="onSearch()">Søk</button>
+    </div>
 </div>
 
 <!--  Denne er for forsiden  -->
-
 <div *ngIf="!showTopNav">
   <div class="form-group">
-    <div class="input-group">
-      <input id="typeahead-http" type="text" class="form-control form-control-lg nav-shadow" style="height:70px"
+    <div class="input-group col-md-8">
+      <input id="typeahead-http" type="text" class="form-control form-control-lg nav-shadow"
+             style="height:3em"
              [class.is-invalid]="searchFailed"
              [(ngModel)]="model"
              [ngbTypeahead]="search"
              placeholder="Søk etter norsk forsker"
              [resultFormatter]="formatMatches"
              [inputFormatter]="resultMatches" />
-      <span *ngIf="searching">...</span>
-      <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      <div class="input-group-append">
+        <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
+          <mat-progress-spinner *ngIf="searching" [diameter]="25" mode="indeterminate"></mat-progress-spinner>
+          <span *ngIf="!searching">Søk</span>
+        </button>
+      </div>
+      <div class="invalid-feedback" *ngIf="searchFailed">Beklager, kunne ikke laste inn data.</div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center" style="padding-top:1em">
-    <button class="btn btn-lg btn-warning col-sm-4" type="submit" (click)="onSearch()" (keyup.enter)="onSearch()">Søk</button>
   </div>
 </div>
 
