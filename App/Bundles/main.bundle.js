@@ -111,7 +111,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n    <div class=\"container\" id=\"userinfo\">\r\n        <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -200,6 +200,7 @@ var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var progress_bar_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
+var progress_spinner_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-spinner.es5.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -227,6 +228,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_client_1.LoadingBarHttpClientModule,
                 progress_bar_1.MatProgressBarModule,
+                progress_spinner_1.MatProgressSpinnerModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_pagination_1.NgxPaginationModule
             ],
@@ -368,25 +370,25 @@ var ProfileComponent = /** @class */ (function () {
                     _this.progressText = "Vi matcher nå fagfeltet til denne profilen..";
                 }
                 else if (progress >= 45 && progress < 60) {
-                    _this.progressText = "Oppretter relevans profil..";
+                    _this.progressText = "Oppretter relevansprofil..";
                 }
                 else if (progress >= 60 && progress < 75) {
-                    _this.progressText = "Oppretter habilitet profil..";
+                    _this.progressText = "Oppretter habilitetsprofil..";
                 }
                 else if (progress >= 75 && progress < 90) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabell data..";
+                        _this.progressText = "Laster inn tabelldata..";
                     }
                     else {
-                        _this.progressText = "Laster inn visualiserings data..";
+                        _this.progressText = "Laster inn visualiseringsdata..";
                     }
                 }
                 else if (progress >= 90 && progress < 100) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabell data..";
+                        _this.progressText = "Laster inn tabelldata..";
                     }
                     else {
-                        _this.progressText = "Laster inn visualiserings data..";
+                        _this.progressText = "Laster inn visualiseringsdata..";
                     }
                 }
                 else if (progress >= 100) {
@@ -451,7 +453,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n        <th></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n        <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover table-light\">\r\n    <thead class=\"thead-light\">\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n        <th></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n        <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -778,7 +780,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--  Denne er for topnav -->\r\n\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <!--<span *ngIf=\"searching\">...</span>-->\r\n    <!--<div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!--  Denne er for forsiden  -->\r\n\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <span *ngIf=\"searching\">...</span>\r\n    <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n    <div class=\"form-inline\">\r\n        <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg mr-sm-2\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"resultMatches\">\r\n        <button class=\"btn btn-lg btn-warning\" type=\"submit\" (click)=\"onSearch()\">Søk</button>\r\n    </div>\r\n</div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group\">\r\n    <div class=\"input-group col-md-8\">\r\n      <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             style=\"height:3em\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\" />\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n          <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -898,14 +900,14 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\">\r\n    <li>\r\n     <a [routerLink]=\"['/profile', obj.cristinID]\"><span class=\"badge\">{{obj.cristinID}}</span> {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
+module.exports = "\r\n<h1>Søkeresultat for \"Lorum\"</h1>\r\n  <p>antall treff ?</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <table class = \"table table-hover table-light\">\r\n    <thead class=\"thead-light\">\r\n      <tr>\r\n        <th>\r\n          <h3>Navn</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Posisjon</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Institusjon</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Institutt</h3>\r\n        </th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr class = \"clickable\" style=\"cursor:pointer\" *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\"  [routerLink]=\"['/profile', obj.cristinID]\">\r\n        <td class=\"text-primary\">\r\n          {{obj.firstName}} {{obj.lastName}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.position}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.institution}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.institute}}\r\n        </td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/searchresults/searchresults.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "clickable {\n  cursor: pointer; }\n\n.tr {\n  padding: 0; }\n"
 
 /***/ }),
 
@@ -1038,7 +1040,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
