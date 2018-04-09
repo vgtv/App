@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using System.Data.Entity;
+using System.Threading;
+using App.Models.DomainModels;
+using System.Diagnostics;
 
 namespace App.Controllers
 {
@@ -16,13 +19,21 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public async Task<HttpResponseMessage> Get(string cristinID)
+        public HttpResponseMessage Get(string cristinID, CancellationToken cancellationToken)
         {
-            var searchResults = await dataAccess.GetResearcherRelevance(cristinID);
-
-            if (searchResults == null)
+            List<ResearcherRelevance> searchResults = new List<ResearcherRelevance>();
+            try
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");
+                searchResults = dataAccess.GetResearcherRelevance(cristinID, cancellationToken);
+                if (searchResults == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");
+                }
+
+            }
+            catch (OperationCanceledException e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message.ToString());
             }
 
             var Json = new JavaScriptSerializer();

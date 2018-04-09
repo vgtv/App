@@ -15,14 +15,11 @@ export class WordcloudComponent {
   count: string;
   apiURL = 'api/apiwordcloud?cristinID=';
   apiURL2 = 'api/apilegend?cristinID=';
+  options: CloudOptions;
 
-  options: CloudOptions = {
-    width: 600,
-    height: 400,
-    overflow: false
-  };
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.setupTagCloud();
+  }
 
   async ngOnChanges() {
     this.showCloud = false;
@@ -47,6 +44,14 @@ export class WordcloudComponent {
           }
         });
     });
+  }
+
+  setupTagCloud() {
+    this.options = {
+      width: 600,
+      height: 400,
+      overflow: false
+    };
   }
 
   getLegend(cristinID: string) {

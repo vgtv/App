@@ -1,13 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ChartReadyEvent } from 'ng2-google-charts';
 import { ChartErrorEvent } from 'ng2-google-charts';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
-
-import { LoadingBarService } from '@ngx-loading-bar/core';
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-
 
 @Component({
   selector: 'app-scatter',
@@ -16,55 +12,68 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 })
 export class ScatterComponent {
   @Input() input: string;
+  @Input() ready: boolean;
+  @Output() showPlot = new EventEmitter<boolean>();
+
   scatterChartData: any;
   apiURL = 'api/apiscatterplot?cristinID=';
-  showScatter: boolean;
-  showProgressBar: boolean;
+  pendingHttp: any;
 
-  constructor(private http: HttpClient, public loader: LoadingBarService) { }
-
-  async ngOnChanges() {
-    console.log("Scatterplot changing");
-    this.showScatter = false;
-    this.showProgressBar = true; 
-    await this.initializeScatter(this.input);
+  constructor(private http: HttpClient) {
+    this.setupChart();
   }
 
-  async initializeScatter(cristinID: string): Promise<any> {
-    return await new Promise((resolve, reject) => {
-      this.http.get<any[]>(this.apiURL + cristinID)
-        .toPromise()
-        .then(results => {
-          this.scatterChartData = {
-            dataTable: results,
-            chartType: 'ScatterChart',
-            options: {
-              width: 1250, height: 850,
-              backgroundColor: 'transparent',
-              title: 'Publikasjoner vs. kvalitet',
-              hAxis: {
-                title: 'Kvalitet'
-              },
-              vAxis: { title: 'Publikasjoner' },
-              legend: 'none',
-              animation: {
-                startup: true,
-                duration: 5000,
-                easing: 'inAndOut'
-              }               
-            }
-          };
-          this.showScatter = true;
-          this.showProgressBar = false;
-          resolve();
+  ngOnDestroy() {
+    this.pendingHttp.unsubscribe();
+  }
+
+  async ngOnChanges() {
+    if (this.pendingHttp) {
+      this.pendingHttp.unsubscribe();
+    }
+
+    if (!this.ready) {
+      await this.initializeScatter(this.input);
+    }
+  }
+
+  async initializeScatter(cristinID: string) {
+
+    this.pendingHttp = await this.http.get<any[]>(this.apiURL + cristinID)
+      .subscribe(results => {
+        this.scatterChartData.dataTable = results;
+        this.showPlot.emit(true);
+      },
+      msg => {
+        if (msg.error === 'No data found for user') {
+          this.showPlot.emit(false);
+          // vis at det ikke finnes data for bruker
+        } else {
+          this.showPlot.emit(false);
+          console.error(msg.status);
+        }
+      });
+  }
+
+  setupChart() {
+    this.scatterChartData = {
+      dataTable: [],
+      chartType: 'ScatterChart',
+      options: {
+        width: 1250, height: 850,
+        backgroundColor: 'transparent',
+        title: 'Publikasjoner vs. kvalitet',
+        hAxis: {
+          title: 'Kvalitet'
         },
-        response => {
-          if (response.error === 'No data found for user') {
-            this.showScatter = false;
-          } else {
-            reject();
-          }
-        });
-    });
+        legend: 'none',
+        vAxis: { title: 'Publikasjoner' },
+        animation: {
+          startup: true,
+          duration: 5000,
+          easing: 'inAndOut'
+        }
+      }
+    };
   }
 }

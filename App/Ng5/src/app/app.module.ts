@@ -6,7 +6,7 @@ import { NgbdTypeaheadHttp } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 
 import { CallbackPipe } from './relevance/callback.pipe';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -50,7 +50,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     FormsModule,
     LoadingBarHttpClientModule,
     MatProgressBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [LoadingBarService],
   bootstrap: [AppComponent]

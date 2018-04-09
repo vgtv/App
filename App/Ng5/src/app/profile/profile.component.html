@@ -9,10 +9,15 @@
   </div>
 </div>
 
+<div *ngIf="showProgress">
+  <h5>{{progressText}}</h5>
+  <mat-progress-bar mode="determinate" [value]="loader.progress$|async" aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
+</div>
+
 <div class="container-fluid" id="scatter">
   <div class="row">
     <div class="col-sm">
-      <app-scatter [input]="cristinID"> </app-scatter>
+      <app-scatter [input]="cristinID" [ready]="showContent" (showPlot)="setPlotState($event)"></app-scatter>
     </div>
   </div>
 </div>
@@ -20,7 +25,7 @@
 <div class="container-fluid" id="relevance">
   <div class="row">
     <div class="col-sm">
-      <app-relevance [input]="cristinID"></app-relevance>
+      <app-relevance [input]="cristinID" [ready]="showContent" (showTable)="setTableState($event)"></app-relevance>
     </div>
   </div>
 </div>

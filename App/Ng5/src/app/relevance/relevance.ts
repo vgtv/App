@@ -1,4 +1,5 @@
 export interface Relevance {
+  cristinID: string;
   similarities: number;
   neutrality: boolean;
   enviroment: boolean;

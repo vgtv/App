@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Relevance } from './relevance';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relevance',
@@ -14,41 +15,55 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 })
 export class RelevanceComponent {
   @Input() input: string;
+  @Input() ready: boolean;
+  @Output() showTable = new EventEmitter<boolean>();
+
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
-  showTable: boolean;
   neutrality: boolean = true;
   enviroment: boolean = true;
+  page: number = 1;
+  pendingHttp: any;
 
-  constructor(private http: HttpClient, config: NgbRatingConfig) {
+  constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
     config.max = 5;
     config.readonly = true;
   }
 
   async ngOnChanges() {
-    console.log('Relevance changing..');
-    this.neutrality = true;
-    this.enviroment = true;
-    this.showTable = false;
-    await this.initializeTable(this.input);
+    if (this.pendingHttp) {
+      this.pendingHttp.unsubscribe();
+    }
+
+    if (!this.ready) {
+      this.neutrality = true;
+      this.enviroment = true;
+      await this.initializeTable(this.input);
+    }
   }
 
-  async initializeTable(cristinID: string): Promise<any> {
-    return await new Promise((resolve, reject) => {
-      this.http.get<Relevance[]>(this.apiURL + cristinID)
-        .toPromise()
-        .then(results => {
+  navigateToProfile(cristinID: string) {
+    this.router.navigate(['/profile', cristinID]);
+  }
+
+  ngOnDestroy() {
+    this.pendingHttp.unsubscribe();
+  }
+  
+  async initializeTable(cristinID: string) {    
+      this.pendingHttp = this.http.get<Relevance[]>(this.apiURL + cristinID)
+        .subscribe(results => {
           this.dataTable = results;
-          this.showTable = true;
-          resolve();
+          this.showTable.emit(true);
         },
-        response => {
-          if (response.error === 'No data found for user') {
-            this.showTable = false;
+        msg => {
+          if (msg.error === 'No data found for user') {
+            this.showTable.emit(false);
+             // vis at det ikke finnes data for bruker
           } else {
-            reject();
+            this.showTable.emit(false);
+            console.error(msg.status);           
           }
         });
-    });
-  }
+    }  
 }

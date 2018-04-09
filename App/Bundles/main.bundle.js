@@ -186,6 +186,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
+var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
 var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
@@ -226,7 +227,8 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_client_1.LoadingBarHttpClientModule,
                 progress_bar_1.MatProgressBarModule,
-                animations_1.BrowserAnimationsModule
+                animations_1.BrowserAnimationsModule,
+                ngx_pagination_1.NgxPaginationModule
             ],
             providers: [core_2.LoadingBarService],
             bootstrap: [app_component_1.AppComponent]
@@ -292,7 +294,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\"> </app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgress\">\r\n  <h5>{{progressText}}</h5>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -320,18 +322,84 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(router) {
+    function ProfileComponent(router, loader) {
         this.router = router;
+        this.loader = loader;
     }
+    ProfileComponent.prototype.setPlotState = function (state) {
+        if (state === true) {
+            this.showPlot = true;
+        }
+        this.readyToShow();
+    };
+    ProfileComponent.prototype.setTableState = function (state) {
+        if (state === true) {
+            this.showTable = true;
+        }
+        this.readyToShow();
+    };
+    ProfileComponent.prototype.readyToShow = function () {
+        if (this.showPlot && this.showTable) {
+            this.showContent = true;
+        }
+    };
     ProfileComponent.prototype.ngOnInit = function () {
+        this.setupSubscription();
+    };
+    ProfileComponent.prototype.setupSubscription = function () {
         var _this = this;
-        this.sub = this.router.params.subscribe(function (params) {
+        this.navigation = this.router.params.subscribe(function (params) {
             _this.cristinID = params['id'];
+            _this.showTable = false;
+            _this.showPlot = false;
+            _this.showContent = false;
+            _this.showProgress = true;
+            if (_this.progressBar) {
+                _this.loader.set(0);
+                _this.progressBar.unsubscribe();
+            }
+            _this.progressBar = _this.loader.progress$.subscribe(function (progress) {
+                if (progress == 0) {
+                    _this.progressText = "";
+                }
+                else if (progress > 0 && progress < 45) {
+                    _this.progressText = "Vi matcher nå fagfeltet til denne profilen..";
+                }
+                else if (progress >= 45 && progress < 60) {
+                    _this.progressText = "Oppretter relevans profil..";
+                }
+                else if (progress >= 60 && progress < 75) {
+                    _this.progressText = "Oppretter habilitet profil..";
+                }
+                else if (progress >= 75 && progress < 90) {
+                    if (_this.showPlot) {
+                        _this.progressText = "Laster inn tabell data..";
+                    }
+                    else {
+                        _this.progressText = "Laster inn visualiserings data..";
+                    }
+                }
+                else if (progress >= 90 && progress < 100) {
+                    if (_this.showPlot) {
+                        _this.progressText = "Laster inn tabell data..";
+                    }
+                    else {
+                        _this.progressText = "Laster inn visualiserings data..";
+                    }
+                }
+                else if (progress >= 100) {
+                    _this.showProgress = false;
+                    _this.loader.set(0);
+                    _this.progressBar.unsubscribe();
+                }
+            });
         });
     };
     ProfileComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe();
+        this.navigation.unsubscribe();
+        this.progressBar.unsubscribe();
     };
     ProfileComponent = __decorate([
         core_1.Component({
@@ -339,7 +407,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/profile/profile.component.html"),
             styles: [__webpack_require__("./src/app/profile/profile.component.scss")]
         }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute])
+        __metadata("design:paramtypes", [router_1.ActivatedRoute, core_2.LoadingBarService])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -383,7 +451,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #t let-fill=\"fill\">\r\n  <span class=\"star\" [class.full]=\"fill === 100\">\r\n    <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n  </span>\r\n</ng-template>\r\n\r\n<div *ngIf=\"showTable\">\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment\">\r\n        <td>\r\n          <ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating>\r\n        </td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n        <th></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n        <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -447,12 +515,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var RelevanceComponent = /** @class */ (function () {
-    function RelevanceComponent(http, config) {
+    function RelevanceComponent(http, config, router) {
         this.http = http;
+        this.router = router;
+        this.showTable = new core_1.EventEmitter();
         this.apiURL = 'api/apirelevance?cristinID=';
         this.neutrality = true;
         this.enviroment = true;
+        this.page = 1;
         config.max = 5;
         config.readonly = true;
     }
@@ -461,41 +533,46 @@ var RelevanceComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('Relevance changing..');
+                        if (this.pendingHttp) {
+                            this.pendingHttp.unsubscribe();
+                        }
+                        if (!!this.ready) return [3 /*break*/, 2];
                         this.neutrality = true;
                         this.enviroment = true;
-                        this.showTable = false;
                         return [4 /*yield*/, this.initializeTable(this.input)];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
                 }
             });
         });
+    };
+    RelevanceComponent.prototype.navigateToProfile = function (cristinID) {
+        this.router.navigate(['/profile', cristinID]);
+    };
+    RelevanceComponent.prototype.ngOnDestroy = function () {
+        this.pendingHttp.unsubscribe();
     };
     RelevanceComponent.prototype.initializeTable = function (cristinID) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
-                            _this.http.get(_this.apiURL + cristinID)
-                                .toPromise()
-                                .then(function (results) {
-                                _this.dataTable = results;
-                                _this.showTable = true;
-                                resolve();
-                            }, function (response) {
-                                if (response.error === 'No data found for user') {
-                                    _this.showTable = false;
-                                }
-                                else {
-                                    reject();
-                                }
-                            });
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
+                this.pendingHttp = this.http.get(this.apiURL + cristinID)
+                    .subscribe(function (results) {
+                    _this.dataTable = results;
+                    _this.showTable.emit(true);
+                }, function (msg) {
+                    if (msg.error === 'No data found for user') {
+                        _this.showTable.emit(false);
+                        // vis at det ikke finnes data for bruker
+                    }
+                    else {
+                        _this.showTable.emit(false);
+                        console.error(msg.status);
+                    }
+                });
+                return [2 /*return*/];
             });
         });
     };
@@ -503,6 +580,14 @@ var RelevanceComponent = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", String)
     ], RelevanceComponent.prototype, "input", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], RelevanceComponent.prototype, "ready", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], RelevanceComponent.prototype, "showTable", void 0);
     RelevanceComponent = __decorate([
         core_1.Component({
             selector: 'app-relevance',
@@ -510,7 +595,7 @@ var RelevanceComponent = /** @class */ (function () {
             styles: [__webpack_require__("./src/app/relevance/relevance.component.scss")],
             providers: [ng_bootstrap_1.NgbRatingConfig]
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient, ng_bootstrap_1.NgbRatingConfig])
+        __metadata("design:paramtypes", [http_1.HttpClient, ng_bootstrap_1.NgbRatingConfig, router_1.Router])
     ], RelevanceComponent);
     return RelevanceComponent;
 }());
@@ -522,7 +607,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgressBar\">\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container\" *ngIf=\"showScatter\">\r\n \r\n  <google-chart [data]=\"scatterChartData\"></google-chart>\r\n</div>\r\n"
+module.exports = "<div class=\"row\" *ngIf=\"ready\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n  <div class=\"container\">\r\n    <google-chart [data]=\"scatterChartData\"></google-chart>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -585,25 +670,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
-var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var ScatterComponent = /** @class */ (function () {
-    function ScatterComponent(http, loader) {
+    function ScatterComponent(http) {
         this.http = http;
-        this.loader = loader;
+        this.showPlot = new core_1.EventEmitter();
         this.apiURL = 'api/apiscatterplot?cristinID=';
+        this.setupChart();
     }
+    ScatterComponent.prototype.ngOnDestroy = function () {
+        this.pendingHttp.unsubscribe();
+    };
     ScatterComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Scatterplot changing");
-                        this.showScatter = false;
-                        this.showProgressBar = true;
+                        if (this.pendingHttp) {
+                            this.pendingHttp.unsubscribe();
+                        }
+                        if (!!this.ready) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.initializeScatter(this.input)];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
                 }
             });
         });
@@ -611,59 +701,72 @@ var ScatterComponent = /** @class */ (function () {
     ScatterComponent.prototype.initializeScatter = function (cristinID) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
-                            _this.http.get(_this.apiURL + cristinID)
-                                .toPromise()
-                                .then(function (results) {
-                                _this.scatterChartData = {
-                                    dataTable: results,
-                                    chartType: 'ScatterChart',
-                                    options: {
-                                        width: 1250, height: 850,
-                                        backgroundColor: 'transparent',
-                                        title: 'Publikasjoner vs. kvalitet',
-                                        hAxis: {
-                                            title: 'Kvalitet'
-                                        },
-                                        vAxis: { title: 'Publikasjoner' },
-                                        legend: 'none',
-                                        animation: {
-                                            startup: true,
-                                            duration: 5000,
-                                            easing: 'inAndOut'
-                                        }
-                                    }
-                                };
-                                _this.showScatter = true;
-                                _this.showProgressBar = false;
-                                resolve();
-                            }, function (response) {
-                                if (response.error === 'No data found for user') {
-                                    _this.showScatter = false;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, this.http.get(this.apiURL + cristinID)
+                                .subscribe(function (results) {
+                                _this.scatterChartData.dataTable = results;
+                                _this.showPlot.emit(true);
+                            }, function (msg) {
+                                if (msg.error === 'No data found for user') {
+                                    _this.showPlot.emit(false);
+                                    // vis at det ikke finnes data for bruker
                                 }
                                 else {
-                                    reject();
+                                    _this.showPlot.emit(false);
+                                    console.error(msg.status);
                                 }
-                            });
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                            })];
+                    case 1:
+                        _a.pendingHttp = _b.sent();
+                        return [2 /*return*/];
                 }
             });
         });
+    };
+    ScatterComponent.prototype.setupChart = function () {
+        this.scatterChartData = {
+            dataTable: [],
+            chartType: 'ScatterChart',
+            options: {
+                width: 1250, height: 850,
+                backgroundColor: 'transparent',
+                title: 'Publikasjoner vs. kvalitet',
+                hAxis: {
+                    title: 'Kvalitet'
+                },
+                legend: 'none',
+                vAxis: { title: 'Publikasjoner' },
+                animation: {
+                    startup: true,
+                    duration: 5000,
+                    easing: 'inAndOut'
+                }
+            }
+        };
     };
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
     ], ScatterComponent.prototype, "input", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], ScatterComponent.prototype, "ready", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ScatterComponent.prototype, "showPlot", void 0);
     ScatterComponent = __decorate([
         core_1.Component({
             selector: 'app-scatter',
             template: __webpack_require__("./src/app/scatter/scatter.component.html"),
             styles: [__webpack_require__("./src/app/scatter/scatter.component.scss")]
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient, core_2.LoadingBarService])
+        __metadata("design:paramtypes", [http_1.HttpClient])
     ], ScatterComponent);
     return ScatterComponent;
 }());
@@ -762,7 +865,6 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
                 .merge(_this.hideSearchingWhenUnsubscribed);
         };
     }
-    NgbdTypeaheadHttp.prototype.ngOnInit = function () { };
     NgbdTypeaheadHttp.prototype.onSearch = function () {
         if (typeof this.model !== 'undefined') {
             if (typeof this.model.cristinID !== 'undefined') {
@@ -796,7 +898,7 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results\">\r\n    <li>\r\n      {{obj.cristinID}}  {{obj.firstName}} {{obj.lastName}}\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
+module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\">\r\n    <li>\r\n     <a [routerLink]=\"['/profile', obj.cristinID]\"><span class=\"badge\">{{obj.cristinID}}</span> {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1214,11 +1316,7 @@ var WordcloudComponent = /** @class */ (function () {
         this.http = http;
         this.apiURL = 'api/apiwordcloud?cristinID=';
         this.apiURL2 = 'api/apilegend?cristinID=';
-        this.options = {
-            width: 600,
-            height: 400,
-            overflow: false
-        };
+        this.setupTagCloud();
     }
     WordcloudComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -1260,6 +1358,13 @@ var WordcloudComponent = /** @class */ (function () {
                 }
             });
         });
+    };
+    WordcloudComponent.prototype.setupTagCloud = function () {
+        this.options = {
+            width: 600,
+            height: 400,
+            overflow: false
+        };
     };
     WordcloudComponent.prototype.getLegend = function (cristinID) {
         var _this = this;
