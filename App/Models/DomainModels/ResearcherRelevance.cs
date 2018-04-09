@@ -7,6 +7,11 @@ namespace App.Models.DomainModels
 {
     public class ResearcherRelevance : Researcher
     {
+
+        public ResearcherRelevance()
+        {
+        }
+
         public string cristinID { get; set; }
         public double similarities { get; set; }
         public bool neutrality { get; set; }

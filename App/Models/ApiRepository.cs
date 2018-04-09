@@ -12,8 +12,6 @@ using System.Threading;
 
 namespace App.Models
 {
-
-
     public class ApiRepository : iApiRepository
     {
         /*
@@ -42,15 +40,17 @@ namespace App.Models
                 if (results.Count() < 10)
                 {
                     int limit = 10 - results.Count();
-                    results.AddRange(await db.person.Where(p =>
+
+                    results.AddRange(db.person.Where(p =>
+
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
+                  
                     .Select(p => new User
                     {
                         cristinID = p.cristinID,
                         firstName = p.firstname,
                         lastName = p.lastname
-                    }).Take(limit).ToListAsync());
-
+                    }).Take(limit).ToList());
                     results = results.DistinctBy(i => i.cristinID).ToList();
                 }
 
@@ -442,7 +442,8 @@ namespace App.Models
             try
             {
                 userData = GetUserData(cristinID, cancellationToken);
-            }catch
+            }
+            catch
             {
                 throw;
             }
@@ -452,49 +453,59 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                var currentAuthor = db.forfattere.Where(a => a.cristinID == cristinID).ToList();
-                if (currentAuthor == null)
+                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).ToList();
+                if (currentPapers == null)
                 {
                     return null;
                 }
-                var currentInstitution = db.tilhorighet.Where(t => t.cristinID == cristinID)
+                var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
                      .Select(t => t.institusjon).ToList();
 
                 foreach (var user in userData)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
+
                     var researcher = GetResearcherInfo(user.cristinID);
+
                     if (researcher != null)
                     {
                         var comp = db.forfattere.Where(a => a.cristinID == user.cristinID)
                             .Select(e => e.forskningsID).ToList();
 
 
-                        var newResearcher = new ResearcherRelevance();
-                        if (currentAuthor.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
+                        ResearcherRelevance newResearcher = null;
+                        if (currentPapers.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
                         {
-                            newResearcher.cristinID = user.cristinID;
-                            newResearcher.firstName = researcher.firstName;
-                            newResearcher.lastName = researcher.lastName;
-                            newResearcher.institute = researcher.institute ?? "Ukjent";
-                            newResearcher.institution = researcher.institution ?? "Ukjent";
-                            newResearcher.position = researcher.position ?? "Ukjent";
-                            newResearcher.similarities = user.similarities;
-                            newResearcher.neutrality = false;
+
+                            newResearcher = new ResearcherRelevance
+                            {
+                                cristinID = user.cristinID,
+                                firstName = researcher.firstName,
+                                lastName = researcher.lastName,
+                                institute = researcher.institute ?? "Ukjent",
+                                institution = researcher.institution ?? "Ukjent",
+                                position = researcher.position ?? "Ukjent",
+                                similarities = user.similarities,
+                                neutrality = false
+                            };
                         }
                         else
                         {
-                            newResearcher.cristinID = user.cristinID;
-                            newResearcher.firstName = researcher.firstName;
-                            newResearcher.lastName = researcher.lastName;
-                            newResearcher.institute = researcher.institute ?? "Ukjent";
-                            newResearcher.institution = researcher.institution ?? "Ukjent";
-                            newResearcher.position = researcher.position ?? "Ukjent";
-                            newResearcher.similarities = user.similarities;
-                            newResearcher.neutrality = true;
-
+                            newResearcher = new ResearcherRelevance
+                            {
+                                cristinID = user.cristinID,
+                                firstName = researcher.firstName,
+                                lastName = researcher.lastName,
+                                institute = researcher.institute ?? "Ukjent",
+                                institution = researcher.institution ?? "Ukjent",
+                                position = researcher.position ?? "Ukjent",
+                                similarities = user.similarities,
+                                neutrality = true
+                            };
                         }
-                        newResearcher.enviroment = currentInstitution.Contains(researcher.institution) ? true : false;
+
+                        var comparedInstitutions = db.tilhorighet.Where(t => t.cristinID == user.cristinID).Select(t => t.institusjon).ToList();
+                        newResearcher.enviroment = currentInstitutions.Where(cur => comparedInstitutions.Contains(cur)).FirstOrDefault() != null ? true : false;
                         researcherList.Add(newResearcher);
                     }
                 }
