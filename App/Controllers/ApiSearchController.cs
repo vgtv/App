@@ -15,9 +15,19 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public async Task<HttpResponseMessage> Get(string searchQuery)
+        ApiSearchController()
         {
-            var searchResults = await dataAccess.GetUsersAsync(searchQuery);
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiSearchController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
+
+        public HttpResponseMessage Get(string searchQuery)
+        {
+            var searchResults = dataAccess.GetUsers(searchQuery);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No user found"); // ""

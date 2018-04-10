@@ -11,23 +11,40 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 })
 export class ProfileComponent implements OnInit {
   cristinID: string;
-  private navigation: any;
-  private progressBar: any;
+  navigation: any; // sub
+  progressBar: any; // sub
   progressText: string;
+
+  activeProfile: boolean;
+  showMessage: boolean;
 
   showProgress: boolean;
   showPlot: boolean;
   showTable: boolean;
   showContent: boolean;
 
-  constructor(private router: ActivatedRoute, public loader: LoadingBarService) {}
+  constructor(private router: ActivatedRoute, public loader: LoadingBarService) { }
+
+  ngOnInit() {
+    this.setupSubscriptions();
+  }
+
+  ngOnDestroy() {
+    this.navigation.unsubscribe();
+    this.progressBar.unsubscribe();
+  }
+
+  setActive(state: boolean) {
+    this.activeProfile = state;
+    this.showMessage = !state;
+  }
 
   setPlotState(state: boolean) {
     if (state === true) {
       this.showPlot = true;
     }
     this.readyToShow();
-  } 
+  }
 
   setTableState(state: boolean) {
     if (state === true) {
@@ -42,19 +59,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.setupSubscription();
-  }
-
-  setupSubscription() {
+  setupSubscriptions() {
     this.navigation = this.router.params.subscribe(params => {
-
       this.cristinID = params['id'];
       this.showTable = false;
       this.showPlot = false;
       this.showContent = false;
       this.showProgress = true;
-
+      this.activeProfile = false;
+      this.showMessage = false;
 
       if (this.progressBar) {
         this.loader.set(0);
@@ -62,30 +75,30 @@ export class ProfileComponent implements OnInit {
       }
 
       this.progressBar = this.loader.progress$.subscribe(progress => {
-        if (progress == 0) {
-          this.progressText = "";
+        if (progress === 0) {
+          this.progressText = '';
         }
         else if (progress > 0 && progress < 45) {
-          this.progressText = "Vi matcher nå fagfeltet til denne profilen..";
+          this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
         }
         else if (progress >= 45 && progress < 60) {
-          this.progressText = "Oppretter relevans profil..";
+          this.progressText = 'Oppretter relevans profil..';
         }
         else if (progress >= 60 && progress < 75) {
-          this.progressText = "Oppretter habilitet profil..";
+          this.progressText = 'Oppretter habilitet profil..';
         }
         else if (progress >= 75 && progress < 90) {
           if (this.showPlot) {
-            this.progressText = "Laster inn tabell data..";
+            this.progressText = 'Laster inn tabell data..';
           } else {
-            this.progressText = "Laster inn visualiserings data..";
+            this.progressText = 'Laster inn visualiserings data..';
           }
         }
         else if (progress >= 90 && progress < 100) {
           if (this.showPlot) {
-            this.progressText = "Laster inn tabell data..";
+            this.progressText = 'Laster inn tabell data..';
           } else {
-            this.progressText = "Laster inn visualiserings data..";
+            this.progressText = 'Laster inn visualiserings data..';
           }
         }
         else if (progress >= 100) {
@@ -94,11 +107,6 @@ export class ProfileComponent implements OnInit {
           this.progressBar.unsubscribe();
         }
       });
-    });   
-  }
-
-  ngOnDestroy() {
-    this.navigation.unsubscribe();
-    this.progressBar.unsubscribe();
+    });
   }
 }

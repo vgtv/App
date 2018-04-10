@@ -14,7 +14,17 @@ namespace App.Controllers
     public class ApiLegendController : ApiController
     {
 
-        private readonly iApiRepository dataAccess = new ApiRepository();
+        private readonly iApiRepository dataAccess;
+
+        ApiLegendController()
+        {
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiLegendController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
 
         public HttpResponseMessage Get(string cristinID)
         {

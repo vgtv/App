@@ -5,7 +5,7 @@
     </span>
   </ng-template>
 
-  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="neutrality">
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioNeutrality" [(ngModel)]="neutrality">
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="true"> Habil
     </label>
@@ -14,7 +14,7 @@
     </label>
   </div>
 
-  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="enviroment">
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioEnviroment" [(ngModel)]="enviroment">
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="true"> Intern
     </label>
@@ -23,28 +23,30 @@
     </label>
   </div>
 
-  <table class="table table-hover table-light">
-    <thead class="thead-light">
-      <tr>
-        <th>Relevans</th>
-        <th>Forsker</th>
-        <th>Posisjon</th>
-        <th>Institusjon</th>
-        <th>Institutt</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
-        <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
-        <td>{{person.firstName}} {{person.lastName}}</td>
-        <td>{{person?.position}}</td>
-        <td>{{person?.institution}}</td>
-        <td>{{person?.institute}}</td>
-        <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)" /></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-hover table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>Relevans</th>
+          <th>Forsker</th>
+          <th>Posisjon</th>
+          <th>Institusjon</th>
+          <th>Institutt</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
+          <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
+          <td>{{person.firstName}} {{person.lastName}}</td>
+          <td>{{person?.position}}</td>
+          <td>{{person?.institution}}</td>
+          <td>{{person?.institute}}</td>
+          <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
 </div>
 

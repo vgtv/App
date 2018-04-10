@@ -111,7 +111,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n    <div class=\"container\" id=\"userinfo\">\r\n        <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -200,6 +200,7 @@ var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
 var progress_bar_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
+var progress_spinner_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-spinner.es5.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -227,6 +228,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_client_1.LoadingBarHttpClientModule,
                 progress_bar_1.MatProgressBarModule,
+                progress_spinner_1.MatProgressSpinnerModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_pagination_1.NgxPaginationModule
             ],
@@ -294,7 +296,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgress\">\r\n  <h5>{{progressText}}</h5>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-warning\">Ikke aktiv</h3>\r\n      <hr />\r\n      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen \"Om tjenesten\"</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"activeProfile\">\r\n    <div *ngIf=\"showProgress\">\r\n      <h5>{{progressText}}</h5>\r\n      <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -328,6 +330,17 @@ var ProfileComponent = /** @class */ (function () {
         this.router = router;
         this.loader = loader;
     }
+    ProfileComponent.prototype.ngOnInit = function () {
+        this.setupSubscriptions();
+    };
+    ProfileComponent.prototype.ngOnDestroy = function () {
+        this.navigation.unsubscribe();
+        this.progressBar.unsubscribe();
+    };
+    ProfileComponent.prototype.setActive = function (state) {
+        this.activeProfile = state;
+        this.showMessage = !state;
+    };
     ProfileComponent.prototype.setPlotState = function (state) {
         if (state === true) {
             this.showPlot = true;
@@ -345,10 +358,7 @@ var ProfileComponent = /** @class */ (function () {
             this.showContent = true;
         }
     };
-    ProfileComponent.prototype.ngOnInit = function () {
-        this.setupSubscription();
-    };
-    ProfileComponent.prototype.setupSubscription = function () {
+    ProfileComponent.prototype.setupSubscriptions = function () {
         var _this = this;
         this.navigation = this.router.params.subscribe(function (params) {
             _this.cristinID = params['id'];
@@ -356,37 +366,39 @@ var ProfileComponent = /** @class */ (function () {
             _this.showPlot = false;
             _this.showContent = false;
             _this.showProgress = true;
+            _this.activeProfile = false;
+            _this.showMessage = false;
             if (_this.progressBar) {
                 _this.loader.set(0);
                 _this.progressBar.unsubscribe();
             }
             _this.progressBar = _this.loader.progress$.subscribe(function (progress) {
-                if (progress == 0) {
-                    _this.progressText = "";
+                if (progress === 0) {
+                    _this.progressText = '';
                 }
                 else if (progress > 0 && progress < 45) {
-                    _this.progressText = "Vi matcher nå fagfeltet til denne profilen..";
+                    _this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
                 }
                 else if (progress >= 45 && progress < 60) {
-                    _this.progressText = "Oppretter relevans profil..";
+                    _this.progressText = 'Oppretter relevans profil..';
                 }
                 else if (progress >= 60 && progress < 75) {
-                    _this.progressText = "Oppretter habilitet profil..";
+                    _this.progressText = 'Oppretter habilitet profil..';
                 }
                 else if (progress >= 75 && progress < 90) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabell data..";
+                        _this.progressText = 'Laster inn tabell data..';
                     }
                     else {
-                        _this.progressText = "Laster inn visualiserings data..";
+                        _this.progressText = 'Laster inn visualiserings data..';
                     }
                 }
                 else if (progress >= 90 && progress < 100) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabell data..";
+                        _this.progressText = 'Laster inn tabell data..';
                     }
                     else {
-                        _this.progressText = "Laster inn visualiserings data..";
+                        _this.progressText = 'Laster inn visualiserings data..';
                     }
                 }
                 else if (progress >= 100) {
@@ -396,10 +408,6 @@ var ProfileComponent = /** @class */ (function () {
                 }
             });
         });
-    };
-    ProfileComponent.prototype.ngOnDestroy = function () {
-        this.navigation.unsubscribe();
-        this.progressBar.unsubscribe();
     };
     ProfileComponent = __decorate([
         core_1.Component({
@@ -433,7 +441,7 @@ var CallbackPipe = /** @class */ (function () {
     function CallbackPipe() {
     }
     CallbackPipe.prototype.transform = function (items, toggle, toggle2) {
-        return items.filter(function (item) { return item.neutrality === toggle && item.enviroment == toggle2; });
+        return items.filter(function (item) { return item.neutrality === toggle && item.enviroment === toggle2; });
     };
     CallbackPipe = __decorate([
         core_1.Pipe({
@@ -451,7 +459,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n        <th></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n        <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -607,7 +615,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"ready\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n  <div class=\"container\">\r\n    <google-chart [data]=\"scatterChartData\"></google-chart>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n      <google-chart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -778,7 +786,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--  Denne er for topnav -->\r\n\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <!--<span *ngIf=\"searching\">...</span>-->\r\n    <!--<div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>-->\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!--  Denne er for forsiden  -->\r\n\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group d-flex justify-content-center\">\r\n    <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg col-md-6 nav-shadow\"\r\n           [class.is-invalid]=\"searchFailed\"\r\n           [(ngModel)]=\"model\"\r\n           [ngbTypeahead]=\"search\"\r\n           placeholder=\"Søk etter norsk forsker\"\r\n           [resultFormatter]=\"formatMatches\"\r\n           [inputFormatter]=\"resultMatches\" />\r\n    <span *ngIf=\"searching\">...</span>\r\n    <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Sorry, suggestions could not be loaded.</div>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center\">\r\n    <button class=\"btn btn-lg btn-warning col-sm-2\" type=\"submit\" (click)=\"onSearch()\" (keyup.enter)=\"onSearch()\">Søk</button>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n    <div class=\"form-inline\">\r\n        <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg mr-sm-2\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"resultMatches\">\r\n        <button class=\"btn btn-lg btn-warning\" type=\"submit\" (click)=\"onSearch()\">Søk</button>\r\n    </div>\r\n</div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group\">\r\n    <div class=\"input-group col-md-8\">\r\n      <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             style=\"height:3em\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\" />\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n          <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1038,7 +1046,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav d-flex justify-content-start\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"nav navbar-nav d-flex justify-content-center\" *ngIf=\"default\">\r\n      <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"navbar-nav d-flex justify-content-end\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1188,7 +1196,7 @@ var UserinfoComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Info changing");
+                        console.log('Info changing');
                         this.showInfo = false;
                         return [4 /*yield*/, this.initializeUserInfo(this.input)];
                     case 1:
@@ -1248,7 +1256,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1314,6 +1322,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var WordcloudComponent = /** @class */ (function () {
     function WordcloudComponent(http) {
         this.http = http;
+        this.activeCloud = new core_1.EventEmitter();
         this.apiURL = 'api/apiwordcloud?cristinID=';
         this.apiURL2 = 'api/apilegend?cristinID=';
         this.setupTagCloud();
@@ -1344,12 +1353,15 @@ var WordcloudComponent = /** @class */ (function () {
                                 _this.data = results;
                                 _this.getLegend(cristinID);
                                 _this.showCloud = true;
+                                _this.activeCloud.emit(true);
                                 resolve();
                             }, function (response) {
                                 if (response.error === 'No data found for user') {
                                     _this.showCloud = false;
+                                    _this.activeCloud.emit(false);
                                 }
                                 else {
+                                    _this.activeCloud.emit(false);
                                     reject();
                                 }
                             });
@@ -1376,6 +1388,10 @@ var WordcloudComponent = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", String)
     ], WordcloudComponent.prototype, "input", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], WordcloudComponent.prototype, "activeCloud", void 0);
     WordcloudComponent = __decorate([
         core_1.Component({
             selector: 'app-wordcloud',

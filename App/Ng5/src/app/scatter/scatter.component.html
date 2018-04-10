@@ -1,11 +1,10 @@
-<div class="row" *ngIf="ready">
-  <div class="col text-center">
-    <h1><strong>Forskningsmiljø</strong></h1>
-  </div>
-  <div class="container">
-    <google-chart [data]="scatterChartData"></google-chart>
+<div class="container-fluid" id="scatter" *ngIf="ready">
+  <div class="col-sm">
+    <div class="col text-center">
+      <h1><strong>Forskningsmiljø</strong></h1>
+    </div>
+    <div class="container">
+      <google-chart [data]="scatterChartData"></google-chart>
+    </div>
   </div>
 </div>
-
-
-

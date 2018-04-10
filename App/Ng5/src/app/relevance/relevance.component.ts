@@ -20,9 +20,9 @@ export class RelevanceComponent {
 
   dataTable: Array<Relevance>;
   apiURL = 'api/apirelevance?cristinID=';
-  neutrality: boolean = true;
-  enviroment: boolean = true;
-  page: number = 1;
+  neutrality = true;
+  enviroment = true;
+  page = 1;
   pendingHttp: any;
 
   constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
@@ -49,8 +49,8 @@ export class RelevanceComponent {
   ngOnDestroy() {
     this.pendingHttp.unsubscribe();
   }
-  
-  async initializeTable(cristinID: string) {    
+
+  async initializeTable(cristinID: string) {
       this.pendingHttp = this.http.get<Relevance[]>(this.apiURL + cristinID)
         .subscribe(results => {
           this.dataTable = results;
@@ -62,8 +62,8 @@ export class RelevanceComponent {
              // vis at det ikke finnes data for bruker
           } else {
             this.showTable.emit(false);
-            console.error(msg.status);           
+            console.error(msg.status);
           }
         });
-    }  
+    }
 }

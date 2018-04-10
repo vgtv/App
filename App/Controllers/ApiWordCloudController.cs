@@ -16,9 +16,19 @@ namespace App.Controllers
 
         private readonly iApiRepository dataAccess = new ApiRepository();
 
-        public async Task<HttpResponseMessage> Get(string cristinID)
+        ApiWordCloudController()
         {
-            var searchResults = await dataAccess.GetWordCloudAsync(cristinID);
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiWordCloudController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
+
+        public HttpResponseMessage Get(string cristinID)
+        {
+            var searchResults = dataAccess.GetWordCloud(cristinID);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");
