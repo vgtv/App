@@ -82,23 +82,23 @@ export class ProfileComponent implements OnInit {
           this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
         }
         else if (progress >= 45 && progress < 60) {
-          this.progressText = 'Oppretter relevans profil..';
+          this.progressText = 'Oppretter relevansprofil..';
         }
         else if (progress >= 60 && progress < 75) {
-          this.progressText = 'Oppretter habilitet profil..';
+          this.progressText = 'Oppretter habilitetprofil..';
         }
         else if (progress >= 75 && progress < 90) {
           if (this.showPlot) {
-            this.progressText = 'Laster inn tabell data..';
+            this.progressText = 'Laster inn tabelldata..';
           } else {
-            this.progressText = 'Laster inn visualiserings data..';
+            this.progressText = 'Laster inn visualiseringsdata..';
           }
         }
         else if (progress >= 90 && progress < 100) {
           if (this.showPlot) {
-            this.progressText = 'Laster inn tabell data..';
+            this.progressText = 'Laster inn tabelldata..';
           } else {
-            this.progressText = 'Laster inn visualiserings data..';
+            this.progressText = 'Laster inn visualiseringsdata..';
           }
         }
         else if (progress >= 100) {

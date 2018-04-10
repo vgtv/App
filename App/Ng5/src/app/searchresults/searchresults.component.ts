@@ -12,10 +12,13 @@ const PARAMS = new HttpParams();
   styleUrls: ['./searchresults.component.scss']
 })
 export class SearchresultsComponent implements OnInit {
-  private query: string;
-  private sub: any;
-  private results: Array<Results>;
-  private searchResults: boolean;
+  query: string;
+  sub: any;
+  page = 1;
+  results: Array<Results>;
+  searchResults: boolean;
+  totalHits: number;
+  loading: boolean;
 
   constructor(private router: ActivatedRoute, private http: HttpClient) { }
 
@@ -30,16 +33,25 @@ export class SearchresultsComponent implements OnInit {
   }
 
   async getSearchResults(query: string) {
+    this.loading = true;
     await new Promise((resolve, reject) => {
       this.http.get<Results[]>(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()
         .then(results => {
+          this.loading = false;
           this.results = results;
+          this.searchResults = true;
+          this.totalHits = this.results.length > 0 ? this.results.length : 0;
           resolve();
         },
         response => {
-          console.log(response);
-          if (response.error === 'No data found for user') {
+          if (response.error === 'No user found') {
+            this.totalHits = 0;
+            this.loading = false;
+            this.searchResults = false;
           } else {
+            this.totalHits = 0;
+            this.loading = false;
+            this.searchResults = false;
             reject();
           }
         });
