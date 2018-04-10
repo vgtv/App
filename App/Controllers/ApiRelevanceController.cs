@@ -17,8 +17,18 @@ namespace App.Controllers
 {
     public class ApiRelevanceController : ApiController
     {
-        private readonly iApiRepository dataAccess = new ApiRepository();
 
+        private readonly iApiRepository dataAccess;
+
+        ApiRelevanceController()
+        {
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiRelevanceController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
         public HttpResponseMessage Get(string cristinID, CancellationToken cancellationToken)
         {
             List<ResearcherRelevance> searchResults = new List<ResearcherRelevance>();

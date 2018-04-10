@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,7 +12,9 @@ export class WordcloudComponent {
   @Input() input: string;
   data: Array<CloudData>;
   showCloud: boolean;
-  count: string;
+  @Output() activeCloud = new EventEmitter<boolean>();
+
+  count: number;
   apiURL = 'api/apiwordcloud?cristinID=';
   apiURL2 = 'api/apilegend?cristinID=';
   options: CloudOptions;
@@ -34,12 +36,15 @@ export class WordcloudComponent {
           this.data = results;
           this.getLegend(cristinID);
           this.showCloud = true;
+          this.activeCloud.emit(true);
           resolve();
         },
         response => {
           if (response.error === 'No data found for user') {
             this.showCloud = false;
+            this.activeCloud.emit(false);
           } else {
+            this.activeCloud.emit(false);
             reject();
           }
         });
@@ -55,7 +60,7 @@ export class WordcloudComponent {
   }
 
   getLegend(cristinID: string) {
-    this.http.get<string>(this.apiURL2 + cristinID).subscribe(results =>
+    this.http.get<number>(this.apiURL2 + cristinID).subscribe(results =>
       this.count = results
     );
   }

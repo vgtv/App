@@ -1,5 +1,6 @@
 ﻿using App.Models;
 using App.Models.DomainModels;
+using App.Models.DomainModels.ScatterPlot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,8 +18,17 @@ namespace App.Controllers
 {
     public class ApiScatterPlotController : ApiController
     {
-        private readonly iApiRepository dataAccess = new ApiRepository();
+        private readonly iApiRepository dataAccess;
 
+        ApiScatterPlotController()
+        {
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiScatterPlotController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
         public HttpResponseMessage Get(string cristinID, CancellationToken cancellationToken)
         {
             ScatterPlot searchResults = new ScatterPlot();

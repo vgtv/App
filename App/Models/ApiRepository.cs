@@ -1,6 +1,5 @@
 ﻿using App.Models.DomainModels;
 using Microsoft.Ajax.Utilities;
-using NinjaNye.SearchExtensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +8,7 @@ using System.Web;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Threading;
+using App.Models.DomainModels.ScatterPlot;
 
 namespace App.Models
 {
@@ -25,17 +25,17 @@ namespace App.Models
          * ];
          */
 
-        public async Task<List<User>> GetUsersAsync(string searchQuery)
+        public List<User> GetUsers(string searchQuery)
         {
             using (var db = new dbEntities())
             {
-                var results = await db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
                 || p.lastname.StartsWith(searchQuery)).Select(p => new User
                 {
                     cristinID = p.cristinID,
                     firstName = p.firstname,
                     lastName = p.lastname
-                }).Take(10).ToListAsync();
+                }).Take(10).ToList();
 
                 if (results.Count() < 10)
                 {
@@ -44,7 +44,7 @@ namespace App.Models
                     results.AddRange(db.person.Where(p =>
 
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
-                  
+
                     .Select(p => new User
                     {
                         cristinID = p.cristinID,
@@ -56,32 +56,22 @@ namespace App.Models
 
 
                 var filter = GetFilter();
-                foreach (var assosciation in results)
+                foreach (var user in results)
                 {
-                    var temp = db.tilhorighet.Where(e => e.cristinID == assosciation.cristinID)
+                    var temp = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
                         .Select(e => new { pos = e.position, ins = e.institusjon })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
 
                     if (temp != null)
                     {
-                        assosciation.position = temp.pos;
-                        assosciation.institution = temp.ins;
+                        user.position = temp.pos;
+                        user.institution = temp.ins;
                     }
 
                 }
                 return results;
             }
         }
-
-        public List<string> GetFilter()
-        {
-            return new List<string>{
-                     "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor","Universitetslektor","Instituttleder",
-                    "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
-                    "Dosent","Professor ii","Forsker i","Forskningsjef", "Professor", "Professor emeritus"
-                    };
-        }
-
 
         public Researcher GetResearcherInfo(string cristinID)
         {
@@ -109,32 +99,32 @@ namespace App.Models
             }
         }
 
-        public async Task<List<Results>> GetSearchResultsAsync(string searchQuery)
+        public List<Results> GetSearchResults(string searchQuery)
         {
             if (searchQuery == "") { return null; }
 
             using (var db = new dbEntities())
             {
-                var results = await db.person.Where(p => p.firstname.StartsWith(searchQuery)
-                || p.lastname.StartsWith(searchQuery)).Select(p => new Results
-                {
-                    cristinID = p.cristinID,
-                    firstName = p.firstname,
-                    lastName = p.lastname,
-                    affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID)
-                    .Select(a => new Affiliation
-                    {
-                        institute = a.institutt,
-                        institution = a.institusjon,
-                        position = a.position
-                    }
-                    ).FirstOrDefault()
-                }).ToListAsync();
+                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+               || p.lastname.StartsWith(searchQuery)).Select(p => new Results
+               {
+                   cristinID = p.cristinID,
+                   firstName = p.firstname,
+                   lastName = p.lastname,
+                   affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID)
+                   .Select(a => new Affiliation
+                   {
+                       institute = a.institutt,
+                       institution = a.institusjon,
+                       position = a.position
+                   }
+                   ).FirstOrDefault()
+               }).ToList();
 
                 if (results.Count() < 10)
                 {
                     int limit = 10 - results.Count();
-                    results.AddRange(await db.person.Where(p =>
+                    results.AddRange(db.person.Where(p =>
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
                     .Select(p => new Results
                     {
@@ -147,7 +137,7 @@ namespace App.Models
                             institution = a.institusjon,
                             position = a.position
                         }).FirstOrDefault()
-                    }).Take(limit).ToListAsync());
+                    }).Take(limit).ToList());
 
                     results.DistinctBy(i => i.cristinID).ToList();
                     if (results.Count() <= 0)
@@ -175,7 +165,7 @@ namespace App.Models
          *       {"wordCount":6,"word":"tempor"},
          *       ];
          */
-        public async Task<List<Cloud>> GetWordCloudAsync(string cristinID)
+        public List<Cloud> GetWordCloud(string cristinID)
         {
             using (var db = new dbEntities())
             {
@@ -183,7 +173,7 @@ namespace App.Models
 
                 Random rnd = new Random();
 
-                var cloud = await db.wordcloud.Where(wc => wc.cristinID == cristinID)
+                var cloud = db.wordcloud.Where(wc => wc.cristinID == cristinID)
                     .Select(wc => new Cloud
                     {
                         weight = (int)wc.count,
@@ -191,7 +181,7 @@ namespace App.Models
                                .Select(bw => bw.baseword).FirstOrDefault() ?? db.words.Where(bw => bw.key == wc.key)
                                .Select(bw => bw.word).FirstOrDefault()
 
-                    }).ToListAsync();
+                    }).ToList();
 
                 if (cloud.Count() <= 0)
                 {
@@ -453,7 +443,7 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).ToList();
+                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).Select(e => e.forskningsID).ToList();
                 if (currentPapers == null)
                 {
                     return null;
@@ -474,7 +464,7 @@ namespace App.Models
 
 
                         ResearcherRelevance newResearcher = null;
-                        if (currentPapers.Where(a => comp.Contains(a.forskningsID)).FirstOrDefault() != null)
+                        if (currentPapers.Where(a => comp.Contains(a)).FirstOrDefault() != null)
                         {
 
                             newResearcher = new ResearcherRelevance
@@ -603,12 +593,23 @@ namespace App.Models
             }
             return scatterPlotData;
         }
+
         public short? GetLegend(string cristinID)
         {
             using (var db = new dbEntities())
             {
                 return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
             }
+        }
+
+        private List<string> GetFilter()
+        {
+            return new List<string>
+            {
+                "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor","Universitetslektor","Instituttleder",
+                "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
+                "Dosent","Professor ii","Forsker i","Forskningsjef", "Professor", "Professor emeritus"
+            };
         }
     }
 }

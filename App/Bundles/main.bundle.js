@@ -296,7 +296,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\"></app-wordcloud>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"showProgress\">\r\n  <h5>{{progressText}}</h5>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"scatter\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"relevance\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-warning\">Ikke aktiv</h3>\r\n      <hr />\r\n      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen \"Om tjenesten\"</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"activeProfile\">\r\n    <div *ngIf=\"showProgress\">\r\n      <h5>{{progressText}}</h5>\r\n      <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -330,6 +330,17 @@ var ProfileComponent = /** @class */ (function () {
         this.router = router;
         this.loader = loader;
     }
+    ProfileComponent.prototype.ngOnInit = function () {
+        this.setupSubscriptions();
+    };
+    ProfileComponent.prototype.ngOnDestroy = function () {
+        this.navigation.unsubscribe();
+        this.progressBar.unsubscribe();
+    };
+    ProfileComponent.prototype.setActive = function (state) {
+        this.activeProfile = state;
+        this.showMessage = !state;
+    };
     ProfileComponent.prototype.setPlotState = function (state) {
         if (state === true) {
             this.showPlot = true;
@@ -347,10 +358,7 @@ var ProfileComponent = /** @class */ (function () {
             this.showContent = true;
         }
     };
-    ProfileComponent.prototype.ngOnInit = function () {
-        this.setupSubscription();
-    };
-    ProfileComponent.prototype.setupSubscription = function () {
+    ProfileComponent.prototype.setupSubscriptions = function () {
         var _this = this;
         this.navigation = this.router.params.subscribe(function (params) {
             _this.cristinID = params['id'];
@@ -358,37 +366,39 @@ var ProfileComponent = /** @class */ (function () {
             _this.showPlot = false;
             _this.showContent = false;
             _this.showProgress = true;
+            _this.activeProfile = false;
+            _this.showMessage = false;
             if (_this.progressBar) {
                 _this.loader.set(0);
                 _this.progressBar.unsubscribe();
             }
             _this.progressBar = _this.loader.progress$.subscribe(function (progress) {
-                if (progress == 0) {
-                    _this.progressText = "";
+                if (progress === 0) {
+                    _this.progressText = '';
                 }
                 else if (progress > 0 && progress < 45) {
-                    _this.progressText = "Vi matcher nå fagfeltet til denne profilen..";
+                    _this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
                 }
                 else if (progress >= 45 && progress < 60) {
-                    _this.progressText = "Oppretter relevansprofil..";
+                    _this.progressText = 'Oppretter relevans profil..';
                 }
                 else if (progress >= 60 && progress < 75) {
-                    _this.progressText = "Oppretter habilitetsprofil..";
+                    _this.progressText = 'Oppretter habilitet profil..';
                 }
                 else if (progress >= 75 && progress < 90) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabelldata..";
+                        _this.progressText = 'Laster inn tabell data..';
                     }
                     else {
-                        _this.progressText = "Laster inn visualiseringsdata..";
+                        _this.progressText = 'Laster inn visualiserings data..';
                     }
                 }
                 else if (progress >= 90 && progress < 100) {
                     if (_this.showPlot) {
-                        _this.progressText = "Laster inn tabelldata..";
+                        _this.progressText = 'Laster inn tabell data..';
                     }
                     else {
-                        _this.progressText = "Laster inn visualiseringsdata..";
+                        _this.progressText = 'Laster inn visualiserings data..';
                     }
                 }
                 else if (progress >= 100) {
@@ -398,10 +408,6 @@ var ProfileComponent = /** @class */ (function () {
                 }
             });
         });
-    };
-    ProfileComponent.prototype.ngOnDestroy = function () {
-        this.navigation.unsubscribe();
-        this.progressBar.unsubscribe();
     };
     ProfileComponent = __decorate([
         core_1.Component({
@@ -435,7 +441,7 @@ var CallbackPipe = /** @class */ (function () {
     function CallbackPipe() {
     }
     CallbackPipe.prototype.transform = function (items, toggle, toggle2) {
-        return items.filter(function (item) { return item.neutrality === toggle && item.enviroment == toggle2; });
+        return items.filter(function (item) { return item.neutrality === toggle && item.enviroment === toggle2; });
     };
     CallbackPipe = __decorate([
         core_1.Pipe({
@@ -453,7 +459,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioBasic\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <table class=\"table table-hover table-light\">\r\n    <thead class=\"thead-light\">\r\n      <tr>\r\n        <th>Relevans</th>\r\n        <th>Forsker</th>\r\n        <th>Posisjon</th>\r\n        <th>Institusjon</th>\r\n        <th>Institutt</th>\r\n        <th></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n        <td>{{person.firstName}} {{person.lastName}}</td>\r\n        <td>{{person?.position}}</td>\r\n        <td>{{person?.institution}}</td>\r\n        <td>{{person?.institute}}</td>\r\n        <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -609,7 +615,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"ready\">\r\n  <div class=\"col text-center\">\r\n    <h1><strong>Forskningsmiljø</strong></h1>\r\n  </div>\r\n  <div class=\"container\">\r\n    <google-chart [data]=\"scatterChartData\"></google-chart>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n      <google-chart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -900,14 +906,14 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<h1>Søkeresultat for \"Lorum\"</h1>\r\n  <p>antall treff ?</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <table class = \"table table-hover table-light\">\r\n    <thead class=\"thead-light\">\r\n      <tr>\r\n        <th>\r\n          <h3>Navn</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Posisjon</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Institusjon</h3>\r\n        </th>\r\n        <th>\r\n          <h3>Institutt</h3>\r\n        </th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr class = \"clickable\" style=\"cursor:pointer\" *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\"  [routerLink]=\"['/profile', obj.cristinID]\">\r\n        <td class=\"text-primary\">\r\n          {{obj.firstName}} {{obj.lastName}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.position}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.institution}}\r\n        </td>\r\n        <td class=\"text-primary\">\r\n          {{obj.affiliation?.institute}}\r\n        </td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
+module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\">\r\n    <li>\r\n     <a [routerLink]=\"['/profile', obj.cristinID]\"><span class=\"badge\">{{obj.cristinID}}</span> {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/searchresults/searchresults.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = "clickable {\n  cursor: pointer; }\n\n.tr {\n  padding: 0; }\n"
+module.exports = ""
 
 /***/ }),
 
@@ -1190,7 +1196,7 @@ var UserinfoComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Info changing");
+                        console.log('Info changing');
                         this.showInfo = false;
                         return [4 /*yield*/, this.initializeUserInfo(this.input)];
                     case 1:
@@ -1250,7 +1256,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1316,6 +1322,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var WordcloudComponent = /** @class */ (function () {
     function WordcloudComponent(http) {
         this.http = http;
+        this.activeCloud = new core_1.EventEmitter();
         this.apiURL = 'api/apiwordcloud?cristinID=';
         this.apiURL2 = 'api/apilegend?cristinID=';
         this.setupTagCloud();
@@ -1346,12 +1353,15 @@ var WordcloudComponent = /** @class */ (function () {
                                 _this.data = results;
                                 _this.getLegend(cristinID);
                                 _this.showCloud = true;
+                                _this.activeCloud.emit(true);
                                 resolve();
                             }, function (response) {
                                 if (response.error === 'No data found for user') {
                                     _this.showCloud = false;
+                                    _this.activeCloud.emit(false);
                                 }
                                 else {
+                                    _this.activeCloud.emit(false);
                                     reject();
                                 }
                             });
@@ -1378,6 +1388,10 @@ var WordcloudComponent = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", String)
     ], WordcloudComponent.prototype, "input", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], WordcloudComponent.prototype, "activeCloud", void 0);
     WordcloudComponent = __decorate([
         core_1.Component({
             selector: 'app-wordcloud',

@@ -16,7 +16,7 @@ export class UserinfoComponent {
   constructor(private http: HttpClient) {}
 
   async ngOnChanges() {
-    console.log("Info changing");
+    console.log('Info changing');
     this.showInfo = false;
     await this.initializeUserInfo(this.input);
   }

@@ -14,10 +14,20 @@ namespace App.Controllers
     public class ApiSearchFullTextController : ApiController
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
-
-        public async Task<HttpResponseMessage> Get(string searchQuery)
+        
+        ApiSearchFullTextController()
         {
-            var searchResults = await dataAccess.GetSearchResultsAsync(searchQuery);
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiSearchFullTextController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
+
+        public HttpResponseMessage Get(string searchQuery)
+        {
+            var searchResults = dataAccess.GetSearchResults(searchQuery);
             if (searchResults == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No user found"); // ""

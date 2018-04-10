@@ -9,7 +9,6 @@ namespace App.Models.DomainModels
     {
         public string cristinID { get; set; }
         public double similarities { get; set; }
-
         public string quality { get; set; }
         public string publications { get; set; }
     }

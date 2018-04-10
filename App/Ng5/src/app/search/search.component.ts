@@ -48,7 +48,7 @@ export class NgbdTypeaheadHttp {
 
   onSearch() {
     if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
-      if (typeof this.model.cristinID !== 'undefined') { // trykket ikke på en person
+      if (typeof this.model.cristinID !== 'undefined') { // trykket ikke paa en person
         this.router.navigate(['/profile', this.model.cristinID]);
       } else {
         this.router.navigate(['/search', this.model]);
@@ -57,7 +57,7 @@ export class NgbdTypeaheadHttp {
   }
 
   formatMatches = (value: any) =>
-    value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution;
+    value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution
 
   resultMatches = (value: any) => value.firstName + ' ' + value.lastName;
 

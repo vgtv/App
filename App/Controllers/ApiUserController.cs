@@ -15,6 +15,17 @@ namespace App.Controllers
     {
         private readonly iApiRepository dataAccess = new ApiRepository();
 
+
+        ApiUserController()
+        {
+            dataAccess = new ApiRepository();
+        }
+
+        public ApiUserController(iApiRepository stub)
+        {
+            dataAccess = stub;
+        }
+
         public HttpResponseMessage Get(string cristinID)
         {
             var searchResults = dataAccess.GetResearcherInfo(cristinID);

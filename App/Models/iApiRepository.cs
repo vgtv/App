@@ -1,4 +1,5 @@
 ﻿using App.Models.DomainModels;
+using App.Models.DomainModels.ScatterPlot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace App.Models
     public interface iApiRepository
     {
         short? GetLegend(string cristinID);
-        Task<List<Results>> GetSearchResultsAsync(string searchQuery);
-        Task<List<User>> GetUsersAsync(string searchQuery);
+        List<Results> GetSearchResults(string searchQuery);
+        List<User> GetUsers(string searchQuery);
         Researcher GetResearcherInfo(string cristinID);
-        Task<List<Cloud>> GetWordCloudAsync(string cristinID);
+        List<Cloud> GetWordCloud(string cristinID);
         List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken);
         ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken);
         List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken);

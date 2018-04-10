@@ -6,6 +6,6 @@ import { PipeTransform, Pipe } from '@angular/core';
 })
 export class CallbackPipe implements PipeTransform {
   transform(items: Array<any>, toggle: boolean, toggle2: boolean): Array<any> {
-    return items.filter(item => item.neutrality === toggle && item.enviroment == toggle2);
+    return items.filter(item => item.neutrality === toggle && item.enviroment === toggle2);
   }
 }
