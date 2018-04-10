@@ -7,7 +7,7 @@
       <app-wordcloud [input]="cristinID" (activeCloud)="setActive($event)"></app-wordcloud>
     </div>
     <div *ngIf="showMessage">
-      <h3 class="text-warning">Ikke aktiv</h3>
+      <h3 class="text-danger">Ikke aktiv</h3>
       <hr />
       <p>Denne profilen er ikke aktiv i dette prosjektet.</p>
       <p>Du kan lese mer om de ulike kravene i seksjonen "Om tjenesten"</p>

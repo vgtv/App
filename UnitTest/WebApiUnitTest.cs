@@ -287,26 +287,21 @@ namespace WebAPI.UnitTest
             };
 
             // Act
-            var response = controller.Get("Ol");
+            var response = controller.Get("Peder");
             var responseString = response.Content.ReadAsStringAsync().Result;
             dynamic results = JsonConvert.DeserializeObject<dynamic>(responseString);
 
             // Assert
             Assert.AreEqual("10", (string)results[0].cristinID);
-            Assert.AreEqual("Ole", (string)results[0].firstName);
+            Assert.AreEqual("Peder", (string)results[0].firstName);
             Assert.AreEqual("Aasen", (string)results[0].lastName);
             Assert.AreEqual("OsloMet", (string)results[0].institution);
             Assert.AreEqual("Forskersjef", (string)results[0].position);
 
-            Assert.AreEqual("100", (string)results[1].cristinID);
-            Assert.AreEqual("Peder", (string)results[1].firstName);
-            Assert.AreEqual("Olhilde", (string)results[1].lastName);
-            Assert.AreEqual("UiO", (string)results[1].institution);
-            Assert.AreEqual("Konsulent", (string)results[1].position);
         }
 
         [TestMethod]
-        public void GetUsersStartsWithOK()
+        public void GetUsersContainsOK()
         {
             // Arrange
             iApiRepository stub = new ApiRepositoryStub();
@@ -317,22 +312,17 @@ namespace WebAPI.UnitTest
             };
 
             // Act
-            var response = controller.Get("lga");
+            var response = controller.Get("hule");
             var responseString = response.Content.ReadAsStringAsync().Result;
             dynamic results = JsonConvert.DeserializeObject<dynamic>(responseString);
 
             // Assert
-            Assert.AreEqual("10", (string)results[0].cristinID);
+            Assert.AreEqual("100", (string)results[0].cristinID);
             Assert.AreEqual("Helga", (string)results[0].firstName);
-            Assert.AreEqual("Aasen", (string)results[0].lastName);
-            Assert.AreEqual("OsloMet", (string)results[0].institution);
-            Assert.AreEqual("Forskersjef", (string)results[0].position);
+            Assert.AreEqual("Bihule", (string)results[0].lastName);
+            Assert.AreEqual("UiO", (string)results[0].institution);
+            Assert.AreEqual("Konsulent", (string)results[0].position);
 
-            Assert.AreEqual("100", (string)results[1].cristinID);
-            Assert.AreEqual("Elgar", (string)results[1].firstName);
-            Assert.AreEqual("Bihule", (string)results[1].lastName);
-            Assert.AreEqual("UiO", (string)results[1].institution);
-            Assert.AreEqual("Konsulent", (string)results[1].position);
         }
 
         [TestMethod]

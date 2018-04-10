@@ -1,42 +1,52 @@
-<h2>Søkeresultat for "{{query}}"</h2>
+<div class="container-fluid">
+  <br />
+  <h2>Søkeresultat for "{{query}}"</h2>
 
-<mat-progress-spinner *ngIf="loading" [diameter]="25" mode="indeterminate"></mat-progress-spinner>
-<h3 *ngIf="!loading">Antall treff: {{totalHits}}</h3>
+  <mat-progress-spinner *ngIf="loading" [diameter]="25" mode="indeterminate"></mat-progress-spinner>
+  <h3 *ngIf="!loading">Antall treff: {{totalHits}}</h3>
 
-<div class="col-sm-10" *ngIf="searchResults">
-  <table class="table table-hover table-light">
-    <thead class="thead-light">
-      <tr>
-        <th>
-          <h4>Navn</h4>
-        </th>
-        <th>
-          <h4>Posisjon</h4>
-        </th>
-        <th>
-          <h4>Institusjon</h4>
-        </th>
-        <th>
-          <h4>Institutt</h4>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="clickable" style="cursor:pointer" *ngFor="let obj of results  |  paginate: { itemsPerPage: 10, currentPage: page }" [routerLink]="['/profile', obj.cristinID]">
-        <td class="text-primary">
-          {{obj.firstName}} {{obj.lastName}}
-        </td>
-        <td class="text-primary">
-          {{obj.affiliation?.position}}
-        </td>
-        <td class="text-primary">
-          {{obj.affiliation?.institution}}
-        </td>
-        <td class="text-primary">
-          {{obj.affiliation?.institute}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
+  <div class="row justify-content-center">
+    <div class=" col-sm-10" *ngIf="searchResults">
+      <table class="table table-hover table-light">
+        <thead class="thead-light">
+          <tr>
+            <th>
+              <h4>Navn</h4>
+            </th>
+            <th>
+              <h4>Posisjon</h4>
+            </th>
+            <th>
+              <h4>Institusjon</h4>
+            </th>
+            <th>
+              <h4>Institutt</h4>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="clickable" style="cursor:pointer" *ngFor="let obj of results  |  paginate: { itemsPerPage: 10, currentPage: page }" [routerLink]="['/profile', obj.cristinID]">
+            <td class="text-primary">
+              {{obj.firstName}} {{obj.lastName}}
+            </td>
+            <td class="text-primary">
+              {{obj.affiliation?.position}}
+            </td>
+            <td class="text-primary">
+              {{obj.affiliation?.institution}}
+            </td>
+            <td class="text-primary">
+              {{obj.affiliation?.institute}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row justify-content-center">
+        <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+    </div>
+  </div>
+
+
 </div>

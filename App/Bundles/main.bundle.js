@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "/about\r\n"
+module.exports = "\r\n\r\n\r\n\r\n<div class=\"container-fluid col-sm-5\">\r\n  <br />\r\n  <h2>Hva er denne tjenesten?</h2>\r\n  <hr />\r\n\r\n  <p class=\"text-justify\">\r\n    Tjenesten er laget i forbindelse med en bacheloroppgave ved Oslo Metropolitan University.\r\n    Av en behovsanalyse bachelorgruppen utførte internt på universitetet fant vi ut at det var et behov\r\n    for å finne relevante og habile forskere. Dette er vårt svar på denne etterspørselen.\r\n    Tjenesten er først og fremst et konsept, som skal kunne vise at det eksisterer muligheter for\r\n    å dekke denne etterspørselen.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    I denne tjenesten kan du finne ut hva en akademiker faktisk forsker på og den sitt tilhørende forskningsmiljø.\r\n    Dette åpner for muligheter for å finne relevante forskere med like interesser.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Vi jobber på en database fra et tidligere prosjekt:\r\n    <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/\">Forskningsindeksen</a>.\r\n    Denne databasen stammer fra deres webscrapping av den norske forskningsportalen\r\n    cristin.no.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Forskningsmiljø vil bli generert live fra databasen og vil derfor bruke litt ekstra tid på beregninger.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    For å kvalitetsikre et forskningsmiljø og til hensyn til lagringskapasitet\r\n    har vi satt et krav at en forsker minst skal ha 3 engelsk skrevende artikler i databasen.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    For å skape konkurranse i forskningsmiljøene har vi brukt et poengsystem\r\n    der vi sammenligner antall publikasjoner og  samlet kvalitetsverdi. Dette kan også gi en pekepinn\r\n    til førstemanuiser om hva som skal til for å søke opprykk..\r\n    Du kan lese mer om poengsystemet vi bruker i scatter plot visualiseringen vår her: ...\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Om oppdragisgiver\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Om oss\r\n  </p>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -111,7 +111,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -296,7 +296,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-warning\">Ikke aktiv</h3>\r\n      <hr />\r\n      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen \"Om tjenesten\"</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"activeProfile\">\r\n    <div *ngIf=\"showProgress\">\r\n      <h5>{{progressText}}</h5>\r\n      <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-danger\">Ikke aktiv</h3>\r\n      <hr />\r\n      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen \"Om tjenesten\"</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"activeProfile\">\r\n    <div *ngIf=\"showProgress\">\r\n      <h5>{{progressText}}</h5>\r\n      <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -380,25 +380,25 @@ var ProfileComponent = /** @class */ (function () {
                     _this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
                 }
                 else if (progress >= 45 && progress < 60) {
-                    _this.progressText = 'Oppretter relevans profil..';
+                    _this.progressText = 'Oppretter relevansprofil..';
                 }
                 else if (progress >= 60 && progress < 75) {
-                    _this.progressText = 'Oppretter habilitet profil..';
+                    _this.progressText = 'Oppretter habilitetprofil..';
                 }
                 else if (progress >= 75 && progress < 90) {
                     if (_this.showPlot) {
-                        _this.progressText = 'Laster inn tabell data..';
+                        _this.progressText = 'Laster inn tabelldata..';
                     }
                     else {
-                        _this.progressText = 'Laster inn visualiserings data..';
+                        _this.progressText = 'Laster inn visualiseringsdata..';
                     }
                 }
                 else if (progress >= 90 && progress < 100) {
                     if (_this.showPlot) {
-                        _this.progressText = 'Laster inn tabell data..';
+                        _this.progressText = 'Laster inn tabelldata..';
                     }
                     else {
-                        _this.progressText = 'Laster inn visualiserings data..';
+                        _this.progressText = 'Laster inn visualiseringsdata..';
                     }
                 }
                 else if (progress >= 100) {
@@ -459,7 +459,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -786,7 +786,7 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n    <div class=\"form-inline\">\r\n        <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg mr-sm-2\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"resultMatches\">\r\n        <button class=\"btn btn-lg btn-warning\" type=\"submit\" (click)=\"onSearch()\">Søk</button>\r\n    </div>\r\n</div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"form-group\">\r\n    <div class=\"input-group col-md-8\">\r\n      <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             style=\"height:3em\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\" />\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n          <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-inline\">\r\n    <div class=\"input-group\">\r\n      <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\">\r\n\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"30\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    </div>\r\n  </div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"input-group col-md-8\">\r\n        <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n               style=\"height:3em\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"formatMatches\" />\r\n        <div class=\"input-group-append\">\r\n          <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"40\" mode=\"indeterminate\"></mat-progress-spinner>\r\n            <span *ngIf=\"!searching\">Søk</span>\r\n          </button>\r\n        </div>\r\n        <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -906,14 +906,14 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Her kommer søkeresultatene...</p>\r\n\r\n\r\n<div class=\"col-sm-10\">\r\n  <ul *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: p }\">\r\n    <li>\r\n     <a [routerLink]=\"['/profile', obj.cristinID]\"><span class=\"badge\">{{obj.cristinID}}</span> {{obj.firstName}} {{obj.lastName}} </a>\r\n    </li>\r\n    <li>\r\n      {{obj.affiliation?.position}}\r\n      {{obj.affiliation?.institution}}\r\n      {{obj.affiliation?.institute}}\r\n    </li>\r\n  </ul>\r\n  <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"p = $event\"></pagination-controls>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <br />\r\n  <h2>Søkeresultat for \"{{query}}\"</h2>\r\n\r\n  <mat-progress-spinner *ngIf=\"loading\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n  <h3 *ngIf=\"!loading\">Antall treff: {{totalHits}}</h3>\r\n\r\n  <div class=\"row justify-content-center\">\r\n    <div class=\" col-sm-10\" *ngIf=\"searchResults\">\r\n      <table class=\"table table-hover table-light\">\r\n        <thead class=\"thead-light\">\r\n          <tr>\r\n            <th>\r\n              <h4>Navn</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Posisjon</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Institusjon</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Institutt</h4>\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr class=\"clickable\" style=\"cursor:pointer\" *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: page }\" [routerLink]=\"['/profile', obj.cristinID]\">\r\n            <td class=\"text-primary\">\r\n              {{obj.firstName}} {{obj.lastName}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.position}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.institution}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.institute}}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"row justify-content-center\">\r\n        <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/searchresults/searchresults.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "clickable {\n  cursor: pointer; }\n\n.tr {\n  padding: 0; }\n"
 
 /***/ }),
 
@@ -976,6 +976,7 @@ var SearchresultsComponent = /** @class */ (function () {
     function SearchresultsComponent(router, http) {
         this.router = router;
         this.http = http;
+        this.page = 1;
     }
     SearchresultsComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -1004,20 +1005,30 @@ var SearchresultsComponent = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
-                            _this.http.get(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()
-                                .then(function (results) {
-                                _this.results = results;
-                                resolve();
-                            }, function (response) {
-                                console.log(response);
-                                if (response.error === 'No data found for user') {
-                                }
-                                else {
-                                    reject();
-                                }
-                            });
-                        })];
+                    case 0:
+                        this.loading = true;
+                        return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                _this.http.get(URL, { params: PARAMS.set('searchQuery', query) }).toPromise()
+                                    .then(function (results) {
+                                    _this.loading = false;
+                                    _this.results = results;
+                                    _this.searchResults = true;
+                                    _this.totalHits = _this.results.length > 0 ? _this.results.length : 0;
+                                    resolve();
+                                }, function (response) {
+                                    if (response.error === 'No user found') {
+                                        _this.totalHits = 0;
+                                        _this.loading = false;
+                                        _this.searchResults = false;
+                                    }
+                                    else {
+                                        _this.totalHits = 0;
+                                        _this.loading = false;
+                                        _this.searchResults = false;
+                                        reject();
+                                    }
+                                });
+                            })];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -1046,7 +1057,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" title=\"Hjem\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\" title=\"Om tjenesten\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1196,7 +1207,6 @@ var UserinfoComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('Info changing');
                         this.showInfo = false;
                         return [4 /*yield*/, this.initializeUserInfo(this.input)];
                     case 1:

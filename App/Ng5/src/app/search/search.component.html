@@ -1,38 +1,48 @@
 <!--  Denne er for topnav -->
 <div *ngIf="showTopNav">
-    <div class="form-inline">
-        <input id="typehead-http" type="text" class="form-control form-control-lg mr-sm-2"
-               [class.is-invalid]="searchFailed"
-               [(ngModel)]="model"
-               [ngbTypeahead]="search"
-               placeholder="Søk etter norsk forsker"
-               [resultFormatter]="formatMatches"
-               [inputFormatter]="resultMatches">
-        <button class="btn btn-lg btn-warning" type="submit" (click)="onSearch()">Søk</button>
-    </div>
-</div>
-
-<!--  Denne er for forsiden  -->
-<div *ngIf="!showTopNav">
-  <div class="form-group">
-    <div class="input-group col-md-8">
-      <input id="typeahead-http" type="text" class="form-control form-control-lg nav-shadow"
-             style="height:3em"
+  <div class="form-inline">
+    <div class="input-group">
+      <input id="typehead-http" type="text" class="form-control form-control-lg nav-shadow"
              [class.is-invalid]="searchFailed"
              [(ngModel)]="model"
              [ngbTypeahead]="search"
              placeholder="Søk etter norsk forsker"
              [resultFormatter]="formatMatches"
-             [inputFormatter]="resultMatches" />
+             [inputFormatter]="resultMatches">
+
       <div class="input-group-append">
         <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
-          <mat-progress-spinner *ngIf="searching" [diameter]="25" mode="indeterminate"></mat-progress-spinner>
+            <mat-progress-spinner *ngIf="searching" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
           <span *ngIf="!searching">Søk</span>
         </button>
       </div>
-      <div class="invalid-feedback" *ngIf="searchFailed">Beklager, kunne ikke laste inn data.</div>
+    </div>
     </div>
   </div>
-</div>
+
+<!--  Denne er for forsiden  -->
+<div *ngIf="!showTopNav">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="input-group col-md-8">
+        <input id="typeahead-http" type="text" class="form-control form-control-lg nav-shadow"
+               style="height:3em"
+               [class.is-invalid]="searchFailed"
+               [(ngModel)]="model"
+               [ngbTypeahead]="search"
+               placeholder="Søk etter norsk forsker"
+               [resultFormatter]="formatMatches"
+               [inputFormatter]="formatMatches" />
+        <div class="input-group-append">
+          <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
+            <mat-progress-spinner *ngIf="searching" [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+            <span *ngIf="!searching">Søk</span>
+          </button>
+        </div>
+        <div class="invalid-feedback" *ngIf="searchFailed">Beklager, kunne ikke laste inn data.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 

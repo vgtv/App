@@ -119,7 +119,7 @@ namespace App.Models
                        position = a.position
                    }
                    ).FirstOrDefault()
-               }).ToList();
+               }).Take(100).ToList();                               
 
                 if (results.Count() < 10)
                 {

@@ -76,52 +76,49 @@ namespace App.Models
             {
                 var researcher = GetResearcherInfo("20");
 
-                if (researcher != null)
+                var comparedArticles = new List<string> { "3", "2", "1" };
+
+                ResearcherRelevance newResearcher;
+                if (currentPapers.Where(a => comparedArticles.Contains(a)).FirstOrDefault() != null)
                 {
-                    var comparedArticles = new List<string> { "3", "2", "1" };
-
-                    ResearcherRelevance newResearcher;
-                    if (currentPapers.Where(a => comparedArticles.Contains(a)).FirstOrDefault() != null)
+                    newResearcher = new ResearcherRelevance
                     {
-                        newResearcher = new ResearcherRelevance
-                        {
-                            cristinID = user.cristinID,
-                            firstName = researcher.firstName,
-                            lastName = researcher.lastName,
-                            institute = researcher.institute ?? "Ukjent",
-                            institution = researcher.institution ?? "Ukjent",
-                            position = researcher.position ?? "Ukjent",
-                            similarities = user.similarities,
-                            neutrality = false
-                        };
-                    }
-                    else
-                    {
-                        newResearcher = new ResearcherRelevance
-                        {
-                            cristinID = user.cristinID,
-                            firstName = researcher.firstName,
-                            lastName = researcher.lastName,
-                            institute = researcher.institute ?? "Ukjent",
-                            institution = researcher.institution ?? "Ukjent",
-                            position = researcher.position ?? "Ukjent",
-                            similarities = user.similarities,
-                            neutrality = true
-                        };
-                    }
-
-
-                    var comparedInstitutions = new List<string> { "OsloMet", "Westerdals" };
-                    newResearcher.enviroment = currentInstitutions.Where(cur => comparedInstitutions.Contains(cur)).FirstOrDefault() != null ? true : false;
-                    researcherList.Add(newResearcher);
+                        cristinID = user.cristinID,
+                        firstName = researcher.firstName,
+                        lastName = researcher.lastName,
+                        institute = researcher.institute ?? "Ukjent",
+                        institution = researcher.institution ?? "Ukjent",
+                        position = researcher.position ?? "Ukjent",
+                        similarities = user.similarities,
+                        neutrality = false
+                    };
                 }
-
-
-                foreach (var r in researcherList)
+                else
                 {
-                    r.similarities = (5 - 1) * (r.similarities - userData.Min(e => e.similarities))
-                                     / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
+                    newResearcher = new ResearcherRelevance
+                    {
+                        cristinID = user.cristinID,
+                        firstName = researcher.firstName,
+                        lastName = researcher.lastName,
+                        institute = researcher.institute ?? "Ukjent",
+                        institution = researcher.institution ?? "Ukjent",
+                        position = researcher.position ?? "Ukjent",
+                        similarities = user.similarities,
+                        neutrality = true
+                    };
+
                 }
+                var comparedInstitutions = new List<string> { "OsloMet", "Westerdals" };
+                newResearcher.enviroment = currentInstitutions.Where(cur => comparedInstitutions.Contains(cur)).FirstOrDefault() != null ? true : false;
+                researcherList.Add(newResearcher);
+
+            }
+
+
+            foreach (var r in researcherList)
+            {
+                r.similarities = (5 - 1) * (r.similarities - userData.Min(e => e.similarities))
+                                 / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
             }
             return researcherList;
         }
@@ -255,40 +252,27 @@ namespace App.Models
 
         public List<User> GetUsers(string searchQuery)
         {
+
+            var list = new List<User>();
+
+            var user1 = new User { cristinID = "10", firstName = "Peder", lastName = "Aasen", institution = "OsloMet", position = "Forskersjef" };
+            var user2 = new User { cristinID = "100", firstName = "Helga", lastName = "Bihule", institution = "UiO", position = "Konsulent" };
+
+
+            if((user1.firstName +" "+ user1.lastName).StartsWith(searchQuery))
             {
-                var list = new List<User>();
-                if (searchQuery == "Ol")
-                {
-                    var user1 = new User { cristinID = "10", firstName = "Ole", lastName = "Aasen", institution = "OsloMet", position = "Forskersjef" };
-                    var user2 = new User { cristinID = "100", firstName = "Peder", lastName = "Olhilde", institution = "UiO", position = "Konsulent" };
-
-                    if (user1.firstName.StartsWith(searchQuery) || user1.lastName.StartsWith(searchQuery))
-                    {
-                        list.Add(user1);
-                    }
-                    if (user2.firstName.StartsWith(searchQuery) || user2.lastName.StartsWith(searchQuery))
-                    {
-                        list.Add(user2);
-                    }
-                }
-                else if (searchQuery == "lga")
-                {
-                    var user1 = new User { cristinID = "10", firstName = "Helga", lastName = "Aasen", institution = "OsloMet", position = "Forskersjef" };
-                    var user2 = new User { cristinID = "100", firstName = "Elgar", lastName = "Bihule", institution = "UiO", position = "Konsulent" };
-
-                    if (user1.firstName.Contains(searchQuery) || user1.lastName.Contains(searchQuery))
-                    {
-                        list.Add(user1);
-                    }
-                    if (user2.firstName.Contains(searchQuery) || user2.lastName.Contains(searchQuery))
-                    {
-                        list.Add(user2);
-                    }
-                }
-                return list.Count() > 0 ? list : null;
-
+                list.Add(user1);
             }
+
+            if ((user2.firstName +" "+ user2.lastName).Contains(searchQuery))
+            {
+                list.Add(user2);
+            }
+
+            return list.Count() > 0 ? list : null;
+
         }
+
 
         public List<Cloud> GetWordCloud(string cristinID)
         {
