@@ -58,14 +58,14 @@ namespace App.Models
                 var filter = GetFilter();
                 foreach (var user in results)
                 {
-                    var temp = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
+                    var assosciation = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
                         .Select(e => new { pos = e.position, ins = e.institusjon })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
 
-                    if (temp != null)
+                    if (assosciation != null)
                     {
-                        user.position = temp.pos;
-                        user.institution = temp.ins;
+                        user.position = assosciation.pos;
+                        user.institution = assosciation.ins;
                     }
 
                 }
@@ -140,6 +140,7 @@ namespace App.Models
                     }).Take(limit).ToList());
 
                     results.DistinctBy(i => i.cristinID).ToList();
+
                     if (results.Count() <= 0)
                     {
                         return null;
@@ -529,8 +530,8 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 var filter = GetFilter();
-                string mainPosition = db.tilhorighet.Where(e => e.cristinID == cristinID).Select(t => t.position)
-                    .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
+                var mainPosition = db.tilhorighet.Where(e => e.cristinID == cristinID).Select(t => new { t.position, t.institusjon })
+                    .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                 if (mainPosition == null) return null;
 
@@ -548,14 +549,16 @@ namespace App.Models
                 foreach (var match in userData)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    string position = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => t.position)
-                        .ToList().OrderByDescending(x => filter.IndexOf(x)).FirstOrDefault();
+
+                    var association = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => new { t.position, t.institusjon})
+                        .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
+
                     var rank = db.rank.Where(r => r.cristinID == match.cristinID)
                         .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
-                    if (position == null) { continue; }
+                    if (association == null) { continue; }
 
-                    string color = position == "Professor" || position == "Professor ii" ? "#0077c2" : "#80d6ff";
+                    string color = association.position == "Professor" || association.position == "Professor ii" ? "#0077c2" : "#80d6ff";
 
                     User user = db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
@@ -567,7 +570,7 @@ namespace App.Models
                     {
                         c = new List<c>{
                             new c { v = rank.quality, f = user.firstName + " " + user.lastName },
-                            new c { v = rank.publications+"", f = position },
+                            new c { v = rank.publications+"", f = association.position + ", " + association.institusjon },
                             new c { v = color, f = null }
                         }
                     });
@@ -578,7 +581,7 @@ namespace App.Models
                 {
                     c = new List<c>{
                         new c { v = mainRank.quality , f = mainUser.firstName + " " + mainUser.lastName },
-                        new c { v = mainRank.publications+"", f = mainPosition },
+                        new c { v = mainRank.publications+"", f = mainPosition.position + ", " + mainPosition.institusjon},
                         new c { v = mainColor, f = null }
                         }
                 });

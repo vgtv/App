@@ -8,8 +8,8 @@
              [ngbTypeahead]="search"
              placeholder="Søk etter norsk forsker"
              [resultFormatter]="formatMatches"
-             [inputFormatter]="resultMatches">
-
+             [inputFormatter]="resultMatches"
+             (keyup.enter)="onSearch()">
       <div class="input-group-append">
         <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
             <mat-progress-spinner *ngIf="searching" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
@@ -32,7 +32,9 @@
                [ngbTypeahead]="search"
                placeholder="Søk etter norsk forsker"
                [resultFormatter]="formatMatches"
-               [inputFormatter]="formatMatches" />
+               [inputFormatter]="resultMatches"
+               (keyup.enter)="onSearch()"
+               />
         <div class="input-group-append">
           <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
             <mat-progress-spinner *ngIf="searching" [diameter]="40" mode="indeterminate"></mat-progress-spinner>

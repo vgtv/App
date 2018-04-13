@@ -7,17 +7,10 @@
       <app-wordcloud [input]="cristinID" (activeCloud)="setActive($event)"></app-wordcloud>
     </div>
     <div *ngIf="showMessage">
-      <h3 class="text-danger">Ikke aktiv</h3>
+      <h3 class="text-danger">Ikke nok engelskspråkelige arbeider</h3>
       <hr />
-      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>
-      <p>Du kan lese mer om de ulike kravene i seksjonen "Om tjenesten"</p>
-    </div>
-  </div>
-
-  <div *ngIf="activeProfile">
-    <div *ngIf="showProgress">
-      <h5>{{progressText}}</h5>
-      <mat-progress-bar mode="determinate" [value]="loader.progress$|async" aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
+      <p>Denne profilen har ikke nok engelskspråkelige arbeider.</p>
+      <p>Du kan lese mer om de ulike kravene i seksjonen  <a routerLink="/about">"Om tjenesten"</a></p>
     </div>
   </div>
 </div>

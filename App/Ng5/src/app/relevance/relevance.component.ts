@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Relevance } from './relevance';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { Router } from '@angular/router';
@@ -62,7 +61,7 @@ export class RelevanceComponent {
              // vis at det ikke finnes data for bruker
           } else {
             this.showTable.emit(false);
-            console.error(msg.status);
+            console.error(msg.status); // videre arbeid logges i db f.eks
           }
         });
     }

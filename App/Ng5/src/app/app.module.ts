@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbdTypeaheadHttp } from './search/search.component';
+
 import { FormsModule } from '@angular/forms';
 
 import { CallbackPipe } from './relevance/callback.pipe';
@@ -15,6 +15,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { NgbdTypeaheadHttp } from './search/search.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { ScatterComponent } from './scatter/scatter.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
@@ -24,9 +25,12 @@ import { TopnavComponent } from './topnav/topnav.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
@@ -40,7 +44,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     UserinfoComponent,
     RelevanceComponent,
     TopnavComponent,
-    CallbackPipe
+    CallbackPipe,
+    DialogComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -52,11 +57,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     LoadingBarHttpClientModule,
     MatProgressBarModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgxPaginationModule
   ],
   providers: [LoadingBarService],
-  bootstrap: [AppComponent]
-})
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
+})    
 export class AppModule { }

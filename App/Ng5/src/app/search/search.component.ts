@@ -57,9 +57,9 @@ export class NgbdTypeaheadHttp {
   }
 
   formatMatches = (value: any) =>
-    value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution
+    value.firstName + ' ' + value.lastName + ' | ' + value.position + ' | ' + value.institution
 
-  resultMatches = (value: any) => value.firstName + ' ' + value.lastName;
+  resultMatches = (value: any) => value.firstName + ' ' + value.lastName + ' (' + value.position +')';
 
   search = (text$: Observable<string>) =>
     text$

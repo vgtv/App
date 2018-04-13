@@ -38,7 +38,6 @@ export class ScatterComponent {
   }
 
   async initializeScatter(cristinID: string) {
-
     this.pendingHttp = await this.http.get<any[]>(this.apiURL + cristinID)
       .subscribe(results => {
         this.scatterChartData.dataTable = results;
@@ -63,11 +62,28 @@ export class ScatterComponent {
         width: 1250, height: 850,
         backgroundColor: 'transparent',
         title: 'Publikasjoner vs. kvalitet',
+        titleTextStyle: {
+          color: '#0077c2',
+          fontSize: 20,
+          bold: true
+        },
         hAxis: {
-          title: 'Kvalitet'
+          title: 'Kvalitet',
+          titleTextStyle: {
+            color: '#0077c2',
+            fontSize: 18,
+            bold: true
+          },
         },
         legend: 'none',
-        vAxis: { title: 'Publikasjoner' },
+        vAxis: {
+          title: 'Publikasjoner',
+          titleTextStyle: {
+            color: '#0077c2',
+            fontSize: 18,
+            bold: true
+          },
+        },
         animation: {
           startup: true,
           duration: 5000,

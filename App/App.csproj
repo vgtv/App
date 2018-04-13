@@ -60,6 +60,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.5-preview1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -224,18 +227,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\db.mdf" />
-    <Content Include="App_Data\db_log.ldf">
-      <DependentUpon>db.mdf</DependentUpon>
-    </Content>
+    <Content Include="Bundles\favicon.ico" />
+    <Content Include="Bundles\index.html" />
+    <Content Include="Bundles\inline.bundle.js" />
+    <Content Include="Bundles\main.bundle.js" />
+    <Content Include="Bundles\polyfills.bundle.js" />
+    <Content Include="Bundles\styles.bundle.js" />
+    <Content Include="Bundles\vendor.bundle.js" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\indigo-pink.css" />
     <Content Include="favicon.ico" />
     <Content Include="img\android-icon-36x36.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="img\logo1.png" />
     <Content Include="Models\dataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -252,6 +257,7 @@
     <Content Include="Ng5\protractor.conf.js" />
     <Content Include="Ng5\src\app\about\about.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
+    <Content Include="Ng5\src\app\dialog\dialog.component.html" />
     <Content Include="Ng5\src\app\home\home.component.html" />
     <Content Include="Ng5\src\app\profile\profile.component.html" />
     <Content Include="Ng5\src\app\relevance\relevance.component.html" />
@@ -297,6 +303,14 @@
     <Content Include="Ng5\src\app\searchresults\searchresults.component.scss" />
     <Content Include="Ng5\src\app\relevance\relevance.component.scss" />
     <Content Include="Ng5\src\app\profile\profile.component.scss" />
+    <Content Include="Bundles\inline.bundle.js.map" />
+    <Content Include="Bundles\main.bundle.js.map" />
+    <Content Include="Bundles\polyfills.bundle.js.map" />
+    <Content Include="Bundles\styles.bundle.js.map" />
+    <Content Include="Bundles\vendor.bundle.js.map" />
+    <Content Include="Ng5\src\app\dialog\dialog.component.scss" />
+    <None Include="Properties\PublishProfiles\App20180411105445 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\App20180412120108 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -308,7 +322,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -324,6 +340,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Ng5\node_modules\npm\html\static\" />
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +363,8 @@
     <TypeScriptCompile Include="Ng5\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\dialog\dialog.component.spec.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\dialog\dialog.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.spec.ts" />
