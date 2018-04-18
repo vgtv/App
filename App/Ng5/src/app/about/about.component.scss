@@ -1,0 +1,41 @@
+a:hover {
+  text-decoration: underline;
+} 
+
+.profile-card {
+  margin-bottom:15px;
+  padding: 0.8em;
+}
+
+.profile-title {
+  color: #0d6797;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-weight: bold;
+}
+
+.profile-image {
+  margin:auto;
+  float: right;
+  border-style: solid;
+  border-color:lightgrey;
+  width:26%;
+  height:26%;
+}
+
+.profile-action {
+  margin: 0;
+}
+
+p.normal {
+  color: dimgray;
+  font-weight: normal;
+  margin-bottom: 2px;
+}
+
+p.thick {
+  color:dimgray;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+

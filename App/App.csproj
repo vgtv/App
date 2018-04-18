@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -241,6 +243,11 @@
     <Content Include="img\android-icon-36x36.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\linkedin\linkedin-anders.jpg" />
+    <Content Include="img\linkedin\linkedin-anton.png" />
+    <Content Include="img\linkedin\linkedin-julian.jpg" />
+    <Content Include="img\linkedin\linkedin-robin.jpg" />
+    <Content Include="img\linkedin\linkedin-steffen.jpg" />
     <Content Include="img\logo1.png" />
     <Content Include="Models\dataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -267,6 +274,11 @@
     <Content Include="Ng5\src\app\topnav\topnav.component.html" />
     <Content Include="Ng5\src\app\userinfo\userinfo.component.html" />
     <Content Include="Ng5\src\app\wordcloud\wordcloud.component.html" />
+    <Content Include="Ng5\src\assets\linkedin\linkedin-anders.jpg" />
+    <Content Include="Ng5\src\assets\linkedin\linkedin-anton.png" />
+    <Content Include="Ng5\src\assets\linkedin\linkedin-julian.jpg" />
+    <Content Include="Ng5\src\assets\linkedin\linkedin-robin.jpg" />
+    <Content Include="Ng5\src\assets\linkedin\linkedin-steffen.jpg" />
     <Content Include="Ng5\src\favicon.ico" />
     <Content Include="Ng5\src\index.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -309,8 +321,7 @@
     <Content Include="Bundles\styles.bundle.js.map" />
     <Content Include="Bundles\vendor.bundle.js.map" />
     <Content Include="Ng5\src\app\dialog\dialog.component.scss" />
-    <None Include="Properties\PublishProfiles\App20180411105445 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\App20180412120108 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,8 +346,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

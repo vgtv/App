@@ -26,6 +26,7 @@ export class DialogComponent {
   }
 
   setupSubscriber() {
+    this.loader.set(0);
     this.subscribe = this.loader.progress$.subscribe(progress => {
       if (progress === 0) {
         this.loadingText = '';

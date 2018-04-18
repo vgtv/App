@@ -12,19 +12,21 @@ namespace App.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class dbEntities : DbContext
     {
         public dbEntities()
             : base("name=dbEntities")
         {
+            Database.SetInitializer<DbContext>(null);
         }
-    
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<eierskap> eierskap { get; set; }
         public virtual DbSet<forfattere> forfattere { get; set; }
         public virtual DbSet<forskning> forskning { get; set; }

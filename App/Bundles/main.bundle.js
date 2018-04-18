@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n\r\n\r\n<div class=\"container-fluid col-sm-5\">\r\n  <br />\r\n  <h2>Hva er denne tjenesten?</h2>\r\n  <hr />\r\n\r\n  <p class=\"text-justify\">\r\n    Tjenesten er laget i forbindelse med en bacheloroppgave ved Oslo Metropolitan University.\r\n    Av en behovsanalyse bachelorgruppen utførte internt på universitetet fant vi ut at det var et behov\r\n    for å finne relevante og habile forskere. Dette er vårt svar på denne etterspørselen.\r\n    Tjenesten er først og fremst et konsept, som skal kunne vise at det eksisterer muligheter for\r\n    å dekke denne etterspørselen.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    I denne tjenesten kan du finne ut hva en akademiker faktisk forsker på og den sitt tilhørende forskningsmiljø.\r\n    Dette åpner for muligheter for å finne relevante forskere med like interesser.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Vi jobber på en database fra et tidligere prosjekt:\r\n    <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/\">Forskningsindeksen</a>.\r\n    Denne databasen stammer fra deres webscrapping av den norske forskningsportalen\r\n    cristin.no.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Forskningsmiljø vil bli generert live fra databasen og vil derfor bruke litt ekstra tid på beregninger.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    For å kvalitetsikre et forskningsmiljø og til hensyn til lagringskapasitet\r\n    har vi satt et krav at en forsker minst skal ha 3 engelsk skrevende artikler i databasen.\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    For å skape konkurranse i forskningsmiljøene har vi brukt et poengsystem\r\n    der vi sammenligner antall publikasjoner og  samlet kvalitetsverdi. Dette kan også gi en pekepinn\r\n    til førstemanuiser om hva som skal til for å søke opprykk..\r\n    Du kan lese mer om poengsystemet vi bruker i scatter plot visualiseringen vår her: ...\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Om oppdragisgiver\r\n  </p>\r\n\r\n  <p class=\"text-justify\">\r\n    Om oss\r\n  </p>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <br />\r\n  <h2 class=\"text-center\">Om Tjenesten</h2>\r\n  <hr />\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <p class=\"text-justify\">\r\n        \"Tjenesten\" er basert på en datainnsamling fra 2007-2016 hentet fra det nåværende forskningsinformasjonssystemet i Norge, <a href=\"http://www.cristin.no/\">Cristin</a>.\r\n        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,\r\n        for så å kategorsiere forskere med like interesseområder.\r\n\r\n        Basert på en forskers interesser sammenlignes relevante forskere på antall publiseringer og kvalitet på publiseringene,\r\n        med poengsystemet vist i tabellen. Du kan lese mer utregningsmodellen på\r\n        <a href=\"https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/\">NTNU</a> sin nettside.\r\n      </p>\r\n      <p class=\"text-justify\">\r\n        Applikasjonen har detaljerte profiler for over 20.000 forskere.\r\n        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet\r\n        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et\r\n        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.\r\n        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.\r\n      </p>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <table class=\"table\">\r\n        <thead class=\"thead-light\">\r\n          <tr>\r\n            <th></th>\r\n            <th>Nivå 1</th>\r\n            <th>Nivå 2</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>Artikkel</td>\r\n            <td>1</td>\r\n            <td>3</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Antologikapittel</td>\r\n            <td>0.7</td>\r\n            <td>1</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Monografi</td>\r\n            <td>5</td>\r\n            <td>8</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container\">\r\n  <h2 class=\"text-center\">Om oss</h2>\r\n  <hr />\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\">Anton Lilleby</a>\r\n          <img mat-card-md-image [src]=\"imageUrls[0]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\">Anders Cleife Gillholm</a>\r\n          <img mat-card-md-image [src]=\"imageUrls[1]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\">Julian Hjallum</a>\r\n          <img mat-card-md-image [src]=\"imageUrls[2]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/pedersenrobin/\">Robin Pedersen</a>\r\n          <img mat-card-md-image [src]=\"imageUrls[3]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/pedersenrobin/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\">Steffen Marstein</a>\r\n          <img mat-card-md-image [src]=\"imageUrls[4]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/about/about.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "a:hover {\n  text-decoration: underline; }\n\n.profile-card {\n  margin-bottom: 15px;\n  padding: 0.8em; }\n\n.profile-title {\n  color: #0d6797;\n  margin-bottom: 0px;\n  margin-top: 0px;\n  font-weight: bold; }\n\n.profile-image {\n  margin: auto;\n  float: right;\n  border-style: solid;\n  border-color: lightgrey;\n  width: 26%;\n  height: 26%; }\n\n.profile-action {\n  margin: 0; }\n\np.normal {\n  color: dimgray;\n  font-weight: normal;\n  margin-bottom: 2px; }\n\np.thick {\n  color: dimgray;\n  font-weight: bold;\n  margin-bottom: 0px; }\n"
 
 /***/ }),
 
@@ -49,8 +49,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
+        this.imageUrls = [];
     }
     AboutComponent.prototype.ngOnInit = function () {
+        this.imageUrls = ['img/linkedin/linkedin-anton.png', 'img/linkedin/linkedin-anders.jpg',
+            'img/linkedin/linkedin-julian.jpg', 'img/linkedin/linkedin-robin.jpg', 'img/linkedin/linkedin-steffen.jpg'];
     };
     AboutComponent = __decorate([
         core_1.Component({
@@ -183,7 +186,6 @@ var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-b
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
-var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
 var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
@@ -192,6 +194,7 @@ var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag
 var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var animations_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
+var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var wordcloud_component_1 = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
 var scatter_component_1 = __webpack_require__("./src/app/scatter/scatter.component.ts");
 var userinfo_component_1 = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
@@ -199,8 +202,11 @@ var relevance_component_1 = __webpack_require__("./src/app/relevance/relevance.c
 var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var dialog_1 = __webpack_require__("./node_modules/@angular/material/esm5/dialog.es5.js");
+var card_1 = __webpack_require__("./node_modules/@angular/material/esm5/card.es5.js");
 var progress_bar_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
 var progress_spinner_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-spinner.es5.js");
+var dialog_component_1 = __webpack_require__("./src/app/dialog/dialog.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -216,7 +222,8 @@ var AppModule = /** @class */ (function () {
                 userinfo_component_1.UserinfoComponent,
                 relevance_component_1.RelevanceComponent,
                 topnav_component_1.TopnavComponent,
-                callback_pipe_1.CallbackPipe
+                callback_pipe_1.CallbackPipe,
+                dialog_component_1.DialogComponent
             ],
             imports: [
                 ng_bootstrap_1.NgbModule.forRoot(),
@@ -228,17 +235,108 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_client_1.LoadingBarHttpClientModule,
                 progress_bar_1.MatProgressBarModule,
+                dialog_1.MatDialogModule,
+                card_1.MatCardModule,
                 progress_spinner_1.MatProgressSpinnerModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_pagination_1.NgxPaginationModule
             ],
             providers: [core_2.LoadingBarService],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            entryComponents: [dialog_component_1.DialogComponent]
         })
     ], AppModule);
     return AppModule;
 }());
 exports.AppModule = AppModule;
+
+
+/***/ }),
+
+/***/ "./src/app/dialog/dialog.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 matDialogTitle>Vennligst vent</h2>\r\n<mat-dialog-content>\r\n  <h6>\r\n    {{loadingText}}\r\n  </h6>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</mat-dialog-content>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/dialog/dialog.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/dialog/dialog.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var DialogComponent = /** @class */ (function () {
+    function DialogComponent(loader) {
+        this.loader = loader;
+        if (typeof this.subscribe !== 'undefined') {
+            if (this.subscribe) {
+                this.loader.set(0);
+                this.subscribe.unsubscribe();
+            }
+        }
+        this.setupSubscriber();
+    }
+    DialogComponent.prototype.ngOnDestroy = function () {
+        this.subscribe.unsubscribe();
+    };
+    DialogComponent.prototype.setupSubscriber = function () {
+        var _this = this;
+        this.loader.set(0);
+        this.subscribe = this.loader.progress$.subscribe(function (progress) {
+            if (progress === 0) {
+                _this.loadingText = '';
+            }
+            else if (progress > 0 && progress < 45) {
+                _this.loadingText = 'Vi matcher nå fagfeltet til denne profilen..';
+            }
+            else if (progress >= 45 && progress < 60) {
+                _this.loadingText = 'Laster inn relevansprofil..';
+            }
+            else if (progress >= 60 && progress < 70) {
+                _this.loadingText = 'Laster inn habilitetprofil..';
+            }
+            else if (progress >= 70 && progress < 92) {
+                _this.loadingText = 'Laster inn visualiseringsdata..';
+            }
+            else if (progress >= 92 && progress < 100) {
+                _this.loadingText = 'Laster inn tabelldata..';
+            }
+            else if (progress >= 100) {
+                _this.loader.set(0);
+                _this.subscribe.unsubscribe();
+            }
+        });
+    };
+    DialogComponent = __decorate([
+        core_1.Component({
+            selector: 'app-dialog',
+            template: __webpack_require__("./src/app/dialog/dialog.component.html"),
+            styles: [__webpack_require__("./src/app/dialog/dialog.component.scss")]
+        }),
+        __metadata("design:paramtypes", [core_2.LoadingBarService])
+    ], DialogComponent);
+    return DialogComponent;
+}());
+exports.DialogComponent = DialogComponent;
 
 
 /***/ }),
@@ -296,7 +394,7 @@ exports.HomeComponent = HomeComponent;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-danger\">Ikke aktiv</h3>\r\n      <hr />\r\n      <p>Denne profilen er ikke aktiv i dette prosjektet.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen \"Om tjenesten\"</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"activeProfile\">\r\n    <div *ngIf=\"showProgress\">\r\n      <h5>{{progressText}}</h5>\r\n      <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <app-userinfo [input]=\"cristinID\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div *ngIf=\"showMessage\">\r\n      <h3 class=\"text-danger\">Ikke nok engelskspråkelige arbeider</h3>\r\n      <hr />\r\n      <p>Denne profilen har ikke nok engelskspråkelige arbeider.</p>\r\n      <p>Du kan lese mer om de ulike kravene i seksjonen  <a routerLink=\"/about\">\"Om tjenesten\"</a></p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <div class=\"container-fluid\" id=\"relevance\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm\">\r\n        <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -325,20 +423,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var material_1 = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
+var dialog_component_1 = __webpack_require__("./src/app/dialog/dialog.component.ts");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(router, loader) {
+    function ProfileComponent(router, loader, dialog) {
         this.router = router;
         this.loader = loader;
+        this.dialog = dialog;
     }
+    ProfileComponent.prototype.openLoader = function () {
+        this.dialog.open(dialog_component_1.DialogComponent, {
+            disableClose: true,
+            width: '500px',
+            closeOnNavigation: true
+        });
+    };
     ProfileComponent.prototype.ngOnInit = function () {
         this.setupSubscriptions();
     };
     ProfileComponent.prototype.ngOnDestroy = function () {
+        this.dialog.closeAll();
         this.navigation.unsubscribe();
-        this.progressBar.unsubscribe();
     };
     ProfileComponent.prototype.setActive = function (state) {
         this.activeProfile = state;
+        if (this.activeProfile === true) {
+            this.openLoader();
+        }
         this.showMessage = !state;
     };
     ProfileComponent.prototype.setPlotState = function (state) {
@@ -356,6 +467,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.readyToShow = function () {
         if (this.showPlot && this.showTable) {
             this.showContent = true;
+            this.dialog.closeAll();
         }
     };
     ProfileComponent.prototype.setupSubscriptions = function () {
@@ -365,48 +477,9 @@ var ProfileComponent = /** @class */ (function () {
             _this.showTable = false;
             _this.showPlot = false;
             _this.showContent = false;
-            _this.showProgress = true;
             _this.activeProfile = false;
             _this.showMessage = false;
-            if (_this.progressBar) {
-                _this.loader.set(0);
-                _this.progressBar.unsubscribe();
-            }
-            _this.progressBar = _this.loader.progress$.subscribe(function (progress) {
-                if (progress === 0) {
-                    _this.progressText = '';
-                }
-                else if (progress > 0 && progress < 45) {
-                    _this.progressText = 'Vi matcher nå fagfeltet til denne profilen..';
-                }
-                else if (progress >= 45 && progress < 60) {
-                    _this.progressText = 'Oppretter relevansprofil..';
-                }
-                else if (progress >= 60 && progress < 75) {
-                    _this.progressText = 'Oppretter habilitetprofil..';
-                }
-                else if (progress >= 75 && progress < 90) {
-                    if (_this.showPlot) {
-                        _this.progressText = 'Laster inn tabelldata..';
-                    }
-                    else {
-                        _this.progressText = 'Laster inn visualiseringsdata..';
-                    }
-                }
-                else if (progress >= 90 && progress < 100) {
-                    if (_this.showPlot) {
-                        _this.progressText = 'Laster inn tabelldata..';
-                    }
-                    else {
-                        _this.progressText = 'Laster inn visualiseringsdata..';
-                    }
-                }
-                else if (progress >= 100) {
-                    _this.showProgress = false;
-                    _this.loader.set(0);
-                    _this.progressBar.unsubscribe();
-                }
-            });
+            _this.dialog.closeAll();
         });
     };
     ProfileComponent = __decorate([
@@ -415,7 +488,9 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/profile/profile.component.html"),
             styles: [__webpack_require__("./src/app/profile/profile.component.scss")]
         }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute, core_2.LoadingBarService])
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            core_2.LoadingBarService,
+            material_1.MatDialog])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -459,7 +534,7 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" style=\"padding-right:15px\" ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"thead-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -577,7 +652,7 @@ var RelevanceComponent = /** @class */ (function () {
                     }
                     else {
                         _this.showTable.emit(false);
-                        console.error(msg.status);
+                        console.error(msg.status); // videre arbeid logges i db f.eks
                     }
                 });
                 return [2 /*return*/];
@@ -742,12 +817,23 @@ var ScatterComponent = /** @class */ (function () {
             options: {
                 width: 1250, height: 850,
                 backgroundColor: 'transparent',
-                title: 'Publikasjoner vs. kvalitet',
                 hAxis: {
-                    title: 'Kvalitet'
+                    title: 'Kvalitet',
+                    titleTextStyle: {
+                        color: '#0077c2',
+                        fontSize: 18,
+                        bold: true
+                    },
                 },
                 legend: 'none',
-                vAxis: { title: 'Publikasjoner' },
+                vAxis: {
+                    title: 'Publikasjoner',
+                    titleTextStyle: {
+                        color: '#0077c2',
+                        fontSize: 18,
+                        bold: true
+                    },
+                },
                 animation: {
                     startup: true,
                     duration: 5000,
@@ -786,14 +872,14 @@ exports.ScatterComponent = ScatterComponent;
 /***/ "./src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-inline\">\r\n    <div class=\"input-group\">\r\n      <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\">\r\n\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"30\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    </div>\r\n  </div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"input-group col-md-8\">\r\n        <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n               style=\"height:3em\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"formatMatches\" />\r\n        <div class=\"input-group-append\">\r\n          <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"40\" mode=\"indeterminate\"></mat-progress-spinner>\r\n            <span *ngIf=\"!searching\">Søk</span>\r\n          </button>\r\n        </div>\r\n        <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n"
+module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\n  <div class=\"form-inline\">\r\n    <div class=\"input-group\">\r\n      <input id=\"typehead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n             [class.is-invalid]=\"searchFailed\"\r\n             [(ngModel)]=\"model\"\r\n             [ngbTypeahead]=\"search\"\r\n             placeholder=\"Søk etter norsk forsker\"\r\n             [resultFormatter]=\"formatMatches\"\r\n             [inputFormatter]=\"resultMatches\"\r\n             (keyup.enter)=\"onSearch()\">\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"30\" mode=\"indeterminate\"></mat-progress-spinner>\r\n          <span *ngIf=\"!searching\">Søk</span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    </div>\r\n  </div>\r\n\r\n<!--  Denne er for forsiden  -->\r\n<div *ngIf=\"!showTopNav\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"input-group col-md-8\">\r\n        <input id=\"typeahead-http\" type=\"text\" class=\"form-control form-control-lg nav-shadow\"\r\n               style=\"height:3em\"\r\n               [class.is-invalid]=\"searchFailed\"\r\n               [(ngModel)]=\"model\"\r\n               [ngbTypeahead]=\"search\"\r\n               placeholder=\"Søk etter norsk forsker\"\r\n               [resultFormatter]=\"formatMatches\"\r\n               [inputFormatter]=\"resultMatches\"\r\n               (keyup.enter)=\"onSearch()\"\r\n               />\r\n        <div class=\"input-group-append\">\r\n          <button class=\"btn btn-lg btn-warning nav-shadow\" style=\"width:4em\" type=\"button\" (click)=\"onSearch()\">\r\n            <mat-progress-spinner *ngIf=\"searching\" [diameter]=\"40\" mode=\"indeterminate\"></mat-progress-spinner>\r\n            <span *ngIf=\"!searching\">Søk</span>\r\n          </button>\r\n        </div>\r\n        <div class=\"invalid-feedback\" *ngIf=\"searchFailed\">Beklager, kunne ikke laste inn data.</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/search/search.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ":host /deep/ .drop-down-menu {\n  top: auto;\n  left: auto;\n  background-color: aqua; }\n"
+module.exports = ":host /deep/ circle {\n  stroke: black; }\n"
 
 /***/ }),
 
@@ -853,9 +939,9 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
         this.searchFailed = false;
         this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
         this.formatMatches = function (value) {
-            return value.firstName + ' ' + value.lastName + ' - ' + value.position + ' - ' + value.institution;
+            return value.firstName + ' ' + value.lastName + ' | ' + value.position + ' | ' + value.institution;
         };
-        this.resultMatches = function (value) { return value.firstName + ' ' + value.lastName; };
+        this.resultMatches = function (value) { return value.firstName + ' ' + value.lastName + ' (' + value.position + ')'; };
         this.search = function (text$) {
             return text$
                 .debounceTime(300)
@@ -1057,7 +1143,7 @@ exports.SearchresultsComponent = SearchresultsComponent;
 /***/ "./src/app/topnav/topnav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" title=\"Hjem\" style=\"cursor:pointer\"><img src=\"../../../../img/logo1.png\" /></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\" title=\"Om tjenesten\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top navbar-light bg-white py-md-2 nav-shadow\">\r\n  <div class=\"container-fluid\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li class=\"nav-item\">\r\n      <a class=\"nav-link\" (click)=\"navigateHome()\" title=\"Hjem\" style=\"cursor:pointer\">\r\n        <img [src]=\"logo\" alt=\"webapp logo\"/></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"default\">\r\n        <ngbd-typeahead-http [showTopNav]=\"default\"></ngbd-typeahead-http>\r\n    </div>\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"navigateAbout()\" style=\"cursor:pointer\" title=\"Om tjenesten\">Om Tjenesten</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1088,6 +1174,7 @@ var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.j
 var TopnavComponent = /** @class */ (function () {
     function TopnavComponent(router) {
         this.router = router;
+        this.logo = 'img/logo1.png';
     }
     TopnavComponent.prototype.navigateHome = function () {
         this.router.navigate(['']);
@@ -1266,7 +1353,7 @@ exports.UserinfoComponent = UserinfoComponent;
 /***/ "./src/app/wordcloud/wordcloud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\">\r\n  </angular-tag-cloud>\r\n  <p class=\"text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelske artikler</p>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"showCloud\">\r\n  <angular-tag-cloud [data]=\"data\"\r\n                     [width]=\"options.width\"\r\n                     [height]=\"options.height\"\r\n                     [overflow]=\"options.overflow\" [strict]=\"true\">\r\n  </angular-tag-cloud>\r\n  <p class=\"lead text-center\">Basert på <code style=\"color:#0077c1\"><strong>{{count}}</strong></code> engelskspråkelige arbeider</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1428,7 +1515,7 @@ exports.WordcloudComponent = WordcloudComponent;
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
-    production: false
+    production: true
 };
 
 

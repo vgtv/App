@@ -11,13 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class WordcloudComponent {
   @Input() input: string;
   data: Array<CloudData>;
+  options: CloudOptions;
   showCloud: boolean;
   @Output() activeCloud = new EventEmitter<boolean>();
 
   count: number;
   apiURL = 'api/apiwordcloud?cristinID=';
   apiURL2 = 'api/apilegend?cristinID=';
-  options: CloudOptions;
 
   constructor(private http: HttpClient) {
     this.setupTagCloud();

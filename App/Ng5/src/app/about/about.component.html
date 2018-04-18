@@ -1,39 +1,162 @@
-<div class="container-fluid col-sm-6">
+<div class="container">
   <br />
-  <h2>Om tjenesten</h2>
+  <h2 class="text-center">Om Tjenesten</h2>
+  <hr />
+  <div class="row">
+    <div class="col-sm">
+      <p class="text-justify">
+        "Tjenesten" er basert på en datainnsamling fra 2007-2016 hentet fra det nåværende forskningsinformasjonssystemet i Norge, <a href="http://www.cristin.no/">Cristin</a>.
+        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,
+        for så å kategorsiere forskere med like interesseområder.
+
+        Basert på en forskers interesser sammenlignes relevante forskere på antall publiseringer og kvalitet på publiseringene,
+        med poengsystemet vist i tabellen. Du kan lese mer utregningsmodellen på
+        <a href="https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/">NTNU</a> sin nettside.
+      </p>
+      <p class="text-justify">
+        Applikasjonen har detaljerte profiler for over 20.000 forskere.
+        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet
+        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et
+        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.
+        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.
+      </p>
+    </div>
+    <div class="col-sm">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th></th>
+            <th>Nivå 1</th>
+            <th>Nivå 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Artikkel</td>
+            <td>1</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Antologikapittel</td>
+            <td>0.7</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Monografi</td>
+            <td>5</td>
+            <td>8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="text-center">Om oss</h2>
   <hr />
 
-  <p class="text-justify">
-    Tjenesten er laget i forbindelse med en bacheloroppgave ved Oslo Metropolitan University.
-    Av en behovsanalyse vi utførte internt på universitetet fant vi ut at det var et behov
-    for å finne relevante og habile forskere. Dette er vårt svar på denne etterspørselen.
-    Tjenesten er et konsept som skal kunne vise at det eksisterer muligheter for
-    å dekke denne etterspørselen.
-  </p>
+  <div class="row">
+    <div class="col-sm">
+      <mat-card class="profile-card">
+        <mat-card-title class="profile-title">
+          <a href="https://www.linkedin.com/in/anton-lilleby-987030105/">Anton Lilleby</a>
+          <img mat-card-md-image [src]="imageUrls[0]" class="profile-image">
+        </mat-card-title>
+        <mat-card-content>
+          <p class="thick">
+            OsloMet – Oslo Metropolitan University
+          </p>
+          <p class="normal">
+            Oslo, Norway
+          </p>
+          <mat-card-actions class="profile-action">
+            <a href="https://www.linkedin.com/in/anton-lilleby-987030105/" type="button" class="btn btn-primary">Besøk Profil</a>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-  <p class="text-justify">
-    I denne tjenesten kan du finne ut hva en akademiker faktisk forsker på og den sitt tilhørende forskningsmiljø.
-    Dette åpner for muligheter for å finne relevante forskere med like interesser.
-  </p>
+    <div class="col-sm">
+      <mat-card class="profile-card">
+        <mat-card-title class="profile-title">
+          <a href="https://www.linkedin.com/in/anders-cleife-gillholm/">Anders Cleife Gillholm</a>
+          <img mat-card-md-image [src]="imageUrls[1]" class="profile-image">
+        </mat-card-title>
+        <mat-card-content>
+          <p class="thick">
+            OsloMet – Oslo Metropolitan University
+          </p>
+          <p class="normal">
+            Oslo, Norway
+          </p>
+          <mat-card-actions class="profile-action">
+            <a href="https://www.linkedin.com/in/anders-cleife-gillholm/" type="button" class="btn btn-primary">Besøk Profil</a>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-  <p class="text-justify">
-    Databasen vi benytter er fra et tidligere bachelorprosjektet som hentet dataen fra <a href="http://www.cristin.no/">CRistin</a>
-    som er det nåværende forskningsinformasjonssystemet i Norge. 
-  </p>
+    <div class="col-sm">
+      <mat-card class="profile-card">
+        <mat-card-title class="profile-title">
+          <a href="https://www.linkedin.com/in/julian-hjallum-27540313b/">Julian Hjallum</a>
+          <img mat-card-md-image [src]="imageUrls[2]" class="profile-image">
+        </mat-card-title>
+        <mat-card-content>
+          <p class="thick">
+            OsloMet – Oslo Metropolitan University
+          </p>
+          <p class="normal">
+            Oslo, Norway
+          </p>
+          <mat-card-actions class="profile-action">
+            <a href="https://www.linkedin.com/in/julian-hjallum-27540313b/" type="button" class="btn btn-primary">Besøk Profil</a>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 
-  <p class="text-justify">
-    For å skape konkurranse i forskningsmiljøene har vi brukt et poengsystem
-    der vi sammenligner antall publikasjoner og  samlet kvalitetsverdi. Dette kan også gi en pekepinn
-    til førstemanuiser om hva som skal til for å søke opprykk.
-    Du kan lese mer om poengsystemet vi bruker i visualiseringen ved: 
-    <a href="https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/">Hva er Publiseringspoeng</a>.
-  </p>
-
-  <p class="text-justify">
-    Om oppdragisgiver
-  </p>
-
-  <p class="text-justify">
-    Om oss
-  </p>
+  <div class="row">
+    <div class="col-sm-4">
+      <mat-card class="profile-card">
+        <mat-card-title class="profile-title">
+          <a href="https://www.linkedin.com/in/pedersenrobin/">Robin Pedersen</a>
+          <img mat-card-md-image [src]="imageUrls[3]" class="profile-image">
+        </mat-card-title>
+        <mat-card-content>
+          <p class="thick">
+            OsloMet – Oslo Metropolitan University
+          </p>
+          <p class="normal">
+            Oslo, Norway
+          </p>
+          <mat-card-actions class="profile-action">
+            <a href="https://www.linkedin.com/in/pedersenrobin/" type="button" class="btn btn-primary">Besøk Profil</a>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-sm-4">
+      <mat-card class="profile-card">
+        <mat-card-title class="profile-title">
+          <a href="https://www.linkedin.com/in/steffen-marstein-389491110/">Steffen Marstein</a>
+          <img mat-card-md-image [src]="imageUrls[4]" class="profile-image">
+        </mat-card-title>
+        <mat-card-content>
+          <p class="thick">
+            OsloMet – Oslo Metropolitan University
+          </p>
+          <p class="normal">
+            Oslo, Norway
+          </p>
+          <mat-card-actions class="profile-action">
+            <a href="https://www.linkedin.com/in/steffen-marstein-389491110/" type="button" class="btn btn-primary">Besøk Profil</a>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>

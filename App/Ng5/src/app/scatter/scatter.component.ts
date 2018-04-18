@@ -61,12 +61,6 @@ export class ScatterComponent {
       options: {
         width: 1250, height: 850,
         backgroundColor: 'transparent',
-        title: 'Publikasjoner vs. kvalitet',
-        titleTextStyle: {
-          color: '#0077c2',
-          fontSize: 20,
-          bold: true
-        },
         hAxis: {
           title: 'Kvalitet',
           titleTextStyle: {

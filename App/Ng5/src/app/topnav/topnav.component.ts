@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 })
 export class TopnavComponent {
   @Input() default: boolean;
+  logo: string;
 
   constructor(private router: Router) {
-
+    this.logo = 'img/logo1.png';
   }
 
   navigateHome() {

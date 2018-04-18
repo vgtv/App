@@ -26,6 +26,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -58,6 +59,7 @@ import { DialogComponent } from './dialog/dialog.component';
     LoadingBarHttpClientModule,
     MatProgressBarModule,
     MatDialogModule,
+    MatCardModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgxPaginationModule

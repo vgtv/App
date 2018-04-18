@@ -24,7 +24,6 @@ namespace App.Models
          *      {"cristinID":"10","firstname":"Bedada Mergo","lastname":"Egne"}
          * ];
          */
-
         public List<User> GetUsers(string searchQuery)
         {
             using (var db = new dbEntities())
@@ -558,7 +557,7 @@ namespace App.Models
 
                     if (association == null) { continue; }
 
-                    string color = association.position == "Professor" || association.position == "Professor ii" ? "#0077c2" : "#80d6ff";
+                    string color = association.position == "Professor" || association.position == "Professor ii" || association.position == "Professor emeritus" ? "#0077c2" : "#80d6ff";
 
                     User user = db.person.Where(p => p.cristinID == match.cristinID)
                         .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
