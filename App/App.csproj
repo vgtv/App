@@ -157,6 +157,7 @@
     <Compile Include="Models\basewords.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\dataModel.Views.cs" />
     <Compile Include="Models\DomainModels\Affiliation.cs" />
     <Compile Include="Models\DomainModels\ScatterPlot\c.cs" />
     <Compile Include="Models\DomainModels\Cloud.cs" />
@@ -243,11 +244,12 @@
     <Content Include="img\android-icon-36x36.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="img\linkedin\linkedin-anders.jpg" />
-    <Content Include="img\linkedin\linkedin-anton.png" />
-    <Content Include="img\linkedin\linkedin-julian.jpg" />
-    <Content Include="img\linkedin\linkedin-robin.jpg" />
-    <Content Include="img\linkedin\linkedin-steffen.jpg" />
+    <Content Include="img\anton1.png" />
+    <Content Include="img\linkedin\anders.jpg" />
+    <Content Include="img\linkedin\anton.png" />
+    <Content Include="img\linkedin\julian.jpg" />
+    <Content Include="img\linkedin\robin.jpg" />
+    <Content Include="img\linkedin\steffen.jpg" />
     <Content Include="img\logo1.png" />
     <Content Include="Models\dataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

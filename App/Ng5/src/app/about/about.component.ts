@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
-  imageUrls: Array<string> = [];
+export class AboutComponent {
+  images: Array<string> =
+  [
+    'img/linkedin/anton.png', 'img/linkedin/anders.jpg', 'img/linkedin/julian.jpg', 'img/linkedin/robin.jpg', 'img/linkedin/steffen.jpg'
+  ];
 
-  constructor() {
-
-  }
-    
-  ngOnInit() {
-    this.imageUrls = ['img/linkedin/linkedin-anton.png', 'img/linkedin/linkedin-anders.jpg',
-      'img/linkedin/linkedin-julian.jpg', 'img/linkedin/linkedin-robin.jpg', 'img/linkedin/linkedin-steffen.jpg'];
-  }
+  constructor() { }
 }

@@ -40,11 +40,14 @@ export class DialogComponent {
       else if (progress >= 60 && progress < 70) {
         this.loadingText = 'Laster inn habilitetprofil..';
       }
-      else if (progress >= 70 && progress < 92) {
+      else if (progress >= 70 && progress < 90) {
         this.loadingText = 'Laster inn visualiseringsdata..';
       }
-      else if (progress >= 92 && progress < 100) {
+      else if (progress >= 90 && progress < 98) {
         this.loadingText = 'Laster inn tabelldata..';
+      }
+      else if (progress >= 98 && progress < 100) {
+        this.loadingText = 'Klargjør applikasjonen..';
       }
       else if (progress >= 100) {
         this.loader.set(0);
