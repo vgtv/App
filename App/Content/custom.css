@@ -9,6 +9,10 @@ h1 {
     color: #0077c1 !important;
     font-size: 5em !important;
 }
+h2 {
+    color: #0077c1 !important;
+    font-size: 3em !important;
+}
 
 #userinfo {
     background-color: #f5f5f6 !important;
@@ -42,6 +46,10 @@ h1 {
     padding-left: 10% !important;
     padding-right: 10% !important;
 }
+#about {
+    padding-top: 6em !important;
+    padding-bottom: 8em !important;
+}
 .nav-shadow {
     -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.2);
@@ -49,4 +57,7 @@ h1 {
 }
 li > a {
     font-size: 1.2em !important;
+}
+.a-text {
+    padding-top: 2em !important;
 }
