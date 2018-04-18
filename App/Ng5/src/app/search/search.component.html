@@ -25,7 +25,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="input-group col-md-8">
-        <input id="typeahead-http" type="text" class="form-control form-control-lg nav-shadow"
+        <input id="typeahead-http" type="text" class="form-control form-control-lg"
                style="height:3em"
                [class.is-invalid]="searchFailed"
                [(ngModel)]="model"
@@ -36,7 +36,7 @@
                (keyup.enter)="onSearch()"
                />
         <div class="input-group-append">
-          <button class="btn btn-lg btn-warning nav-shadow" style="width:4em" type="button" (click)="onSearch()">
+          <button class="btn btn-lg btn-warning" style="width:4em" type="button" (click)="onSearch()">
             <mat-progress-spinner *ngIf="searching" [diameter]="40" mode="indeterminate"></mat-progress-spinner>
             <span *ngIf="!searching">Søk</span>
           </button>

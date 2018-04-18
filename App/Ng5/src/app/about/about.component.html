@@ -1,19 +1,18 @@
-<div class="container" id="about">
+
+<div class="container">
   <br />
   <h2 class="text-center"><strong>Om Tjenesten</strong></h2>
-  <hr />
-  <div class="row a-text">
-    <div class="col-sm">
-      <p class="text-justify">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text text-justify">
         "Tjenesten" er basert på en datainnsamling fra 2007-2016 hentet fra det nåværende forskningsinformasjonssystemet i Norge, <a href="http://www.cristin.no/">Cristin</a>.
         Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,
         for så å kategorsiere forskere med like interesseområder.
 
-        Basert på en forskers interesser sammenlignes relevante forskere på antall publiseringer og kvalitet på publiseringene,
-        med poengsystemet vist i tabellen. Du kan lese mer utregningsmodellen på
+        Basert på en forskers interesser sammenlignes relevante forskere på antall publiseringer og kvalitet på publiseringene.
+        Du kan lese mer om den eldre utregningsmodellen på
         <a href="https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/">NTNU</a> sin nettside.
-      </p>
-      <p class="text-justify">
+
         Applikasjonen har detaljerte profiler for over 20.000 forskere.
         Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet
         regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et
@@ -21,48 +20,92 @@
         Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.
       </p>
     </div>
-    <div class="col-sm">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th></th>
-            <th>Nivå 1</th>
-            <th>Nivå 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Artikkel</td>
-            <td>1</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>Antologikapittel</td>
-            <td>0.7</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Monografi</td>
-            <td>5</td>
-            <td>8</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 </div>
 
+
 <div class="container">
   <h2 class="text-center"><strong>Personene bak</strong></h2>
-  <hr />
+  <div class="card-group">
+    <div class="card">
+      <img class="card-img-top" [src]="images[0]" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Anton Lilleby</h5>
+        <hr />
+        <p class="card-text">
+          Oslo Metropolitan University - Kan ha mer tekst her   Kan ha mer tekst her  Kan ha mer tekst her  Kan ha mer tekst her  Kan ha mer tekst her  Kan ha mer tekst her
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.linkedin.com/in/anton-lilleby-987030105/" class="btn btn-light btn-outline-primary">Linkedin</a>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" [src]="images[1]" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Anders Cleife Gillholm</h5>
+        <hr />
+        <p class="card-text">
+          Oslo Metropolitan University
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.linkedin.com/in/anton-lilleby-987030105/" class="btn btn-light btn-outline-primary">Linkedin</a>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" [src]="images[2]" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Julian Hjallum</h5>
+        <hr />
+        <p class="card-text">
+          Oslo Metropolitan University
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.linkedin.com/in/julian-hjallum-27540313b/" class="btn btn-light btn-outline-primary">Linkedin</a>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" [src]="images[3]" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Robin Pedersen</h5>
+        <hr />
+        <p class="card-text">
+          Oslo Metropolitan University
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.linkedin.com/in/pedersenrobin/" class="btn btn-light btn-outline-primary">Linkedin</a>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" [src]="images[4]" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Steffen Marstein</h5>
+        <hr />
+        <p class="card-text">
+          Oslo Metropolitan University
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.linkedin.com/in/steffen-marstein-389491110/" class="btn btn-light btn-outline-primary">Linkedin</a>
+      </div>
+    </div>
+  </div>
 
-  <div class="row a-text">
+</div>
+
+<!--
+<div class="container">
+  <h2 class="display-1 text-center">Gruppen</h2>
+  <hr />
+  <div class="row">
     <div class="col-sm">
       <mat-card class="profile-card">
         <mat-card-title class="profile-title">
           <a href="https://www.linkedin.com/in/anton-lilleby-987030105/">Anton Lilleby</a>
-          <img mat-card-md-image [src]="imageUrls[0]" class="profile-image">
+          <img mat-card-md-image [src]="images[0]" class="profile-image">
         </mat-card-title>
         <mat-card-content>
           <p class="thick">
@@ -82,7 +125,7 @@
       <mat-card class="profile-card">
         <mat-card-title class="profile-title">
           <a href="https://www.linkedin.com/in/anders-cleife-gillholm/">Anders Cleife Gillholm</a>
-          <img mat-card-md-image [src]="imageUrls[1]" class="profile-image">
+          <img mat-card-md-image [src]="images[1]" class="profile-image">
         </mat-card-title>
         <mat-card-content>
           <p class="thick">
@@ -102,7 +145,7 @@
       <mat-card class="profile-card">
         <mat-card-title class="profile-title">
           <a href="https://www.linkedin.com/in/julian-hjallum-27540313b/">Julian Hjallum</a>
-          <img mat-card-md-image [src]="imageUrls[2]" class="profile-image">
+          <img mat-card-md-image [src]="images[2]" class="profile-image">
         </mat-card-title>
         <mat-card-content>
           <p class="thick">
@@ -124,7 +167,7 @@
       <mat-card class="profile-card">
         <mat-card-title class="profile-title">
           <a href="https://www.linkedin.com/in/pedersenrobin/">Robin Pedersen</a>
-          <img mat-card-md-image [src]="imageUrls[3]" class="profile-image">
+          <img mat-card-md-image [src]="images[3]" class="profile-image">
         </mat-card-title>
         <mat-card-content>
           <p class="thick">
@@ -143,7 +186,7 @@
       <mat-card class="profile-card">
         <mat-card-title class="profile-title">
           <a href="https://www.linkedin.com/in/steffen-marstein-389491110/">Steffen Marstein</a>
-          <img mat-card-md-image [src]="imageUrls[4]" class="profile-image">
+          <img mat-card-md-image [src]="images[4]" class="profile-image">
         </mat-card-title>
         <mat-card-content>
           <p class="thick">
@@ -160,3 +203,4 @@
     </div>
   </div>
 </div>
+-->
