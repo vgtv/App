@@ -1,13 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <br />
       <h2>Søkeresultat for "{{query}}"</h2>
     </div>
+    <div class="col-sm-1">
+      <br />
+      <mat-progress-spinner *ngIf="loading" [diameter]="45" mode="indeterminate"></mat-progress-spinner>
+    </div>
+
     <div class="col-sm-12">
-      <mat-progress-spinner *ngIf="loading" [diameter]="25" mode="indeterminate"></mat-progress-spinner>
       <div class="alert alert-info" role="alert" *ngIf="!loading">
-        <h3>Antall treff: {{totalHits}}</h3>
+        <h4>Antall treff: {{totalHits}}</h4>
       </div>
     </div>
 
