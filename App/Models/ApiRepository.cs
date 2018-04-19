@@ -72,6 +72,55 @@ namespace App.Models
             }
         }
 
+
+        public List<Results> GetSearchResults(string searchQuery)
+        {
+            using (var db = new dbEntities())
+            {
+                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                  || p.lastname.StartsWith(searchQuery)).Select(p => new Results
+                  {
+                      cristinID = p.cristinID,
+                      firstName = p.firstname,
+                      lastName = p.lastname
+                  }).Take(100).ToList();
+
+
+                if (results.Count() < 10)
+                {
+                    int limit = 10 - results.Count();
+                    results.AddRange(db.person.Where(p =>
+                    (p.firstname + " " + p.lastname).Contains(searchQuery))
+                    .Select(p => new Results
+                    {
+                        cristinID = p.cristinID,
+                        firstName = p.firstname,
+                        lastName = p.lastname
+                    }).Take(limit).ToList());
+                    results = results.DistinctBy(i => i.cristinID).ToList();
+                }
+
+                var filter = GetFilter();
+                foreach (var user in results)
+                {
+                    var assosciation = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
+                        .Select(e => new { position = e.position, institution = e.institusjon, institute = e.institutt })
+                        .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
+
+                    if (assosciation != null)
+                    {
+                        user.affiliation = new Affiliation
+                        {
+                            position = assosciation.position,
+                            institute = assosciation.institute,
+                            institution = assosciation.institution
+                        };
+                    }
+                }
+                return results;
+            }
+        }
+
         public Researcher GetResearcherInfo(string cristinID)
         {
             using (var db = new dbEntities())
@@ -93,62 +142,12 @@ namespace App.Models
 
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
-                researcher.position = assosciations.position != "null" ? assosciations.position : "Ukjent";
+                researcher.position = assosciations.position ?? "Ukjent";
                 return researcher;
             }
         }
 
-        public List<Results> GetSearchResults(string searchQuery)
-        {
-            if (searchQuery == "") { return null; }
-
-            using (var db = new dbEntities())
-            {
-                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
-               || p.lastname.StartsWith(searchQuery)).Select(p => new Results
-               {
-                   cristinID = p.cristinID,
-                   firstName = p.firstname,
-                   lastName = p.lastname,
-                   affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID)
-                   .Select(a => new Affiliation
-                   {
-                       institute = a.institutt,
-                       institution = a.institusjon,
-                       position = a.position
-                   }
-                   ).FirstOrDefault()
-               }).Take(100).ToList();                               
-
-                if (results.Count() < 10)
-                {
-                    int limit = 10 - results.Count();
-                    results.AddRange(db.person.Where(p =>
-                    (p.firstname + " " + p.lastname).Contains(searchQuery))
-                    .Select(p => new Results
-                    {
-                        cristinID = p.cristinID,
-                        firstName = p.firstname,
-                        lastName = p.lastname,
-                        affiliation = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(a => new Affiliation
-                        {
-                            institute = a.institutt,
-                            institution = a.institusjon,
-                            position = a.position
-                        }).FirstOrDefault()
-                    }).Take(limit).ToList());
-
-                    results.DistinctBy(i => i.cristinID).ToList();
-
-                    if (results.Count() <= 0)
-                    {
-                        return null;
-                    }
-                    return results;
-                }
-                return results;
-            }
-        }
+       
 
 
 
@@ -549,7 +548,7 @@ namespace App.Models
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var association = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => new { t.position, t.institusjon})
+                    var association = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => new { t.position, t.institusjon })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                     var rank = db.rank.Where(r => r.cristinID == match.cristinID)

@@ -240,11 +240,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\indigo-pink.css" />
+    <Content Include="favicon-32x32.png" />
     <Content Include="favicon.ico" />
-    <Content Include="img\android-icon-36x36.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="img\anton1.png" />
     <Content Include="img\linkedin\anders.jpg" />
     <Content Include="img\linkedin\anton.png" />
     <Content Include="img\linkedin\julian.jpg" />
@@ -378,6 +377,7 @@
     <TypeScriptCompile Include="Ng5\src\app\dialog\dialog.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Ng5\src\app\null.pipe.ts" />
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\profile\profile.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\relevance\callback.pipe.ts" />

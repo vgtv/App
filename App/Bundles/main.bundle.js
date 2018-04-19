@@ -186,6 +186,7 @@ var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootst
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
+var null_pipe_1 = __webpack_require__("./src/app/null.pipe.ts");
 var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
 var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
 var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
@@ -221,6 +222,7 @@ var AppModule = /** @class */ (function () {
                 relevance_component_1.RelevanceComponent,
                 topnav_component_1.TopnavComponent,
                 callback_pipe_1.CallbackPipe,
+                null_pipe_1.NullPipe,
                 dialog_component_1.DialogComponent
             ],
             imports: [
@@ -388,6 +390,41 @@ var HomeComponent = /** @class */ (function () {
     return HomeComponent;
 }());
 exports.HomeComponent = HomeComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/null.pipe.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var NullPipe = /** @class */ (function () {
+    function NullPipe() {
+    }
+    NullPipe.prototype.transform = function (value) {
+        if (value === 'null') {
+            return 'Ukjent';
+        }
+        return value;
+    };
+    NullPipe = __decorate([
+        core_1.Pipe({
+            name: 'unknown',
+            pure: false
+        })
+    ], NullPipe);
+    return NullPipe;
+}());
+exports.NullPipe = NullPipe;
 
 
 /***/ }),
@@ -880,7 +917,7 @@ module.exports = "<!--  Denne er for topnav -->\r\n<div *ngIf=\"showTopNav\">\r\
 /***/ "./src/app/search/search.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ":host /deep/ circle {\n  stroke: black; }\n"
+module.exports = ":host /deep/ circle {\n  stroke: darkslategray; }\n"
 
 /***/ }),
 
@@ -993,14 +1030,14 @@ exports.NgbdTypeaheadHttp = NgbdTypeaheadHttp;
 /***/ "./src/app/searchresults/searchresults.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <br />\r\n  <h2>Søkeresultat for \"{{query}}\"</h2>\r\n\r\n  <mat-progress-spinner *ngIf=\"loading\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n  <h3 *ngIf=\"!loading\">Antall treff: {{totalHits}}</h3>\r\n\r\n  <div class=\"row justify-content-center\">\r\n    <div class=\" col-sm-10\" *ngIf=\"searchResults\">\r\n      <table class=\"table table-hover table-light\">\r\n        <thead class=\"thead-light\">\r\n          <tr>\r\n            <th>\r\n              <h4>Navn</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Posisjon</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Institusjon</h4>\r\n            </th>\r\n            <th>\r\n              <h4>Institutt</h4>\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr class=\"clickable\" style=\"cursor:pointer\" *ngFor=\"let obj of results  |  paginate: { itemsPerPage: 10, currentPage: page }\" [routerLink]=\"['/profile', obj.cristinID]\">\r\n            <td class=\"text-primary\">\r\n              {{obj.firstName}} {{obj.lastName}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.position}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.institution}}\r\n            </td>\r\n            <td class=\"text-primary\">\r\n              {{obj.affiliation?.institute}}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <div class=\"row justify-content-center\">\r\n        <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12\">\r\n      <br />\r\n      <h2>Søkeresultat for \"{{query}}\"</h2>\r\n    </div>\r\n    <div class=\"col-sm-12\">\r\n      <mat-progress-spinner *ngIf=\"loading\" [diameter]=\"25\" mode=\"indeterminate\"></mat-progress-spinner>\r\n      <div class=\"alert alert-info\" role=\"alert\" *ngIf=\"!loading\">\r\n        <h3>Antall treff: {{totalHits}}</h3>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-sm-12\" *ngIf=\"searchResults\">\r\n      <ul class=\"list-group\" *ngFor=\"let obj of results | paginate: { itemsPerPage: 10, currentPage: page }\">\r\n        <li class=\"list-group-item\">\r\n          <a [routerLink]=\"['/profile', obj.cristinID]\">{{obj.firstName}} {{obj.lastName}}</a>\r\n          <p class=\"url\">http://dotnet.cs.hioa.no/app/profile/{{obj.cristinID}}</p>\r\n          <p class=\"text-muted\">\r\n            {{obj.affiliation.position | unknown}} ved\r\n            {{obj.affiliation.institution | unknown}},\r\n            {{obj.affiliation.institute | unknown}}\r\n          </p>\r\n        </li>\r\n      </ul>\r\n      <div class=\"row justify-content-center\">\r\n        <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/searchresults/searchresults.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = "clickable {\n  cursor: pointer; }\n\n.tr {\n  padding: 0; }\n"
+module.exports = ".url {\n  color: #006621; }\n"
 
 /***/ }),
 

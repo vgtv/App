@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { CallbackPipe } from './relevance/callback.pipe';
+import { NullPipe } from './null.pipe';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
@@ -46,6 +48,7 @@ import { DialogComponent } from './dialog/dialog.component';
     RelevanceComponent,
     TopnavComponent,
     CallbackPipe,
+    NullPipe,
     DialogComponent
   ],
   imports: [
