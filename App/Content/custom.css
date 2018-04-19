@@ -59,5 +59,12 @@ li > a {
     font-size: 1.2em !important;
 }
 .a-text {
-    padding-top: 2em !important;
+    padding-top: 4em !important;
+    padding-bottom: 2em !important;
+}
+.a-text > h2 {
+    padding-bottom: 0.8em !important;
+}
+.card-p {
+    padding-bottom: 2em !important;
 }
