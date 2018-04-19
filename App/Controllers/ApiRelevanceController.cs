@@ -31,11 +31,11 @@ namespace App.Controllers
         }
         public HttpResponseMessage Get(string cristinID, CancellationToken cancellationToken)
         {
-            List<ResearcherRelevance> searchResults = new List<ResearcherRelevance>();
+            var data = new List<SimilarResearcher>();
             try
             {
-                searchResults = dataAccess.GetResearcherRelevance(cristinID, cancellationToken);
-                if (searchResults == null)
+                data= dataAccess.GetResearcherRelevance(cristinID, cancellationToken);
+                if (data== null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound, "No data found for user");
                 }
@@ -47,7 +47,7 @@ namespace App.Controllers
             }
 
             var Json = new JavaScriptSerializer();
-            string JsonString = Json.Serialize(searchResults);
+            string JsonString = Json.Serialize(data);
 
             return new HttpResponseMessage()
             {

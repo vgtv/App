@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
+
 export class DialogComponent {
   subscribe; any;
   loadingText: string;
@@ -27,6 +27,10 @@ export class DialogComponent {
 
   setupSubscriber() {
     this.loader.set(0);
+
+
+
+
     this.subscribe = this.loader.progress$.subscribe(progress => {
       if (progress === 0) {
         this.loadingText = '';

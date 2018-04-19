@@ -182,6 +182,7 @@
     <Compile Include="Models\DomainModels\Researcher.cs" />
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\DomainModels\Results.cs" />
+    <Compile Include="Models\DomainModels\SimilarResearcher.cs" />
     <Compile Include="Models\eierskap.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>

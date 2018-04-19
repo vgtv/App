@@ -43,7 +43,8 @@ namespace App.Models
             }
         }
 
-        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
+        // Må oppdateres
+        public List<SimilarResearcher> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
         {
             var userData = GetUserData(cristinID, cancellationToken);
             if (userData == null)
@@ -120,7 +121,7 @@ namespace App.Models
                 r.similarities = (5 - 1) * (r.similarities - userData.Min(e => e.similarities))
                                  / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
             }
-            return researcherList;
+            return null;
         }
 
         public ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken)
@@ -222,7 +223,8 @@ namespace App.Models
             }
         }
 
-        public List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken)
+        // må oppdateres
+        public List<SimilarResearcher> GetUserData(string cristinID, CancellationToken cancellationToken)
         {
             if (cristinID == "10" || cristinID == "20" || cristinID == "100" || cristinID == "1000")
             {
@@ -242,7 +244,8 @@ namespace App.Models
                     publications = "20"
                 };
 
-                return new List<UserMatch> { um, um2 };
+                return null;
+                //return new List<UserMatch> { um, um2 };
             }
             else
             {

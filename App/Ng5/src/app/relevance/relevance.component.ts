@@ -2,8 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Relevance } from './relevance';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingBarService } from '@ngx-loading-bar/core';
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { Router } from '@angular/router';
 
 @Component({

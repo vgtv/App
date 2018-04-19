@@ -16,8 +16,8 @@ namespace App.Models
         List<User> GetUsers(string searchQuery);
         Researcher GetResearcherInfo(string cristinID);
         List<Cloud> GetWordCloud(string cristinID);
-        List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken);
+        List<SimilarResearcher> GetUserData(string cristinID, CancellationToken cancellationToken);
         ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken);
-        List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken);
+        List<SimilarResearcher> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken);
     }
 }

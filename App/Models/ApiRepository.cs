@@ -147,23 +147,7 @@ namespace App.Models
             }
         }
 
-       
 
-
-
-        /*
-         * ----------------------------------------------------------------------
-         * Wordcloud
-         * ----------------------------------------------------------------------
-         * Json
-         *       [
-         *       {"wordCount":15,"word":"strategi"},
-         *       {"wordCount":22,"word":"imag"},
-         *       {"wordCount":5,"word":"task"},
-         *       {"wordCount":13,"word":"student"},
-         *       {"wordCount":6,"word":"tempor"},
-         *       ];
-         */
         public List<Cloud> GetWordCloud(string cristinID)
         {
             using (var db = new dbEntities())
@@ -202,32 +186,11 @@ namespace App.Models
             }
         }
 
-        /*
-         * ----------------------------------------------------------------------
-         * User Data
-         * ----------------------------------------------------------------------
-         * Json
-         *       [
-         *       {"cristinID":"1267","percentage":53},
-         *       {"cristinID":"13159","percentage":71},
-         *       {"cristinID":"13240","percentage":71},
-         *       {"cristinID":"13371","percentage":59},
-         *       {"cristinID":"17600","percentage":55},
-         *       {"cristinID":"18817","percentage":58},
-         *       {"cristinID":"25102","percentage":58},
-         *       {"cristinID":"25444","percentage":54},
-         *       {"cristinID":"26902","percentage":55},
-         *       {"cristinID":"29530","percentage":53},
-         *       {"cristinID":"645051","percentage":70}
-         *       ]
-         */
-        public List<UserMatch> GetUserData(string cristinID, CancellationToken cancellationToken)
+        public List<SimilarResearcher> GetUserData(string cristinID, CancellationToken cancellationToken)
         {
-
-
             using (var db = new dbEntities())
             {
-                var matchedUsers = new List<UserMatch>();
+                var matchedUsers = new List<SimilarResearcher>();
 
                 var currentUser = db.wordcloud.Where(e => e.cristinID == cristinID)
                     .GroupBy(item => item.cristinID)
@@ -248,6 +211,7 @@ namespace App.Models
                       }).ToList();
 
                 double x, y;
+                var filter = GetFilter();
                 foreach (var compared in comparedUsers)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -419,111 +383,112 @@ namespace App.Models
                             default: ++x; break;
                         }
                     }
-                    matchedUsers.Add(new UserMatch { cristinID = compared.Key, similarities = x });
+     
+                    matchedUsers.Add(new SimilarResearcher { similarities = x, cristinID = compared.Key });
                 }
-                return matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
+
+
+                var testList = matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
+ 
+
+                foreach (var test in testList)
+                {
+                    var researcher = db.person.Where(p => p.cristinID == test.cristinID)
+                                  .Select(p => new
+                                  {
+                                      firstName = p.firstname,
+                                      lastName = p.lastname
+                                  }).FirstOrDefault();
+
+      
+                    test.firstName = researcher.firstName;
+
+                    test.lastName = researcher.lastName;
+
+                    if (researcher != null)
+                    {
+                        var assosciations = db.tilhorighet.Where(e => e.cristinID == test.cristinID)
+                            .ToList().OrderByDescending(comp => filter.IndexOf(comp.position)).FirstOrDefault();
+
+                        if (assosciations != null)
+                        {
+                            test.institution = assosciations.institusjon ?? "Ukjent";
+                            test.institute = assosciations.institutt ?? "Ukjent";
+                            test.position = assosciations.position ?? "Ukjent";
+                        }
+                    }
+                }
+
+                return testList;
             }
         }
 
-        public List<ResearcherRelevance> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
+        public List<SimilarResearcher> GetResearcherRelevance(string cristinID, CancellationToken cancellationToken)
         {
-            List<UserMatch> userData = new List<UserMatch>();
+            var similarResearchers = new List<SimilarResearcher>();
             try
             {
-                userData = GetUserData(cristinID, cancellationToken);
+                similarResearchers = GetUserData(cristinID, cancellationToken);               
             }
             catch
             {
                 throw;
             }
-            if (userData == null) { return null; }
+            if (similarResearchers == null) { return null; }
 
-            var researcherList = new List<ResearcherRelevance>();
+            double MAX = similarResearchers.Max(e => e.similarities);
+            double MIN = similarResearchers.Min(e => e.similarities);
 
             using (var db = new dbEntities())
             {
-                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).Select(e => e.forskningsID).ToList();
-                if (currentPapers == null)
-                {
-                    return null;
-                }
-                var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
-                     .Select(t => t.institusjon).ToList();
+                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID)
+                                   
+                                    .Select(e => e.forskningsID).ToList();
 
-                foreach (var user in userData)
+                if (currentPapers == null) { return null; }
+
+                var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
+                                          .Select(t => t.institusjon).ToList();
+
+                foreach (var similar in similarResearchers)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var researcher = GetResearcherInfo(user.cristinID);
+                    var comparedPapers = db.forfattere.Where(a => a.cristinID == similar.cristinID)
+                                        .Select(e => e.forskningsID).ToList();
 
-                    if (researcher != null)
-                    {
-                        var comp = db.forfattere.Where(a => a.cristinID == user.cristinID)
-                            .Select(e => e.forskningsID).ToList();
+                    similar.neutrality = currentPapers.Where(a => comparedPapers.Contains(a))
+                                         .FirstOrDefault() != null ? false : true;
 
+                    var comparedInstitutions = db.tilhorighet.Where(t => t.cristinID == similar.cristinID)
+                                               .Select(t => t.institusjon).ToList();
 
-                        ResearcherRelevance newResearcher = null;
-                        if (currentPapers.Where(a => comp.Contains(a)).FirstOrDefault() != null)
-                        {
+                    similar.enviroment = currentInstitutions.Where(current => comparedInstitutions.Contains(current))
+                                         .FirstOrDefault() != null ? true : false;
 
-                            newResearcher = new ResearcherRelevance
-                            {
-                                cristinID = user.cristinID,
-                                firstName = researcher.firstName,
-                                lastName = researcher.lastName,
-                                institute = researcher.institute ?? "Ukjent",
-                                institution = researcher.institution ?? "Ukjent",
-                                position = researcher.position ?? "Ukjent",
-                                similarities = user.similarities,
-                                neutrality = false
-                            };
-                        }
-                        else
-                        {
-                            newResearcher = new ResearcherRelevance
-                            {
-                                cristinID = user.cristinID,
-                                firstName = researcher.firstName,
-                                lastName = researcher.lastName,
-                                institute = researcher.institute ?? "Ukjent",
-                                institution = researcher.institution ?? "Ukjent",
-                                position = researcher.position ?? "Ukjent",
-                                similarities = user.similarities,
-                                neutrality = true
-                            };
-                        }
-
-                        var comparedInstitutions = db.tilhorighet.Where(t => t.cristinID == user.cristinID).Select(t => t.institusjon).ToList();
-                        newResearcher.enviroment = currentInstitutions.Where(cur => comparedInstitutions.Contains(cur)).FirstOrDefault() != null ? true : false;
-                        researcherList.Add(newResearcher);
-                    }
+                    similar.similarities = (4) * (similar.similarities - MIN) / (MAX - MIN) + 1;
                 }
-
-                foreach (var researcher in researcherList)
-                {
-                    researcher.similarities = (5 - 1) * (researcher.similarities - userData.Min(e => e.similarities))
-                                     / (userData.Max(e => e.similarities) - userData.Min(e => e.similarities)) + 1;
-                }
-                return researcherList;
+                return similarResearchers;
             }
         }
 
         public ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken)
         {
-            List<UserMatch> userData = new List<UserMatch>();
+            Debug.WriteLine("Scatter");
+            var userData = new List<SimilarResearcher>();
             try
             {
-                userData = GetUserData(cristinID, cancellationToken);
+                userData = GetUserData(cristinID, cancellationToken);              
             }
             catch
             {
+                Debug.WriteLine("!!!!");
                 throw;
             }
             if (userData == null) { return null; }
 
             var scatterPlotData = new ScatterPlot();
             var rowList = new List<rows>();
-            var random = new Random();
 
             using (var db = new dbEntities())
             {
@@ -547,28 +512,18 @@ namespace App.Models
                 foreach (var match in userData)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-
-                    var association = db.tilhorighet.Where(e => e.cristinID == match.cristinID).Select(t => new { t.position, t.institusjon })
-                        .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
-
                     var rank = db.rank.Where(r => r.cristinID == match.cristinID)
                         .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
-                    if (association == null) { continue; }
-
-                    string color = association.position == "Professor" || association.position == "Professor ii" || association.position == "Professor emeritus" ? "#0077c2" : "#80d6ff";
-
-                    User user = db.person.Where(p => p.cristinID == match.cristinID)
-                        .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
-                        .FirstOrDefault();
-
-                    if (user == null) { continue; }
+                    string color = match.position == "Professor" ||
+                                   match.position == "Professor ii" ||
+                                   match.position == "Professor emeritus" ? "#0077c2" : "#80d6ff";
 
                     rowList.Add(new rows
                     {
                         c = new List<c>{
-                            new c { v = rank.quality, f = user.firstName + " " + user.lastName },
-                            new c { v = rank.publications+"", f = association.position + ", " + association.institusjon },
+                            new c { v = rank.quality, f = match.firstName + " " + match.lastName },
+                            new c { v = rank.publications+"", f = match.position + ", " + match.institution },
                             new c { v = color, f = null }
                         }
                     });
