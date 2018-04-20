@@ -3,7 +3,30 @@
     <div class="col text-center">
       <h1><strong>Forskningsmiljø</strong></h1>
     </div>
-    <div class="container">
+    <div class="container" style="margin-top:2em">
+      <div class="col-sm offset-2">
+        <table>
+          <thead>
+            <tr>
+              <th>Legend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><span class="badge badge-pill badge-warning"> </span></th>
+              <td>Gjeldende person</td>
+            </tr>
+            <tr>
+              <th><span class="badge badge-pill badge-primary"> </span></th>
+              <td>Professor, Professor II, Emeritus, Forsker I, Dosent </td>
+            </tr>
+            <tr>
+              <th><span class="badge badge-pill badge-secondary"> </span></th>
+              <td>Andre vitenskapelige titler</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <google-chart [data]="scatterChartData"></google-chart>
     </div>
   </div>
