@@ -4,14 +4,46 @@
       <h1><strong>Forskningsmiljø</strong></h1>
     </div>
     <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
 
+            <div class="col-sm-6 offset-2">
+              <table>                
+                <thead>                  
+                  <tr>                    
+                    <th>Legend</th>                    
+                  </tr>                  
+                </thead>                
+                <tbody>                  
+                  <tr>
+                    <th><span class="badge badge-pill badge-warning"> </span></th>
+                    <td>Gjeldende person</td>
+                  </tr>
+                  
+                  <tr>                    
+                    <th><span class="badge badge-pill badge-primary"> </span></th>                    
+                    <td>Professor, Professor II, Emeritus, Forsker I, Dosent </td>                    
+                  </tr>                  
+                  <tr>              
+                    <th><span class="badge badge-pill badge-secondary"> </span></th>
+                    <td>Andre posisjoner</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-sm-4">
+              <switch [status]="value"
+                      [onText]="onText"
+                      [offText]="offText"
+                      [onColor]="onColor"
+                      [offColor]="offColor"
+                      (statusChange)="logChange($event)"></switch>
+            </div>
+          </div>
 
-      <switch [status]="value"
-              [onText]="onText"
-              [offText]="offText"
-              [onColor]="onColor"
-              [offColor]="offColor"
-              (statusChange)="logChange($event)"></switch>
+        </div>
+      </div>
 
       <google-chart #cchart [data]="scatterChartData"></google-chart>
     </div>

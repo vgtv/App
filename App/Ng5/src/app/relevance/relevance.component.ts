@@ -26,7 +26,7 @@ export class RelevanceComponent {
   onText = "Filtrering På";
   offText = "Filtrering Av";
   onColor = "green";
-  offColor = "red";
+  offColor = "yellow";
   default = "blue";
 
   valueEnviroment = true;
