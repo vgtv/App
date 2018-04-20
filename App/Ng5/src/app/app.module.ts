@@ -24,6 +24,8 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { RelevanceComponent } from './relevance/relevance.component';
 import { TopnavComponent } from './topnav/topnav.component';
 
+import { BootstrapSwitchModule } from 'angular2-bootstrap-switch';
+
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
@@ -52,6 +54,7 @@ import { DialogComponent } from './dialog/dialog.component';
     DialogComponent
   ],
   imports: [
+    BootstrapSwitchModule.forRoot(),
     NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,

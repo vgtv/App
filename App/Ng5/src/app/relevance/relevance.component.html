@@ -5,7 +5,9 @@
     </span>
   </ng-template>
 
-  <div class="btn-group btn-group-toggle" style="padding-right:15px; padding-bottom:5px;" ngbRadioGroup name="radioNeutrality" [(ngModel)]="neutrality">
+  <!--
+      <div class="btn-group btn-group-toggle" style="padding-right:15px;"
+       ngbRadioGroup name="radioNeutrality" [(ngModel)]="neutrality">
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="true"> Habil
     </label>
@@ -16,16 +18,54 @@
 
   <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioEnviroment" [(ngModel)]="enviroment">
     <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="true"> Intern
+      <input ngbButton type="radio" [value]="false"> Intern
     </label>
     <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="false"> Ekstern
+      <input ngbButton type="radio" [value]="true"> Ekstern
     </label>
   </div>
 
+  -->
+
+
+
+
+  <ul class="list-inline">
+    <li class="list-inline-item">
+
+      <switch [status]="value"
+              [onText]="onText"
+              [offText]="offText"
+              [onColor]="onColor"
+              [offColor]="offColor"
+              [size]="size"
+              (statusChange)="onFilterChange($event)"></switch>
+    </li>
+
+    <li class="list-inline-item" *ngIf="value">
+      <switch [status]="valueEnviroment"
+              [onText]="onEnviromentText"
+              [offText]="offEnviromentText"
+              [onColor]="default"
+              [offColor]="default"
+              [size]="size"
+              (statusChange)="onEnviromentChange($event)"></switch>
+    </li>
+
+    <li class="list-inline-item" *ngIf="value">
+      <switch [status]="valueNeutrality"
+              [onText]="onNeutralityText"
+              [offText]="offNeutralityText"
+              [onColor]="default"
+              [offColor]="default"
+              [size]="size"
+              (statusChange)="onNeutralityChange($event)"></switch>
+    </li>
+  </ul>
+
   <div class="table-responsive">
     <table class="table table-hover table-light">
-      <thead class="thead-light">
+      <thead class="table-light">
         <tr>
           <th>Relevans</th>
           <th>Forsker</th>
@@ -36,7 +76,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let person of dataTable | callback: neutrality : enviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
+        <tr *ngFor="let person of dataTable | callback: value : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
           <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
           <td>{{person.firstName}} {{person.lastName}}</td>
           <td>{{person?.position}}</td>
@@ -51,4 +91,6 @@
     <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
   </div>
 </div>
+
+
 

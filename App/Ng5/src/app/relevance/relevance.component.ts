@@ -22,9 +22,42 @@ export class RelevanceComponent {
   page = 1;
   pendingHttp: any;
 
+  value = false;
+  onText = "Filtrering På";
+  offText = "Filtrering Av";
+  onColor = "green";
+  offColor = "red";
+  default = "blue";
+  disabled = true;
+
+  valueEnviroment = true;
+  onEnviromentText = "Eksterne";
+  offEnviromentText = "Kollegaer";
+
+  valueNeutrality = true;
+  onNeutralityText = "Ikke-medforfattere";
+  offNeutralityText = "Medforfattere";
+
+
   constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
     config.max = 5;
     config.readonly = true;
+  }
+
+  onFilterChange(event: any) {
+    this.value = !this.value;
+    if (this.value) {
+      this.valueNeutrality = true;
+      this.valueEnviroment = true;
+    }
+  }
+
+  onNeutralityChange(event: any) {
+    this.valueNeutrality = !this.valueNeutrality;
+  }
+
+  onEnviromentChange(event: any) {
+    this.valueEnviroment = !this.valueEnviroment;
   }
 
   async ngOnChanges() {

@@ -377,6 +377,7 @@ namespace App.Models
                     matchedUsers.Add(new SimilarResearcher { similarities = x, cristinID = compared.Key });
                 }
 
+
                 // tar ut de mest relevante i fagmiljøet
                 var communityList = matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
                 foreach (var researcher in communityList)
@@ -429,7 +430,8 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID)
+                
+                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).DistinctBy(d => d.forskningsID)
                     .Select(e => e.forskningsID).ToList();
 
                 if (currentPapers == null) { return null; }
@@ -437,20 +439,32 @@ namespace App.Models
                 var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
                                           .Select(t => t.institusjon).ToList();
 
-                foreach (var similar in similarResearchers)
+                foreach (var researcher in similarResearchers)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    // sjekker om de har jobbet sammen
-                    similar.neutrality = db.forfattere.Where(a => a.cristinID == similar.cristinID && currentPapers.Contains(a.forskningsID) == true)
-                        .FirstOrDefault() != null ? true : false;
-
-                    // sjekker om de har jobbet på samme institusjon
-                    similar.enviroment = db.tilhorighet.Where(a => a.cristinID == similar.cristinID && currentInstitutions.Contains(a.institusjon) == true)
+                    // Denne linq spørringen sjekker om de har jobbet sammen
+                    /****
+                     * 
+                     * I console -> network i chrome ser du at apirelevevance requesten er treigest og det er denne som gjør at det spesielt går treigt
+                     *  En ting jeg ikke har testet ut er å hente alle medforfattere og deretter sjekke om personen
+                     *  som itereres over her er en av dem, kan hende det er raskere, vet ikke.
+                     *  
+                     *  Det er kun denne delen som bør optimaliseres
+                     *  
+                     ****/
+                    researcher.neutrality = db.forfattere.Where(a => a.cristinID == researcher.cristinID && currentPapers
+                                         .Contains(a.forskningsID) == true)
                                          .FirstOrDefault() != null ? true : false;
 
+
+                    // sjekker om de har jobbet på samme institusjon
+                    researcher.enviroment = db.tilhorighet.Where(a => a.cristinID == researcher.cristinID && currentInstitutions
+                                        .Contains(a.institusjon) == true)
+                                        .FirstOrDefault() != null ? true : false;
+
                     // normaliserer dataen til intervallet [1,5]
-                    similar.similarities = (4) * (similar.similarities - MIN) / (MAX - MIN) + 1;
+                    researcher.similarities = (4) * (researcher.similarities - MIN) / (MAX - MIN) + 1;
                 }
                 return similarResearchers;
             }
@@ -499,6 +513,8 @@ namespace App.Models
 
                     string color = match.position == "Professor" ||
                                    match.position == "Professor ii" ||
+                                   match.position == "Dosent" ||
+                                   match.position == "Forsker i" ||
                                    match.position == "Professor emeritus" ? "#0077c2" : "#80d6ff";
 
                     rowList.Add(new rows
@@ -544,9 +560,10 @@ namespace App.Models
         {
             return new List<string>
             {
-                "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor","Universitetslektor","Instituttleder",
+                "Vitenskapelig ass","Spesialistkandidat", "Stipendiat","Høgskolelektor",
+                "Universitetslektor","Instituttleder", "Førsteamanuensis",
                 "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
-                "Dosent","Professor ii","Forsker i","Forskningsjef", "Professor", "Professor emeritus"
+                "Dosent","Professor ii","Forsker i", "Professor", "Professor emeritus"
             };
         }
     }

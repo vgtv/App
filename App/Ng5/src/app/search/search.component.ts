@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -18,7 +20,9 @@ const PARAMS = new HttpParams();
 
 @Injectable()
 export class SearchService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, config: NgbTypeaheadConfig) {
+    config.focusFirst = false;
+  }
 
   public search(term: string) {
     if (term === '') {
@@ -44,9 +48,13 @@ export class NgbdTypeaheadHttp {
 
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor(private _service: SearchService, private router: Router) {}
+  constructor(private _service: SearchService, private router: Router) { }
 
-  onSearch() {
+  onSearch(event: any) {
+      this.router.navigate(['/profile', event.item.cristinID]);    
+  }
+
+  onSearchButton() {
     if (typeof this.model !== 'undefined') { // ikke skrevet noe inn
       if (typeof this.model.cristinID !== 'undefined') { // trykket ikke paa en person
         this.router.navigate(['/profile', this.model.cristinID]);
@@ -59,11 +67,11 @@ export class NgbdTypeaheadHttp {
   formatMatches = (value: any) =>
     value.firstName + ' ' + value.lastName + ' | ' + value.position + ' | ' + value.institution
 
-  resultMatches = (value: any) => value.firstName + ' ' + value.lastName + ' (' + value.position +')';
+  resultMatches = (value: any) => value.firstName + ' ' + value.lastName;
 
   search = (text$: Observable<string>) =>
     text$
-      .debounceTime(300)
+      .debounceTime(250)
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>

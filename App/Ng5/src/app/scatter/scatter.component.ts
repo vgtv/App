@@ -71,7 +71,7 @@ export class ScatterComponent {
         },
         legend: 'none',
         vAxis: {
-          title: 'Publikasjoner',
+          title: 'Kvantitet',
           titleTextStyle: {
             color: '#0077c2',
             fontSize: 18,

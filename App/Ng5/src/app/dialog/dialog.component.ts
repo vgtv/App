@@ -37,7 +37,7 @@ export class DialogComponent {
     this.subscribe = this.loader.progress$.subscribe(progress => {
       if (this.data) {
         this.loader.set(99);
-        this.loader.set(50);
+        this.loader.set(30);
         this.data = false;
         this.changed = true;
       }
@@ -53,10 +53,10 @@ export class DialogComponent {
         }
       }
       else {
-        if (progress >= 50 && progress < 65) {
+        if (progress >= 30 && progress < 50) {
           this.loadingText = "Laster inn relevansprofil..";
         }
-        else if (progress >= 65 && progress < 75) {
+        else if (progress >= 50 && progress < 75) {
           this.loadingText = "Laster inn habiltetsprofil..";
         }
         else if (progress >= 75 && progress < 98) {

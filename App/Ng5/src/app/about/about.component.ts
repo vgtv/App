@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AboutComponent {
   images: Array<string> =
   [
-    'img/linkedin/anton.png', 'img/linkedin/anders.jpg', 'img/linkedin/julian.jpg', 'img/linkedin/robin.jpg', 'img/linkedin/steffen.jpg'
+    'img/linkedin/anton.png', 'img/linkedin/anders.jpg', 'img/linkedin/julian.jpg', 'img/linkedin/robin.jpg', 'img/linkedin/steffen.jpg', 'img/linkedin/frode.jpg'
   ];
 
   constructor() { }

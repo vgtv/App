@@ -247,6 +247,7 @@
     <Content Include="Global.asax" />
     <Content Include="img\linkedin\anders.jpg" />
     <Content Include="img\linkedin\anton.png" />
+    <Content Include="img\linkedin\frode.jpg" />
     <Content Include="img\linkedin\julian.jpg" />
     <Content Include="img\linkedin\robin.jpg" />
     <Content Include="img\linkedin\steffen.jpg" />

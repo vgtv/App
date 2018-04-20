@@ -9,16 +9,16 @@
              placeholder="Søk etter norsk forsker"
              [resultFormatter]="formatMatches"
              [inputFormatter]="resultMatches"
-             (keyup.enter)="onSearch()">
+             (selectItem)="onSearch($event)">
       <div class="input-group-append">
-        <button class="btn btn-lg btn-warning" style="width:4em" type="button" (click)="onSearch()">
-            <mat-progress-spinner *ngIf="searching" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
+        <button class="btn btn-lg btn-warning" style="width:4em" type="button" (click)="onSearchButton()">
+          <mat-progress-spinner *ngIf="searching" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
           <span *ngIf="!searching">Søk</span>
         </button>
       </div>
     </div>
-    </div>
   </div>
+</div>
 
 <!--  Denne er for forsiden  -->
 <div *ngIf="!showTopNav">
@@ -33,18 +33,17 @@
                placeholder="Søk etter norsk forsker"
                [resultFormatter]="formatMatches"
                [inputFormatter]="resultMatches"
-               (keyup.enter)="onSearch()"
-               />
+               (selectItem)="onSearch($event)">
         <div class="input-group-append">
-          <button class="btn btn-lg btn-warning" style="width:4em" type="button" (click)="onSearch()">
+          <button class="btn btn-lg btn-warning" style="width:4em" type="button" (click)="onSearchButton()">
             <mat-progress-spinner *ngIf="searching" [diameter]="40" mode="indeterminate"></mat-progress-spinner>
             <span *ngIf="!searching">Søk</span>
           </button>
         </div>
         <div class="invalid-feedback" *ngIf="searchFailed">Beklager, kunne ikke laste inn data.</div>
-        </div>
       </div>
     </div>
   </div>
+</div>
 
 
