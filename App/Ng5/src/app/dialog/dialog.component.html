@@ -1,7 +1,5 @@
-<h2 matDialogTitle>Vennligst vent</h2>
+<h3 matDialogTitle class="text-center">Vennligst vent</h3>
 <mat-dialog-content>
-  <h6>
-    {{loadingText}}
-  </h6>
+  <p class="text-muted text-center">{{loadingText}}</p>
   <mat-progress-bar mode="determinate" [value]="loader.progress$|async" aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
 </mat-dialog-content>

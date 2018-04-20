@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -21,13 +21,16 @@ export class ProfileComponent implements OnInit {
   showTable: boolean;
   showContent: boolean;
 
+
+  aref: any;
+
   constructor(private router: ActivatedRoute,
     public loader: LoadingBarService,
     public dialog: MatDialog) {
   }
 
   openLoader() {
-    this.dialog.open(DialogComponent, {
+    this.aref = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '500px',
       closeOnNavigation: true
@@ -54,6 +57,7 @@ export class ProfileComponent implements OnInit {
   setPlotState(state: boolean) {
     if (state === true) {
       this.showPlot = true;
+      this.aref.componentInstance.data = true;
     }
     this.readyToShow();
   }

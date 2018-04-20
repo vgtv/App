@@ -14,16 +14,6 @@ namespace App.Models
 {
     public class ApiRepository : iApiRepository
     {
-        /*
-         * ----------------------------------------------------------------------
-         * Autocomplete
-         * ----------------------------------------------------------------------
-         * Json
-         * [
-         *      {"cristinID":"1","firstname":"Yvonne","lastname":"Andersson"},
-         *      {"cristinID":"10","firstname":"Bedada Mergo","lastname":"Egne"}
-         * ];
-         */
         public List<User> GetUsers(string searchQuery)
         {
             using (var db = new dbEntities())
@@ -383,43 +373,41 @@ namespace App.Models
                             default: ++x; break;
                         }
                     }
-     
+
                     matchedUsers.Add(new SimilarResearcher { similarities = x, cristinID = compared.Key });
                 }
 
-
-                var testList = matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
- 
-
-                foreach (var test in testList)
+                // tar ut de mest relevante i fagmiljøet
+                var communityList = matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
+                foreach (var researcher in communityList)
                 {
-                    var researcher = db.person.Where(p => p.cristinID == test.cristinID)
+                    var person = db.person.Where(p => p.cristinID == researcher.cristinID)
                                   .Select(p => new
                                   {
                                       firstName = p.firstname,
                                       lastName = p.lastname
                                   }).FirstOrDefault();
 
-      
-                    test.firstName = researcher.firstName;
 
-                    test.lastName = researcher.lastName;
+                    researcher.firstName = person.firstName;
+
+                    researcher.lastName = person.lastName;
 
                     if (researcher != null)
                     {
-                        var assosciations = db.tilhorighet.Where(e => e.cristinID == test.cristinID)
+                        var assosciations = db.tilhorighet.Where(t => t.cristinID == researcher.cristinID)
                             .ToList().OrderByDescending(comp => filter.IndexOf(comp.position)).FirstOrDefault();
 
                         if (assosciations != null)
                         {
-                            test.institution = assosciations.institusjon ?? "Ukjent";
-                            test.institute = assosciations.institutt ?? "Ukjent";
-                            test.position = assosciations.position ?? "Ukjent";
+                            researcher.institution = assosciations.institusjon ?? "Ukjent";
+                            researcher.institute = assosciations.institutt ?? "Ukjent";
+                            researcher.position = assosciations.position ?? "Ukjent";
                         }
                     }
                 }
 
-                return testList;
+                return communityList;
             }
         }
 
@@ -428,7 +416,7 @@ namespace App.Models
             var similarResearchers = new List<SimilarResearcher>();
             try
             {
-                similarResearchers = GetUserData(cristinID, cancellationToken);               
+                similarResearchers = GetUserData(cristinID, cancellationToken);
             }
             catch
             {
@@ -442,8 +430,7 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID)
-                                   
-                                    .Select(e => e.forskningsID).ToList();
+                    .Select(e => e.forskningsID).ToList();
 
                 if (currentPapers == null) { return null; }
 
@@ -454,18 +441,15 @@ namespace App.Models
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var comparedPapers = db.forfattere.Where(a => a.cristinID == similar.cristinID)
-                                        .Select(e => e.forskningsID).ToList();
+                    // sjekker om de har jobbet sammen
+                    similar.neutrality = db.forfattere.Where(a => a.cristinID == similar.cristinID && currentPapers.Contains(a.forskningsID) == true)
+                        .FirstOrDefault() != null ? true : false;
 
-                    similar.neutrality = currentPapers.Where(a => comparedPapers.Contains(a))
-                                         .FirstOrDefault() != null ? false : true;
-
-                    var comparedInstitutions = db.tilhorighet.Where(t => t.cristinID == similar.cristinID)
-                                               .Select(t => t.institusjon).ToList();
-
-                    similar.enviroment = currentInstitutions.Where(current => comparedInstitutions.Contains(current))
+                    // sjekker om de har jobbet på samme institusjon
+                    similar.enviroment = db.tilhorighet.Where(a => a.cristinID == similar.cristinID && currentInstitutions.Contains(a.institusjon) == true)
                                          .FirstOrDefault() != null ? true : false;
 
+                    // normaliserer dataen til intervallet [1,5]
                     similar.similarities = (4) * (similar.similarities - MIN) / (MAX - MIN) + 1;
                 }
                 return similarResearchers;
@@ -474,15 +458,13 @@ namespace App.Models
 
         public ScatterPlot GetScatterData(string cristinID, CancellationToken cancellationToken)
         {
-            Debug.WriteLine("Scatter");
             var userData = new List<SimilarResearcher>();
             try
             {
-                userData = GetUserData(cristinID, cancellationToken);              
+                userData = GetUserData(cristinID, cancellationToken);
             }
             catch
             {
-                Debug.WriteLine("!!!!");
                 throw;
             }
             if (userData == null) { return null; }

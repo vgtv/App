@@ -256,7 +256,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/dialog/dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 matDialogTitle>Vennligst vent</h2>\r\n<mat-dialog-content>\r\n  <h6>\r\n    {{loadingText}}\r\n  </h6>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</mat-dialog-content>\r\n"
+module.exports = "<h3 matDialogTitle class=\"text-center\">Vennligst vent</h3>\r\n<mat-dialog-content>\r\n  <p class=\"text-muted text-center\">{{loadingText}}</p>\r\n  <mat-progress-bar mode=\"determinate\" [value]=\"loader.progress$|async\" aria-label=\"Vi matcher nå forskere sitt fagfelt, vennligst vent\"></mat-progress-bar>\r\n</mat-dialog-content>\r\n"
 
 /***/ }),
 
@@ -287,6 +287,8 @@ var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-
 var DialogComponent = /** @class */ (function () {
     function DialogComponent(loader) {
         this.loader = loader;
+        this.changed = false;
+        this.data = false;
         if (typeof this.subscribe !== 'undefined') {
             if (this.subscribe) {
                 this.loader.set(0);
@@ -302,30 +304,37 @@ var DialogComponent = /** @class */ (function () {
         var _this = this;
         this.loader.set(0);
         this.subscribe = this.loader.progress$.subscribe(function (progress) {
-            if (progress === 0) {
-                _this.loadingText = '';
+            if (_this.data) {
+                _this.loader.set(99);
+                _this.loader.set(50);
+                _this.data = false;
+                _this.changed = true;
             }
-            else if (progress > 0 && progress < 45) {
-                _this.loadingText = 'Vi matcher nå fagfeltet til denne profilen..';
+            else if (!_this.changed) {
+                if (progress >= 0 && progress < 50) {
+                    _this.loadingText = "Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..";
+                }
+                else if (progress >= 50 && progress < 80) {
+                    _this.loadingText = "Laster inn forskningsmiljø..";
+                }
+                else if (progress >= 80 && progress < 99) {
+                    _this.loadingText = "Laster inn visualisering..";
+                }
             }
-            else if (progress >= 45 && progress < 60) {
-                _this.loadingText = 'Laster inn relevansprofil..';
-            }
-            else if (progress >= 60 && progress < 70) {
-                _this.loadingText = 'Laster inn habilitetprofil..';
-            }
-            else if (progress >= 70 && progress < 90) {
-                _this.loadingText = 'Laster inn visualiseringsdata..';
-            }
-            else if (progress >= 90 && progress < 98) {
-                _this.loadingText = 'Laster inn tabelldata..';
-            }
-            else if (progress >= 98 && progress < 100) {
-                _this.loadingText = 'Klargjør applikasjonen..';
-            }
-            else if (progress >= 100) {
-                _this.loader.set(0);
-                _this.subscribe.unsubscribe();
+            else {
+                if (progress >= 50 && progress < 65) {
+                    _this.loadingText = "Laster inn relevansprofil..";
+                }
+                else if (progress >= 65 && progress < 75) {
+                    _this.loadingText = "Laster inn habiltetsprofil..";
+                }
+                else if (progress >= 75 && progress < 98) {
+                    _this.loadingText = "Klargjør profil..";
+                }
+                else if (progress >= 100) {
+                    _this.loader.set(0);
+                    _this.subscribe.unsubscribe();
+                }
             }
         });
     };
@@ -470,7 +479,7 @@ var ProfileComponent = /** @class */ (function () {
         this.dialog = dialog;
     }
     ProfileComponent.prototype.openLoader = function () {
-        this.dialog.open(dialog_component_1.DialogComponent, {
+        this.aref = this.dialog.open(dialog_component_1.DialogComponent, {
             disableClose: true,
             width: '500px',
             closeOnNavigation: true
@@ -493,6 +502,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.setPlotState = function (state) {
         if (state === true) {
             this.showPlot = true;
+            this.aref.componentInstance.data = true;
         }
         this.readyToShow();
     };

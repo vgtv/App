@@ -11,6 +11,12 @@ export class DialogComponent {
   subscribe; any;
   loadingText: string;
 
+  match: false;
+  relevance: false;
+
+  changed: boolean = false;
+  data: boolean = false;
+
   constructor(public loader: LoadingBarService) {
     if (typeof this.subscribe !== 'undefined') {
       if (this.subscribe) {
@@ -28,35 +34,40 @@ export class DialogComponent {
   setupSubscriber() {
     this.loader.set(0);
 
-
-
-
     this.subscribe = this.loader.progress$.subscribe(progress => {
-      if (progress === 0) {
-        this.loadingText = '';
+      if (this.data) {
+        this.loader.set(99);
+        this.loader.set(50);
+        this.data = false;
+        this.changed = true;
       }
-      else if (progress > 0 && progress < 45) {
-        this.loadingText = 'Vi matcher nå fagfeltet til denne profilen..';
+      else if (!this.changed) {
+        if (progress >= 0 && progress < 50) {
+          this.loadingText = "Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..";
+        }
+        else if (progress >= 50 && progress < 80) {
+          this.loadingText = "Laster inn forskningsmiljø..";
+        }        
+        else if (progress >= 80 && progress < 99) {
+          this.loadingText = "Laster inn visualisering..";
+        }
       }
-      else if (progress >= 45 && progress < 60) {
-        this.loadingText = 'Laster inn relevansprofil..';
+      else {
+        if (progress >= 50 && progress < 65) {
+          this.loadingText = "Laster inn relevansprofil..";
+        }
+        else if (progress >= 65 && progress < 75) {
+          this.loadingText = "Laster inn habiltetsprofil..";
+        }
+        else if (progress >= 75 && progress < 98) {
+          this.loadingText = "Klargjør profil..";
+        }
+        else if (progress >= 100) {
+          this.loader.set(0);
+          this.subscribe.unsubscribe();
+        }
       }
-      else if (progress >= 60 && progress < 70) {
-        this.loadingText = 'Laster inn habilitetprofil..';
-      }
-      else if (progress >= 70 && progress < 90) {
-        this.loadingText = 'Laster inn visualiseringsdata..';
-      }
-      else if (progress >= 90 && progress < 98) {
-        this.loadingText = 'Laster inn tabelldata..';
-      }
-      else if (progress >= 98 && progress < 100) {
-        this.loadingText = 'Klargjør applikasjonen..';
-      }
-      else if (progress >= 100) {
-        this.loader.set(0);
-        this.subscribe.unsubscribe();
-      }
+
     });
   }
 }
