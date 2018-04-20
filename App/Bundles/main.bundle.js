@@ -667,7 +667,6 @@ var RelevanceComponent = /** @class */ (function () {
         this.onColor = "green";
         this.offColor = "red";
         this.default = "blue";
-        this.disabled = true;
         this.valueEnviroment = true;
         this.onEnviromentText = "Eksterne";
         this.offEnviromentText = "Kollegaer";
@@ -769,7 +768,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n      <google-chart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n\r\n\r\n      <switch [status]=\"value\"\r\n              [onText]=\"onText\"\r\n              [offText]=\"offText\"\r\n              [onColor]=\"onColor\"\r\n              [offColor]=\"offColor\"\r\n              (statusChange)=\"logChange($event)\"></switch>\r\n\r\n      <google-chart #cchart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -832,13 +831,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var cloneDeep = __webpack_require__("./node_modules/lodash/cloneDeep.js");
+var core_2 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var ScatterComponent = /** @class */ (function () {
     function ScatterComponent(http) {
         this.http = http;
         this.showPlot = new core_1.EventEmitter();
+        this.value = false;
+        this.onText = "Log(n) på";
+        this.offText = "Logn(n) av";
+        this.onColor = "blue";
+        this.offColor = "yellow";
         this.apiURL = 'api/apiscatterplot?cristinID=';
         this.setupChart();
     }
+    ScatterComponent.prototype.logChange = function (event) {
+        console.log("OK1");
+        if (event === true) {
+            this.cchart.wrapper.setDataTable(this.scatterChartLogData);
+        }
+        else {
+            this.cchart.wrapper.setDataTable(this.scatterChartData.dataTable);
+            console.log(this.scatterChartData.dataTable);
+        }
+        this.cchart.redraw();
+    };
     ScatterComponent.prototype.ngOnDestroy = function () {
         this.pendingHttp.unsubscribe();
     };
@@ -872,6 +889,17 @@ var ScatterComponent = /** @class */ (function () {
                                 .subscribe(function (results) {
                                 _this.scatterChartData.dataTable = results;
                                 _this.showPlot.emit(true);
+                                _this.scatterChartLogData = cloneDeep(_this.scatterChartData.dataTable);
+                                for (var _i = 0, _a = _this.scatterChartLogData.rows; _i < _a.length; _i++) {
+                                    var c = _a[_i];
+                                    for (var _b = 0, _c = c.c; _b < _c.length; _b++) {
+                                        var i = _c[_b];
+                                        var value = i.v + "";
+                                        if (!value.startsWith("#")) {
+                                            i.v = Math.log(Number(i.v));
+                                        }
+                                    }
+                                }
                             }, function (msg) {
                                 if (msg.error === 'No data found for user') {
                                     _this.showPlot.emit(false);
@@ -933,6 +961,10 @@ var ScatterComponent = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], ScatterComponent.prototype, "showPlot", void 0);
+    __decorate([
+        core_2.ViewChild('cchart'),
+        __metadata("design:type", Object)
+    ], ScatterComponent.prototype, "cchart", void 0);
     ScatterComponent = __decorate([
         core_1.Component({
             selector: 'app-scatter',

@@ -4,7 +4,16 @@
       <h1><strong>Forskningsmiljø</strong></h1>
     </div>
     <div class="container">
-      <google-chart [data]="scatterChartData"></google-chart>
+
+
+      <switch [status]="value"
+              [onText]="onText"
+              [offText]="offText"
+              [onColor]="onColor"
+              [offColor]="offColor"
+              (statusChange)="logChange($event)"></switch>
+
+      <google-chart #cchart [data]="scatterChartData"></google-chart>
     </div>
   </div>
 </div>

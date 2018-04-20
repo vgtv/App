@@ -28,7 +28,6 @@ export class RelevanceComponent {
   onColor = "green";
   offColor = "red";
   default = "blue";
-  disabled = true;
 
   valueEnviroment = true;
   onEnviromentText = "Eksterne";

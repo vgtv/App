@@ -4,6 +4,8 @@ import { ChartReadyEvent } from 'ng2-google-charts';
 import { ChartErrorEvent } from 'ng2-google-charts';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
+import * as cloneDeep from 'lodash/cloneDeep';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-scatter',
@@ -14,13 +16,34 @@ export class ScatterComponent {
   @Input() input: string;
   @Input() ready: boolean;
   @Output() showPlot = new EventEmitter<boolean>();
+  @ViewChild('cchart') cchart;
 
+  scatterChartLogData: any;
   scatterChartData: any;
+
+
+  value = false;
+  onText = "Log(n) på";
+  offText = "Logn(n) av";
+  onColor = "blue";
+  offColor = "yellow";
+
   apiURL = 'api/apiscatterplot?cristinID=';
   pendingHttp: any;
 
   constructor(private http: HttpClient) {
     this.setupChart();
+  }
+    
+  logChange(event: any) {
+    console.log("OK1");
+    if (event === true) {
+      this.cchart.wrapper.setDataTable(this.scatterChartLogData);
+    } else {
+      this.cchart.wrapper.setDataTable(this.scatterChartData.dataTable);
+      console.log(this.scatterChartData.dataTable)
+    }
+    this.cchart.redraw();
   }
 
   ngOnDestroy() {
@@ -42,6 +65,17 @@ export class ScatterComponent {
       .subscribe(results => {
         this.scatterChartData.dataTable = results;
         this.showPlot.emit(true);
+
+        this.scatterChartLogData = cloneDeep(this.scatterChartData.dataTable);
+
+        for (let c of this.scatterChartLogData.rows) {
+          for (let i of c.c) {  
+            var value = i.v + "";
+            if (!value.startsWith("#")) {
+              i.v = Math.log(Number(i.v));
+            }
+          }
+        }
       },
       msg => {
         if (msg.error === 'No data found for user') {
