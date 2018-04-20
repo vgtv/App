@@ -769,7 +769,7 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n      <google-chart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\" style=\"margin-top:2em\">\r\n      <div class=\"col-sm offset-2\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th>Legend</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n              <th><span class=\"badge badge-pill badge-warning\"> </span></th>\r\n              <td>Gjeldende person</td>\r\n            </tr>\r\n            <tr>\r\n              <th><span class=\"badge badge-pill badge-primary\"> </span></th>\r\n              <td>Professor, Professor II, Emeritus, Forsker I, Dosent </td>\r\n            </tr>\r\n            <tr>\r\n              <th><span class=\"badge badge-pill badge-secondary\"> </span></th>\r\n              <td>Andre vitenskapelige titler</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n      <google-chart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
