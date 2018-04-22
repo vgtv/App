@@ -37,15 +37,15 @@ export class DialogComponent {
     this.subscribe = this.loader.progress$.subscribe(progress => {
       if (this.data) {
         this.loader.set(99);
-        this.loader.set(30);
+        this.loader.set(70);
         this.data = false;
         this.changed = true;
       }
       else if (!this.changed) {
-        if (progress >= 0 && progress < 50) {
+        if (progress >= 0 && progress < 55) {
           this.loadingText = "Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..";
         }
-        else if (progress >= 50 && progress < 80) {
+        else if (progress >= 55 && progress < 80) {
           this.loadingText = "Laster inn forskningsmiljø..";
         }        
         else if (progress >= 80 && progress < 99) {
@@ -53,13 +53,7 @@ export class DialogComponent {
         }
       }
       else {
-        if (progress >= 30 && progress < 50) {
-          this.loadingText = "Laster inn relevansprofil..";
-        }
-        else if (progress >= 50 && progress < 75) {
-          this.loadingText = "Laster inn habiltetsprofil..";
-        }
-        else if (progress >= 75 && progress < 98) {
+        if (progress >= 70 && progress < 99) {
           this.loadingText = "Klargjør profil..";
         }
         else if (progress >= 100) {

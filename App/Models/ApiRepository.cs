@@ -434,6 +434,9 @@ namespace App.Models
                 var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).DistinctBy(d => d.forskningsID)
                     .Select(e => e.forskningsID).ToList();
 
+                var compotent = db.forfattere.Where(f => currentPapers.Contains(f.forskningsID)).DistinctBy(d => d.cristinID)
+                    .Select(e => e.cristinID).ToList();
+
                 if (currentPapers == null) { return null; }
 
                 var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
@@ -443,20 +446,7 @@ namespace App.Models
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    // Denne linq spørringen sjekker om de har jobbet sammen
-                    /****
-                     * 
-                     * I console -> network i chrome ser du at apirelevevance requesten er treigest og det er denne som gjør at det spesielt går treigt
-                     *  En ting jeg ikke har testet ut er å hente alle medforfattere og deretter sjekke om personen
-                     *  som itereres over her er en av dem, kan hende det er raskere, vet ikke.
-                     *  
-                     *  Det er kun denne delen som bør optimaliseres
-                     *  
-                     ****/
-                    researcher.neutrality = db.forfattere.Where(a => a.cristinID == researcher.cristinID && currentPapers
-                                         .Contains(a.forskningsID) == true)
-                                         .FirstOrDefault() != null ? true : false;
-
+                    researcher.neutrality = compotent.Contains(researcher.cristinID) == true ? true : false;
 
                     // sjekker om de har jobbet på samme institusjon
                     researcher.enviroment = db.tilhorighet.Where(a => a.cristinID == researcher.cristinID && currentInstitutions

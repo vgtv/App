@@ -2,40 +2,37 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 import { CallbackPipe } from './relevance/callback.pipe';
 import { NullPipe } from './null.pipe';
-
-import { NgxPaginationModule } from 'ngx-pagination';
-
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-import { TagCloudModule } from 'angular-tag-cloud-module';
-
-import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { NgbdTypeaheadHttp } from './search/search.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { ScatterComponent } from './scatter/scatter.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 import { RelevanceComponent } from './relevance/relevance.component';
 import { TopnavComponent } from './topnav/topnav.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { AnimationComponent } from './animation/animation.component';
 
-import { BootstrapSwitchModule } from 'angular2-bootstrap-switch';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import { LottieAnimationViewModule } from 'ng-lottie';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-
-
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DialogComponent } from './dialog/dialog.component';
+
 
 
 @NgModule({
@@ -51,10 +48,12 @@ import { DialogComponent } from './dialog/dialog.component';
     TopnavComponent,
     CallbackPipe,
     NullPipe,
-    DialogComponent
+    DialogComponent,
+    AnimationComponent
   ],
   imports: [
-    BootstrapSwitchModule.forRoot(),
+    LottieAnimationViewModule.forRoot(),
+    DeviceDetectorModule.forRoot(),
     NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
@@ -67,6 +66,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatDialogModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatButtonToggleModule,
     BrowserAnimationsModule,
     NgxPaginationModule
   ],
