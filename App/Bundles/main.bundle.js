@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Om Tjenesten</strong></h2>\r\n  <div class=\"card card-p\">\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text text-justify\">\r\n        \"Tjenesten\" er basert på en tidligere datainnsamling av bachelorgruppen bak <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/index.html\">Forskningsindeksen</a>.\r\n        Datainnsamling dateres opp til 2016 fra det nåværende forskningsinformasjonssystemet i Norge, <a href=\"http://www.cristin.no/\">Cristin</a>.\r\n\r\n        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,\r\n        for så å kategorsiere forskere med like interesseområder.\r\n\r\n        Basert på en forskers interesser sammenlignes relevante forskere på kvalitet og kvantitet på publiseringene.\r\n        Du kan lese mer om den eldre utregningsmodellen på\r\n        <a href=\"https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/\">NTNU</a> sin nettside.\r\n        <br />\r\n        <br />\r\n        Applikasjonen har detaljerte profiler for over 20.000 forskere.\r\n        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet\r\n        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et\r\n        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.\r\n        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Oppdragsgiver</strong></h2>\r\n  <div class=\"card-group card-p mx-auto col-sm-4 \">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[5]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Frode Eika Sandnes</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Norsk professor i informasjonsteknologi (IKT) og prorektor ved Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <!--        <a href=\"\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>-->\r\n      </div>\r\n    </div>\r\n  </div>  \r\n\r\n  <h2 class=\"text-center\"><strong>Personene bak</strong></h2>\r\n  <div class=\"card-group card-p\">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[0]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anton Lilleby</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University - Kan ha mer tekst her   Kan ha mer tekst her\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[1]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anders Gillholm</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[2]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Julian Hjallum</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[3]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Robin Pedersen</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/pedersenrobin/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[4]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Steffen Marstein</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n<!--\r\n<div class=\"container\">\r\n  <h2 class=\"display-1 text-center\">Gruppen</h2>\r\n  <hr />\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\">Anton Lilleby</a>\r\n          <img mat-card-md-image [src]=\"images[0]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\">Anders Cleife Gillholm</a>\r\n          <img mat-card-md-image [src]=\"images[1]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\">Julian Hjallum</a>\r\n          <img mat-card-md-image [src]=\"images[2]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/pedersenrobin/\">Robin Pedersen</a>\r\n          <img mat-card-md-image [src]=\"images[3]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/pedersenrobin/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\">Steffen Marstein</a>\r\n          <img mat-card-md-image [src]=\"images[4]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n-->\r\n"
+module.exports = "\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Om Tjenesten</strong></h2>\r\n  <div class=\"card card-p\">\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text text-justify\">\r\n        \"Tjenesten\" er basert på en tidligere datainnsamling av bachelorgruppen bak <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/index.html\">Forskningsindeksen</a>.\r\n        Datainnsamling dateres opp til 2016 fra det nåværende forskningsinformasjonssystemet i Norge, <a href=\"http://www.cristin.no/\">Cristin</a>.\r\n\r\n        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,\r\n        for så å kategorsiere forskere med like interesseområder.\r\n\r\n        Basert på en forskers interesser sammenlignes relevante forskere på kvalitet og kvantitet på publiseringene.\r\n        Du kan lese mer om den eldre utregningsmodellen på\r\n        <a href=\"https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/\">NTNU</a> sin nettside.\r\n        <br />\r\n        <br />\r\n        Applikasjonen har detaljerte profiler for over 20.000 forskere.\r\n        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet\r\n        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et\r\n        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.\r\n        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Oppdragsgiver</strong></h2>\r\n  <div class=\"card-group card-p mx-auto col-sm-4 \">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[5]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Frode Eika Sandnes</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Norsk professor i informasjonsteknologi ved Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <!--        <a href=\"\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>-->\r\n      </div>\r\n    </div>\r\n  </div>  \r\n\r\n  <h2 class=\"text-center\"><strong>Utviklerne</strong></h2>\r\n  <div class=\"card-group card-p\">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[0]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anton Lilleby</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University \r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[1]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anders Gillholm</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[2]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Julian Hjallum</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[3]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Robin Pedersen</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/pedersenrobin/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[4]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Steffen Marstein</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n<!--\r\n<div class=\"container\">\r\n  <h2 class=\"display-1 text-center\">Gruppen</h2>\r\n  <hr />\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\">Anton Lilleby</a>\r\n          <img mat-card-md-image [src]=\"images[0]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\">Anders Cleife Gillholm</a>\r\n          <img mat-card-md-image [src]=\"images[1]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\">Julian Hjallum</a>\r\n          <img mat-card-md-image [src]=\"images[2]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/pedersenrobin/\">Robin Pedersen</a>\r\n          <img mat-card-md-image [src]=\"images[3]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/pedersenrobin/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <mat-card class=\"profile-card\">\r\n        <mat-card-title class=\"profile-title\">\r\n          <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\">Steffen Marstein</a>\r\n          <img mat-card-md-image [src]=\"images[4]\" class=\"profile-image\">\r\n        </mat-card-title>\r\n        <mat-card-content>\r\n          <p class=\"thick\">\r\n            OsloMet – Oslo Metropolitan University\r\n          </p>\r\n          <p class=\"normal\">\r\n            Oslo, Norway\r\n          </p>\r\n          <mat-card-actions class=\"profile-action\">\r\n            <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" type=\"button\" class=\"btn btn-primary\">Besøk Profil</a>\r\n          </mat-card-actions>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n-->\r\n"
 
 /***/ }),
 
@@ -50,7 +50,8 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
         this.images = [
-            'img/linkedin/anton.png', 'img/linkedin/anders.jpg', 'img/linkedin/julian.jpg', 'img/linkedin/robin.jpg', 'img/linkedin/steffen.jpg', 'img/linkedin/frode.jpg'
+            'img/linkedin/anton.png', 'img/linkedin/anders.jpg', 'img/linkedin/julian.jpg',
+            'img/linkedin/robin.jpg', 'img/linkedin/steffen.jpg', 'img/linkedin/frode.jpg'
         ];
     }
     AboutComponent = __decorate([
@@ -64,6 +65,74 @@ var AboutComponent = /** @class */ (function () {
     return AboutComponent;
 }());
 exports.AboutComponent = AboutComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/animation/animation.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <lottie-animation-view [options]=\"lottieConfig\"\r\n                             [width]=\"200\"\r\n                             [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n      </lottie-animation-view>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <lottie-animation-view [options]=\"lottieConfig3\"\r\n                             [width]=\"200\"\r\n                             [height]=\"200\"\r\n                             (animCreated)=\"setSpeed($event)\">\r\n      </lottie-animation-view>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <lottie-animation-view [options]=\"lottieConfig2\"\r\n                             [width]=\"200\"\r\n                             [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n      </lottie-animation-view>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <div class=\"text-center\">\r\n        <p class=\"text-muted\">Vi har ny data for over 20.000 norske forskere</p>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <div class=\"text-center\">\r\n        <p class=\"text-muted\">\r\n          Se hvordan du ligger an og knytt nye relasjoner ved å benytte søke feltet over\r\n        </p>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <div class=\"text-center\">\r\n        <p class=\"text-muted\">Hver forsker sammenlignes med sitt unike forskningsmiljø</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/animation/animation.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/animation/animation.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var AnimationComponent = /** @class */ (function () {
+    function AnimationComponent() {
+        this.lottieConfig = {
+            path: 'json/animation-school.json',
+            autoplay: true,
+            loop: true,
+        };
+        this.lottieConfig2 = {
+            path: 'json/animation-w800-h600.json',
+            autoplay: true,
+            prerender: true,
+            loop: true
+        };
+        this.lottieConfig3 = {
+            path: 'json/animation-lab.json',
+            autoplay: true,
+            loop: true
+        };
+    }
+    AnimationComponent.prototype.setSpeed = function (event) {
+        this.a = event;
+        this.a.setSpeed(0.5);
+    };
+    AnimationComponent = __decorate([
+        core_1.Component({
+            selector: 'app-animation',
+            template: __webpack_require__("./src/app/animation/animation.component.html"),
+            styles: [__webpack_require__("./src/app/animation/animation.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], AnimationComponent);
+    return AnimationComponent;
+}());
+exports.AnimationComponent = AnimationComponent;
 
 
 /***/ }),
@@ -82,12 +151,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-var home_component_1 = __webpack_require__("./src/app/home/home.component.ts");
 var about_component_1 = __webpack_require__("./src/app/about/about.component.ts");
 var profile_component_1 = __webpack_require__("./src/app/profile/profile.component.ts");
 var searchresults_component_1 = __webpack_require__("./src/app/searchresults/searchresults.component.ts");
 var routes = [
-    { path: 'home', component: home_component_1.HomeComponent },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'profile/:id', component: profile_component_1.ProfileComponent },
     { path: 'search/:query', component: searchresults_component_1.SearchresultsComponent }
@@ -104,7 +171,7 @@ var AppRoutingModule = /** @class */ (function () {
     return AppRoutingModule;
 }());
 exports.AppRoutingModule = AppRoutingModule;
-exports.routingComponents = [home_component_1.HomeComponent, about_component_1.AboutComponent, profile_component_1.ProfileComponent, searchresults_component_1.SearchresultsComponent];
+exports.routingComponents = [about_component_1.AboutComponent, profile_component_1.ProfileComponent, searchresults_component_1.SearchresultsComponent];
 
 
 /***/ }),
@@ -112,7 +179,7 @@ exports.routingComponents = [home_component_1.HomeComponent, about_component_1.A
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showSearchBar\">\r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "\r\n<div *ngIf=\"alertMessage\">\r\n  <ngb-alert *ngIf=\"!closed\" (close)=\"closed = true\">\r\n    <p class=\"text-muted\">\r\n      Hei, vi vil gjøre opperksom på at denne applikasjonen ikke er optimalisert for din <strong>\r\n        {{this.device.device}}\r\n      </strong> enhet.\r\n    </p>\r\n  </ngb-alert>\r\n</div>\r\n\r\n<div *ngIf=\"showSearchBar\"> \r\n  <app-topnav></app-topnav>\r\n  <div class=\"container\">\r\n    <div class=\"col-3\" id=\"index-search\">\r\n      <ngbd-typeahead-http></ngbd-typeahead-http>\r\n      <hr />\r\n      <app-animation></app-animation>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"!showSearchBar\">\r\n  <app-topnav [default]=\"!showSearchBar\"></app-topnav>\r\n</div>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
@@ -140,13 +207,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var ngx_device_detector_1 = __webpack_require__("./node_modules/ngx-device-detector/ngx-device-detector.umd.js");
+var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router) {
+    function AppComponent(router, http, deviceService) {
         this.router = router;
+        this.http = http;
+        this.deviceService = deviceService;
+        this.alertMessage = false;
+        this.closed = false;
         this.showSearchBar = true;
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.device = this.deviceService.getDeviceInfo();
+        if (this.device.device !== "unknown") {
+            this.alertMessage = true;
+        }
         this.router.events.subscribe(function (event) {
             if (event instanceof router_1.NavigationStart) {
                 _this.showSearchBar = event.url === '/' ? true : false;
@@ -159,7 +236,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [router_1.Router])
+        __metadata("design:paramtypes", [router_1.Router, http_1.HttpClient, ngx_device_detector_1.DeviceDetectorService])
     ], AppComponent);
     return AppComponent;
 }());
@@ -184,29 +261,32 @@ var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-b
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var ng_bootstrap_1 = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var animations_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var callback_pipe_1 = __webpack_require__("./src/app/relevance/callback.pipe.ts");
 var null_pipe_1 = __webpack_require__("./src/app/null.pipe.ts");
-var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
-var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
-var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
-var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
-var animations_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
+var app_routing_module_1 = __webpack_require__("./src/app/app-routing.module.ts");
 var search_component_1 = __webpack_require__("./src/app/search/search.component.ts");
 var wordcloud_component_1 = __webpack_require__("./src/app/wordcloud/wordcloud.component.ts");
 var scatter_component_1 = __webpack_require__("./src/app/scatter/scatter.component.ts");
 var userinfo_component_1 = __webpack_require__("./src/app/userinfo/userinfo.component.ts");
 var relevance_component_1 = __webpack_require__("./src/app/relevance/relevance.component.ts");
 var topnav_component_1 = __webpack_require__("./src/app/topnav/topnav.component.ts");
-var angular2_bootstrap_switch_1 = __webpack_require__("./node_modules/angular2-bootstrap-switch/angular2-bootstrap-switch.umd.js");
+var dialog_component_1 = __webpack_require__("./src/app/dialog/dialog.component.ts");
+var animation_component_1 = __webpack_require__("./src/app/animation/animation.component.ts");
+var ng2_google_charts_1 = __webpack_require__("./node_modules/ng2-google-charts/index.js");
+var angular_tag_cloud_module_1 = __webpack_require__("./node_modules/angular-tag-cloud-module/esm5/angular-tag-cloud-module.js");
+var ng_lottie_1 = __webpack_require__("./node_modules/ng-lottie/dist/esm/src/index.js");
+var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/ngx-pagination.js");
+var ngx_device_detector_1 = __webpack_require__("./node_modules/ngx-device-detector/ngx-device-detector.umd.js");
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var button_toggle_1 = __webpack_require__("./node_modules/@angular/material/esm5/button-toggle.es5.js");
 var dialog_1 = __webpack_require__("./node_modules/@angular/material/esm5/dialog.es5.js");
 var card_1 = __webpack_require__("./node_modules/@angular/material/esm5/card.es5.js");
 var progress_bar_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-bar.es5.js");
 var progress_spinner_1 = __webpack_require__("./node_modules/@angular/material/esm5/progress-spinner.es5.js");
-var dialog_component_1 = __webpack_require__("./src/app/dialog/dialog.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -224,10 +304,12 @@ var AppModule = /** @class */ (function () {
                 topnav_component_1.TopnavComponent,
                 callback_pipe_1.CallbackPipe,
                 null_pipe_1.NullPipe,
-                dialog_component_1.DialogComponent
+                dialog_component_1.DialogComponent,
+                animation_component_1.AnimationComponent
             ],
             imports: [
-                angular2_bootstrap_switch_1.BootstrapSwitchModule.forRoot(),
+                ng_lottie_1.LottieAnimationViewModule.forRoot(),
+                ngx_device_detector_1.DeviceDetectorModule.forRoot(),
                 ng_bootstrap_1.NgbModule.forRoot(),
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
@@ -240,6 +322,7 @@ var AppModule = /** @class */ (function () {
                 dialog_1.MatDialogModule,
                 card_1.MatCardModule,
                 progress_spinner_1.MatProgressSpinnerModule,
+                button_toggle_1.MatButtonToggleModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_pagination_1.NgxPaginationModule
             ],
@@ -308,15 +391,15 @@ var DialogComponent = /** @class */ (function () {
         this.subscribe = this.loader.progress$.subscribe(function (progress) {
             if (_this.data) {
                 _this.loader.set(99);
-                _this.loader.set(30);
+                _this.loader.set(70);
                 _this.data = false;
                 _this.changed = true;
             }
             else if (!_this.changed) {
-                if (progress >= 0 && progress < 50) {
+                if (progress >= 0 && progress < 55) {
                     _this.loadingText = "Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..";
                 }
-                else if (progress >= 50 && progress < 80) {
+                else if (progress >= 55 && progress < 80) {
                     _this.loadingText = "Laster inn forskningsmiljø..";
                 }
                 else if (progress >= 80 && progress < 99) {
@@ -324,13 +407,7 @@ var DialogComponent = /** @class */ (function () {
                 }
             }
             else {
-                if (progress >= 30 && progress < 50) {
-                    _this.loadingText = "Laster inn relevansprofil..";
-                }
-                else if (progress >= 50 && progress < 75) {
-                    _this.loadingText = "Laster inn habiltetsprofil..";
-                }
-                else if (progress >= 75 && progress < 98) {
+                if (progress >= 70 && progress < 99) {
                     _this.loadingText = "Klargjør profil..";
                 }
                 else if (progress >= 100) {
@@ -351,56 +428,6 @@ var DialogComponent = /** @class */ (function () {
     return DialogComponent;
 }());
 exports.DialogComponent = DialogComponent;
-
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "/home\r\n"
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.scss":
-/***/ (function(module, exports) {
-
-module.exports = "p {\n  color: red; }\n"
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
-    }
-    HomeComponent.prototype.ngOnInit = function () {
-    };
-    HomeComponent = __decorate([
-        core_1.Component({
-            selector: 'app-home',
-            template: __webpack_require__("./src/app/home/home.component.html"),
-            styles: [__webpack_require__("./src/app/home/home.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], HomeComponent);
-    return HomeComponent;
-}());
-exports.HomeComponent = HomeComponent;
 
 
 /***/ }),
@@ -587,14 +614,14 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <!--\r\n      <div class=\"btn-group btn-group-toggle\" style=\"padding-right:15px;\"\r\n       ngbRadioGroup name=\"radioNeutrality\" [(ngModel)]=\"neutrality\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Habil\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Inhabil\r\n    </label>\r\n  </div>\r\n\r\n  <div class=\"btn-group btn-group-toggle\" ngbRadioGroup name=\"radioEnviroment\" [(ngModel)]=\"enviroment\">\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"false\"> Intern\r\n    </label>\r\n    <label ngbButtonLabel class=\"btn-primary\">\r\n      <input ngbButton type=\"radio\" [value]=\"true\"> Ekstern\r\n    </label>\r\n  </div>\r\n\r\n  -->\r\n\r\n\r\n\r\n\r\n  <ul class=\"list-inline\">\r\n    <li class=\"list-inline-item\">\r\n\r\n      <switch [status]=\"value\"\r\n              [onText]=\"onText\"\r\n              [offText]=\"offText\"\r\n              [onColor]=\"onColor\"\r\n              [offColor]=\"offColor\"\r\n              [size]=\"size\"\r\n              (statusChange)=\"onFilterChange($event)\"></switch>\r\n    </li>\r\n\r\n    <li class=\"list-inline-item\" *ngIf=\"value\">\r\n      <switch [status]=\"valueEnviroment\"\r\n              [onText]=\"onEnviromentText\"\r\n              [offText]=\"offEnviromentText\"\r\n              [onColor]=\"default\"\r\n              [offColor]=\"default\"\r\n              [size]=\"size\"\r\n              (statusChange)=\"onEnviromentChange($event)\"></switch>\r\n    </li>\r\n\r\n    <li class=\"list-inline-item\" *ngIf=\"value\">\r\n      <switch [status]=\"valueNeutrality\"\r\n              [onText]=\"onNeutralityText\"\r\n              [offText]=\"offNeutralityText\"\r\n              [onColor]=\"default\"\r\n              [offColor]=\"default\"\r\n              [size]=\"size\"\r\n              (statusChange)=\"onNeutralityChange($event)\"></switch>\r\n    </li>\r\n  </ul>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"table-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: value : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n\r\n  <ul class=\"list-inline\">\r\n    <li class=\"list-inline-item\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"filterChange($event)\">Filtrering På</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"filterChange($event)\" [checked]=\"checked\">Filtrering Av</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"enviromentChange($event)\" [checked]=\"checked\">Eksterne</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"enviromentChange($event)\">Kollegaer</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"false\" (change)=\"neutralityChange($event)\">Medforfattere</mat-button-toggle>\r\n        <mat-button-toggle value=\"true\" (change)=\"neutralityChange($event)\" [checked]=\"checked\">Ikke-medforfattere</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n  </ul>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"table-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: showFilter : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/relevance/relevance.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".star {\n  position: relative;\n  display: inline-block;\n  font-size: 2rem;\n  color: #d3d3d3; }\n\n.full {\n  color: darkorange; }\n\n.half {\n  position: absolute;\n  display: inline-block;\n  overflow: hidden;\n  color: darkorange; }\n"
+module.exports = ".star {\n  position: relative;\n  display: inline-block;\n  font-size: 2rem;\n  color: #d3d3d3; }\n\n.full {\n  color: darkorange; }\n\n.half {\n  position: absolute;\n  display: inline-block;\n  overflow: hidden;\n  color: darkorange; }\n\n.mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n"
 
 /***/ }),
 
@@ -661,33 +688,38 @@ var RelevanceComponent = /** @class */ (function () {
         this.neutrality = true;
         this.enviroment = true;
         this.page = 1;
-        this.value = false;
-        this.onText = "Filtrering På";
-        this.offText = "Filtrering Av";
-        this.onColor = "green";
-        this.offColor = "yellow";
-        this.default = "blue";
-        this.valueEnviroment = true;
-        this.onEnviromentText = "Eksterne";
-        this.offEnviromentText = "Kollegaer";
-        this.valueNeutrality = true;
-        this.onNeutralityText = "Ikke-medforfattere";
-        this.offNeutralityText = "Medforfattere";
+        this.checked = true;
+        this.showFilter = false;
+        this.valueNeutrality = false;
+        this.valueEnviroment = false;
         config.max = 5;
         config.readonly = true;
     }
-    RelevanceComponent.prototype.onFilterChange = function (event) {
-        this.value = !this.value;
-        if (this.value) {
-            this.valueNeutrality = true;
+    RelevanceComponent.prototype.filterChange = function (event) {
+        if (event.value === "true") {
+            this.showFilter = true;
             this.valueEnviroment = true;
+            this.valueNeutrality = true;
+        }
+        else {
+            this.showFilter = false;
         }
     };
-    RelevanceComponent.prototype.onNeutralityChange = function (event) {
-        this.valueNeutrality = !this.valueNeutrality;
+    RelevanceComponent.prototype.enviromentChange = function (event) {
+        if (event.value === "true") {
+            this.valueEnviroment = true;
+        }
+        else {
+            this.valueEnviroment = false;
+        }
     };
-    RelevanceComponent.prototype.onEnviromentChange = function (event) {
-        this.valueEnviroment = !this.valueEnviroment;
+    RelevanceComponent.prototype.neutralityChange = function (event) {
+        if (event.value === "true") {
+            this.valueNeutrality = true;
+        }
+        else {
+            this.valueNeutrality = false;
+        }
     };
     RelevanceComponent.prototype.ngOnChanges = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -768,14 +800,14 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"col-sm\">\r\n    <div class=\"col text-center\">\r\n      <h1><strong>Forskningsmiljø</strong></h1>\r\n    </div>\r\n    <div class=\"container\">\r\n      <div class=\"card\">\r\n        <div class=\"card-body\">\r\n          <div class=\"row\">\r\n\r\n            <div class=\"col-sm-6 offset-2\">\r\n              <table>                \r\n                <thead>                  \r\n                  <tr>                    \r\n                    <th>Legend</th>                    \r\n                  </tr>                  \r\n                </thead>                \r\n                <tbody>                  \r\n                  <tr>\r\n                    <th><span class=\"badge badge-pill badge-warning\"> </span></th>\r\n                    <td>Gjeldende person</td>\r\n                  </tr>\r\n                  \r\n                  <tr>                    \r\n                    <th><span class=\"badge badge-pill badge-primary\"> </span></th>                    \r\n                    <td>Professor, Professor II, Emeritus, Forsker I, Dosent </td>                    \r\n                  </tr>                  \r\n                  <tr>              \r\n                    <th><span class=\"badge badge-pill badge-secondary\"> </span></th>\r\n                    <td>Andre posisjoner</td>\r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n            <div class=\"col-sm-4\">\r\n              <switch [status]=\"value\"\r\n                      [onText]=\"onText\"\r\n                      [offText]=\"offText\"\r\n                      [onColor]=\"onColor\"\r\n                      [offColor]=\"offColor\"\r\n                      (statusChange)=\"logChange($event)\"></switch>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <google-chart #cchart [data]=\"scatterChartData\"></google-chart>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <div class=\"text-center\">\r\n        <h1><strong>Forskningsmiljø</strong></h1>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <google-chart #cchart [data]=\"chartData\"></google-chart>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <div class=\"card\" style=\"margin-top:4.2%\">\r\n        <br />\r\n        <h6 class=\"text-center\">Tegnforklaring</h6>\r\n        <div class=\"card-body\">\r\n          <ul class=\"list-group\">\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-warning\" style=\"margin-bottom:2px\"> </span> {{person}}\r\n            </li>\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-primary\" style=\"margin-bottom:2px\"> </span> Toppstilling\r\n              <p class=\"text-muted\">(Professor, Professor II, Emeritus, Forsker I, Dosent)</p>\r\n            </li>\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-info\" style=\"margin-bottom:2px\"> </span> Andre stillinger\r\n            </li>\r\n          </ul>\r\n\r\n          <hr />\r\n          <div class=\"text-center\">\r\n            <button type=\"button\" class=\"btn btn-secondary\" (click)=\"isCollapsed = !isCollapsed\"\r\n                    [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"collapseExample\">\r\n              Hva er det jeg ser på?\r\n            </button>\r\n            <p class=\"text-muted\" id=\"collapseExample\" [ngbCollapse]=\"isCollapsed\">\r\n              I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>\r\n              sin ordsky. Hver relevante forsker sammenlignes på\r\n              kvalitet og antall publikasjoner.\r\n            </p>\r\n\r\n            <hr />\r\n            <h6>Verktøy</h6>\r\n            <mat-button-toggle-group>\r\n              <mat-button-toggle value=\"on\" (change)=\"logChange($event)\">log-lineær</mat-button-toggle>\r\n              <mat-button-toggle value=\"off\" (change)=\"logChange($event)\" [checked]=\"checked\">lineær</mat-button-toggle>\r\n            </mat-button-toggle-group>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/scatter/scatter.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n\n.badge-warning {\n  background-color: #ffbd45; }\n\n.badge-primary {\n  background-color: #0077C2; }\n\n.badge-info {\n  background-color: #80D6FF; }\n"
 
 /***/ }),
 
@@ -837,22 +869,19 @@ var ScatterComponent = /** @class */ (function () {
     function ScatterComponent(http) {
         this.http = http;
         this.showPlot = new core_1.EventEmitter();
-        this.value = false;
-        this.onText = "Log(n) på";
-        this.offText = "Logn(n) av";
-        this.onColor = "blue";
-        this.offColor = "yellow";
+        this.checked = true;
+        this.isCollapsed = true;
         this.apiURL = 'api/apiscatterplot?cristinID=';
+        this.actualWidth = window.innerWidth * 0.5;
+        this.actualHeight = window.innerHeight * 0.6;
         this.setupChart();
     }
     ScatterComponent.prototype.logChange = function (event) {
-        console.log("OK1");
-        if (event === true) {
-            this.cchart.wrapper.setDataTable(this.scatterChartLogData);
+        if (event.value === "on") {
+            this.cchart.wrapper.setDataTable(this.logData);
         }
         else {
-            this.cchart.wrapper.setDataTable(this.scatterChartData.dataTable);
-            console.log(this.scatterChartData.dataTable);
+            this.cchart.wrapper.setDataTable(this.chartData.dataTable);
         }
         this.cchart.redraw();
     };
@@ -887,18 +916,25 @@ var ScatterComponent = /** @class */ (function () {
                         _a = this;
                         return [4 /*yield*/, this.http.get(this.apiURL + cristinID)
                                 .subscribe(function (results) {
-                                _this.scatterChartData.dataTable = results;
+                                _this.chartData.dataTable = results;
                                 _this.showPlot.emit(true);
-                                _this.scatterChartLogData = cloneDeep(_this.scatterChartData.dataTable);
-                                for (var _i = 0, _a = _this.scatterChartLogData.rows; _i < _a.length; _i++) {
-                                    var c = _a[_i];
-                                    for (var _b = 0, _c = c.c; _b < _c.length; _b++) {
-                                        var i = _c[_b];
-                                        var value = i.v + "";
-                                        if (!value.startsWith("#")) {
-                                            i.v = Math.log(Number(i.v));
+                                _this.logData = cloneDeep(_this.chartData.dataTable);
+                                var counter = 0;
+                                var found = false;
+                                for (var _i = 0, _a = _this.logData.rows; _i < _a.length; _i++) {
+                                    var row = _a[_i];
+                                    for (var _b = 0, _c = row.c; _b < _c.length; _b++) {
+                                        var cell = _c[_b];
+                                        var value = cell.v + "";
+                                        if (!value.startsWith("#") && value.indexOf('.') == -1 && value !== '1') {
+                                            cell.v = Math.log(Number(cell.v));
+                                        }
+                                        if (counter === (_this.logData.rows.length - 1) && !found) {
+                                            _this.person = cell.f;
+                                            found = true;
                                         }
                                     }
+                                    ++counter;
                                 }
                             }, function (msg) {
                                 if (msg.error === 'No data found for user') {
@@ -917,12 +953,21 @@ var ScatterComponent = /** @class */ (function () {
             });
         });
     };
+    ScatterComponent.prototype.onWindowResize = function (event) {
+        this.actualWidth = window.innerWidth * 0.5;
+        this.actualHeight = window.innerHeight * 0.6;
+        this.cchart.wrapper.setOption('height', this.actualHeight);
+        this.cchart.wrapper.setOption('width', this.actualWidth);
+        this.cchart.redraw();
+        // you can remove two lines that preserve selection if you don't need them
+    };
     ScatterComponent.prototype.setupChart = function () {
-        this.scatterChartData = {
+        this.chartData = {
             dataTable: [],
             chartType: 'ScatterChart',
             options: {
-                width: 1250, height: 850,
+                width: this.actualWidth, height: this.actualHeight,
+                chartArea: { top: '3%', left: '10%', bottom: '10%', right: '2%', width: '100%', height: '100%' },
                 backgroundColor: 'transparent',
                 hAxis: {
                     title: 'Kvalitet',
@@ -943,7 +988,7 @@ var ScatterComponent = /** @class */ (function () {
                 },
                 animation: {
                     startup: true,
-                    duration: 5000,
+                    duration: 2000,
                     easing: 'inAndOut'
                 }
             }
@@ -965,6 +1010,12 @@ var ScatterComponent = /** @class */ (function () {
         core_2.ViewChild('cchart'),
         __metadata("design:type", Object)
     ], ScatterComponent.prototype, "cchart", void 0);
+    __decorate([
+        core_1.HostListener('window:resize', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], ScatterComponent.prototype, "onWindowResize", null);
     ScatterComponent = __decorate([
         core_1.Component({
             selector: 'app-scatter',

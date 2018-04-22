@@ -1,8 +1,21 @@
-<div *ngIf="showSearchBar">
+
+<div *ngIf="alertMessage">
+  <ngb-alert *ngIf="!closed" (close)="closed = true">
+    <p class="text-muted">
+      Hei, vi vil gjøre opperksom på at denne applikasjonen ikke er optimalisert for din <strong>
+        {{this.device.device}}
+      </strong> enhet.
+    </p>
+  </ngb-alert>
+</div>
+
+<div *ngIf="showSearchBar"> 
   <app-topnav></app-topnav>
   <div class="container">
     <div class="col-3" id="index-search">
       <ngbd-typeahead-http></ngbd-typeahead-http>
+      <hr />
+      <app-animation></app-animation>
     </div>
   </div>
 </div>
@@ -12,3 +25,4 @@
 </div>
 
 <router-outlet></router-outlet>
+

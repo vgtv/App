@@ -5,61 +5,25 @@
     </span>
   </ng-template>
 
-  <!--
-      <div class="btn-group btn-group-toggle" style="padding-right:15px;"
-       ngbRadioGroup name="radioNeutrality" [(ngModel)]="neutrality">
-    <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="true"> Habil
-    </label>
-    <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="false"> Inhabil
-    </label>
-  </div>
-
-  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioEnviroment" [(ngModel)]="enviroment">
-    <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="false"> Intern
-    </label>
-    <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="true"> Ekstern
-    </label>
-  </div>
-
-  -->
-
-
-
 
   <ul class="list-inline">
     <li class="list-inline-item">
-
-      <switch [status]="value"
-              [onText]="onText"
-              [offText]="offText"
-              [onColor]="onColor"
-              [offColor]="offColor"
-              [size]="size"
-              (statusChange)="onFilterChange($event)"></switch>
+      <mat-button-toggle-group>
+        <mat-button-toggle value="true" (change)="filterChange($event)">Filtrering På</mat-button-toggle>
+        <mat-button-toggle value="false" (change)="filterChange($event)" [checked]="checked">Filtrering Av</mat-button-toggle>
+      </mat-button-toggle-group>
     </li>
-
-    <li class="list-inline-item" *ngIf="value">
-      <switch [status]="valueEnviroment"
-              [onText]="onEnviromentText"
-              [offText]="offEnviromentText"
-              [onColor]="default"
-              [offColor]="default"
-              [size]="size"
-              (statusChange)="onEnviromentChange($event)"></switch>
+    <li class="list-inline-item" *ngIf="showFilter">
+      <mat-button-toggle-group>
+        <mat-button-toggle value="true" (change)="enviromentChange($event)" [checked]="checked">Eksterne</mat-button-toggle>
+        <mat-button-toggle value="false" (change)="enviromentChange($event)">Kollegaer</mat-button-toggle>
+      </mat-button-toggle-group>
     </li>
-
-    <li class="list-inline-item" *ngIf="value">
-      <switch [status]="valueNeutrality"
-              [onText]="onNeutralityText"
-              [offText]="offNeutralityText"
-              [onColor]="default"
-              [offColor]="default"
-              [size]="size"
-              (statusChange)="onNeutralityChange($event)"></switch>
+    <li class="list-inline-item" *ngIf="showFilter">
+      <mat-button-toggle-group>
+        <mat-button-toggle value="false" (change)="neutralityChange($event)">Medforfattere</mat-button-toggle>
+        <mat-button-toggle value="true" (change)="neutralityChange($event)" [checked]="checked">Ikke-medforfattere</mat-button-toggle>
+      </mat-button-toggle-group>
     </li>
   </ul>
 
@@ -76,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let person of dataTable | callback: value : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
+        <tr *ngFor="let person of dataTable | callback: showFilter : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
           <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
           <td>{{person.firstName}} {{person.lastName}}</td>
           <td>{{person?.position}}</td>

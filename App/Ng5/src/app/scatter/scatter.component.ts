@@ -1,9 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ChartReadyEvent } from 'ng2-google-charts';
-import { ChartErrorEvent } from 'ng2-google-charts';
-import { ChartSelectEvent } from 'ng2-google-charts';
-import { ChartMouseOverEvent, ChartMouseOutEvent } from 'ng2-google-charts';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { ViewChild } from '@angular/core';
 
@@ -18,30 +14,32 @@ export class ScatterComponent {
   @Output() showPlot = new EventEmitter<boolean>();
   @ViewChild('cchart') cchart;
 
-  scatterChartLogData: any;
-  scatterChartData: any;
+  logData: any;
+  chartData: any;
 
+  checked = true;
+  isCollapsed = true;
 
-  value = false;
-  onText = "Log(n) på";
-  offText = "Logn(n) av";
-  onColor = "blue";
-  offColor = "yellow";
+  person: string;
 
   apiURL = 'api/apiscatterplot?cristinID=';
   pendingHttp: any;
 
+  actualWidth: any;
+  actualHeight: any;
+
   constructor(private http: HttpClient) {
+    this.actualWidth = window.innerWidth * 0.5;
+    this.actualHeight = window.innerHeight * 0.6;
+
     this.setupChart();
   }
     
   logChange(event: any) {
-    console.log("OK1");
-    if (event === true) {
-      this.cchart.wrapper.setDataTable(this.scatterChartLogData);
+    if (event.value === "on") {
+      this.cchart.wrapper.setDataTable(this.logData);
     } else {
-      this.cchart.wrapper.setDataTable(this.scatterChartData.dataTable);
-      console.log(this.scatterChartData.dataTable)
+      this.cchart.wrapper.setDataTable(this.chartData.dataTable);
     }
     this.cchart.redraw();
   }
@@ -63,18 +61,26 @@ export class ScatterComponent {
   async initializeScatter(cristinID: string) {
     this.pendingHttp = await this.http.get<any[]>(this.apiURL + cristinID)
       .subscribe(results => {
-        this.scatterChartData.dataTable = results;
+        this.chartData.dataTable = results;
         this.showPlot.emit(true);
 
-        this.scatterChartLogData = cloneDeep(this.scatterChartData.dataTable);
+        this.logData = cloneDeep(this.chartData.dataTable);
 
-        for (let c of this.scatterChartLogData.rows) {
-          for (let i of c.c) {  
-            var value = i.v + "";
-            if (!value.startsWith("#")) {
-              i.v = Math.log(Number(i.v));
+        var counter = 0;
+        var found = false;
+
+        for (let row of this.logData.rows) {
+          for (let cell of row.c) {
+            var value = cell.v + "";
+            if (!value.startsWith("#") && value.indexOf('.') == -1 && value !== '1') {
+              cell.v = Math.log(Number(cell.v));
             }
+            if (counter === (this.logData.rows.length - 1) && !found) {
+              this.person = cell.f;
+              found = true;
+            }           
           }
+          ++counter;            
         }
       },
       msg => {
@@ -88,12 +94,26 @@ export class ScatterComponent {
       });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.actualWidth = window.innerWidth * 0.5;
+    this.actualHeight = window.innerHeight * 0.6;
+
+    this.cchart.wrapper.setOption('height', this.actualHeight);
+    this.cchart.wrapper.setOption('width', this.actualWidth);
+
+    this.cchart.redraw();
+
+    // you can remove two lines that preserve selection if you don't need them
+  }
+
   setupChart() {
-    this.scatterChartData = {
+    this.chartData = {
       dataTable: [],
       chartType: 'ScatterChart',
       options: {
-        width: 1250, height: 850,
+        width: this.actualWidth, height: this.actualHeight,
+        chartArea: { top: '3%', left: '10%', bottom: '10%', right: '2%', width: '100%', height: '100%'},
         backgroundColor: 'transparent',
         hAxis: {
           title: 'Kvalitet',
@@ -114,7 +134,7 @@ export class ScatterComponent {
         },
         animation: {
           startup: true,
-          duration: 5000,
+          duration: 2000,
           easing: 'inAndOut'
         }
       }

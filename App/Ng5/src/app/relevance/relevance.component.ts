@@ -22,20 +22,10 @@ export class RelevanceComponent {
   page = 1;
   pendingHttp: any;
 
-  value = false;
-  onText = "Filtrering På";
-  offText = "Filtrering Av";
-  onColor = "green";
-  offColor = "yellow";
-  default = "blue";
-
-  valueEnviroment = true;
-  onEnviromentText = "Eksterne";
-  offEnviromentText = "Kollegaer";
-
-  valueNeutrality = true;
-  onNeutralityText = "Ikke-medforfattere";
-  offNeutralityText = "Medforfattere";
+  checked = true;
+  showFilter = false;
+  valueNeutrality = false;
+  valueEnviroment = false;
 
 
   constructor(private http: HttpClient, config: NgbRatingConfig, private router: Router) {
@@ -43,20 +33,30 @@ export class RelevanceComponent {
     config.readonly = true;
   }
 
-  onFilterChange(event: any) {
-    this.value = !this.value;
-    if (this.value) {
-      this.valueNeutrality = true;
+  filterChange(event: any) {
+    if (event.value === "true") {
+      this.showFilter = true;
       this.valueEnviroment = true;
+      this.valueNeutrality = true;
+    } else {
+      this.showFilter = false;
     }
   }
 
-  onNeutralityChange(event: any) {
-    this.valueNeutrality = !this.valueNeutrality;
+  enviromentChange(event: any) {
+    if (event.value === "true") {
+      this.valueEnviroment = true;
+    } else {
+      this.valueEnviroment = false;
+    }
   }
 
-  onEnviromentChange(event: any) {
-    this.valueEnviroment = !this.valueEnviroment;
+  neutralityChange(event: any) {
+    if (event.value === "true") {
+      this.valueNeutrality = true;
+    } else {
+      this.valueNeutrality = false;
+    }
   }
 
   async ngOnChanges() {
@@ -80,19 +80,19 @@ export class RelevanceComponent {
   }
 
   async initializeTable(cristinID: string) {
-      this.pendingHttp = this.http.get<Relevance[]>(this.apiURL + cristinID)
-        .subscribe(results => {
-          this.dataTable = results;
-          this.showTable.emit(true);
-        },
-        msg => {
-          if (msg.error === 'No data found for user') {
-            this.showTable.emit(false);
-             // vis at det ikke finnes data for bruker
-          } else {
-            this.showTable.emit(false);
-            console.error(msg.status); // videre arbeid logges i db f.eks
-          }
-        });
-    }
+    this.pendingHttp = this.http.get<Relevance[]>(this.apiURL + cristinID)
+      .subscribe(results => {
+        this.dataTable = results;
+        this.showTable.emit(true);
+      },
+      msg => {
+        if (msg.error === 'No data found for user') {
+          this.showTable.emit(false);
+          // vis at det ikke finnes data for bruker
+        } else {
+          this.showTable.emit(false);
+          console.error(msg.status); // videre arbeid logges i db f.eks
+        }
+      });
+  }
 }
