@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   device: any;
   alertMessage = false;
   closed = false;
+  isCollapsed = true;
 
   constructor(private router: Router, private http: HttpClient, private deviceService: DeviceDetectorService) {
     this.showSearchBar = true;
