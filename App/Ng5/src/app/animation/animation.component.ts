@@ -30,7 +30,7 @@ export class AnimationComponent {
       path: 'json/animation-lab.json',
       autoplay: true,
       loop: true
-    };  
+    };
   }
 
   setSpeed(event: any) {

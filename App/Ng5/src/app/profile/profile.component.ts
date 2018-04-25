@@ -55,9 +55,12 @@ export class ProfileComponent implements OnInit {
   }
 
   setPlotState(state: boolean) {
+    console.log(state);
     if (state === true) {
       this.showPlot = true;
       this.aref.componentInstance.data = true;
+    } else {
+      this.dialog.closeAll();
     }
     this.readyToShow();
   }
@@ -65,6 +68,8 @@ export class ProfileComponent implements OnInit {
   setTableState(state: boolean) {
     if (state === true) {
       this.showTable = true;
+    } else {
+      this.dialog.closeAll();
     }
     this.readyToShow();
   }
