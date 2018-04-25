@@ -251,6 +251,7 @@
     <Content Include="img\linkedin\julian.jpg" />
     <Content Include="img\linkedin\robin.jpg" />
     <Content Include="img\linkedin\steffen.jpg" />
+    <Content Include="img\logo-nav.png" />
     <Content Include="img\logo1.png" />
     <Content Include="Models\dataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

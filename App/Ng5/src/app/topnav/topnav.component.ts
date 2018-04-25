@@ -11,7 +11,7 @@ export class TopnavComponent {
   logo: string;
 
   constructor(private router: Router) {
-    this.logo = 'img/logo1.png';
+    this.logo = 'img/logo-nav.png';
   }
 
   navigateHome() {
