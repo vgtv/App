@@ -51,7 +51,7 @@ export class NgbdTypeaheadHttp {
   constructor(private _service: SearchService, private router: Router) { }
 
   onSearch(event: any) {
-      this.router.navigate(['/profile', event.item.cristinID]);    
+      this.router.navigate(['/profile', event.item.cristinID]);
   }
 
   onSearchButton() {

@@ -12,6 +12,9 @@ namespace App.Controllers
     {
         public ActionResult Index()
         {
+            /*ApiRepository i = new ApiRepository();
+
+            i.Science();*/
             return View();
         }
     }

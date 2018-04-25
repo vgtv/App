@@ -14,7 +14,7 @@ export class ScatterComponent {
   @Output() showPlot = new EventEmitter<boolean>();
   @ViewChild('cchart') cchart;
 
-  logData: any;
+  originalData: any;
   chartData: any;
 
   checked = true;
@@ -29,17 +29,16 @@ export class ScatterComponent {
   actualHeight: any;
 
   constructor(private http: HttpClient) {
-    this.actualWidth = window.innerWidth * 0.5;
-    this.actualHeight = window.innerHeight * 0.6;
-
+    this.actualWidth = window.innerWidth * 0.65;
+    this.actualHeight = window.innerHeight * 0.65;
     this.setupChart();
   }
-    
+
   logChange(event: any) {
-    if (event.value === "on") {
-      this.cchart.wrapper.setDataTable(this.logData);
-    } else {
+    if (event.value === 'on') {
       this.cchart.wrapper.setDataTable(this.chartData.dataTable);
+    } else {
+      this.cchart.wrapper.setDataTable(this.originalData);
     }
     this.cchart.redraw();
   }
@@ -61,26 +60,26 @@ export class ScatterComponent {
   async initializeScatter(cristinID: string) {
     this.pendingHttp = await this.http.get<any[]>(this.apiURL + cristinID)
       .subscribe(results => {
-        this.chartData.dataTable = results;
         this.showPlot.emit(true);
 
-        this.logData = cloneDeep(this.chartData.dataTable);
+        this.chartData.dataTable = results;
+        this.originalData = cloneDeep(this.chartData.dataTable);
 
-        var counter = 0;
-        var found = false;
+        let counter = 0;
+        let found = false;
 
-        for (let row of this.logData.rows) {
-          for (let cell of row.c) {
-            var value = cell.v + "";
-            if (!value.startsWith("#") && value.indexOf('.') == -1 && value !== '1') {
+        for (const row of this.chartData.dataTable.rows) {
+          for (const cell of row.c) {
+            const value = cell.v + '';
+            if (!value.startsWith('#') && value.indexOf('.') === -1 && value !== '1' && value !== '2') {
               cell.v = Math.log(Number(cell.v));
             }
-            if (counter === (this.logData.rows.length - 1) && !found) {
+            if (counter === (this.chartData.dataTable.rows.length - 1) && !found) {
               this.person = cell.f;
               found = true;
-            }           
+            }
           }
-          ++counter;            
+          ++counter;
         }
       },
       msg => {
@@ -96,15 +95,14 @@ export class ScatterComponent {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: any) {
-    this.actualWidth = window.innerWidth * 0.5;
+    this.actualWidth = window.innerWidth * 0.6;
     this.actualHeight = window.innerHeight * 0.6;
 
-    this.cchart.wrapper.setOption('height', this.actualHeight);
-    this.cchart.wrapper.setOption('width', this.actualWidth);
-
-    this.cchart.redraw();
-
-    // you can remove two lines that preserve selection if you don't need them
+    if (typeof this.cchart !== 'undefined') {
+      this.cchart.wrapper.setOption('height', this.actualHeight);
+      this.cchart.wrapper.setOption('width', this.actualWidth);
+      this.cchart.redraw();
+    }
   }
 
   setupChart() {

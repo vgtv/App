@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.device = this.deviceService.getDeviceInfo();
-    if (this.device.device !== "unknown") {
+    if (this.device.device !== 'unknown') {
       this.alertMessage = true;
     }
 

@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Om Tjenesten</strong></h2>\r\n  <div class=\"card card-p\">\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text text-justify\">\r\n        \"Tjenesten\" er basert på en tidligere datainnsamling av bachelorgruppen bak <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/index.html\">Forskningsindeksen</a>.\r\n        Datainnsamling dateres opp til 2016 fra det nåværende forskningsinformasjonssystemet i Norge, <a href=\"http://www.cristin.no/\">Cristin</a>.\r\n\r\n        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,\r\n        for så å kategorsiere forskere med like interesseområder.\r\n\r\n        Basert på en forskers interesser sammenlignes relevante forskere på kvalitet og kvantitet på publiseringene.\r\n        Du kan lese mer om den eldre utregningsmodellen på\r\n        <a href=\"https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/\">NTNU</a> sin nettside.\r\n        <br />\r\n        <br />\r\n        Applikasjonen har detaljerte profiler for over 20.000 forskere.\r\n        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet\r\n        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et\r\n        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.\r\n        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Utviklerne</strong></h2>\r\n  <div class=\"card-group card-p\">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[0]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anton Lilleby</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[1]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anders Gillholm</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[2]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Julian Hjallum</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[3]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Robin Pedersen</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/pedersenrobin/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[4]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Steffen Marstein</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <h2 class=\"text-center\"><strong>Oppdragsgiver</strong></h2>\r\n  <div class=\"card-group card-p mx-auto col-sm-4 \">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[5]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Frode Eika Sandnes</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Norsk professor i informasjonsteknologi ved Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <!--        <a href=\"\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>-->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
+module.exports = "\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Om Tjenesten</strong></h2>\r\n  <div class=\"card card-p\">\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text text-justify\">\r\n        \"Tjenesten\" er basert på en tidligere datainnsamling av bachelorgruppen bak <a href=\"http://forskningsindeksen.vlab.cs.hioa.no/index.html\">Forskningsindeksen</a>.\r\n        Datainnsamling dateres opp til 2016 fra det nåværende forskningsinformasjonssystemet i Norge, <a href=\"http://www.cristin.no/\">Cristin</a>.\r\n\r\n        Av dette datagrunnlaget genererer tjenesten ny informasjon basert på titler fra engelskspråklige arbeider,\r\n        for så å kategorsiere forskere med like interesseområder.\r\n\r\n        Basert på en forskers interesser sammenlignes relevante forskere på kvalitet og kvantitet på publiseringene.\r\n        Du kan lese mer om den eldre utregningsmodellen på\r\n        <a href=\"https://www.ntnu.no/blogger/ub-bibliometri/2017/11/10/hva-er-publiseringspoeng/\">NTNU</a> sin nettside.\r\n        <br />\r\n        <br />\r\n        Applikasjonen har detaljerte profiler for over 20.000 forskere.\r\n        Forskere med under tre engelskspråklige arbeider fra tidsrommet da dataene er uthentet\r\n        regnes som inaktive og vil ikke ha en detaljert profil. Denne siden er et resultat av et\r\n        bachelorprosjekt og skal ikke benyttes som beslutningsgrunnlag.\r\n        Vi tar ikke ansvar for ukomplette og/eller feil i datagrunnlaget.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container a-text\">\r\n  <h2 class=\"text-center\"><strong>Utviklerne</strong></h2>\r\n  <div class=\"card-group card-p\">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[0]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anton Lilleby</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Fullstack Developer\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anton-lilleby-987030105/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[1]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Anders Gillholm</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          UX Designer/Frontend\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/anders-cleife-gillholm/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[2]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Julian Hjallum</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          UX Designer/Frontend\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/julian-hjallum-27540313b/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[3]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Robin Pedersen</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          UX Designer/Backend\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/pedersenrobin/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[4]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Steffen Marstein</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          UX Designer/Backend\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <a href=\"https://www.linkedin.com/in/steffen-marstein-389491110/\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <h2 class=\"text-center\"><strong>Oppdragsgiver</strong></h2>\r\n  <div class=\"card-group card-p mx-auto col-sm-4 \">\r\n    <div class=\"card\">\r\n      <img class=\"card-img-top\" [src]=\"images[5]\" alt=\"Card image cap\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Frode Eika Sandnes</h5>\r\n        <hr />\r\n        <p class=\"card-text\">\r\n          Norsk professor i informasjonsteknologi ved Oslo Metropolitan University\r\n        </p>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <!--        <a href=\"\" class=\"btn btn-light btn-outline-primary\">Linkedin</a>-->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -72,7 +72,7 @@ exports.AboutComponent = AboutComponent;
 /***/ "./src/app/animation/animation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig3\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\"\r\n                           (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig2\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">Vi har ny data for over 20.000 norske forskere</p>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">\r\n        Se hvordan du ligger an og knytt nye relasjoner ved å benytte søke feltet over\r\n      </p>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">Hver forsker sammenlignes med sitt unike forskningsmiljø</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "\r\n<div class=\"row\">\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig3\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\"\r\n                           (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <lottie-animation-view [options]=\"lottieConfig2\"\r\n                           [width]=\"200\"\r\n                           [height]=\"200\" (animCreated)=\"setSpeed($event)\">\r\n    </lottie-animation-view>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">Vi har ny data for over 20.000 norske forskere</p>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">\r\n        Se hvordan du ligger an og knytt nye relasjoner ved å benytte søke feltet over\r\n      </p>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-sm-4\">\r\n    <div class=\"text-center\">\r\n      <p class=\"text-muted\">Hver forsker sammenlignes med sitt unike forskningsmiljø</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n  \r\n\r\n\r\n"
 
 /***/ }),
 
@@ -222,7 +222,7 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.device = this.deviceService.getDeviceInfo();
-        if (this.device.device !== "unknown") {
+        if (this.device.device !== 'unknown') {
             this.alertMessage = true;
         }
         this.router.events.subscribe(function (event) {
@@ -283,6 +283,7 @@ var ngx_pagination_1 = __webpack_require__("./node_modules/ngx-pagination/dist/n
 var ngx_device_detector_1 = __webpack_require__("./node_modules/ngx-device-detector/ngx-device-detector.umd.js");
 var http_client_1 = __webpack_require__("./node_modules/@ngx-loading-bar/http-client/esm5/ngx-loading-bar-http-client.js");
 var core_2 = __webpack_require__("./node_modules/@ngx-loading-bar/core/esm5/ngx-loading-bar-core.js");
+var list_1 = __webpack_require__("./node_modules/@angular/material/esm5/list.es5.js");
 var button_toggle_1 = __webpack_require__("./node_modules/@angular/material/esm5/button-toggle.es5.js");
 var dialog_1 = __webpack_require__("./node_modules/@angular/material/esm5/dialog.es5.js");
 var card_1 = __webpack_require__("./node_modules/@angular/material/esm5/card.es5.js");
@@ -324,6 +325,7 @@ var AppModule = /** @class */ (function () {
                 card_1.MatCardModule,
                 progress_spinner_1.MatProgressSpinnerModule,
                 button_toggle_1.MatButtonToggleModule,
+                list_1.MatListModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_pagination_1.NgxPaginationModule
             ],
@@ -398,18 +400,18 @@ var DialogComponent = /** @class */ (function () {
             }
             else if (!_this.changed) {
                 if (progress >= 0 && progress < 55) {
-                    _this.loadingText = "Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..";
+                    _this.loadingText = 'Dette kan ta litt tid, vi matcher nå forskningsmiljøet live..';
                 }
                 else if (progress >= 55 && progress < 80) {
-                    _this.loadingText = "Laster inn forskningsmiljø..";
+                    _this.loadingText = 'Laster inn forskningsmiljø..';
                 }
                 else if (progress >= 80 && progress < 99) {
-                    _this.loadingText = "Laster inn visualisering..";
+                    _this.loadingText = 'Laster inn visualisering..';
                 }
             }
             else {
                 if (progress >= 70 && progress < 99) {
-                    _this.loadingText = "Klargjør profil..";
+                    _this.loadingText = 'Klargjør profil..';
                 }
                 else if (progress >= 100) {
                     _this.loader.set(0);
@@ -530,15 +532,22 @@ var ProfileComponent = /** @class */ (function () {
         this.showMessage = !state;
     };
     ProfileComponent.prototype.setPlotState = function (state) {
+        console.log(state);
         if (state === true) {
             this.showPlot = true;
             this.aref.componentInstance.data = true;
+        }
+        else {
+            this.dialog.closeAll();
         }
         this.readyToShow();
     };
     ProfileComponent.prototype.setTableState = function (state) {
         if (state === true) {
             this.showTable = true;
+        }
+        else {
+            this.dialog.closeAll();
         }
         this.readyToShow();
     };
@@ -597,7 +606,7 @@ var CallbackPipe = /** @class */ (function () {
         if (!value) {
             return items;
         }
-        return items.filter(function (item) { return item.neutrality === !valueNeutrality && item.enviroment == !valueEnviroment; });
+        return items.filter(function (item) { return item.neutrality === !valueNeutrality && item.enviroment === !valueEnviroment; });
     };
     CallbackPipe = __decorate([
         core_1.Pipe({
@@ -615,14 +624,14 @@ exports.CallbackPipe = CallbackPipe;
 /***/ "./src/app/relevance/relevance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n\r\n  <ul class=\"list-inline\">\r\n    <li class=\"list-inline-item\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"filterChange($event)\">Filtrering På</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"filterChange($event)\" [checked]=\"checked\">Filtrering Av</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"enviromentChange($event)\" [checked]=\"checked\">Eksterne</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"enviromentChange($event)\">Kollegaer</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"false\" (change)=\"neutralityChange($event)\">Medforfattere</mat-button-toggle>\r\n        <mat-button-toggle value=\"true\" (change)=\"neutralityChange($event)\" [checked]=\"checked\">Ikke-medforfattere</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n  </ul>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"table-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: showFilter : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<div *ngIf=\"ready\">\r\n  <ng-template #t let-fill=\"fill\">\r\n    <span class=\"star\" [class.full]=\"fill === 100\">\r\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span>&#9733;\r\n    </span>\r\n  </ng-template>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <div class=\"text-center\">\r\n        <h1><strong>Relaterte Fagpersoner</strong></h1>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ul class=\"list-inline\">\r\n    <li class=\"list-inline-item\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"filterChange($event)\">Filtrering På</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"filterChange($event)\" [checked]=\"checked\">Filtrering Av</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"true\" (change)=\"enviromentChange($event)\" [checked]=\"checked\">Eksterne</mat-button-toggle>\r\n        <mat-button-toggle value=\"false\" (change)=\"enviromentChange($event)\">Kollegaer</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n    <li class=\"list-inline-item\" *ngIf=\"showFilter\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"false\" (change)=\"neutralityChange($event)\">Medforfattere</mat-button-toggle>\r\n        <mat-button-toggle value=\"true\" (change)=\"neutralityChange($event)\" [checked]=\"checked\">Ikke-medforfattere</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </li>\r\n  </ul>\r\n\r\n  <div class=\"table-responsive\">\r\n    <table class=\"table table-hover table-light\">\r\n      <thead class=\"table-light\">\r\n        <tr>\r\n          <th>Relevans</th>\r\n          <th>Forsker</th>\r\n          <th>Posisjon</th>\r\n          <th>Institusjon</th>\r\n          <th>Institutt</th>\r\n          <th></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let person of dataTable | callback: showFilter : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }\">\r\n          <td><ngb-rating [rate]=\"person.similarities\" [starTemplate]=\"t\"></ngb-rating></td>\r\n          <td>{{person.firstName}} {{person.lastName}}</td>\r\n          <td>{{person?.position}}</td>\r\n          <td>{{person?.institution}}</td>\r\n          <td>{{person?.institute}}</td>\r\n          <td><input type=\"button\" class=\"btn btn-primary\" value=\"Besøk\" (click)=\"navigateToProfile(person.cristinID)\" /></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"row justify-content-center\">\r\n    <pagination-controls previousLabel=\"Tilbake\" nextLabel=\"Neste\" (pageChange)=\"page = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/relevance/relevance.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".star {\n  position: relative;\n  display: inline-block;\n  font-size: 2rem;\n  color: #d3d3d3; }\n\n.full {\n  color: darkorange; }\n\n.half {\n  position: absolute;\n  display: inline-block;\n  overflow: hidden;\n  color: darkorange; }\n\n.mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n"
+module.exports = ".star {\n  position: relative;\n  display: inline-block;\n  font-size: 2rem;\n  color: #d3d3d3; }\n\n.full {\n  color: #ffbd45; }\n\n.half {\n  position: absolute;\n  display: inline-block;\n  overflow: hidden;\n  color: #ffbd45; }\n\n.mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n"
 
 /***/ }),
 
@@ -697,7 +706,7 @@ var RelevanceComponent = /** @class */ (function () {
         config.readonly = true;
     }
     RelevanceComponent.prototype.filterChange = function (event) {
-        if (event.value === "true") {
+        if (event.value === 'true') {
             this.showFilter = true;
             this.valueEnviroment = true;
             this.valueNeutrality = true;
@@ -707,7 +716,7 @@ var RelevanceComponent = /** @class */ (function () {
         }
     };
     RelevanceComponent.prototype.enviromentChange = function (event) {
-        if (event.value === "true") {
+        if (event.value === 'true') {
             this.valueEnviroment = true;
         }
         else {
@@ -715,7 +724,7 @@ var RelevanceComponent = /** @class */ (function () {
         }
     };
     RelevanceComponent.prototype.neutralityChange = function (event) {
-        if (event.value === "true") {
+        if (event.value === 'true') {
             this.valueNeutrality = true;
         }
         else {
@@ -801,14 +810,14 @@ exports.RelevanceComponent = RelevanceComponent;
 /***/ "./src/app/scatter/scatter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <div class=\"text-center\">\r\n        <h1><strong>Forskningsmiljø</strong></h1>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <google-chart #cchart [data]=\"chartData\"></google-chart>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <div class=\"card\" style=\"margin-top:4.2%\">\r\n        <br />\r\n        <h6 class=\"text-center\">Tegnforklaring</h6>\r\n        <div class=\"card-body\">\r\n          <ul class=\"list-group\">\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-warning\" style=\"margin-bottom:2px\"> </span> {{person}}\r\n            </li>\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-primary\" style=\"margin-bottom:2px\"> </span> Toppstilling\r\n              <p class=\"text-muted\">(Professor, Professor II, Emeritus, Forsker I, Dosent)</p>\r\n            </li>\r\n            <li class=\"list-group-item\">\r\n              <span class=\"badge badge-pill badge-info\" style=\"margin-bottom:2px\"> </span> Andre stillinger\r\n            </li>\r\n          </ul>\r\n\r\n          <hr />\r\n          <div class=\"text-center\">\r\n            <button type=\"button\" class=\"btn btn-secondary\" (click)=\"isCollapsed = !isCollapsed\"\r\n                    [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"collapseExample\">\r\n              Hva er det jeg ser på?\r\n            </button>\r\n            <p class=\"text-muted\" id=\"collapseExample\" [ngbCollapse]=\"isCollapsed\">\r\n              I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>\r\n              sin ordsky. Hver relevante forsker sammenlignes på\r\n              kvalitet og antall publikasjoner.\r\n            </p>\r\n\r\n            <hr />\r\n            <h6>Verktøy</h6>\r\n            <mat-button-toggle-group>\r\n              <mat-button-toggle value=\"on\" (change)=\"logChange($event)\">log-lineær</mat-button-toggle>\r\n              <mat-button-toggle value=\"off\" (change)=\"logChange($event)\" [checked]=\"checked\">lineær</mat-button-toggle>\r\n            </mat-button-toggle-group>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container\" id=\"scatter\" *ngIf=\"ready\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <div class=\"text-center\">\r\n        <h1><strong>Forskningsmiljø</strong></h1>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm\">\r\n      <google-chart #cchart [data]=\"chartData\"></google-chart>\r\n    </div>\r\n\r\n    <div class=\"col-sm\">\r\n      <mat-list>\r\n        <mat-list-item><span class=\"circle1 mr-1\"></span> {{person}} </mat-list-item>\r\n        <mat-list-item><span class=\"circle2 mr-1\"></span> Toppstillinger </mat-list-item>\r\n        <mat-list-item><span class=\"circle3 mr-1\"></span> Andre stillinger </mat-list-item>\r\n      </mat-list>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm offset-sm-1\">\r\n      <mat-button-toggle-group>\r\n        <mat-button-toggle value=\"on\" (change)=\"logChange($event)\" [checked]=\"checked\">log-lineær</mat-button-toggle>\r\n        <mat-button-toggle value=\"off\" (change)=\"logChange($event)\">lineær</mat-button-toggle>\r\n      </mat-button-toggle-group>\r\n    </div>\r\n    <div class=\"col-sm\">\r\n      <div class=\"text-center\">\r\n        <button type=\"button\" class=\"btn btn-primary rounded-circle\" (click)=\"isCollapsed = !isCollapsed\">?</button>\r\n        <p class=\"text-muted\" [ngbCollapse]=\"isCollapsed\">\r\n          I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>\r\n          sin ordsky. Hver relevante forsker sammenlignes på\r\n          kvalitet og antall publikasjoner.\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/scatter/scatter.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n\n.badge-warning {\n  background-color: #ffbd45; }\n\n.badge-primary {\n  background-color: #0077C2; }\n\n.badge-info {\n  background-color: #80D6FF; }\n"
+module.exports = ".mat-button-toggle {\n  height: 2em; }\n\n.mat-button-toggle {\n  color: black;\n  background-color: white; }\n\n.mat-button-toggle-checked {\n  background-color: #FFC107; }\n\n.circle1 {\n  height: 1em;\n  width: 1em;\n  background-color: #ffbd45;\n  border-radius: 50%;\n  display: inline-block; }\n\n.circle2 {\n  height: 1em;\n  width: 1em;\n  background-color: #0077C2;\n  border-radius: 50%;\n  display: inline-block; }\n\n.circle3 {\n  height: 1em;\n  width: 1em;\n  background-color: #80D6FF;\n  border-radius: 50%;\n  display: inline-block; }\n"
 
 /***/ }),
 
@@ -873,16 +882,16 @@ var ScatterComponent = /** @class */ (function () {
         this.checked = true;
         this.isCollapsed = true;
         this.apiURL = 'api/apiscatterplot?cristinID=';
-        this.actualWidth = window.innerWidth * 0.5;
-        this.actualHeight = window.innerHeight * 0.6;
+        this.actualWidth = window.innerWidth * 0.65;
+        this.actualHeight = window.innerHeight * 0.65;
         this.setupChart();
     }
     ScatterComponent.prototype.logChange = function (event) {
-        if (event.value === "on") {
-            this.cchart.wrapper.setDataTable(this.logData);
+        if (event.value === 'on') {
+            this.cchart.wrapper.setDataTable(this.chartData.dataTable);
         }
         else {
-            this.cchart.wrapper.setDataTable(this.chartData.dataTable);
+            this.cchart.wrapper.setDataTable(this.originalData);
         }
         this.cchart.redraw();
     };
@@ -917,20 +926,20 @@ var ScatterComponent = /** @class */ (function () {
                         _a = this;
                         return [4 /*yield*/, this.http.get(this.apiURL + cristinID)
                                 .subscribe(function (results) {
-                                _this.chartData.dataTable = results;
                                 _this.showPlot.emit(true);
-                                _this.logData = cloneDeep(_this.chartData.dataTable);
+                                _this.chartData.dataTable = results;
+                                _this.originalData = cloneDeep(_this.chartData.dataTable);
                                 var counter = 0;
                                 var found = false;
-                                for (var _i = 0, _a = _this.logData.rows; _i < _a.length; _i++) {
+                                for (var _i = 0, _a = _this.chartData.dataTable.rows; _i < _a.length; _i++) {
                                     var row = _a[_i];
                                     for (var _b = 0, _c = row.c; _b < _c.length; _b++) {
                                         var cell = _c[_b];
-                                        var value = cell.v + "";
-                                        if (!value.startsWith("#") && value.indexOf('.') == -1 && value !== '1') {
+                                        var value = cell.v + '';
+                                        if (!value.startsWith('#') && value.indexOf('.') === -1 && value !== '1' && value !== '2') {
                                             cell.v = Math.log(Number(cell.v));
                                         }
-                                        if (counter === (_this.logData.rows.length - 1) && !found) {
+                                        if (counter === (_this.chartData.dataTable.rows.length - 1) && !found) {
                                             _this.person = cell.f;
                                             found = true;
                                         }
@@ -955,12 +964,13 @@ var ScatterComponent = /** @class */ (function () {
         });
     };
     ScatterComponent.prototype.onWindowResize = function (event) {
-        this.actualWidth = window.innerWidth * 0.5;
+        this.actualWidth = window.innerWidth * 0.6;
         this.actualHeight = window.innerHeight * 0.6;
-        this.cchart.wrapper.setOption('height', this.actualHeight);
-        this.cchart.wrapper.setOption('width', this.actualWidth);
-        this.cchart.redraw();
-        // you can remove two lines that preserve selection if you don't need them
+        if (typeof this.cchart !== 'undefined') {
+            this.cchart.wrapper.setOption('height', this.actualHeight);
+            this.cchart.wrapper.setOption('width', this.actualWidth);
+            this.cchart.redraw();
+        }
     };
     ScatterComponent.prototype.setupChart = function () {
         this.chartData = {
@@ -1388,7 +1398,7 @@ exports.Researcher = Researcher;
 /***/ "./src/app/userinfo/userinfo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>\r\n  <h3><strong>{{user?.position}}</strong></h3>\r\n  <hr>\r\n  <p><strong>Institutt:</strong> {{user?.institute}}</p>\r\n  <p><strong>Institusjon:</strong> {{user?.institution}}</p>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"showInfo\">\r\n  <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>\r\n  <h3><strong>{{user?.position}}</strong></h3>\r\n  <hr>\r\n  <p class=\"lead\"> {{user?.institution}}</p>\r\n  <p class=\"lead\" *ngIf=\"user.institute !== 'Ukjent'\"> {{user?.institute}}</p>\r\n</div>\r\n"
 
 /***/ }),
 
