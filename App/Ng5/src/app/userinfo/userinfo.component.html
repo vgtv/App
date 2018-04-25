@@ -2,6 +2,6 @@
   <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>
   <h3><strong>{{user?.position}}</strong></h3>
   <hr>
-  <p><strong>Institutt:</strong> {{user?.institute}}</p>
-  <p><strong>Institusjon:</strong> {{user?.institution}}</p>
+  <p class="lead"> {{user?.institution}}</p>
+  <p class="lead" *ngIf="user.institute !== 'Ukjent'"> {{user?.institute}}</p>
 </div>

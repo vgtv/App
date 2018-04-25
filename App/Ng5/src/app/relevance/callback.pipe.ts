@@ -9,6 +9,6 @@ export class CallbackPipe implements PipeTransform {
     if (!value) {
       return items;
     }
-    return items.filter(item => item.neutrality === !valueNeutrality && item.enviroment == !valueEnviroment);
+    return items.filter(item => item.neutrality === !valueNeutrality && item.enviroment === !valueEnviroment);
   }
 }

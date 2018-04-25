@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Threading;
 using App.Models.DomainModels.ScatterPlot;
+using System.Text;
+using System.Globalization;
+using System.IO;
+using CsvHelper;
 
 namespace App.Models
 {
@@ -18,7 +22,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                var results = db.person.AsNoTracking().Where(p => p.firstname.StartsWith(searchQuery)
                 || p.lastname.StartsWith(searchQuery)).Select(p => new User
                 {
                     cristinID = p.cristinID,
@@ -30,7 +34,7 @@ namespace App.Models
                 {
                     int limit = 10 - results.Count();
 
-                    results.AddRange(db.person.Where(p =>
+                    results.AddRange(db.person.AsNoTracking().Where(p =>
 
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
 
@@ -47,7 +51,7 @@ namespace App.Models
                 var filter = GetFilter();
                 foreach (var user in results)
                 {
-                    var assosciation = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
+                    var assosciation = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == user.cristinID)
                         .Select(e => new { pos = e.position, ins = e.institusjon })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
 
@@ -67,7 +71,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                var results = db.person.Where(p => p.firstname.StartsWith(searchQuery)
+                var results = db.person.AsNoTracking().Where(p => p.firstname.StartsWith(searchQuery)
                   || p.lastname.StartsWith(searchQuery)).Select(p => new Results
                   {
                       cristinID = p.cristinID,
@@ -79,7 +83,7 @@ namespace App.Models
                 if (results.Count() < 10)
                 {
                     int limit = 10 - results.Count();
-                    results.AddRange(db.person.Where(p =>
+                    results.AddRange(db.person.AsNoTracking().Where(p =>
                     (p.firstname + " " + p.lastname).Contains(searchQuery))
                     .Select(p => new Results
                     {
@@ -93,7 +97,7 @@ namespace App.Models
                 var filter = GetFilter();
                 foreach (var user in results)
                 {
-                    var assosciation = db.tilhorighet.Where(e => e.cristinID == user.cristinID)
+                    var assosciation = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == user.cristinID)
                         .Select(e => new { position = e.position, institution = e.institusjon, institute = e.institutt })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
@@ -182,7 +186,7 @@ namespace App.Models
             {
                 var matchedUsers = new List<SimilarResearcher>();
 
-                var currentUser = db.wordcloud.Where(e => e.cristinID == cristinID)
+                var currentUser = db.wordcloud.AsNoTracking().Where(e => e.cristinID == cristinID)
                     .GroupBy(item => item.cristinID)
                     .Select(group => new
                     {
@@ -192,7 +196,7 @@ namespace App.Models
 
                 if (currentUser == null) { return null; }
 
-                var comparedUsers = db.wordcloud.GroupBy(item => item.cristinID)
+                var comparedUsers = db.wordcloud.AsNoTracking().GroupBy(item => item.cristinID)
                       .Select(group => new
                       {
                           group.Key,
@@ -382,7 +386,7 @@ namespace App.Models
                 var communityList = matchedUsers.OrderByDescending(e => e.similarities).Take(100).ToList();
                 foreach (var researcher in communityList)
                 {
-                    var person = db.person.Where(p => p.cristinID == researcher.cristinID)
+                    var person = db.person.AsNoTracking().Where(p => p.cristinID == researcher.cristinID)
                                   .Select(p => new
                                   {
                                       firstName = p.firstname,
@@ -391,12 +395,11 @@ namespace App.Models
 
 
                     researcher.firstName = person.firstName;
-
                     researcher.lastName = person.lastName;
 
                     if (researcher != null)
                     {
-                        var assosciations = db.tilhorighet.Where(t => t.cristinID == researcher.cristinID)
+                        var assosciations = db.tilhorighet.AsNoTracking().Where(t => t.cristinID == researcher.cristinID)
                             .ToList().OrderByDescending(comp => filter.IndexOf(comp.position)).FirstOrDefault();
 
                         if (assosciations != null)
@@ -430,26 +433,26 @@ namespace App.Models
 
             using (var db = new dbEntities())
             {
-                
-                var currentPapers = db.forfattere.Where(a => a.cristinID == cristinID).DistinctBy(d => d.forskningsID)
+
+                var currentPapers = db.forfattere.AsNoTracking().Where(a => a.cristinID == cristinID).DistinctBy(d => d.forskningsID)
                     .Select(e => e.forskningsID).ToList();
 
-                var compotent = db.forfattere.Where(f => currentPapers.Contains(f.forskningsID)).DistinctBy(d => d.cristinID)
+                var compotentResearchers = db.forfattere.AsNoTracking().Where(f => currentPapers.Contains(f.forskningsID)).DistinctBy(d => d.cristinID)
                     .Select(e => e.cristinID).ToList();
 
                 if (currentPapers == null) { return null; }
 
-                var currentInstitutions = db.tilhorighet.Where(t => t.cristinID == cristinID)
+                var currentInstitutions = db.tilhorighet.AsNoTracking().Where(t => t.cristinID == cristinID)
                                           .Select(t => t.institusjon).ToList();
 
                 foreach (var researcher in similarResearchers)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    researcher.neutrality = compotent.Contains(researcher.cristinID) == true ? true : false;
+                    researcher.neutrality = compotentResearchers.Contains(researcher.cristinID) == true ? true : false;
 
                     // sjekker om de har jobbet på samme institusjon
-                    researcher.enviroment = db.tilhorighet.Where(a => a.cristinID == researcher.cristinID && currentInstitutions
+                    researcher.enviroment = db.tilhorighet.AsNoTracking().Where(a => a.cristinID == researcher.cristinID && currentInstitutions
                                         .Contains(a.institusjon) == true)
                                         .FirstOrDefault() != null ? true : false;
 
@@ -479,18 +482,18 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 var filter = GetFilter();
-                var mainPosition = db.tilhorighet.Where(e => e.cristinID == cristinID).Select(t => new { t.position, t.institusjon })
+                var mainPosition = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == cristinID).Select(t => new { t.position, t.institusjon })
                     .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                 if (mainPosition == null) return null;
 
                 string mainColor = "#ffbd45";
 
-                User mainUser = db.person.Where(p => p.cristinID == cristinID)
+                User mainUser = db.person.AsNoTracking().Where(p => p.cristinID == cristinID)
                     .Select(e => new User { firstName = e.firstname, lastName = e.lastname })
                     .FirstOrDefault();
 
-                var mainRank = db.rank.Where(r => r.cristinID == cristinID)
+                var mainRank = db.rank.AsNoTracking().Where(r => r.cristinID == cristinID)
                     .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
                 if (mainRank.publications == null || mainRank.quality == null || mainUser == null) { return null; }
@@ -498,7 +501,7 @@ namespace App.Models
                 foreach (var match in userData)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var rank = db.rank.Where(r => r.cristinID == match.cristinID)
+                    var rank = db.rank.AsNoTracking().Where(r => r.cristinID == match.cristinID)
                         .Select(r => new { publications = r.publikasjoner, quality = r.kvalitet }).FirstOrDefault();
 
                     string color = match.position == "Professor" ||
@@ -542,7 +545,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.titles.Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
+                return db.titles.AsNoTracking().Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
             }
         }
 
@@ -555,6 +558,60 @@ namespace App.Models
                 "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
                 "Dosent","Professor ii","Forsker i", "Professor", "Professor emeritus"
             };
+        }
+
+
+        public void Science()
+        {
+            using (var db = new dbEntities())
+            {
+                var ids = db.wordcloud.DistinctBy(k => k.cristinID).Select(e => e.cristinID).ToList();
+                var persons = db.person.Where(e => ids.Contains(e.cristinID)).ToList();
+
+                using (TextWriter writer = new StreamWriter(@"C:\Users\an2n\Desktop\data.csv"))
+                {
+                    foreach (var p in persons)
+                    {
+                        var y = db.rank.Where(t => t.cristinID == p.cristinID)
+                                .Select(s => new { kvalitet = s.kvalitet, s.publikasjoner }).FirstOrDefault();
+
+                        if (y.kvalitet != null)
+                        {
+                            var x = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(s => new { s.position, s.institusjon }).ToList();
+
+
+                            var a = db.wordcloud.Where(e => e.cristinID == p.cristinID).Select(s => new
+                            {
+                                b = db.basewords.Where(k => k.key == s.key).Select(k => k.baseword).FirstOrDefault() ?? db.words.Where(bw => bw.key == s.key)
+                                         .Select(bw => bw.word).FirstOrDefault(),
+                                c = s.count
+                            }).ToList();
+
+
+                            string kvalitet = y.kvalitet.ToString();
+                            kvalitet = kvalitet.Replace(',', '.');
+
+                            var sb = new StringBuilder();
+
+                            sb.Append(p.cristinID + ";" + p.firstname + ";" + p.lastname + ";");
+
+                            foreach (var i in x)
+                            {
+                                sb.Append(i.position + ";" + i.institusjon + ";");
+                            }
+                            sb.Append(kvalitet + ";" + y.publikasjoner);
+
+
+                            foreach (var i in a)
+                            {
+                                sb.Append(";" + i.b + ";" + i.c);
+                            }
+
+                            writer.WriteLine(sb);
+                        }
+                    }
+                }
+            }
         }
     }
 }

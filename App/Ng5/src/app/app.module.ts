@@ -27,6 +27,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
+import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
@@ -67,11 +68,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCardModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
+    MatListModule,
     BrowserAnimationsModule,
     NgxPaginationModule
   ],
   providers: [LoadingBarService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
-})    
+})
 export class AppModule { }

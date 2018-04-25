@@ -13,45 +13,29 @@
     </div>
 
     <div class="col-sm">
-      <div class="card" style="margin-top:4.2%">
-        <br />
-        <h6 class="text-center">Tegnforklaring</h6>
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <span class="badge badge-pill badge-warning" style="margin-bottom:2px"> </span> {{person}}
-            </li>
-            <li class="list-group-item">
-              <span class="badge badge-pill badge-primary" style="margin-bottom:2px"> </span> Toppstilling
-              <p class="text-muted">(Professor, Professor II, Emeritus, Forsker I, Dosent)</p>
-            </li>
-            <li class="list-group-item">
-              <span class="badge badge-pill badge-info" style="margin-bottom:2px"> </span> Andre stillinger
-            </li>
-          </ul>
-
-          <hr />
-          <div class="text-center">
-            <button type="button" class="btn btn-secondary" (click)="isCollapsed = !isCollapsed"
-                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-              Hva er det jeg ser på?
-            </button>
-            <p class="text-muted" id="collapseExample" [ngbCollapse]="isCollapsed">
-              I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>
-              sin ordsky. Hver relevante forsker sammenlignes på
-              kvalitet og antall publikasjoner.
-            </p>
-
-            <hr />
-            <h6>Verktøy</h6>
-            <mat-button-toggle-group>
-              <mat-button-toggle value="on" (change)="logChange($event)">log-lineær</mat-button-toggle>
-              <mat-button-toggle value="off" (change)="logChange($event)" [checked]="checked">lineær</mat-button-toggle>
-            </mat-button-toggle-group>
-          </div>
-        </div>
+      <mat-list>
+        <mat-list-item><span class="circle1 mr-1"></span> {{person}} </mat-list-item>
+        <mat-list-item><span class="circle2 mr-1"></span> Toppstillinger </mat-list-item>
+        <mat-list-item><span class="circle3 mr-1"></span> Andre stillinger </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm offset-sm-1">
+      <mat-button-toggle-group>
+        <mat-button-toggle value="on" (change)="logChange($event)" [checked]="checked">log-lineær</mat-button-toggle>
+        <mat-button-toggle value="off" (change)="logChange($event)">lineær</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="col-sm">
+      <div class="text-center">
+        <button type="button" class="btn btn-primary rounded-circle" (click)="isCollapsed = !isCollapsed">?</button>
+        <p class="text-muted" [ngbCollapse]="isCollapsed">
+          I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>
+          sin ordsky. Hver relevante forsker sammenlignes på
+          kvalitet og antall publikasjoner.
+        </p>
       </div>
     </div>
   </div>
 </div>
-

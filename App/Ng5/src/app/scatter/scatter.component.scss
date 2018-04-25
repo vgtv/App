@@ -12,12 +12,27 @@
   color: #fff;
 }
 
-.badge-warning {
+
+.circle1 {
+  height: 1em;
+  width: 1em;
   background-color: #ffbd45;
+  border-radius: 50%;
+  display: inline-block;
 }
-.badge-primary {
+
+.circle2 {
+  height: 1em;
+  width: 1em;
   background-color: #0077C2;
+  border-radius: 50%;
+  display: inline-block;
 }
-.badge-info {
+
+.circle3 {
+  height: 1em;
+  width: 1em;
   background-color: #80D6FF;
+  border-radius: 50%;
+  display: inline-block;
 }

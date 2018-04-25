@@ -34,7 +34,7 @@ export class RelevanceComponent {
   }
 
   filterChange(event: any) {
-    if (event.value === "true") {
+    if (event.value === 'true') {
       this.showFilter = true;
       this.valueEnviroment = true;
       this.valueNeutrality = true;
@@ -44,7 +44,7 @@ export class RelevanceComponent {
   }
 
   enviromentChange(event: any) {
-    if (event.value === "true") {
+    if (event.value === 'true') {
       this.valueEnviroment = true;
     } else {
       this.valueEnviroment = false;
@@ -52,7 +52,7 @@ export class RelevanceComponent {
   }
 
   neutralityChange(event: any) {
-    if (event.value === "true") {
+    if (event.value === 'true') {
       this.valueNeutrality = true;
     } else {
       this.valueNeutrality = false;
