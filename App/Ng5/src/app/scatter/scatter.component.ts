@@ -11,26 +11,24 @@ import { ViewChild } from '@angular/core';
 export class ScatterComponent {
   @Input() input: string;
   @Input() ready: boolean;
+  @Input() meta: string;
   @Output() showPlot = new EventEmitter<boolean>();
   @ViewChild('cchart') cchart;
 
-  originalData: any;
+  logChartData: any;
   chartData: any;
-
   checked = true;
   isCollapsed = true;
-
-  person: string;
-
-  apiURL = 'api/apiscatterplot?cristinID=';
+  apiURL: string;
   pendingHttp: any;
-
   actualWidth: any;
   actualHeight: any;
 
   constructor(private http: HttpClient) {
-    this.actualWidth = window.innerWidth * 0.65;
-    this.actualHeight = window.innerHeight * 0.65;
+    this.actualWidth = window.innerWidth * 0.657;
+    this.actualHeight = window.innerHeight * 0.657;
+    this.apiURL = 'api/apiscatterplot?cristinID=';
+
     this.setupChart();
   }
 
@@ -38,7 +36,7 @@ export class ScatterComponent {
     if (event.value === 'on') {
       this.cchart.wrapper.setDataTable(this.chartData.dataTable);
     } else {
-      this.cchart.wrapper.setDataTable(this.originalData);
+      this.cchart.wrapper.setDataTable(this.logChartData);
     }
     this.cchart.redraw();
   }
@@ -63,23 +61,16 @@ export class ScatterComponent {
         this.showPlot.emit(true);
 
         this.chartData.dataTable = results;
-        this.originalData = cloneDeep(this.chartData.dataTable);
-
-        let counter = 0;
-        let found = false;
-
-        for (const row of this.chartData.dataTable.rows) {
+        this.logChartData = cloneDeep(this.chartData.dataTable);
+    
+        for (const row of this.logChartData.rows) {
           for (const cell of row.c) {
-            const value = cell.v + '';
-            if (!value.startsWith('#') && value.indexOf('.') === -1 && value !== '1' && value !== '2') {
-              cell.v = Math.log(Number(cell.v));
-            }
-            if (counter === (this.chartData.dataTable.rows.length - 1) && !found) {
-              this.person = cell.f;
-              found = true;
+            if (typeof cell.v === 'string') {
+              if (!cell.v.startsWith('#')) {
+                cell.v = Math.log(Number(cell.v));
+              }
             }
           }
-          ++counter;
         }
       },
       msg => {
@@ -95,8 +86,8 @@ export class ScatterComponent {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: any) {
-    this.actualWidth = window.innerWidth * 0.6;
-    this.actualHeight = window.innerHeight * 0.6;
+    this.actualWidth = window.innerWidth * 0.657;
+    this.actualHeight = window.innerHeight * 0.657;
 
     if (typeof this.cchart !== 'undefined') {
       this.cchart.wrapper.setOption('height', this.actualHeight);

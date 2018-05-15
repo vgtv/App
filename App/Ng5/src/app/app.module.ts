@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CallbackPipe } from './relevance/callback.pipe';
 import { NullPipe } from './null.pipe';
@@ -16,17 +16,16 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { RelevanceComponent } from './relevance/relevance.component';
 import { TopnavComponent } from './topnav/topnav.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { AnimationComponent } from './animation/animation.component';
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TagCloudModule } from 'angular-tag-cloud-module';
-import { LottieAnimationViewModule } from 'ng-lottie';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
+import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -34,8 +33,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
-
+import { IconInfo} from 'angular-feather';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +47,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TopnavComponent,
     CallbackPipe,
     NullPipe,
-    DialogComponent,
-    AnimationComponent
+    DialogComponent
   ],
   imports: [
-    LottieAnimationViewModule.forRoot(),
+    IconInfo,
+    ReactiveFormsModule,
     DeviceDetectorModule.forRoot(),
     NgbModule.forRoot(),
     BrowserModule,
@@ -63,6 +61,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     Ng2GoogleChartsModule,
     FormsModule,
     LoadingBarHttpClientModule,
+    MatSelectModule,
     MatProgressBarModule,
     MatDialogModule,
     MatCardModule,

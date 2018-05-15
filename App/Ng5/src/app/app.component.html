@@ -2,9 +2,8 @@
 <div *ngIf="alertMessage">
   <ngb-alert *ngIf="!closed" (close)="closed = true">
     <p class="text-muted">
-      Hei, vi vil gjøre opperksom på at denne applikasjonen ikke er optimalisert for din <strong>
-        {{this.device.device}}
-      </strong> enhet.
+      Hei, vi vil gjøre oppmerksom på at denne applikasjonen ikke er optimalisert for din
+      <strong> {{this.device.device}} </strong> enhet.
     </p>
   </ngb-alert>
 </div>
@@ -14,17 +13,6 @@
   <div class="container">
     <div class="col-3" id="index-search">
       <ngbd-typeahead-http></ngbd-typeahead-http>
-
-      <div class="text-center">
-        <br />
-        <button type="button" class="btn btn-primary btn-lg rounded-circle"
-                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="Åpe informasjons boks">
-          <strong>?</strong>
-        </button>
-      </div>
-      <div  [ngbCollapse]="isCollapsed">
-        <app-animation></app-animation>
-      </div>
     </div>
   </div>
 </div>

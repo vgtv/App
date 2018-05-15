@@ -22,7 +22,9 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                var results = db.person.AsNoTracking().Where(p => p.firstname.StartsWith(searchQuery)
+                var results = db.person.AsNoTracking()
+                              .Where(p => p.firstname.StartsWith(searchQuery)
+
                 || p.lastname.StartsWith(searchQuery)).Select(p => new User
                 {
                     cristinID = p.cristinID,
@@ -191,19 +193,20 @@ namespace App.Models
                     .Select(group => new
                     {
                         group.Key,
-                        Items = group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
+                        Items = group.OrderByDescending(e => e.count).ThenBy(e => e.key).Select(g => g.key).ToList()
                     }).FirstOrDefault();
 
                 if (currentUser == null) { return null; }
 
-                var comparedUsers = db.wordcloud.AsNoTracking().GroupBy(item => item.cristinID)
-                      .Select(group => new
-                      {
-                          group.Key,
-                          Items =
-                          group.OrderByDescending(e => e.count).Select(g => new { g.key }).ToList()
-                      }).ToList();
+                var comparedUsers = db.wordcloud.AsNoTracking()
+                    .GroupBy(item => item.cristinID)
+                    .Select(group => new
+                    {
+                        group.Key,
+                        Items = group.OrderByDescending(e => e.count).ThenBy(e => e.key).Select(g => g.key).ToList()
+                    }).ToList();
 
+                int index;
                 double x, y;
                 var filter = GetFilter();
                 foreach (var compared in comparedUsers)
@@ -212,18 +215,20 @@ namespace App.Models
 
                     x = 0;
                     y = 0;
-                    foreach (var i in compared.Items)
+
+                    foreach (var comparedWord in compared.Items)
                     {
                         if (currentUser.Key == compared.Key) { continue; }
+                        index = currentUser.Items.FindIndex(currentWords => currentWords == comparedWord);
 
-                        switch (currentUser.Items.FindIndex(e => e.key == i.key))
+                        switch (index)
                         {
                             case -1:
                                 break;
                             case 1:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords=> comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -238,9 +243,9 @@ namespace App.Models
                                 x += 10 / y;
                                 break;
                             case 2:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -255,9 +260,9 @@ namespace App.Models
                                 x += 9 / y;
                                 break;
                             case 3:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -272,9 +277,9 @@ namespace App.Models
                                 x += 8 / y;
                                 break;
                             case 4:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -289,9 +294,9 @@ namespace App.Models
                                 x += 7 / y;
                                 break;
                             case 5:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -306,9 +311,9 @@ namespace App.Models
                                 x += 6 / y;
                                 break;
                             case 6:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -323,9 +328,9 @@ namespace App.Models
                                 x += 5 / y;
                                 break;
                             case 7:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -341,9 +346,9 @@ namespace App.Models
 
                                 break;
                             case 8:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -358,9 +363,9 @@ namespace App.Models
                                 x += 3 / y;
                                 break;
                             case 9:
-                                switch (compared.Items.FindIndex(e => e.key == i.key))
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
+                                switch (index)
                                 {
-                                    case -1: x = 0; break;
                                     case 1: y = 1.0; break;
                                     case 2: y = 1.1; break;
                                     case 3: y = 1.2; break;
@@ -377,7 +382,6 @@ namespace App.Models
                             default: ++x; break;
                         }
                     }
-
                     matchedUsers.Add(new SimilarResearcher { similarities = x, cristinID = compared.Key });
                 }
 
@@ -410,7 +414,6 @@ namespace App.Models
                         }
                     }
                 }
-
                 return communityList;
             }
         }
@@ -558,60 +561,6 @@ namespace App.Models
                 "Forsker","Forsker iii", "Postdoktor","Førstelektor","Seniorforsker", "Forsker ii",
                 "Dosent","Professor ii","Forsker i", "Professor", "Professor emeritus"
             };
-        }
-
-
-        public void Science()
-        {
-            using (var db = new dbEntities())
-            {
-                var ids = db.wordcloud.DistinctBy(k => k.cristinID).Select(e => e.cristinID).ToList();
-                var persons = db.person.Where(e => ids.Contains(e.cristinID)).ToList();
-
-                using (TextWriter writer = new StreamWriter(@"C:\Users\an2n\Desktop\data.csv"))
-                {
-                    foreach (var p in persons)
-                    {
-                        var y = db.rank.Where(t => t.cristinID == p.cristinID)
-                                .Select(s => new { kvalitet = s.kvalitet, s.publikasjoner }).FirstOrDefault();
-
-                        if (y.kvalitet != null)
-                        {
-                            var x = db.tilhorighet.Where(t => t.cristinID == p.cristinID).Select(s => new { s.position, s.institusjon }).ToList();
-
-
-                            var a = db.wordcloud.Where(e => e.cristinID == p.cristinID).Select(s => new
-                            {
-                                b = db.basewords.Where(k => k.key == s.key).Select(k => k.baseword).FirstOrDefault() ?? db.words.Where(bw => bw.key == s.key)
-                                         .Select(bw => bw.word).FirstOrDefault(),
-                                c = s.count
-                            }).ToList();
-
-
-                            string kvalitet = y.kvalitet.ToString();
-                            kvalitet = kvalitet.Replace(',', '.');
-
-                            var sb = new StringBuilder();
-
-                            sb.Append(p.cristinID + ";" + p.firstname + ";" + p.lastname + ";");
-
-                            foreach (var i in x)
-                            {
-                                sb.Append(i.position + ";" + i.institusjon + ";");
-                            }
-                            sb.Append(kvalitet + ";" + y.publikasjoner);
-
-
-                            foreach (var i in a)
-                            {
-                                sb.Append(";" + i.b + ";" + i.c);
-                            }
-
-                            writer.WriteLine(sb);
-                        }
-                    }
-                }
-            }
         }
     }
 }

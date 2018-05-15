@@ -255,7 +255,10 @@
     <Content Include="img\linkedin\robin.jpg" />
     <Content Include="img\linkedin\steffen.jpg" />
     <Content Include="img\logo-nav.png" />
-    <Content Include="img\logo1.png" />
+    <Content Include="img\zip\cloud.png" />
+    <Content Include="img\zip\im.png" />
+    <Content Include="img\zip\scatter.png" />
+    <Content Include="img\zip\table.png" />
     <Content Include="Models\dataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dataModel.edmx</DependentUpon>
@@ -270,7 +273,6 @@
     <Content Include="Ng5\karma.conf.js" />
     <Content Include="Ng5\protractor.conf.js" />
     <Content Include="Ng5\src\app\about\about.component.html" />
-    <Content Include="Ng5\src\app\animation\animation.component.html" />
     <Content Include="Ng5\src\app\app.component.html" />
     <Content Include="Ng5\src\app\dialog\dialog.component.html" />
     <Content Include="Ng5\src\app\profile\profile.component.html" />
@@ -322,12 +324,7 @@
     <Content Include="Bundles\styles.bundle.js.map" />
     <Content Include="Bundles\vendor.bundle.js.map" />
     <Content Include="Ng5\src\app\dialog\dialog.component.scss" />
-    <Content Include="Ng5\src\app\animation\animation.component.scss" />
-    <Content Include="json\animation-w800-h600.json" />
-    <Content Include="json\animation-shake.json" />
-    <Content Include="json\animation-school.json" />
-    <Content Include="json\animation-lab.json" />
-    <Content Include="json\animation-eye.json" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -369,14 +366,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Ng5\src\app\about\about.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\about\about.component.ts" />
-    <TypeScriptCompile Include="Ng5\src\app\animation\animation.component.spec.ts" />
-    <TypeScriptCompile Include="Ng5\src\app\animation\animation.component.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app-routing.module.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Ng5\src\app\app.component.ts" />

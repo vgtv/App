@@ -71,7 +71,7 @@ export class NgbdTypeaheadHttp {
 
   search = (text$: Observable<string>) =>
     text$
-      .debounceTime(250)
+      .debounceTime(300)
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>

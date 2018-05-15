@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -17,24 +17,41 @@ export class ProfileComponent implements OnInit {
   activeProfile: boolean;
   showMessage: boolean;
 
+  meta: string;
+
   showPlot: boolean;
   showTable: boolean;
   showContent: boolean;
 
+  loaderElement: any;
+  infoElement: any;
+  showHelper = false;
 
-  aref: any;
-
-  constructor(private router: ActivatedRoute,
-    public loader: LoadingBarService,
-    public dialog: MatDialog) {
+  constructor(private router: ActivatedRoute,public loader: LoadingBarService, public dialog: MatDialog) {
+    this.meta = "forskeren";
   }
 
-  openLoader() {
-    this.aref = this.dialog.open(DialogComponent, {
+  openLoadingLoader() {
+    this.loaderElement = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '500px',
-      closeOnNavigation: true
+      closeOnNavigation: true,
+      data: true
     });
+  }
+
+  openInfoLoader(event:any) {
+    if (this.showPlot && this.showTable) {
+      if (typeof this.infoElement !== 'undefined') {
+        this.dialog.closeAll();
+      }
+
+
+     this.infoElement = this.dialog.open(DialogComponent, {
+        closeOnNavigation: true,
+        data: false
+      });
+    }
   }
 
   ngOnInit() {
@@ -49,16 +66,15 @@ export class ProfileComponent implements OnInit {
   setActive(state: boolean) {
     this.activeProfile = state;
     if (this.activeProfile === true) {
-      this.openLoader();
+      this.openLoadingLoader();
     }
     this.showMessage = !state;
   }
 
   setPlotState(state: boolean) {
-    console.log(state);
     if (state === true) {
       this.showPlot = true;
-      this.aref.componentInstance.data = true;
+      this.loaderElement.componentInstance.updated = true;
     } else {
       this.dialog.closeAll();
     }
@@ -78,6 +94,7 @@ export class ProfileComponent implements OnInit {
     if (this.showPlot && this.showTable) {
       this.showContent = true;
       this.dialog.closeAll();
+      this.showHelper = true;
     }
   }
 

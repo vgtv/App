@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Researcher } from './Researcher';
 
@@ -9,6 +9,7 @@ import { Researcher } from './Researcher';
 })
 export class UserinfoComponent {
   @Input() input: string;
+  @Output() name = new EventEmitter<string>();
   user: Researcher;
   showInfo: boolean;
   apiURL = 'api/apiuser?cristinID=';
@@ -27,6 +28,7 @@ export class UserinfoComponent {
         .then(results => {
           this.user = new Researcher();
           this.user = results;
+          this.name.emit(this.user.firstName); 
           this.showInfo = true;
           resolve();
         },

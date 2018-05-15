@@ -5,63 +5,72 @@
     </span>
   </ng-template>
 
-  <div class="row">
-    <div class="col-sm">
-      <div class="text-center">
-        <h1><strong>Relaterte Fagpersoner</strong></h1>
+  <div class="container-fluid" id="relevance">
+    <div class="row">
+      <div class="col-sm">
+        <div class="text-center">
+          <h1><strong>Relaterte Fagpersoner</strong></h1>
+        </div>
+      </div>
+      <div class="col-sm-1 float-right">
+        <i-info class="info float-right" placement="left"
+                ngbTooltip="Tabellen viser hvor god match en forsker er for {{meta}} sitt forskningsmiljø.
+                            Tabbelen kan sorteres."></i-info>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        Sorter etter:
+        <mat-form-field>
+          <mat-select placeholder="{{placeholder}}"  [(ngModel)]="selected" [formControl]="selectControl" (selectionChange)="sortData($event)">
+            <mat-option [value]="selected">Alle</mat-option>
+            <mat-optgroup *ngFor="let data of dataList" [label]="data.name">
+              <mat-option *ngFor="let role of data.role" [value]="role.value">
+                {{ role.viewValue }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div class="table-responsive-sm">
+          <table class="table table-hover table-light">
+            <thead>
+              <tr>
+                <th>Match</th>
+                <th>Forsker</th>
+                <th>Posisjon</th>
+                <th>Institusjon</th>
+                <th>Institutt</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let person of dataTable |
+                          callback: showFilter : valueNeutrality : valueEnviroment |
+                          paginate: { itemsPerPage: 10, currentPage: page }"
+                  (click)="navigate(person.cristinID)"
+                  style="cursor:pointer"
+                  title="Besøk {{person.firstName}} {{person.lastName}} sin profil">
+                <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
+                <td>{{person.firstName}} {{person.lastName}}</td>
+                <td>{{person?.position}}</td>
+                <td>{{person?.institution}}</td>
+                <td>{{person?.institute}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-center">
+          <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
+        </div>
       </div>
     </div>
   </div>
-
-  <ul class="list-inline">
-    <li class="list-inline-item">
-      <mat-button-toggle-group>
-        <mat-button-toggle value="true" (change)="filterChange($event)">Filtrering På</mat-button-toggle>
-        <mat-button-toggle value="false" (change)="filterChange($event)" [checked]="checked">Filtrering Av</mat-button-toggle>
-      </mat-button-toggle-group>
-    </li>
-    <li class="list-inline-item" *ngIf="showFilter">
-      <mat-button-toggle-group>
-        <mat-button-toggle value="true" (change)="enviromentChange($event)" [checked]="checked">Eksterne</mat-button-toggle>
-        <mat-button-toggle value="false" (change)="enviromentChange($event)">Kollegaer</mat-button-toggle>
-      </mat-button-toggle-group>
-    </li>
-    <li class="list-inline-item" *ngIf="showFilter">
-      <mat-button-toggle-group>
-        <mat-button-toggle value="false" (change)="neutralityChange($event)">Medforfattere</mat-button-toggle>
-        <mat-button-toggle value="true" (change)="neutralityChange($event)" [checked]="checked">Ikke-medforfattere</mat-button-toggle>
-      </mat-button-toggle-group>
-    </li>
-  </ul>
-
-  <div class="table-responsive">
-    <table class="table table-hover table-light">
-      <thead class="table-light">
-        <tr>
-          <th>Relevans</th>
-          <th>Forsker</th>
-          <th>Posisjon</th>
-          <th>Institusjon</th>
-          <th>Institutt</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let person of dataTable | callback: showFilter : valueNeutrality : valueEnviroment |  paginate: { itemsPerPage: 10, currentPage: page }">
-          <td><ngb-rating [rate]="person.similarities" [starTemplate]="t"></ngb-rating></td>
-          <td>{{person.firstName}} {{person.lastName}}</td>
-          <td>{{person?.position}}</td>
-          <td>{{person?.institution}}</td>
-          <td>{{person?.institute}}</td>
-          <td><input type="button" class="btn btn-primary" value="Besøk" (click)="navigateToProfile(person.cristinID)" /></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row justify-content-center">
-    <pagination-controls previousLabel="Tilbake" nextLabel="Neste" (pageChange)="page = $event"></pagination-controls>
-  </div>
 </div>
-
 
 

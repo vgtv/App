@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "Content/font-awesome.min.min.css",
+    "inputFiles": [
+      "Content/font-awesome.min.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/bundle.css",
+    "inputFiles": [
+      "Content/bootstrap.css",
+      "Content/custom.css",
+      "Content/indigo-pink.css"
+    ]
+  }
+]

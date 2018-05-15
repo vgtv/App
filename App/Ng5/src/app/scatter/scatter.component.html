@@ -1,9 +1,14 @@
-<div class="container" id="scatter" *ngIf="ready">
+<div id="scatter" *ngIf="ready">
   <div class="row">
     <div class="col-sm">
       <div class="text-center">
         <h1><strong>Forskningsmiljø</strong></h1>
       </div>
+    </div>
+    <div class="col-sm-1 float-right">
+      <i-info class="info float-right" placement="left"
+              ngbTooltip="Spredningsplott viser forskere som har likhetstrekk i sin ordsky i forhold til {{meta}}.
+                          Hver forsker sammenlignes på publiseringpoeng og antall publiseringer. Plottet er interaktivt og kan sorteres logiaritmisk."></i-info>
     </div>
   </div>
 
@@ -14,7 +19,7 @@
 
     <div class="col-sm">
       <mat-list>
-        <mat-list-item><span class="circle1 mr-1"></span> {{person}} </mat-list-item>
+        <mat-list-item><span class="circle1 mr-1"></span> {{meta}} </mat-list-item>
         <mat-list-item><span class="circle2 mr-1"></span> Toppstillinger </mat-list-item>
         <mat-list-item><span class="circle3 mr-1"></span> Andre stillinger </mat-list-item>
       </mat-list>
@@ -23,19 +28,9 @@
   <div class="row">
     <div class="col-sm offset-sm-1">
       <mat-button-toggle-group>
-        <mat-button-toggle value="on" (change)="logChange($event)" [checked]="checked">log-lineær</mat-button-toggle>
-        <mat-button-toggle value="off" (change)="logChange($event)">lineær</mat-button-toggle>
+        <mat-button-toggle value="on" (change)="logChange($event)" [checked]="checked">lineær</mat-button-toggle>
+        <mat-button-toggle value="off" (change)="logChange($event)">log-lineær</mat-button-toggle>
       </mat-button-toggle-group>
-    </div>
-    <div class="col-sm">
-      <div class="text-center">
-        <button type="button" class="btn btn-primary rounded-circle" (click)="isCollapsed = !isCollapsed">?</button>
-        <p class="text-muted" [ngbCollapse]="isCollapsed">
-          I visualiseringen kan man se forskere som er relevante i forhold til <strong>{{person}}</strong>
-          sin ordsky. Hver relevante forsker sammenlignes på
-          kvalitet og antall publikasjoner.
-        </p>
-      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,28 @@
-<h3 matDialogTitle class="text-center">Vennligst vent</h3>
-<mat-dialog-content>
-  <p class="text-muted text-center">{{loadingText}}</p>
-  <mat-progress-bar mode="determinate" [value]="loader.progress$|async" aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
-</mat-dialog-content>
+
+<div *ngIf="showLoading">
+  <h3 matDialogTitle class="text-center">Vennligst vent</h3>
+  <mat-dialog-content>
+    <p class="text-muted text-center">{{loadingText}}</p>
+    <mat-progress-bar mode="determinate" [value]="loader.progress$|async" aria-label="Vi matcher nå forskere sitt fagfelt, vennligst vent"></mat-progress-bar>
+  </mat-dialog-content>
+</div>
+
+<div *ngIf="!showLoading">
+  <mat-dialog-content>
+    <h3 matDialogTitle class="text-center">Ordsky informasjon</h3>
+
+
+    <div class="row">
+      <div class="col-sm">
+        Ordskyen er basert på engelskespråklige arbeider til denne profilen.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="text-center">
+          <button class="btn btn-secondary" (click)="closeDialog()">Lukk</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

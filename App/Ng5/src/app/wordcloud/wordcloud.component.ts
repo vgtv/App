@@ -14,12 +14,13 @@ export class WordcloudComponent {
   options: CloudOptions;
   showCloud: boolean;
   @Output() activeCloud = new EventEmitter<boolean>();
-
   count: number;
-  apiURL = 'api/apiwordcloud?cristinID=';
-  apiURL2 = 'api/apilegend?cristinID=';
+  apiURL: string;
+  apiURL2: string;
 
   constructor(private http: HttpClient) {
+    this.apiURL = 'api/apiwordcloud?cristinID=';
+    this.apiURL2 = 'api/apilegend?cristinID=';
     this.setupTagCloud();
   }
 
@@ -53,8 +54,8 @@ export class WordcloudComponent {
 
   setupTagCloud() {
     this.options = {
-      width: 600,
-      height: 400,
+      width: 525,
+      height: 370,
       overflow: false
     };
   }

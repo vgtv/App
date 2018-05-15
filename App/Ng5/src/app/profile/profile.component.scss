@@ -1,0 +1,17 @@
+.info {
+  height: 42px;
+  width: 42px;
+  stroke: #80D6FF;
+  fill: transparent;
+}
+
+.info:hover {
+  stroke: #42A5F5;
+  fill: white;
+  cursor: pointer;
+}
+
+:host /deep/ .tooltip-inner {
+  background-color: white;
+  color: #000000;
+}

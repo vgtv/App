@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 @Component({
   selector: 'app-dialog',
@@ -10,35 +11,42 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 export class DialogComponent {
   subscribe; any;
   loadingText: string;
-
   match: false;
   relevance: false;
-
   changed = false;
-  data = false;
+  updated = false;
+  showLoading: boolean;
+  url: string = 'img/zip/im.png';
 
-  constructor(public loader: LoadingBarService) {
+  constructor(public dialogRef: MatDialogRef<DialogComponent>,public loader: LoadingBarService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.showLoading = data;
+
     if (typeof this.subscribe !== 'undefined') {
       if (this.subscribe) {
         this.loader.set(0);
         this.subscribe.unsubscribe();
       }
     }
-    this.setupSubscriber();
+
+    if (this.showLoading) {
+      this.setupSubscriber();
+    }
   }
 
   ngOnDestroy() {
-    this.subscribe.unsubscribe();
+    if (typeof this.subscribe !== 'undefined') {
+      this.subscribe.unsubscribe();
+    }
   }
 
   setupSubscriber() {
     this.loader.set(0);
 
     this.subscribe = this.loader.progress$.subscribe(progress => {
-      if (this.data) {
+      if (this.updated) {
         this.loader.set(99);
         this.loader.set(70);
-        this.data = false;
+        this.updated = false;
         this.changed = true;
       } else if (!this.changed) {
         if (progress >= 0 && progress < 55) {
@@ -56,7 +64,10 @@ export class DialogComponent {
           this.subscribe.unsubscribe();
         }
       }
-
     });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

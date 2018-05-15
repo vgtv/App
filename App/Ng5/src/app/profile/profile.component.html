@@ -1,27 +1,27 @@
 <div class="container-fluid" id="userinfo">
   <div class="row">
-    <div class="col-sm">
-      <app-userinfo [input]="cristinID"></app-userinfo>
+    <div class="col-sm float-left">
+      <app-userinfo [input]="cristinID" (name)="meta = $event"></app-userinfo> 
     </div>
-    <div class="col-sm">
+    <div class="col-sm -float-right">
       <app-wordcloud [input]="cristinID" (activeCloud)="setActive($event)"></app-wordcloud>
     </div>
-    <div *ngIf="showMessage">
-      <h3 class="text-danger">Ikke nok engelskspråkelige arbeider</h3>
-      <hr />
-      <p>Denne profilen har ikke nok engelskspråkelige arbeider.</p>
-      <p>Du kan lese mer om de ulike kravene i seksjonen  <a routerLink="/about">"Om tjenesten"</a></p>
+    <div class="col-sm-1 float-right" *ngIf="activeProfile">
+      <i-info class="info float-right"  placement="left"
+              ngbTooltip="Ordskyen beskriver hva {{meta}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet."></i-info>
+    </div>
+
+    <div *ngIf="showMessage" class="col-sm float-right">
+      <h3 class="text-info">Ikke nok engelskspråklige arbeider</h3> <hr />
+      <p>
+        Denne profilen har ikke nok engelskspråklige arbeider.
+        Du kan lese mer om de ulike kravene i seksjonen <a routerLink="/about">"Om tjenesten"</a>.
+      </p>
     </div>
   </div>
 </div>
 
 <div *ngIf="activeProfile">
-  <app-scatter [input]="cristinID" [ready]="showContent" (showPlot)="setPlotState($event)"></app-scatter>
-  <div class="container-fluid" id="relevance">
-    <div class="row">
-      <div class="col-sm">
-        <app-relevance [input]="cristinID" [ready]="showContent" (showTable)="setTableState($event)"></app-relevance>
-      </div>
-    </div>
-  </div>
+  <app-scatter [input]="cristinID" [ready]="showContent" [meta]="meta"  (showPlot)="setPlotState($event)"></app-scatter>
+  <app-relevance [input]="cristinID" [ready]="showContent" [meta]="meta"  (showTable)="setTableState($event)"></app-relevance>
 </div>
