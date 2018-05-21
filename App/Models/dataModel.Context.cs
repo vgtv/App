@@ -12,34 +12,29 @@ namespace App.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class dbEntities : DbContext
     {
         public dbEntities()
             : base("name=dbEntities")
         {
-            Database.SetInitializer<DbContext>(null);
         }
-
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public virtual DbSet<eierskap> eierskap { get; set; }
+    
+        public virtual DbSet<Person> person { get; set; }
+        public virtual DbSet<Rank> rank { get; set; }
+        public virtual DbSet<Stoppord> stoppord { get; set; }
+        public virtual DbSet<Tidsskrift> tidsskrift { get; set; }
+        public virtual DbSet<Tilhorighet> tilhorighet { get; set; }
+        public virtual DbSet<Titler> titler { get; set; }
+        public virtual DbSet<Ordsky> ordsky { get; set; }
+        public virtual DbSet<Rotform> rotform { get; set; }
+        public virtual DbSet<Oppslagsord> oppslagsord { get; set; }
         public virtual DbSet<forfattere> forfattere { get; set; }
         public virtual DbSet<forskning> forskning { get; set; }
-        public virtual DbSet<institutter> institutter { get; set; }
-        public virtual DbSet<person> person { get; set; }
-        public virtual DbSet<rank> rank { get; set; }
-        public virtual DbSet<rankinstitusjon> rankinstitusjon { get; set; }
-        public virtual DbSet<stopwords> stopwords { get; set; }
-        public virtual DbSet<tidsskrift> tidsskrift { get; set; }
-        public virtual DbSet<tilhorighet> tilhorighet { get; set; }
-        public virtual DbSet<titles> titles { get; set; }
-        public virtual DbSet<wordcloud> wordcloud { get; set; }
-        public virtual DbSet<words> words { get; set; }
-        public virtual DbSet<basewords> basewords { get; set; }
     }
 }

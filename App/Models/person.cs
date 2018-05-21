@@ -12,16 +12,24 @@ namespace App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class person
+    public partial class Person
     {
-   
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Person()
+        {
+            this.Ordsky = new HashSet<Ordsky>();
+            this.Tilhorighet = new HashSet<Tilhorighet>();
+        }
+    
         public string cristinID { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
     
-        public virtual titles titles { get; set; }
-      
-        public virtual ICollection<wordcloud> wordcloud { get; set; }
-        public virtual rank rank { get; set; }
+        public virtual Titler Titler { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ordsky> Ordsky { get; set; }
+        public virtual Rank Rank { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tilhorighet> Tilhorighet { get; set; }
     }
 }

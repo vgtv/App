@@ -12,13 +12,15 @@ namespace App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tilhorighet
+    public partial class Tilhorighet
     {
         public int tilhorighetsID { get; set; }
         public string cristinID { get; set; }
         public string institusjon { get; set; }
         public string institutt { get; set; }
-        public string position { get; set; }
+        public string posisjon { get; set; }
         public short aktiv { get; set; }
+    
+        public virtual Person Person { get; set; }
     }
 }

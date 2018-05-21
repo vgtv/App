@@ -54,7 +54,7 @@ namespace App.Models
                 foreach (var user in results)
                 {
                     var assosciation = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == user.cristinID)
-                        .Select(e => new { pos = e.position, ins = e.institusjon })
+                        .Select(e => new { pos = e.posisjon, ins = e.institusjon })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.pos)).FirstOrDefault();
 
                     if (assosciation != null)
@@ -100,7 +100,7 @@ namespace App.Models
                 foreach (var user in results)
                 {
                     var assosciation = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == user.cristinID)
-                        .Select(e => new { position = e.position, institution = e.institusjon, institute = e.institutt })
+                        .Select(e => new { position = e.posisjon, institution = e.institusjon, institute = e.institutt })
                         .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
 
                     if (assosciation != null)
@@ -132,13 +132,13 @@ namespace App.Models
 
                 var filter = GetFilter();
                 var assosciations = db.tilhorighet.Where(e => e.cristinID == cristinID)
-                    .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
+                    .ToList().OrderByDescending(x => filter.IndexOf(x.posisjon)).FirstOrDefault();
 
                 if (assosciations == null) { return null; }
 
                 researcher.institution = assosciations.institusjon ?? "Ukjent";
                 researcher.institute = assosciations.institutt ?? "Ukjent";
-                researcher.position = assosciations.position ?? "Ukjent";
+                researcher.position = assosciations.posisjon ?? "Ukjent";
                 return researcher;
             }
         }
@@ -152,13 +152,13 @@ namespace App.Models
 
                 Random rnd = new Random();
 
-                var cloud = db.wordcloud.Where(wc => wc.cristinID == cristinID)
-                    .Select(wc => new Cloud
+                var cloud = db.ordsky.Where(os => os.cristinID == cristinID)
+                    .Select(os => new Cloud
                     {
-                        weight = (int)wc.count,
-                        text = db.basewords.Where(bw => bw.key == wc.key)
-                               .Select(bw => bw.baseword).FirstOrDefault() ?? db.words.Where(bw => bw.key == wc.key)
-                               .Select(bw => bw.word).FirstOrDefault()
+                        weight = (int)os.forekomster,
+                        text = db.oppslagsord.Where(oo => oo.oppslagsordID == os.rotformID)
+                               .Select(oo => oo.oppslagsord).FirstOrDefault() ?? db.rotform.Where(oo => oo.rotformID == os.rotformID)
+                               .Select(oo => oo.rotform).FirstOrDefault()
 
                     }).ToList();
 
@@ -188,22 +188,22 @@ namespace App.Models
             {
                 var matchedUsers = new List<SimilarResearcher>();
 
-                var currentUser = db.wordcloud.AsNoTracking().Where(e => e.cristinID == cristinID)
+                var currentUser = db.ordsky.AsNoTracking().Where(e => e.cristinID == cristinID)
                     .GroupBy(item => item.cristinID)
                     .Select(group => new
                     {
                         group.Key,
-                        Items = group.OrderByDescending(e => e.count).ThenBy(e => e.key).Select(g => g.key).ToList()
+                        Items = group.OrderByDescending(e => e.forekomster).ThenBy(e => e.rotformID).Select(g => g.rotformID).ToList()
                     }).FirstOrDefault();
 
                 if (currentUser == null) { return null; }
 
-                var comparedUsers = db.wordcloud.AsNoTracking()
+                var comparedUsers = db.ordsky.AsNoTracking()
                     .GroupBy(item => item.cristinID)
                     .Select(group => new
                     {
                         group.Key,
-                        Items = group.OrderByDescending(e => e.count).ThenBy(e => e.key).Select(g => g.key).ToList()
+                        Items = group.OrderByDescending(e => e.forekomster).ThenBy(e => e.rotformID).Select(g => g.rotformID).ToList()
                     }).ToList();
 
                 int index;
@@ -226,158 +226,158 @@ namespace App.Models
                             case -1:
                                 break;
                             case 1:
-                                index = compared.Items.FindIndex(comparedWords=> comparedWords == comparedWord);
+                                index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 10 / y;
+                                x += (10 + y) / 2;
                                 break;
                             case 2:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 9 / y;
+                                x += (9 + y) / 2;
                                 break;
                             case 3:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 8 / y;
+                                x += (8 + y) / 2;
                                 break;
                             case 4:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 7 / y;
+                                x += (7 + y) / 2;
                                 break;
                             case 5:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 6 / y;
+                                x += (6 + y) / 2;
                                 break;
                             case 6:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 5 / y;
+                                x += (5 + y) / 2;
                                 break;
                             case 7:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 4 / y;
+                                x += (4 + y) / 2;
 
                                 break;
                             case 8:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 3 / y;
+                                x += (3 + y) / 2;
                                 break;
                             case 9:
                                 index = compared.Items.FindIndex(comparedWords => comparedWords == comparedWord);
                                 switch (index)
                                 {
-                                    case 1: y = 1.0; break;
-                                    case 2: y = 1.1; break;
-                                    case 3: y = 1.2; break;
-                                    case 4: y = 1.3; break;
-                                    case 5: y = 1.4; break;
-                                    case 6: y = 1.5; break;
-                                    case 7: y = 1.6; break;
-                                    case 8: y = 1.7; break;
-                                    case 9: y = 1.8; break;
-                                    default: y = 1.9; break;
+                                    case 1: y = 10; break;
+                                    case 2: y = 9; break;
+                                    case 3: y = 8; break;
+                                    case 4: y = 7; break;
+                                    case 5: y = 6; break;
+                                    case 6: y = 5; break;
+                                    case 7: y = 4; break;
+                                    case 8: y = 3; break;
+                                    case 9: y = 2; break;
+                                    default: y = 1; break;
                                 }
-                                x += 2 / y;
+                                x += (2 + y) / 2;
                                 break;
                             default: ++x; break;
                         }
@@ -404,13 +404,13 @@ namespace App.Models
                     if (researcher != null)
                     {
                         var assosciations = db.tilhorighet.AsNoTracking().Where(t => t.cristinID == researcher.cristinID)
-                            .ToList().OrderByDescending(comp => filter.IndexOf(comp.position)).FirstOrDefault();
+                            .ToList().OrderByDescending(comp => filter.IndexOf(comp.posisjon)).FirstOrDefault();
 
                         if (assosciations != null)
                         {
                             researcher.institution = assosciations.institusjon ?? "Ukjent";
                             researcher.institute = assosciations.institutt ?? "Ukjent";
-                            researcher.position = assosciations.position ?? "Ukjent";
+                            researcher.position = assosciations.posisjon ?? "Ukjent";
                         }
                     }
                 }
@@ -485,8 +485,8 @@ namespace App.Models
             using (var db = new dbEntities())
             {
                 var filter = GetFilter();
-                var mainPosition = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == cristinID).Select(t => new { t.position, t.institusjon })
-                    .ToList().OrderByDescending(x => filter.IndexOf(x.position)).FirstOrDefault();
+                var mainPosition = db.tilhorighet.AsNoTracking().Where(e => e.cristinID == cristinID).Select(t => new { t.posisjon, t.institusjon })
+                    .ToList().OrderByDescending(x => filter.IndexOf(x.posisjon)).FirstOrDefault();
 
                 if (mainPosition == null) return null;
 
@@ -528,7 +528,7 @@ namespace App.Models
                 {
                     c = new List<c>{
                         new c { v = mainRank.quality , f = mainUser.firstName + " " + mainUser.lastName },
-                        new c { v = mainRank.publications+"", f = mainPosition.position + ", " + mainPosition.institusjon},
+                        new c { v = mainRank.publications+"", f = mainPosition.posisjon + ", " + mainPosition.institusjon},
                         new c { v = mainColor, f = null }
                         }
                 });
@@ -548,7 +548,7 @@ namespace App.Models
         {
             using (var db = new dbEntities())
             {
-                return db.titles.AsNoTracking().Where(e => e.cristinID == cristinID).Select(e => e.titlesCount).FirstOrDefault();
+                return db.titler.AsNoTracking().Where(e => e.cristinID == cristinID).Select(e => e.antall).FirstOrDefault();
             }
         }
 

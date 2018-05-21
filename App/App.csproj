@@ -157,9 +157,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiRepositoryStub.cs" />
-    <Compile Include="Models\basewords.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\dataModel.Views.cs" />
     <Compile Include="Models\DomainModels\Affiliation.cs" />
     <Compile Include="Models\DomainModels\ScatterPlot\c.cs" />
@@ -186,9 +183,6 @@
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\DomainModels\Results.cs" />
     <Compile Include="Models\DomainModels\SimilarResearcher.cs" />
-    <Compile Include="Models\eierskap.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\forfattere.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
@@ -196,39 +190,36 @@
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iApiRepository.cs" />
-    <Compile Include="Models\institutter.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\person.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\rank.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\rankinstitusjon.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DomainModels\ScatterPlot\rows.cs" />
     <Compile Include="Models\DomainModels\ScatterPlot\ScatterPlot.cs" />
-    <Compile Include="Models\stopwords.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tidsskrift.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tilhorighet.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\titles.cs">
-      <DependentUpon>dataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DomainModels\User.cs" />
     <Compile Include="Models\DomainModels\UserMatch.cs" />
     <Compile Include="Models\DomainModels\Word.cs" />
-    <Compile Include="Models\wordcloud.cs">
+    <Compile Include="Models\Oppslagsord.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\words.cs">
+    <Compile Include="Models\Ordsky.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rank.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rotform.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stoppord.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tidsskrift.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tilhorighet.cs">
+      <DependentUpon>dataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Titler.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

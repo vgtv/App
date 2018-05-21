@@ -4,26 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="159ce203b2b348b5aef39131928bc86a" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="dbModel.eierskap" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.forfattere" Width="1.5" PointX="14.75" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.forskning" Width="1.5" PointX="2.75" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.institutter" Width="1.5" PointX="15.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.person" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.rank" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.rankinstitusjon" Width="1.5" PointX="4.75" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.stopwords" Width="1.5" PointX="15.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.tidsskrift" Width="1.5" PointX="14.75" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.tilhorighet" Width="1.5" PointX="16.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.titles" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.wordcloud" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.words" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="dbModel.FK_cristinID" ManuallyRouted="false" />
+      <Diagram DiagramId="159ce203b2b348b5aef39131928bc86a" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="dbModel.Person" Width="1.5" PointX="7.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Rank" Width="1.5" PointX="5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Stoppord" Width="1.5" PointX="20.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Tilhorighet" Width="1.5" PointX="7.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Titler" Width="1.5" PointX="3.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Ordsky" Width="1.5" PointX="5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Rotform" Width="1.5" PointX="7.25" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="dbModel.FK_cristinID" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="dbModel.FK_person" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.rank_FNcristinID" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.FK_words" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbModel.basewords" Width="1.5" PointX="6" PointY="21" />
+        <EntityTypeShape EntityType="dbModel.Oppslagsord" Width="1.5" PointX="9.5" PointY="8.625" />
         <AssociationConnector Association="dbModel.FK_base_word_key" />
+        <AssociationConnector Association="dbModel.persontilhorighet" />
+        <EntityTypeShape EntityType="dbModel.forfattere" Width="1.5" PointX="9.5" PointY="11" />
+        <EntityTypeShape EntityType="dbModel.forskning" Width="1.5" PointX="9.5" PointY="14.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

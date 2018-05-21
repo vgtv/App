@@ -1,27 +1,28 @@
 <div class="container-fluid" id="userinfo">
   <div class="row">
     <div class="col-sm float-left">
-      <app-userinfo [input]="cristinID" (name)="meta = $event"></app-userinfo> 
+      <app-userinfo [input]="cristinID" (name)="meta = $event"></app-userinfo>
     </div>
     <div class="col-sm -float-right">
       <app-wordcloud [input]="cristinID" (activeCloud)="setActive($event)"></app-wordcloud>
     </div>
     <div class="col-sm-1 float-right" *ngIf="activeProfile">
-      <i-info class="info float-right"  placement="left"
+      <i-info class="info float-right" placement="left"
               ngbTooltip="Ordskyen beskriver hva {{meta}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet."></i-info>
     </div>
 
     <div *ngIf="showMessage" class="col-sm float-right">
-      <h3 class="text-info">Ikke nok engelskspråklige arbeider</h3> <hr />
+      <h3 style="color:#0077C1;">Ikke nok engelskspråklige arbeider</h3> <hr />
       <p>
-        Denne profilen har ikke nok engelskspråklige arbeider.
-        Du kan lese mer om de ulike kravene i seksjonen <a routerLink="/about">"Om tjenesten"</a>.
+        Vi har ikke funnet nok engelsskpråklige arbeider fra en datainnhenting fra Cristin
+        (Current Research Information System in Norway) frem til 2016 for denne profilen.
+        Du kan lese mer om de ulike kravene i seksjonen <a routerLink="/about">"Om tjenesten"</a> for å få en detaljert profil generert.
       </p>
     </div>
   </div>
 </div>
 
 <div *ngIf="activeProfile">
-  <app-scatter [input]="cristinID" [ready]="showContent" [meta]="meta"  (showPlot)="setPlotState($event)"></app-scatter>
-  <app-relevance [input]="cristinID" [ready]="showContent" [meta]="meta"  (showTable)="setTableState($event)"></app-relevance>
+  <app-scatter [input]="cristinID" [ready]="showContent" [meta]="meta_person" (showPlot)="setPlotState($event)"></app-scatter>
+  <app-relevance [input]="cristinID" [ready]="showContent" [meta]="meta_person" (showTable)="setTableState($event)"></app-relevance>
 </div>

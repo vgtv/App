@@ -12,7 +12,7 @@ namespace App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class rank
+    public partial class Rank
     {
         public string cristinID { get; set; }
         public int rank1 { get; set; }
@@ -24,6 +24,6 @@ namespace App.Models
         public Nullable<int> niva2 { get; set; }
         public Nullable<decimal> kvalitet { get; set; }
     
-        public virtual person person { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

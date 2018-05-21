@@ -16,19 +16,16 @@ export class ProfileComponent implements OnInit {
 
   activeProfile: boolean;
   showMessage: boolean;
-
-  meta: string;
-
+  meta_person: string;
   showPlot: boolean;
   showTable: boolean;
   showContent: boolean;
-
   loaderElement: any;
   infoElement: any;
   showHelper = false;
 
   constructor(private router: ActivatedRoute,public loader: LoadingBarService, public dialog: MatDialog) {
-    this.meta = "forskeren";
+    this.meta_person = "forskeren"; // default
   }
 
   openLoadingLoader() {

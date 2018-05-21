@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(App.Models.dbEntities),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2a7b2f8d6a01ef4d89b2300f0df24cd13fe4686fa80f93d4a853a86e226d43c1))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsacfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySets2a7b2f8d6a01ef4d89b2300f0df24cd13fe4686fa80f93d4a853a86e226d43c1 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetsacfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "2a7b2f8d6a01ef4d89b2300f0df24cd13fe4686fa80f93d4a853a86e226d43c1"; }
+            get { return "acfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673"; }
         }
 
         /// <summary>
@@ -47,326 +47,124 @@ namespace Edm_EntityMappingGeneratedViews
 
             var extentName = extent.EntityContainer.Name + "." + extent.Name;
 
-            if (extentName == "dbModelStoreContainer.eierskap")
+            if (extentName == "dbModelStoreContainer.person")
             {
                 return GetView0();
             }
 
-            if (extentName == "dbEntities.eierskap")
+            if (extentName == "dbModelStoreContainer.rank")
             {
                 return GetView1();
             }
 
-            if (extentName == "dbModelStoreContainer.forfattere")
+            if (extentName == "dbModelStoreContainer.titles")
             {
                 return GetView2();
             }
 
-            if (extentName == "dbEntities.forfattere")
+            if (extentName == "dbModelStoreContainer.wordcloud")
             {
                 return GetView3();
             }
 
-            if (extentName == "dbModelStoreContainer.forskning")
+            if (extentName == "dbModelStoreContainer.words")
             {
                 return GetView4();
             }
 
-            if (extentName == "dbEntities.forskning")
+            if (extentName == "dbModelStoreContainer.basewords")
             {
                 return GetView5();
             }
 
-            if (extentName == "dbModelStoreContainer.institutter")
+            if (extentName == "dbEntities.person")
             {
                 return GetView6();
             }
 
-            if (extentName == "dbEntities.institutter")
+            if (extentName == "dbEntities.rank")
             {
                 return GetView7();
             }
 
-            if (extentName == "dbModelStoreContainer.person")
+            if (extentName == "dbEntities.titles")
             {
                 return GetView8();
             }
 
-            if (extentName == "dbModelStoreContainer.rank")
+            if (extentName == "dbEntities.wordcloud")
             {
                 return GetView9();
             }
 
-            if (extentName == "dbModelStoreContainer.titles")
+            if (extentName == "dbEntities.words")
             {
                 return GetView10();
             }
 
-            if (extentName == "dbModelStoreContainer.wordcloud")
+            if (extentName == "dbEntities.basewords")
             {
                 return GetView11();
             }
 
-            if (extentName == "dbModelStoreContainer.words")
+            if (extentName == "dbModelStoreContainer.stopwords")
             {
                 return GetView12();
             }
 
-            if (extentName == "dbModelStoreContainer.basewords")
+            if (extentName == "dbEntities.stopwords")
             {
                 return GetView13();
             }
 
-            if (extentName == "dbEntities.person")
+            if (extentName == "dbModelStoreContainer.tidsskrift")
             {
                 return GetView14();
             }
 
-            if (extentName == "dbEntities.rank")
+            if (extentName == "dbEntities.tidsskrift")
             {
                 return GetView15();
             }
 
-            if (extentName == "dbEntities.titles")
+            if (extentName == "dbModelStoreContainer.tilhorighet")
             {
                 return GetView16();
             }
 
-            if (extentName == "dbEntities.wordcloud")
+            if (extentName == "dbEntities.tilhorighet")
             {
                 return GetView17();
             }
 
-            if (extentName == "dbEntities.words")
+            if (extentName == "dbModelStoreContainer.forfattere")
             {
                 return GetView18();
             }
 
-            if (extentName == "dbEntities.basewords")
+            if (extentName == "dbEntities.forfattere")
             {
                 return GetView19();
             }
 
-            if (extentName == "dbModelStoreContainer.rankinstitusjon")
+            if (extentName == "dbModelStoreContainer.forskning")
             {
                 return GetView20();
             }
 
-            if (extentName == "dbEntities.rankinstitusjon")
+            if (extentName == "dbEntities.forskning")
             {
                 return GetView21();
-            }
-
-            if (extentName == "dbModelStoreContainer.stopwords")
-            {
-                return GetView22();
-            }
-
-            if (extentName == "dbEntities.stopwords")
-            {
-                return GetView23();
-            }
-
-            if (extentName == "dbModelStoreContainer.tidsskrift")
-            {
-                return GetView24();
-            }
-
-            if (extentName == "dbEntities.tidsskrift")
-            {
-                return GetView25();
-            }
-
-            if (extentName == "dbModelStoreContainer.tilhorighet")
-            {
-                return GetView26();
-            }
-
-            if (extentName == "dbEntities.tilhorighet")
-            {
-                return GetView27();
             }
 
             return null;
         }
 
         /// <summary>
-        /// Gets the view for dbModelStoreContainer.eierskap.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView0()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing eierskap
-        [dbModel.Store.eierskap](T1.eierskap_eierskapID, T1.eierskap_forskningsID, T1.eierskap_institusjonsID, T1.eierskap_poeng, T1.eierskap_poengNytt)
-    FROM (
-        SELECT 
-            T.eierskapID AS eierskap_eierskapID, 
-            T.forskningsID AS eierskap_forskningsID, 
-            T.institusjonsID AS eierskap_institusjonsID, 
-            T.poeng AS eierskap_poeng, 
-            T.poengNytt AS eierskap_poengNytt, 
-            True AS _from0
-        FROM dbEntities.eierskap AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbEntities.eierskap.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView1()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing eierskap
-        [dbModel.eierskap](T1.eierskap_eierskapID, T1.eierskap_forskningsID, T1.eierskap_institusjonsID, T1.eierskap_poeng, T1.eierskap_poengNytt)
-    FROM (
-        SELECT 
-            T.eierskapID AS eierskap_eierskapID, 
-            T.forskningsID AS eierskap_forskningsID, 
-            T.institusjonsID AS eierskap_institusjonsID, 
-            T.poeng AS eierskap_poeng, 
-            T.poengNytt AS eierskap_poengNytt, 
-            True AS _from0
-        FROM dbModelStoreContainer.eierskap AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbModelStoreContainer.forfattere.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView2()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing forfattere
-        [dbModel.Store.forfattere](T1.forfattere_forfatterID, T1.forfattere_cristinID, T1.forfattere_forskningsID, T1.forfattere_institusjonsID, T1.forfattere_poeng, T1.forfattere_poengNytt)
-    FROM (
-        SELECT 
-            T.forfatterID AS forfattere_forfatterID, 
-            T.cristinID AS forfattere_cristinID, 
-            T.forskningsID AS forfattere_forskningsID, 
-            T.institusjonsID AS forfattere_institusjonsID, 
-            T.poeng AS forfattere_poeng, 
-            T.poengNytt AS forfattere_poengNytt, 
-            True AS _from0
-        FROM dbEntities.forfattere AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbEntities.forfattere.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView3()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing forfattere
-        [dbModel.forfattere](T1.forfattere_forfatterID, T1.forfattere_cristinID, T1.forfattere_forskningsID, T1.forfattere_institusjonsID, T1.forfattere_poeng, T1.forfattere_poengNytt)
-    FROM (
-        SELECT 
-            T.forfatterID AS forfattere_forfatterID, 
-            T.cristinID AS forfattere_cristinID, 
-            T.forskningsID AS forfattere_forskningsID, 
-            T.institusjonsID AS forfattere_institusjonsID, 
-            T.poeng AS forfattere_poeng, 
-            T.poengNytt AS forfattere_poengNytt, 
-            True AS _from0
-        FROM dbModelStoreContainer.forfattere AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbModelStoreContainer.forskning.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView4()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing forskning
-        [dbModel.Store.forskning](T1.forskning_resultatID, T1.forskning_cristinID, T1.forskning_tittel, T1.forskning_aar, T1.forskning_kvalitet, T1.forskning_hovedkategori, T1.forskning_underkategori)
-    FROM (
-        SELECT 
-            T.resultatID AS forskning_resultatID, 
-            T.cristinID AS forskning_cristinID, 
-            T.tittel AS forskning_tittel, 
-            T.aar AS forskning_aar, 
-            T.kvalitet AS forskning_kvalitet, 
-            T.hovedkategori AS forskning_hovedkategori, 
-            T.underkategori AS forskning_underkategori, 
-            True AS _from0
-        FROM dbEntities.forskning AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbEntities.forskning.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView5()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing forskning
-        [dbModel.forskning](T1.forskning_resultatID, T1.forskning_cristinID, T1.forskning_tittel, T1.forskning_aar, T1.forskning_kvalitet, T1.forskning_hovedkategori, T1.forskning_underkategori)
-    FROM (
-        SELECT 
-            T.resultatID AS forskning_resultatID, 
-            T.cristinID AS forskning_cristinID, 
-            T.tittel AS forskning_tittel, 
-            T.aar AS forskning_aar, 
-            T.kvalitet AS forskning_kvalitet, 
-            T.hovedkategori AS forskning_hovedkategori, 
-            T.underkategori AS forskning_underkategori, 
-            True AS _from0
-        FROM dbModelStoreContainer.forskning AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbModelStoreContainer.institutter.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView6()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing institutter
-        [dbModel.Store.institutter](T1.institutter_cristinID, T1.institutter_navn, T1.institutter_akronym, T1.institutter_land)
-    FROM (
-        SELECT 
-            T.cristinID AS institutter_cristinID, 
-            T.navn AS institutter_navn, 
-            T.akronym AS institutter_akronym, 
-            T.land AS institutter_land, 
-            True AS _from0
-        FROM dbEntities.institutter AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbEntities.institutter.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView7()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing institutter
-        [dbModel.institutter](T1.institutter_cristinID, T1.institutter_navn, T1.institutter_akronym, T1.institutter_land)
-    FROM (
-        SELECT 
-            T.cristinID AS institutter_cristinID, 
-            T.navn AS institutter_navn, 
-            T.akronym AS institutter_akronym, 
-            T.land AS institutter_land, 
-            True AS _from0
-        FROM dbModelStoreContainer.institutter AS T
-    ) AS T1");
-        }
-
-        /// <summary>
         /// Gets the view for dbModelStoreContainer.person.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView8()
+        private static DbMappingView GetView0()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing person
@@ -385,7 +183,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.rank.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView9()
+        private static DbMappingView GetView1()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing rank
@@ -410,7 +208,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.titles.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView10()
+        private static DbMappingView GetView2()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing titles
@@ -418,7 +216,7 @@ namespace Edm_EntityMappingGeneratedViews
     FROM (
         SELECT 
             T.cristinID AS titles_cristinID, 
-            T.titlesCount AS titles_titlesCount, 
+            T.antall AS titles_titlesCount, 
             True AS _from0
         FROM dbEntities.titles AS T
     ) AS T1");
@@ -428,7 +226,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.wordcloud.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView11()
+        private static DbMappingView GetView3()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing wordcloud
@@ -436,8 +234,8 @@ namespace Edm_EntityMappingGeneratedViews
     FROM (
         SELECT 
             T.cristinID AS wordcloud_cristinID, 
-            T.[key] AS wordcloud_key, 
-            T.count AS wordcloud_count, 
+            T.rotformID AS wordcloud_key, 
+            T.forekomster AS wordcloud_count, 
             True AS _from0
         FROM dbEntities.wordcloud AS T
     ) AS T1");
@@ -447,16 +245,16 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.words.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView12()
+        private static DbMappingView GetView4()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing words
         [dbModel.Store.words](T1.words_key, T1.words_word, T1.words_count)
     FROM (
         SELECT 
-            T.[key] AS words_key, 
-            T.word AS words_word, 
-            T.count AS words_count, 
+            T.rotformID AS words_key, 
+            T.rotform AS words_word, 
+            T.antall AS words_count, 
             True AS _from0
         FROM dbEntities.words AS T
     ) AS T1");
@@ -466,15 +264,15 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.basewords.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView13()
+        private static DbMappingView GetView5()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing basewords
         [dbModel.Store.basewords](T1.basewords_key, T1.basewords_baseword)
     FROM (
         SELECT 
-            T.[key] AS basewords_key, 
-            T.baseword AS basewords_baseword, 
+            T.oppslagsordID AS basewords_key, 
+            T.oppslagsord AS basewords_baseword, 
             True AS _from0
         FROM dbEntities.basewords AS T
     ) AS T1");
@@ -484,16 +282,16 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.person.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView14()
+        private static DbMappingView GetView6()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing person
-        [dbModel.person](T1.person_cristinID, T1.person_firstname, T1.person_lastname)
+        [dbModel.Person](T1.Person_cristinID, T1.Person_firstname, T1.Person_lastname)
     FROM (
         SELECT 
-            T.cristinID AS person_cristinID, 
-            T.fornavn AS person_firstname, 
-            T.etternavn AS person_lastname, 
+            T.cristinID AS Person_cristinID, 
+            T.fornavn AS Person_firstname, 
+            T.etternavn AS Person_lastname, 
             True AS _from0
         FROM dbModelStoreContainer.person AS T
     ) AS T1");
@@ -503,22 +301,22 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.rank.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView15()
+        private static DbMappingView GetView7()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing rank
-        [dbModel.rank](T1.rank_cristinID, T1.rank_rank1, T1.rank_rankNytt, T1.rank_poeng, T1.rank_poengNytt, T1.rank_kroner, T1.rank_publikasjoner, T1.rank_niva2, T1.rank_kvalitet)
+        [dbModel.Rank](T1.Rank_cristinID, T1.Rank_rank1, T1.Rank_rankNytt, T1.Rank_poeng, T1.Rank_poengNytt, T1.Rank_kroner, T1.Rank_publikasjoner, T1.Rank_niva2, T1.Rank_kvalitet)
     FROM (
         SELECT 
-            T.cristinID AS rank_cristinID, 
-            T.rank AS rank_rank1, 
-            T.rankNytt AS rank_rankNytt, 
-            T.poeng AS rank_poeng, 
-            T.poengNytt AS rank_poengNytt, 
-            T.kroner AS rank_kroner, 
-            T.publikasjoner AS rank_publikasjoner, 
-            T.niva2 AS rank_niva2, 
-            T.kvalitet AS rank_kvalitet, 
+            T.cristinID AS Rank_cristinID, 
+            T.rank AS Rank_rank1, 
+            T.rankNytt AS Rank_rankNytt, 
+            T.poeng AS Rank_poeng, 
+            T.poengNytt AS Rank_poengNytt, 
+            T.kroner AS Rank_kroner, 
+            T.publikasjoner AS Rank_publikasjoner, 
+            T.niva2 AS Rank_niva2, 
+            T.kvalitet AS Rank_kvalitet, 
             True AS _from0
         FROM dbModelStoreContainer.rank AS T
     ) AS T1");
@@ -528,15 +326,15 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.titles.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView16()
+        private static DbMappingView GetView8()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing titles
-        [dbModel.titles](T1.titles_cristinID, T1.titles_titlesCount)
+        [dbModel.Titler](T1.Titler_cristinID, T1.Titler_antall)
     FROM (
         SELECT 
-            T.cristinID AS titles_cristinID, 
-            T.titlesCount AS titles_titlesCount, 
+            T.cristinID AS Titler_cristinID, 
+            T.titlesCount AS Titler_antall, 
             True AS _from0
         FROM dbModelStoreContainer.titles AS T
     ) AS T1");
@@ -546,16 +344,16 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.wordcloud.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView17()
+        private static DbMappingView GetView9()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing wordcloud
-        [dbModel.wordcloud](T1.wordcloud_cristinID, T1.wordcloud_key, T1.wordcloud_count)
+        [dbModel.Ordsky](T1.Ordsky_cristinID, T1.Ordsky_rotformID, T1.Ordsky_forekomster)
     FROM (
         SELECT 
-            T.cristinID AS wordcloud_cristinID, 
-            T.[key] AS wordcloud_key, 
-            T.count AS wordcloud_count, 
+            T.cristinID AS Ordsky_cristinID, 
+            T.[key] AS Ordsky_rotformID, 
+            T.count AS Ordsky_forekomster, 
             True AS _from0
         FROM dbModelStoreContainer.wordcloud AS T
     ) AS T1");
@@ -565,16 +363,16 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.words.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView18()
+        private static DbMappingView GetView10()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing words
-        [dbModel.words](T1.words_key, T1.words_word, T1.words_count)
+        [dbModel.Rotform](T1.Rotform_rotformID, T1.Rotform_rotform, T1.Rotform_antall)
     FROM (
         SELECT 
-            T.[key] AS words_key, 
-            T.word AS words_word, 
-            T.count AS words_count, 
+            T.[key] AS Rotform_rotformID, 
+            T.word AS Rotform_rotform, 
+            T.count AS Rotform_antall, 
             True AS _from0
         FROM dbModelStoreContainer.words AS T
     ) AS T1");
@@ -584,65 +382,17 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.basewords.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView19()
+        private static DbMappingView GetView11()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing basewords
-        [dbModel.basewords](T1.basewords_key, T1.basewords_baseword)
+        [dbModel.Oppslagsord](T1.Oppslagsord_oppslagsordID, T1.Oppslagsord_oppslagsord)
     FROM (
         SELECT 
-            T.[key] AS basewords_key, 
-            T.baseword AS basewords_baseword, 
+            T.[key] AS Oppslagsord_oppslagsordID, 
+            T.baseword AS Oppslagsord_oppslagsord, 
             True AS _from0
         FROM dbModelStoreContainer.basewords AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbModelStoreContainer.rankinstitusjon.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView20()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing rankinstitusjon
-        [dbModel.Store.rankinstitusjon](T1.rankinstitusjon_cristinID, T1.rankinstitusjon_poeng, T1.rankinstitusjon_poengNytt, T1.rankinstitusjon_rank, T1.rankinstitusjon_rankNytt, T1.rankinstitusjon_kroner, T1.rankinstitusjon_publikasjoner, T1.rankinstitusjon_niva2)
-    FROM (
-        SELECT 
-            T.cristinID AS rankinstitusjon_cristinID, 
-            T.poeng AS rankinstitusjon_poeng, 
-            T.poengNytt AS rankinstitusjon_poengNytt, 
-            T.rank AS rankinstitusjon_rank, 
-            T.rankNytt AS rankinstitusjon_rankNytt, 
-            T.kroner AS rankinstitusjon_kroner, 
-            T.publikasjoner AS rankinstitusjon_publikasjoner, 
-            T.niva2 AS rankinstitusjon_niva2, 
-            True AS _from0
-        FROM dbEntities.rankinstitusjon AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for dbEntities.rankinstitusjon.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView21()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing rankinstitusjon
-        [dbModel.rankinstitusjon](T1.rankinstitusjon_cristinID, T1.rankinstitusjon_poeng, T1.rankinstitusjon_poengNytt, T1.rankinstitusjon_rank, T1.rankinstitusjon_rankNytt, T1.rankinstitusjon_kroner, T1.rankinstitusjon_publikasjoner, T1.rankinstitusjon_niva2)
-    FROM (
-        SELECT 
-            T.cristinID AS rankinstitusjon_cristinID, 
-            T.poeng AS rankinstitusjon_poeng, 
-            T.poengNytt AS rankinstitusjon_poengNytt, 
-            T.rank AS rankinstitusjon_rank, 
-            T.rankNytt AS rankinstitusjon_rankNytt, 
-            T.kroner AS rankinstitusjon_kroner, 
-            T.publikasjoner AS rankinstitusjon_publikasjoner, 
-            T.niva2 AS rankinstitusjon_niva2, 
-            True AS _from0
-        FROM dbModelStoreContainer.rankinstitusjon AS T
     ) AS T1");
         }
 
@@ -650,15 +400,15 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.stopwords.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView22()
+        private static DbMappingView GetView12()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing stopwords
         [dbModel.Store.stopwords](T1.stopwords_Id, T1.stopwords_Word)
     FROM (
         SELECT 
-            T.Id AS stopwords_Id, 
-            T.Word AS stopwords_Word, 
+            T.stoppordID AS stopwords_Id, 
+            T.stoppord AS stopwords_Word, 
             True AS _from0
         FROM dbEntities.stopwords AS T
     ) AS T1");
@@ -668,15 +418,15 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.stopwords.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView23()
+        private static DbMappingView GetView13()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing stopwords
-        [dbModel.stopwords](T1.stopwords_Id, T1.stopwords_Word)
+        [dbModel.Stoppord](T1.Stoppord_stoppordID, T1.Stoppord_stoppord)
     FROM (
         SELECT 
-            T.Id AS stopwords_Id, 
-            T.Word AS stopwords_Word, 
+            T.Id AS Stoppord_stoppordID, 
+            T.Word AS Stoppord_stoppord, 
             True AS _from0
         FROM dbModelStoreContainer.stopwords AS T
     ) AS T1");
@@ -686,7 +436,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.tidsskrift.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView24()
+        private static DbMappingView GetView14()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing tidsskrift
@@ -707,18 +457,18 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.tidsskrift.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView25()
+        private static DbMappingView GetView15()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing tidsskrift
-        [dbModel.tidsskrift](T1.tidsskrift_cristinID, T1.tidsskrift_navn, T1.tidsskrift_issn, T1.tidsskrift_url, T1.tidsskrift_kvalitet)
+        [dbModel.Tidsskrift](T1.Tidsskrift_cristinID, T1.Tidsskrift_navn, T1.Tidsskrift_issn, T1.Tidsskrift_url, T1.Tidsskrift_kvalitet)
     FROM (
         SELECT 
-            T.cristinID AS tidsskrift_cristinID, 
-            T.navn AS tidsskrift_navn, 
-            T.issn AS tidsskrift_issn, 
-            T.url AS tidsskrift_url, 
-            T.kvalitet AS tidsskrift_kvalitet, 
+            T.cristinID AS Tidsskrift_cristinID, 
+            T.navn AS Tidsskrift_navn, 
+            T.issn AS Tidsskrift_issn, 
+            T.url AS Tidsskrift_url, 
+            T.kvalitet AS Tidsskrift_kvalitet, 
             True AS _from0
         FROM dbModelStoreContainer.tidsskrift AS T
     ) AS T1");
@@ -728,7 +478,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbModelStoreContainer.tilhorighet.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView26()
+        private static DbMappingView GetView16()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing tilhorighet
@@ -739,7 +489,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.cristinID AS tilhorighet_cristinID, 
             T.institusjon AS tilhorighet_institusjon, 
             T.institutt AS tilhorighet_institutt, 
-            T.position AS tilhorighet_posisjon, 
+            T.posisjon AS tilhorighet_posisjon, 
             T.aktiv AS tilhorighet_aktiv, 
             True AS _from0
         FROM dbEntities.tilhorighet AS T
@@ -750,21 +500,111 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for dbEntities.tilhorighet.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView27()
+        private static DbMappingView GetView17()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing tilhorighet
-        [dbModel.tilhorighet](T1.tilhorighet_tilhorighetsID, T1.tilhorighet_cristinID, T1.tilhorighet_institusjon, T1.tilhorighet_institutt, T1.tilhorighet_position, T1.tilhorighet_aktiv)
+        [dbModel.Tilhorighet](T1.Tilhorighet_tilhorighetsID, T1.Tilhorighet_cristinID, T1.Tilhorighet_institusjon, T1.Tilhorighet_institutt, T1.Tilhorighet_posisjon, T1.Tilhorighet_aktiv)
     FROM (
         SELECT 
-            T.tilhorighetsID AS tilhorighet_tilhorighetsID, 
-            T.cristinID AS tilhorighet_cristinID, 
-            T.institusjon AS tilhorighet_institusjon, 
-            T.institutt AS tilhorighet_institutt, 
-            T.posisjon AS tilhorighet_position, 
-            T.aktiv AS tilhorighet_aktiv, 
+            T.tilhorighetsID AS Tilhorighet_tilhorighetsID, 
+            T.cristinID AS Tilhorighet_cristinID, 
+            T.institusjon AS Tilhorighet_institusjon, 
+            T.institutt AS Tilhorighet_institutt, 
+            T.posisjon AS Tilhorighet_posisjon, 
+            T.aktiv AS Tilhorighet_aktiv, 
             True AS _from0
         FROM dbModelStoreContainer.tilhorighet AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for dbModelStoreContainer.forfattere.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView18()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing forfattere
+        [dbModel.Store.forfattere](T1.forfattere_forfatterID, T1.forfattere_cristinID, T1.forfattere_forskningsID, T1.forfattere_institusjonsID, T1.forfattere_poeng, T1.forfattere_poengNytt)
+    FROM (
+        SELECT 
+            T.forfatterID AS forfattere_forfatterID, 
+            T.cristinID AS forfattere_cristinID, 
+            T.forskningsID AS forfattere_forskningsID, 
+            T.institusjonsID AS forfattere_institusjonsID, 
+            T.poeng AS forfattere_poeng, 
+            T.poengNytt AS forfattere_poengNytt, 
+            True AS _from0
+        FROM dbEntities.forfattere AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for dbEntities.forfattere.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView19()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing forfattere
+        [dbModel.forfattere](T1.forfattere_forfatterID, T1.forfattere_cristinID, T1.forfattere_forskningsID, T1.forfattere_institusjonsID, T1.forfattere_poeng, T1.forfattere_poengNytt)
+    FROM (
+        SELECT 
+            T.forfatterID AS forfattere_forfatterID, 
+            T.cristinID AS forfattere_cristinID, 
+            T.forskningsID AS forfattere_forskningsID, 
+            T.institusjonsID AS forfattere_institusjonsID, 
+            T.poeng AS forfattere_poeng, 
+            T.poengNytt AS forfattere_poengNytt, 
+            True AS _from0
+        FROM dbModelStoreContainer.forfattere AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for dbModelStoreContainer.forskning.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView20()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing forskning
+        [dbModel.Store.forskning](T1.forskning_resultatID, T1.forskning_cristinID, T1.forskning_tittel, T1.forskning_aar, T1.forskning_kvalitet, T1.forskning_hovedkategori, T1.forskning_underkategori)
+    FROM (
+        SELECT 
+            T.resultatID AS forskning_resultatID, 
+            T.cristinID AS forskning_cristinID, 
+            T.tittel AS forskning_tittel, 
+            T.aar AS forskning_aar, 
+            T.kvalitet AS forskning_kvalitet, 
+            T.hovedkategori AS forskning_hovedkategori, 
+            T.underkategori AS forskning_underkategori, 
+            True AS _from0
+        FROM dbEntities.forskning AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for dbEntities.forskning.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView21()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing forskning
+        [dbModel.forskning](T1.forskning_resultatID, T1.forskning_cristinID, T1.forskning_tittel, T1.forskning_aar, T1.forskning_kvalitet, T1.forskning_hovedkategori, T1.forskning_underkategori)
+    FROM (
+        SELECT 
+            T.resultatID AS forskning_resultatID, 
+            T.cristinID AS forskning_cristinID, 
+            T.tittel AS forskning_tittel, 
+            T.aar AS forskning_aar, 
+            T.kvalitet AS forskning_kvalitet, 
+            T.hovedkategori AS forskning_hovedkategori, 
+            T.underkategori AS forskning_underkategori, 
+            True AS _from0
+        FROM dbModelStoreContainer.forskning AS T
     ) AS T1");
         }
     }

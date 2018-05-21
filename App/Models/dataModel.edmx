@@ -13,16 +13,6 @@
           <Property Name="key" Type="int" Nullable="false" />
           <Property Name="baseword" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="eierskap">
-          <Key>
-            <PropertyRef Name="eierskapID" />
-          </Key>
-          <Property Name="eierskapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="forskningsID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="institusjonsID" Type="int" Nullable="false" />
-          <Property Name="poeng" Type="float" Nullable="false" />
-          <Property Name="poengNytt" Type="float" Nullable="false" />
-        </EntityType>
         <EntityType Name="forfattere">
           <Key>
             <PropertyRef Name="forfatterID" />
@@ -46,15 +36,6 @@
           <Property Name="hovedkategori" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="underkategori" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="institutter">
-          <Key>
-            <PropertyRef Name="cristinID" />
-          </Key>
-          <Property Name="cristinID" Type="int" Nullable="false" />
-          <Property Name="navn" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="akronym" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="land" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
         <EntityType Name="person">
           <Key>
             <PropertyRef Name="cristinID" />
@@ -76,19 +57,6 @@
           <Property Name="publikasjoner" Type="int" />
           <Property Name="niva2" Type="int" />
           <Property Name="kvalitet" Type="decimal" Precision="5" Scale="4" />
-        </EntityType>
-        <EntityType Name="rankinstitusjon">
-          <Key>
-            <PropertyRef Name="cristinID" />
-          </Key>
-          <Property Name="cristinID" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="poeng" Type="float" Nullable="false" />
-          <Property Name="poengNytt" Type="float" Nullable="false" />
-          <Property Name="rank" Type="int" Nullable="false" />
-          <Property Name="rankNytt" Type="int" Nullable="false" />
-          <Property Name="kroner" Type="float" />
-          <Property Name="publikasjoner" Type="int" />
-          <Property Name="niva2" Type="int" />
         </EntityType>
         <EntityType Name="stopwords">
           <Key>
@@ -204,13 +172,10 @@
         </Association>
         <EntityContainer Name="dbModelStoreContainer">
           <EntitySet Name="basewords" EntityType="Self.basewords" Schema="forskningsresultater" store:Type="Tables" />
-          <EntitySet Name="eierskap" EntityType="Self.eierskap" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="forfattere" EntityType="Self.forfattere" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="forskning" EntityType="Self.forskning" Schema="forskningsresultater" store:Type="Tables" />
-          <EntitySet Name="institutter" EntityType="Self.institutter" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="person" EntityType="Self.person" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="rank" EntityType="Self.rank" Schema="forskningsresultater" store:Type="Tables" />
-          <EntitySet Name="rankinstitusjon" EntityType="Self.rankinstitusjon" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="stopwords" EntityType="Self.stopwords" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="tidsskrift" EntityType="Self.tidsskrift" Schema="forskningsresultater" store:Type="Tables" />
           <EntitySet Name="tilhorighet" EntityType="Self.tilhorighet" Schema="forskningsresultater" store:Type="Tables" />
@@ -242,60 +207,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="eierskap">
-          <Key>
-            <PropertyRef Name="eierskapID" />
-          </Key>
-          <Property Name="eierskapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="forskningsID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="institusjonsID" Type="Int32" Nullable="false" />
-          <Property Name="poeng" Type="Double" Nullable="false" />
-          <Property Name="poengNytt" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="forfattere">
-          <Key>
-            <PropertyRef Name="forfatterID" />
-          </Key>
-          <Property Name="forfatterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cristinID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="forskningsID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="institusjonsID" Type="Int32" Nullable="false" />
-          <Property Name="poeng" Type="Double" Nullable="false" />
-          <Property Name="poengNytt" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="forskning">
-          <Key>
-            <PropertyRef Name="resultatID" />
-          </Key>
-          <Property Name="resultatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cristinID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tittel" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="aar" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="kvalitet" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="hovedkategori" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="underkategori" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="institutter">
-          <Key>
-            <PropertyRef Name="cristinID" />
-          </Key>
-          <Property Name="cristinID" Type="Int32" Nullable="false" />
-          <Property Name="navn" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="akronym" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="land" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="person">
+        <EntityType Name="Person">
           <Key>
             <PropertyRef Name="cristinID" />
           </Key>
           <Property Name="cristinID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="titles" Relationship="Self.FK_cristinID" FromRole="person" ToRole="titles" />
-          <NavigationProperty Name="wordcloud" Relationship="Self.FK_person" FromRole="person" ToRole="wordcloud" />
-          <NavigationProperty Name="rank" Relationship="Self.rank_FNcristinID" FromRole="person" ToRole="rank" />
+          <NavigationProperty Name="Titler" Relationship="Self.FK_cristinID" FromRole="person" ToRole="titles" />
+          <NavigationProperty Name="Ordsky" Relationship="Self.FK_person" FromRole="person" ToRole="wordcloud" />
+          <NavigationProperty Name="Rank" Relationship="Self.rank_FNcristinID" FromRole="person" ToRole="rank" />
+          <NavigationProperty Name="Tilhorighet" Relationship="dbModel.persontilhorighet" FromRole="person" ToRole="tilhorighet" />
         </EntityType>
-        <EntityType Name="rank">
+        <EntityType Name="Rank">
           <Key>
             <PropertyRef Name="cristinID" />
           </Key>
@@ -307,30 +231,17 @@
           <Property Name="kroner" Type="Double" />
           <Property Name="publikasjoner" Type="Int32" />
           <Property Name="niva2" Type="Int32" />
-          <NavigationProperty Name="person" Relationship="Self.rank_FNcristinID" FromRole="rank" ToRole="person" />
+          <NavigationProperty Name="Person" Relationship="Self.rank_FNcristinID" FromRole="rank" ToRole="person" />
           <Property Name="kvalitet" Type="Decimal" Precision="5" Scale="4" />
         </EntityType>
-        <EntityType Name="rankinstitusjon">
+        <EntityType Name="Stoppord">
           <Key>
-            <PropertyRef Name="cristinID" />
+            <PropertyRef Name="stoppordID" />
           </Key>
-          <Property Name="cristinID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="poeng" Type="Double" Nullable="false" />
-          <Property Name="poengNytt" Type="Double" Nullable="false" />
-          <Property Name="rank" Type="Int32" Nullable="false" />
-          <Property Name="rankNytt" Type="Int32" Nullable="false" />
-          <Property Name="kroner" Type="Double" />
-          <Property Name="publikasjoner" Type="Int32" />
-          <Property Name="niva2" Type="Int32" />
+          <Property Name="stoppordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stoppord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="stopwords">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Word" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tidsskrift">
+        <EntityType Name="Tidsskrift">
           <Key>
             <PropertyRef Name="cristinID" />
           </Key>
@@ -340,49 +251,50 @@
           <Property Name="url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="kvalitet" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="tilhorighet">
+        <EntityType Name="Tilhorighet">
           <Key>
             <PropertyRef Name="tilhorighetsID" />
           </Key>
           <Property Name="tilhorighetsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cristinID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cristinID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="institusjon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="institutt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="posisjon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="aktiv" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="dbModel.persontilhorighet" FromRole="tilhorighet" ToRole="person" />
         </EntityType>
-        <EntityType Name="titles">
+        <EntityType Name="Titler">
           <Key>
             <PropertyRef Name="cristinID" />
           </Key>
           <Property Name="cristinID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="titlesCount" Type="Int16" />
-          <NavigationProperty Name="person" Relationship="Self.FK_cristinID" FromRole="titles" ToRole="person" />
+          <Property Name="antall" Type="Int16" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_cristinID" FromRole="titles" ToRole="person" />
         </EntityType>
-        <EntityType Name="wordcloud">
+        <EntityType Name="Ordsky">
           <Key>
             <PropertyRef Name="cristinID" />
-            <PropertyRef Name="key" />
+            <PropertyRef Name="rotformID" />
           </Key>
           <Property Name="cristinID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="key" Type="Int32" Nullable="false" />
-          <Property Name="count" Type="Int16" />
-          <NavigationProperty Name="person" Relationship="Self.FK_person" FromRole="wordcloud" ToRole="person" />
-          <NavigationProperty Name="words" Relationship="Self.FK_words" FromRole="wordcloud" ToRole="words" />
+          <Property Name="rotformID" Type="Int32" Nullable="false" />
+          <Property Name="forekomster" Type="Int16" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_person" FromRole="wordcloud" ToRole="person" />
+          <NavigationProperty Name="Rotord" Relationship="Self.FK_words" FromRole="wordcloud" ToRole="words" />
         </EntityType>
-        <EntityType Name="words">
+        <EntityType Name="Rotform">
           <Key>
-            <PropertyRef Name="key" />
+            <PropertyRef Name="rotformID" />
           </Key>
-          <Property Name="key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="word" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="wordcloud" Relationship="Self.FK_words" FromRole="words" ToRole="wordcloud" />
-          <NavigationProperty Name="basewords" Relationship="dbModel.FK_base_word_key" FromRole="words" ToRole="basewords" />
+          <Property Name="rotformID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rotform" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="antall" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ordsky" Relationship="Self.FK_words" FromRole="words" ToRole="wordcloud" />
+          <NavigationProperty Name="Oppslagsord" Relationship="dbModel.FK_base_word_key" FromRole="words" ToRole="basewords" />
         </EntityType>
         <Association Name="FK_cristinID">
-          <End Role="person" Type="Self.person" Multiplicity="1" />
-          <End Role="titles" Type="Self.titles" Multiplicity="0..1" />
+          <End Role="person" Type="dbModel.Person" Multiplicity="1" />
+          <End Role="titles" Type="dbModel.Titler" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="person">
               <PropertyRef Name="cristinID" />
@@ -393,8 +305,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_person">
-          <End Role="person" Type="Self.person" Multiplicity="1" />
-          <End Role="wordcloud" Type="Self.wordcloud" Multiplicity="*" />
+          <End Role="person" Type="dbModel.Person" Multiplicity="1" />
+          <End Role="wordcloud" Type="dbModel.Ordsky" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="person">
               <PropertyRef Name="cristinID" />
@@ -405,8 +317,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="rank_FNcristinID">
-          <End Role="person" Type="Self.person" Multiplicity="1" />
-          <End Role="rank" Type="Self.rank" Multiplicity="0..1" />
+          <End Role="person" Type="dbModel.Person" Multiplicity="1" />
+          <End Role="rank" Type="dbModel.Rank" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="person">
               <PropertyRef Name="cristinID" />
@@ -417,31 +329,26 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_words">
-          <End Role="words" Type="Self.words" Multiplicity="1" />
-          <End Role="wordcloud" Type="Self.wordcloud" Multiplicity="*" />
+          <End Role="words" Type="dbModel.Rotform" Multiplicity="1" />
+          <End Role="wordcloud" Type="dbModel.Ordsky" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="words">
-              <PropertyRef Name="key" />
+              <PropertyRef Name="rotformID" />
             </Principal>
             <Dependent Role="wordcloud">
-              <PropertyRef Name="key" />
+              <PropertyRef Name="rotformID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="eierskap" EntityType="Self.eierskap" />
-          <EntitySet Name="forfattere" EntityType="Self.forfattere" />
-          <EntitySet Name="forskning" EntityType="Self.forskning" />
-          <EntitySet Name="institutter" EntityType="Self.institutter" />
-          <EntitySet Name="person" EntityType="Self.person" />
-          <EntitySet Name="rank" EntityType="Self.rank" />
-          <EntitySet Name="rankinstitusjon" EntityType="Self.rankinstitusjon" />
-          <EntitySet Name="stopwords" EntityType="Self.stopwords" />
-          <EntitySet Name="tidsskrift" EntityType="Self.tidsskrift" />
-          <EntitySet Name="tilhorighet" EntityType="Self.tilhorighet" />
-          <EntitySet Name="titles" EntityType="Self.titles" />
-          <EntitySet Name="wordcloud" EntityType="Self.wordcloud" />
-          <EntitySet Name="words" EntityType="Self.words" />
+          <EntitySet Name="person" EntityType="dbModel.Person" />
+          <EntitySet Name="rank" EntityType="dbModel.Rank" />
+          <EntitySet Name="stopwords" EntityType="dbModel.Stoppord" />
+          <EntitySet Name="tidsskrift" EntityType="dbModel.Tidsskrift" />
+          <EntitySet Name="tilhorighet" EntityType="dbModel.Tilhorighet" />
+          <EntitySet Name="titles" EntityType="dbModel.Titler" />
+          <EntitySet Name="wordcloud" EntityType="dbModel.Ordsky" />
+          <EntitySet Name="words" EntityType="dbModel.Rotform" />
           <AssociationSet Name="FK_cristinID" Association="Self.FK_cristinID">
             <End Role="person" EntitySet="person" />
             <End Role="titles" EntitySet="titles" />
@@ -458,87 +365,82 @@
             <End Role="words" EntitySet="words" />
             <End Role="wordcloud" EntitySet="wordcloud" />
           </AssociationSet>
-          <EntitySet Name="basewords" EntityType="dbModel.basewords" />
+          <EntitySet Name="basewords" EntityType="dbModel.Oppslagsord" />
           <AssociationSet Name="FK_base_word_key" Association="dbModel.FK_base_word_key">
             <End Role="words" EntitySet="words" />
             <End Role="basewords" EntitySet="basewords" />
           </AssociationSet>
+          <AssociationSet Name="persontilhorighet" Association="dbModel.persontilhorighet">
+            <End Role="person" EntitySet="person" />
+            <End Role="tilhorighet" EntitySet="tilhorighet" />
+          </AssociationSet>
+          <EntitySet Name="forfattere" EntityType="dbModel.forfattere" />
+          <EntitySet Name="forskning" EntityType="dbModel.forskning" />
         </EntityContainer>
-        <EntityType Name="basewords">
+        <EntityType Name="Oppslagsord">
           <Key>
-            <PropertyRef Name="key" />
-            <PropertyRef Name="baseword" />
+            <PropertyRef Name="oppslagsordID" />
+            <PropertyRef Name="oppslagsord" />
           </Key>
-          <Property Name="key" Type="Int32" Nullable="false" />
-          <Property Name="baseword" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="words" Relationship="dbModel.FK_base_word_key" FromRole="basewords" ToRole="words" />
+          <Property Name="oppslagsordID" Type="Int32" Nullable="false" />
+          <Property Name="oppslagsord" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rotord" Relationship="dbModel.FK_base_word_key" FromRole="basewords" ToRole="words" />
         </EntityType>
         <Association Name="FK_base_word_key">
-          <End Type="dbModel.words" Role="words" Multiplicity="1" />
-          <End Type="dbModel.basewords" Role="basewords" Multiplicity="*" />
+          <End Type="dbModel.Rotform" Role="words" Multiplicity="1" />
+          <End Type="dbModel.Oppslagsord" Role="basewords" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="words">
-              <PropertyRef Name="key" />
+              <PropertyRef Name="rotformID" />
             </Principal>
             <Dependent Role="basewords">
-              <PropertyRef Name="key" />
+              <PropertyRef Name="oppslagsordID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="persontilhorighet">
+          <End Type="dbModel.Person" Role="person" Multiplicity="1" />
+          <End Type="dbModel.Tilhorighet" Role="tilhorighet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="cristinID" />
+            </Principal>
+            <Dependent Role="tilhorighet">
+              <PropertyRef Name="cristinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="forfattere">
+          <Key>
+            <PropertyRef Name="forfatterID" />
+          </Key>
+          <Property Name="forfatterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cristinID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="forskningsID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="institusjonsID" Type="Int32" Nullable="false" />
+          <Property Name="poeng" Type="Double" Nullable="false" />
+          <Property Name="poengNytt" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="forskning">
+          <Key>
+            <PropertyRef Name="resultatID" />
+          </Key>
+          <Property Name="resultatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cristinID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tittel" Type="String" Nullable="false" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="aar" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="kvalitet" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="hovedkategori" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="underkategori" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
-          <EntitySetMapping Name="eierskap">
-            <EntityTypeMapping TypeName="dbModel.eierskap">
-              <MappingFragment StoreEntitySet="eierskap">
-                <ScalarProperty Name="eierskapID" ColumnName="eierskapID" />
-                <ScalarProperty Name="forskningsID" ColumnName="forskningsID" />
-                <ScalarProperty Name="institusjonsID" ColumnName="institusjonsID" />
-                <ScalarProperty Name="poeng" ColumnName="poeng" />
-                <ScalarProperty Name="poengNytt" ColumnName="poengNytt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="forfattere">
-            <EntityTypeMapping TypeName="dbModel.forfattere">
-              <MappingFragment StoreEntitySet="forfattere">
-                <ScalarProperty Name="forfatterID" ColumnName="forfatterID" />
-                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="forskningsID" ColumnName="forskningsID" />
-                <ScalarProperty Name="institusjonsID" ColumnName="institusjonsID" />
-                <ScalarProperty Name="poeng" ColumnName="poeng" />
-                <ScalarProperty Name="poengNytt" ColumnName="poengNytt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="forskning">
-            <EntityTypeMapping TypeName="dbModel.forskning">
-              <MappingFragment StoreEntitySet="forskning">
-                <ScalarProperty Name="resultatID" ColumnName="resultatID" />
-                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="tittel" ColumnName="tittel" />
-                <ScalarProperty Name="aar" ColumnName="aar" />
-                <ScalarProperty Name="kvalitet" ColumnName="kvalitet" />
-                <ScalarProperty Name="hovedkategori" ColumnName="hovedkategori" />
-                <ScalarProperty Name="underkategori" ColumnName="underkategori" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="institutter">
-            <EntityTypeMapping TypeName="dbModel.institutter">
-              <MappingFragment StoreEntitySet="institutter">
-                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="navn" ColumnName="navn" />
-                <ScalarProperty Name="akronym" ColumnName="akronym" />
-                <ScalarProperty Name="land" ColumnName="land" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="person">
-            <EntityTypeMapping TypeName="dbModel.person">
+            <EntityTypeMapping TypeName="dbModel.Person">
               <MappingFragment StoreEntitySet="person">
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
                 <ScalarProperty Name="firstname" ColumnName="fornavn" />
@@ -547,7 +449,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rank">
-            <EntityTypeMapping TypeName="dbModel.rank">
+            <EntityTypeMapping TypeName="dbModel.Rank">
               <MappingFragment StoreEntitySet="rank">
                 <ScalarProperty Name="kvalitet" ColumnName="kvalitet" />
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
@@ -561,30 +463,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="rankinstitusjon">
-            <EntityTypeMapping TypeName="dbModel.rankinstitusjon">
-              <MappingFragment StoreEntitySet="rankinstitusjon">
-                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="poeng" ColumnName="poeng" />
-                <ScalarProperty Name="poengNytt" ColumnName="poengNytt" />
-                <ScalarProperty Name="rank" ColumnName="rank" />
-                <ScalarProperty Name="rankNytt" ColumnName="rankNytt" />
-                <ScalarProperty Name="kroner" ColumnName="kroner" />
-                <ScalarProperty Name="publikasjoner" ColumnName="publikasjoner" />
-                <ScalarProperty Name="niva2" ColumnName="niva2" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="stopwords">
-            <EntityTypeMapping TypeName="dbModel.stopwords">
+            <EntityTypeMapping TypeName="dbModel.Stoppord">
               <MappingFragment StoreEntitySet="stopwords">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="stoppordID" ColumnName="Id" />
+                <ScalarProperty Name="stoppord" ColumnName="Word" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tidsskrift">
-            <EntityTypeMapping TypeName="dbModel.tidsskrift">
+            <EntityTypeMapping TypeName="dbModel.Tidsskrift">
               <MappingFragment StoreEntitySet="tidsskrift">
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
                 <ScalarProperty Name="navn" ColumnName="navn" />
@@ -595,48 +483,73 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tilhorighet">
-            <EntityTypeMapping TypeName="dbModel.tilhorighet">
+            <EntityTypeMapping TypeName="dbModel.Tilhorighet">
               <MappingFragment StoreEntitySet="tilhorighet">
                 <ScalarProperty Name="tilhorighetsID" ColumnName="tilhorighetsID" />
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
                 <ScalarProperty Name="institusjon" ColumnName="institusjon" />
                 <ScalarProperty Name="institutt" ColumnName="institutt" />
-                <ScalarProperty Name="position" ColumnName="posisjon" />
+                <ScalarProperty Name="posisjon" ColumnName="posisjon" />
                 <ScalarProperty Name="aktiv" ColumnName="aktiv" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="titles">
-            <EntityTypeMapping TypeName="dbModel.titles">
+            <EntityTypeMapping TypeName="dbModel.Titler">
               <MappingFragment StoreEntitySet="titles">
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="titlesCount" ColumnName="titlesCount" />
+                <ScalarProperty Name="antall" ColumnName="titlesCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="wordcloud">
-            <EntityTypeMapping TypeName="dbModel.wordcloud">
+            <EntityTypeMapping TypeName="dbModel.Ordsky">
               <MappingFragment StoreEntitySet="wordcloud">
                 <ScalarProperty Name="cristinID" ColumnName="cristinID" />
-                <ScalarProperty Name="key" ColumnName="key" />
-                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="rotformID" ColumnName="key" />
+                <ScalarProperty Name="forekomster" ColumnName="count" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="words">
-            <EntityTypeMapping TypeName="dbModel.words">
+            <EntityTypeMapping TypeName="dbModel.Rotform">
               <MappingFragment StoreEntitySet="words">
-                <ScalarProperty Name="key" ColumnName="key" />
-                <ScalarProperty Name="word" ColumnName="word" />
-                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="rotformID" ColumnName="key" />
+                <ScalarProperty Name="rotform" ColumnName="word" />
+                <ScalarProperty Name="antall" ColumnName="count" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="basewords">
-            <EntityTypeMapping TypeName="dbModel.basewords">
+            <EntityTypeMapping TypeName="dbModel.Oppslagsord">
               <MappingFragment StoreEntitySet="basewords">
-                <ScalarProperty Name="baseword" ColumnName="baseword" />
-                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="oppslagsord" ColumnName="baseword" />
+                <ScalarProperty Name="oppslagsordID" ColumnName="key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="forfattere">
+            <EntityTypeMapping TypeName="dbModel.forfattere">
+              <MappingFragment StoreEntitySet="forfattere">
+                <ScalarProperty Name="poengNytt" ColumnName="poengNytt" />
+                <ScalarProperty Name="poeng" ColumnName="poeng" />
+                <ScalarProperty Name="institusjonsID" ColumnName="institusjonsID" />
+                <ScalarProperty Name="forskningsID" ColumnName="forskningsID" />
+                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
+                <ScalarProperty Name="forfatterID" ColumnName="forfatterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="forskning">
+            <EntityTypeMapping TypeName="dbModel.forskning">
+              <MappingFragment StoreEntitySet="forskning">
+                <ScalarProperty Name="underkategori" ColumnName="underkategori" />
+                <ScalarProperty Name="hovedkategori" ColumnName="hovedkategori" />
+                <ScalarProperty Name="kvalitet" ColumnName="kvalitet" />
+                <ScalarProperty Name="aar" ColumnName="aar" />
+                <ScalarProperty Name="tittel" ColumnName="tittel" />
+                <ScalarProperty Name="cristinID" ColumnName="cristinID" />
+                <ScalarProperty Name="resultatID" ColumnName="resultatID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
