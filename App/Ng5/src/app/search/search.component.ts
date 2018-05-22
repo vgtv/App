@@ -46,7 +46,7 @@ export class NgbdTypeaheadHttp {
   searchFailed = false;
   @Input() showTopNav: boolean;
 
-  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
+  hide = new Observable(() => () => this.searching = false);
 
   constructor(private _service: SearchService, private router: Router) { }
 
@@ -82,5 +82,5 @@ export class NgbdTypeaheadHttp {
             return of([]);
           }))
       .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed)
+      .merge(this.hide)
 }

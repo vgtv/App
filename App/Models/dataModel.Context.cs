@@ -31,10 +31,10 @@ namespace App.Models
         public virtual DbSet<Tidsskrift> tidsskrift { get; set; }
         public virtual DbSet<Tilhorighet> tilhorighet { get; set; }
         public virtual DbSet<Titler> titler { get; set; }
-        public virtual DbSet<Ordsky> ordsky { get; set; }
+        public virtual DbSet<Ordsky> ordsky{ get; set; }
         public virtual DbSet<Rotform> rotform { get; set; }
         public virtual DbSet<Oppslagsord> oppslagsord { get; set; }
-        public virtual DbSet<forfattere> forfattere { get; set; }
-        public virtual DbSet<forskning> forskning { get; set; }
+        public virtual DbSet<Forfattere> forfattere { get; set; }
+        public virtual DbSet<Forskning> forskning { get; set; }
     }
 }

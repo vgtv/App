@@ -183,10 +183,10 @@
     <Compile Include="Models\DomainModels\ResearcherRelevance.cs" />
     <Compile Include="Models\DomainModels\Results.cs" />
     <Compile Include="Models\DomainModels\SimilarResearcher.cs" />
-    <Compile Include="Models\forfattere.cs">
+    <Compile Include="Models\Forfattere.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\forskning.cs">
+    <Compile Include="Models\Forskning.cs">
       <DependentUpon>dataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iApiRepository.cs" />

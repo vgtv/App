@@ -374,8 +374,8 @@
             <End Role="person" EntitySet="person" />
             <End Role="tilhorighet" EntitySet="tilhorighet" />
           </AssociationSet>
-          <EntitySet Name="forfattere" EntityType="dbModel.forfattere" />
-          <EntitySet Name="forskning" EntityType="dbModel.forskning" />
+          <EntitySet Name="forfattere" EntityType="dbModel.Forfattere" />
+          <EntitySet Name="forskning" EntityType="dbModel.Forskning" />
         </EntityContainer>
         <EntityType Name="Oppslagsord">
           <Key>
@@ -410,18 +410,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="forfattere">
+        <EntityType Name="Forfattere">
           <Key>
             <PropertyRef Name="forfatterID" />
           </Key>
           <Property Name="forfatterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cristinID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cristinID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="forskningsID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="institusjonsID" Type="Int32" Nullable="false" />
           <Property Name="poeng" Type="Double" Nullable="false" />
           <Property Name="poengNytt" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="forskning">
+        <EntityType Name="Forskning">
           <Key>
             <PropertyRef Name="resultatID" />
           </Key>
@@ -529,7 +529,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="forfattere">
-            <EntityTypeMapping TypeName="dbModel.forfattere">
+            <EntityTypeMapping TypeName="dbModel.Forfattere">
               <MappingFragment StoreEntitySet="forfattere">
                 <ScalarProperty Name="poengNytt" ColumnName="poengNytt" />
                 <ScalarProperty Name="poeng" ColumnName="poeng" />
@@ -541,7 +541,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="forskning">
-            <EntityTypeMapping TypeName="dbModel.forskning">
+            <EntityTypeMapping TypeName="dbModel.Forskning">
               <MappingFragment StoreEntitySet="forskning">
                 <ScalarProperty Name="underkategori" ColumnName="underkategori" />
                 <ScalarProperty Name="hovedkategori" ColumnName="hovedkategori" />

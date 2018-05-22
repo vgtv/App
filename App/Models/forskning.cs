@@ -12,7 +12,7 @@ namespace App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class forskning
+    public partial class Forskning
     {
         public int resultatID { get; set; }
         public string cristinID { get; set; }

@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   activeProfile: boolean;
   showMessage: boolean;
-  meta_person: string;
+  meta_person: string = "forskeren";
   showPlot: boolean;
   showTable: boolean;
   showContent: boolean;
@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit {
   showHelper = false;
 
   constructor(private router: ActivatedRoute,public loader: LoadingBarService, public dialog: MatDialog) {
-    this.meta_person = "forskeren"; // default
   }
 
   openLoadingLoader() {

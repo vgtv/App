@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(App.Models.dbEntities),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsacfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsb1b7ae51c4f022b12fccb06b0351e3140ac1fd868a9277efa4c7ae39c5889b59))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySetsacfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetsb1b7ae51c4f022b12fccb06b0351e3140ac1fd868a9277efa4c7ae39c5889b59 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "acfec065cf0a17194f62811b1072d910a949eea4643003e6a6ad3ac42105c673"; }
+            get { return "b1b7ae51c4f022b12fccb06b0351e3140ac1fd868a9277efa4c7ae39c5889b59"; }
         }
 
         /// <summary>
@@ -548,15 +548,15 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing forfattere
-        [dbModel.forfattere](T1.forfattere_forfatterID, T1.forfattere_cristinID, T1.forfattere_forskningsID, T1.forfattere_institusjonsID, T1.forfattere_poeng, T1.forfattere_poengNytt)
+        [dbModel.Forfattere](T1.Forfattere_forfatterID, T1.Forfattere_cristinID, T1.Forfattere_forskningsID, T1.Forfattere_institusjonsID, T1.Forfattere_poeng, T1.Forfattere_poengNytt)
     FROM (
         SELECT 
-            T.forfatterID AS forfattere_forfatterID, 
-            T.cristinID AS forfattere_cristinID, 
-            T.forskningsID AS forfattere_forskningsID, 
-            T.institusjonsID AS forfattere_institusjonsID, 
-            T.poeng AS forfattere_poeng, 
-            T.poengNytt AS forfattere_poengNytt, 
+            T.forfatterID AS Forfattere_forfatterID, 
+            T.cristinID AS Forfattere_cristinID, 
+            T.forskningsID AS Forfattere_forskningsID, 
+            T.institusjonsID AS Forfattere_institusjonsID, 
+            T.poeng AS Forfattere_poeng, 
+            T.poengNytt AS Forfattere_poengNytt, 
             True AS _from0
         FROM dbModelStoreContainer.forfattere AS T
     ) AS T1");
@@ -593,16 +593,16 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing forskning
-        [dbModel.forskning](T1.forskning_resultatID, T1.forskning_cristinID, T1.forskning_tittel, T1.forskning_aar, T1.forskning_kvalitet, T1.forskning_hovedkategori, T1.forskning_underkategori)
+        [dbModel.Forskning](T1.Forskning_resultatID, T1.Forskning_cristinID, T1.Forskning_tittel, T1.Forskning_aar, T1.Forskning_kvalitet, T1.Forskning_hovedkategori, T1.Forskning_underkategori)
     FROM (
         SELECT 
-            T.resultatID AS forskning_resultatID, 
-            T.cristinID AS forskning_cristinID, 
-            T.tittel AS forskning_tittel, 
-            T.aar AS forskning_aar, 
-            T.kvalitet AS forskning_kvalitet, 
-            T.hovedkategori AS forskning_hovedkategori, 
-            T.underkategori AS forskning_underkategori, 
+            T.resultatID AS Forskning_resultatID, 
+            T.cristinID AS Forskning_cristinID, 
+            T.tittel AS Forskning_tittel, 
+            T.aar AS Forskning_aar, 
+            T.kvalitet AS Forskning_kvalitet, 
+            T.hovedkategori AS Forskning_hovedkategori, 
+            T.underkategori AS Forskning_underkategori, 
             True AS _from0
         FROM dbModelStoreContainer.forskning AS T
     ) AS T1");

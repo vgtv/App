@@ -1,14 +1,14 @@
 <div class="container-fluid" id="userinfo">
   <div class="row">
     <div class="col-sm float-left">
-      <app-userinfo [input]="cristinID" (name)="meta = $event"></app-userinfo>
+      <app-userinfo [input]="cristinID" (name)="meta_person = $event"></app-userinfo>
     </div>
     <div class="col-sm -float-right">
       <app-wordcloud [input]="cristinID" (activeCloud)="setActive($event)"></app-wordcloud>
     </div>
     <div class="col-sm-1 float-right" *ngIf="activeProfile">
       <i-info class="info float-right" placement="left"
-              ngbTooltip="Ordskyen beskriver hva {{meta}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet."></i-info>
+              ngbTooltip="Ordskyen beskriver hva {{meta_person}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet."></i-info>
     </div>
 
     <div *ngIf="showMessage" class="col-sm float-right">

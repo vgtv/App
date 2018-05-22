@@ -422,7 +422,7 @@ exports.NullPipe = NullPipe;
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm float-left\">\r\n      <app-userinfo [input]=\"cristinID\" (name)=\"meta = $event\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm -float-right\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div class=\"col-sm-1 float-right\" *ngIf=\"activeProfile\">\r\n      <i-info class=\"info float-right\" placement=\"left\"\r\n              ngbTooltip=\"Ordskyen beskriver hva {{meta}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet.\"></i-info>\r\n    </div>\r\n\r\n    <div *ngIf=\"showMessage\" class=\"col-sm float-right\">\r\n      <h3 style=\"color:#0077C1;\">Ikke nok engelskspråklige arbeider</h3> <hr />\r\n      <p>\r\n        Vi har ikke funnet nok engelsskpråklige arbeider fra en datainnhenting fra Cristin\r\n        (Current Research Information System in Norway) frem til 2016 for denne profilen.\r\n        Du kan lese mer om de ulike kravene i seksjonen <a routerLink=\"/about\">\"Om tjenesten\"</a> for å få en detaljert profil generert.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" [meta]=\"meta_person\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" [meta]=\"meta_person\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" id=\"userinfo\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm float-left\">\r\n      <app-userinfo [input]=\"cristinID\" (name)=\"meta_person = $event\"></app-userinfo>\r\n    </div>\r\n    <div class=\"col-sm -float-right\">\r\n      <app-wordcloud [input]=\"cristinID\" (activeCloud)=\"setActive($event)\"></app-wordcloud>\r\n    </div>\r\n    <div class=\"col-sm-1 float-right\" *ngIf=\"activeProfile\">\r\n      <i-info class=\"info float-right\" placement=\"left\"\r\n              ngbTooltip=\"Ordskyen beskriver hva {{meta_person}} jobber med. Størrelse forholdet mellom ord er basert på antall forekomster av ord i arbeidet.\"></i-info>\r\n    </div>\r\n\r\n    <div *ngIf=\"showMessage\" class=\"col-sm float-right\">\r\n      <h3 style=\"color:#0077C1;\">Ikke nok engelskspråklige arbeider</h3> <hr />\r\n      <p>\r\n        Vi har ikke funnet nok engelsskpråklige arbeider fra en datainnhenting fra Cristin\r\n        (Current Research Information System in Norway) frem til 2016 for denne profilen.\r\n        Du kan lese mer om de ulike kravene i seksjonen <a routerLink=\"/about\">\"Om tjenesten\"</a> for å få en detaljert profil generert.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"activeProfile\">\r\n  <app-scatter [input]=\"cristinID\" [ready]=\"showContent\" [meta]=\"meta_person\" (showPlot)=\"setPlotState($event)\"></app-scatter>\r\n  <app-relevance [input]=\"cristinID\" [ready]=\"showContent\" [meta]=\"meta_person\" (showTable)=\"setTableState($event)\"></app-relevance>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -458,8 +458,8 @@ var ProfileComponent = /** @class */ (function () {
         this.router = router;
         this.loader = loader;
         this.dialog = dialog;
+        this.meta_person = "forskeren";
         this.showHelper = false;
-        this.meta_person = "forskeren"; // default
     }
     ProfileComponent.prototype.openLoadingLoader = function () {
         this.loaderElement = this.dialog.open(dialog_component_1.DialogComponent, {
@@ -1108,7 +1108,7 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
         this.router = router;
         this.searching = false;
         this.searchFailed = false;
-        this.hideSearchingWhenUnsubscribed = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
+        this.hide = new Observable_1.Observable(function () { return function () { return _this.searching = false; }; });
         this.formatMatches = function (value) {
             return value.firstName + ' ' + value.lastName + ' | ' + value.position + ' | ' + value.institution;
         };
@@ -1127,7 +1127,7 @@ var NgbdTypeaheadHttp = /** @class */ (function () {
                 });
             })
                 .do(function () { return _this.searching = false; })
-                .merge(_this.hideSearchingWhenUnsubscribed);
+                .merge(_this.hide);
         };
     }
     NgbdTypeaheadHttp.prototype.onSearch = function (event) {
